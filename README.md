@@ -2,7 +2,7 @@
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
 ## Grupo {N}
-- Integrante 1 - 
+- Integrante 1 - Diego Di Grazia
 - Integrante 2 - 
 - Integrante 3 - 
 - Integrante 4 - 
