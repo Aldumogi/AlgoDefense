@@ -3,7 +3,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 ## Grupo {N}
 - Integrante 1 - Diego Di Grazia
-- Integrante 2 - 
+- Integrante 2 - Nazarian Juan Martin
 - Integrante 3 - 
 - Integrante 4 - 
 - Integrante 5 - 
