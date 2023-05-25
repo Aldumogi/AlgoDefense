@@ -1,6 +1,6 @@
 ![tp2](https://github.com/Aldumogi/AlgoDefense/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/Aldumogi/AlgoDefense/branch/master/graph/badge.svg)](https://codecov.io/gh/Aldumogi/algo3_tp2)
 
-# TP2 Algoritmos 3: {Nombre}
+# TP2 Algoritmos 3: AlgoDefense
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
 ## Grupo T1
