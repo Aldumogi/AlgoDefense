@@ -1,0 +1,55 @@
+@startuml
+
+class Juego {
+- jugador: Jugador
++ iniciarPartida()
++ agregarJugador()
++ avanzarTurno()
+}
+
+class Turno {
++ avanzarTurno()
+}
+
+class Mapa {
++ crearMapa()
+}
+
+interface Parcela {
++ esPosibleConstruir(): boolean
+}
+
+abstract Pasarela {
+- fila
+- columna
++ esPosibleConstruir(): boolean
+}
+
+class PasarelaLargada {}
+
+class PasarelaMeta{}
+
+class Rocoso {
+- fila
+- columna
++ esPosibleConstruir(): boolean
+}
+
+class Tierra {
+- fila
+- columna
++ esPosibleConstruir(): boolean
+}
+
+Parcela <|.. Pasarela
+Parcela <|.. Rocoso
+Parcela <|.. Tierra
+
+Pasarela <|-- PasarelaLargada
+Pasarela <|-- PasarelaMeta
+
+Juego *- Mapa
+Turno <- Juego
+Mapa "1" *-- "1..*" Parcela
+
+@enduml
