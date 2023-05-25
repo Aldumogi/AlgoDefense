@@ -2,17 +2,27 @@
 
 class Juego {
 - jugador: Jugador
-+ iniciarPartida()
-+ agregarJugador()
 + avanzarTurno()
 }
 
+class Inicializador {
++ agregarJugador()
++ iniciarPartida()
+}
+
 class Turno {
-+ avanzarTurno()
++ avanzar()
 }
 
 class Mapa {
 + crearMapa()
++ actualizarMapa()
+}
+
+class Coordenadas {
+- fila: int
+- columna: int
++ distanciaEntreCoordenadas(c1: Coordenada, c2: Coordenada): int 
 }
 
 interface Parcela {
@@ -48,8 +58,10 @@ Parcela <|.. Tierra
 Pasarela <|-- PasarelaLargada
 Pasarela <|-- PasarelaMeta
 
+Inicializador --> Juego
 Juego *- Mapa
 Turno <- Juego
 Mapa "1" *-- "1..*" Parcela
+Coordenadas "1..*" <-- "1" Mapa
 
 @enduml
