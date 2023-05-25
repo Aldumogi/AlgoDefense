@@ -5,8 +5,9 @@ abstract Enemigo {
 - energía: int
 - creditosOtorgados: int
 - pasarela: Pasarela
+- coordenada: Coordenada
 + cantidadCreditosOtorgados(): int
-+ estaVivo(): bool
++ estaVivo(): boolean
 }
 
 class Hormiga {
@@ -20,9 +21,12 @@ class Araña {
 class Juego {
 - mapa: Mapa
 - turno: Turno
-+ iniciarPartida()
-+ agregarJugador()
 + avanzarTurno()
+}
+
+class Inicializador {
++ agregarJugador()
++ iniciarPartida()
 }
 
 abstract Defensa {
@@ -32,6 +36,7 @@ abstract Defensa {
 - rangoDeAtaque
 - daño
 - tierra: Tierra
+- coordenada: Coordenada
 + atacarEnemigo(enemigo: Enemigo)
 + construirTorre(torre:Torre)
 }
@@ -62,6 +67,7 @@ Defensa <|-- TorrePlateada
 Enemigo <|-- Hormiga
 Enemigo <|-- Araña
 
+Juego <- Inicializador 
 Juego "1" --> "0..*" Enemigo
 Jugador <- Juego
 Jugador "1" --> "0..*" Defensa
