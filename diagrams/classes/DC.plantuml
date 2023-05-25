@@ -1,0 +1,95 @@
+@startuml
+
+abstract Enemigo {
+- velocidad: int
+- dañoCausado: int
+- energía: int
+- creditosOtorgados: int
++ cantidadCreditosOtorgados(): int
+}
+
+class Hormiga {
++ cantidadCreditosOtorgados(): int
+}
+
+class Araña {
++ cantidadCreditosOtorgados(): int
+}
+
+Enemigo <-- Hormiga
+Enemigo <-- Araña
+
+class Jugador {
+- nombre
+- cantidadDeCreditos: int
+- puntosDeVida: int
+- defensas: colección Defensa
++ descontarCreditos()
++ agregarCreditos()
++ generarDefensa()
++ descontarPuntosDeVida()
+}
+
+abstract Defensa {
+- nombre
+- costo
+- tiempoDeConstruccion
+- rangoDeAtaque
+- daño
++ atacarEnemigo(enemigo: Enemigo)
++ construirTorre(torre:Torre)
+}
+
+class TorreBlanca {
++ atacarEnemigo(enemigo: Enemigo)
++ construirTorre(torre:Torre)
+}
+
+class TorrePlateada {
++ atacarEnemigo(enemigo: Enemigo)
++ construirTorre(torre:Torre)
+}
+
+Defensa <-- TorreBlanca 
+Defensa <-- TorrePlateada
+
+interface Parcela {
++ esPosibleConstruir(): boolean
+}
+
+abstract Pasarela {}
+class PasarelaLargada {}
+class PasarelaMeta{}
+class Rocoso {}
+class Tierra {}
+
+Parcela <.. Pasarela 
+Parcela <.. Rocoso 
+Parcela <.. Tierra 
+
+Pasarela <-- PasarelaLargada
+Pasarela <-- PasarelaMeta
+
+class Mapa {
+- parcela: colección Parcela
++ crearMapa()
+}
+
+class Juego {
+- enemigo: colección Enemigo
+- mapa: Mapa
++ iniciarPartida()
++ agregarJugador()
++ avanzarTurno()
+}
+
+Juego o- Mapa
+Juego "1" --> "0..*" Enemigo
+Jugador <- Juego
+
+Mapa *-- Parcela
+Jugador "0" --> "*" Defensa
+
+Defensa .> Enemigo
+
+@enduml
