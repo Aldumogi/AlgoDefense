@@ -1,0 +1,70 @@
+@startuml
+abstract Enemigo {
+- velocidad: int
+- dañoCausado: int
+- energía: int
+- creditosOtorgados: int
+- pasarela: Pasarela
++ cantidadCreditosOtorgados(): int
++ estaVivo(): bool
+}
+
+class Hormiga {
++ cantidadCreditosOtorgados(): int
+}
+
+class Araña {
++ cantidadCreditosOtorgados(): int
+}
+
+class Juego {
+- mapa: Mapa
+- turno: Turno
++ iniciarPartida()
++ agregarJugador()
++ avanzarTurno()
+}
+
+abstract Defensa {
+- nombre
+- costo
+- tiempoDeConstruccion
+- rangoDeAtaque
+- daño
+- tierra: Tierra
++ atacarEnemigo(enemigo: Enemigo)
++ construirTorre(torre:Torre)
+}
+
+class TorreBlanca {
++ atacarEnemigo(enemigo: Enemigo)
++ construirTorre(torre:Torre)
+}
+
+class TorrePlateada {
++ atacarEnemigo(enemigo: Enemigo)
++ construirTorre(torre:Torre)
+}
+
+class Jugador {
+- nombre
+- cantidadDeCreditos: int
+- puntosDeVida: int
++ descontarCreditos()
++ agregarCreditos()
++ generarDefensa()
++ descontarPuntosDeVida()
+}
+
+Defensa <|-- TorreBlanca
+Defensa <|-- TorrePlateada
+
+Enemigo <|-- Hormiga
+Enemigo <|-- Araña
+
+Juego "1" --> "0..*" Enemigo
+Jugador <- Juego
+Jugador "1" --> "0..*" Defensa
+Defensa .> Enemigo
+
+@enduml
