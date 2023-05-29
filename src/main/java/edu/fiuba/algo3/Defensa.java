@@ -37,7 +37,7 @@ public abstract class Defensa {
     public void danio(int unDanio){
         this.danio =  unDanio;
     }
-    protected EstadoDefensa estado;
+    protected AccionesDefensa estado;
     public abstract void atacarEnemigo();
     public abstract void construir();
 }
