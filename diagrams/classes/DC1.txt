@@ -38,17 +38,17 @@ abstract Defensa {
 - tierra: Tierra
 - coordenada: Coordenada
 + atacarEnemigo(enemigo: Enemigo)
-+ construirTorre(torre:Torre)
++ construir(torre:Torre)
 }
 
 class TorreBlanca {
 + atacarEnemigo(enemigo: Enemigo)
-+ construirTorre(torre:Torre)
++ construir(torre:Torre)
 }
 
 class TorrePlateada {
 + atacarEnemigo(enemigo: Enemigo)
-+ construirTorre(torre:Torre)
++ construir(torre:Torre)
 }
 
 class Jugador {
@@ -61,16 +61,51 @@ class Jugador {
 + descontarPuntosDeVida()
 }
 
+
+interface EstadoDefensa {
++atacarEnemigo(e: Enemigo, D: Defensa)
+}
+
+class EnConstruccion {
++atacarEnemigo(e: Enemigo, D: Defensa)
+}
+
+class Terminada {
++atacarEnemigo(e: Enemigo, D: Defensa)
+}
+
+
+interface EstadoEnemigo {
++ mover(enemigo:Enemigo)
+}
+
+class Vivo {
++ mover(enemigo:Enemigo)
+}
+
+class Muerto {
++ mover(enemigo:Enemigo)
+}
+
+EstadoEnemigo <|.. Vivo
+EstadoEnemigo <|.. Muerto
+
+EstadoDefensa <|.. EnConstruccion
+EstadoDefensa <|.. Terminada
+
 Defensa <|-- TorreBlanca
 Defensa <|-- TorrePlateada
+
+
 
 Enemigo <|-- Hormiga
 Enemigo <|-- Araña
 
-Juego <- Inicializador 
+Juego <- Inicializador
 Juego "1" --> "0..*" Enemigo
 Jugador <- Juego
 Jugador "1" --> "0..*" Defensa
 Defensa .> Enemigo
-
+Defensa --> EstadoDefensa
+Enemigo --> EstadoEnemigo
 @enduml
