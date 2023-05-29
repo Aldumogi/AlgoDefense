@@ -21,9 +21,7 @@ public class Jugador {
     public int obtenerCantidadDeCreditos(){
         return this.cantidadDeCreditos;
     }
-    //public void creditos(int unosCreditos){
-      //  cantidadDeCreditos;
-    //}
+
     public List<Defensa> obtenerDefensas(){
         return this.defensas;
     }
@@ -31,7 +29,6 @@ public class Jugador {
         if(this.obtenerCantidadDeCreditos() >= unaDefensa.costo()){
             this.defensas.add(unaDefensa);
             this.cantidadDeCreditos -= unaDefensa.costo();
-   
             return true;
         }
         return false;
