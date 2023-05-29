@@ -2,16 +2,12 @@ package edu.fiuba.algo3;
 
 public class Hormiga extends Enemigo {
 
-    private int velocidad;
-    private int dañoCausado;
-    private int energia;
-    private int creditosOtorgados;
 
     public Hormiga() {
-        this.velocidad = 1;
-        this.dañoCausado = 1;
-        this.energia = 1;
-        this.creditosOtorgados = 1;
+        this.velocidad(1);
+        this.dañoCausado(1);
+        this.energia(1);
+        this.creditosOtorgados(1);
     }
 
     public int cantidadCreditosOtorgados() {
@@ -19,6 +15,6 @@ public class Hormiga extends Enemigo {
     }
 
     public boolean estaVivo() {
-        return (this.energia > 0) ? true : false;
+        return (this.energia() > 0) ? true : false;
     }
 }
