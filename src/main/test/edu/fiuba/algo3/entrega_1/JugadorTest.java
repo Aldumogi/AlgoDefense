@@ -37,8 +37,8 @@ public class JugadorTest {
         assertEquals( 20, unaTorre.costo() );
         assertEquals( true, sePudoConstruir );
         assertEquals( 1, jugador.obtenerDefensas().size() );
-
     }
+    
     @Test
     public void siMeQuedoSinCreditosNoSeGeneraNingunaDefensa() {
         Inicializador inicio = new Inicializador();
