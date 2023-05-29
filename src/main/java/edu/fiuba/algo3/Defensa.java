@@ -39,5 +39,5 @@ public abstract class Defensa {
     }
     protected EstadoDefensa estado;
     public abstract void atacarEnemigo();
-    public abstract void construirTorre();
+    public abstract void construir();
 }

@@ -1,5 +1,5 @@
 package edu.fiuba.algo3;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
@@ -13,6 +13,7 @@ public class Jugador {
         this.puntosDeVida = 20;
         this.cantidadDeCreditos = 100;
         this.nombre = nombre;
+        this.defensas = new ArrayList<Defensa>();
     }
     public int obtenerPuntosDeVida() {
         return this.puntosDeVida;
@@ -20,10 +21,17 @@ public class Jugador {
     public int obtenerCantidadDeCreditos(){
         return this.cantidadDeCreditos;
     }
+    //public void creditos(int unosCreditos){
+      //  cantidadDeCreditos;
+    //}
+    public List<Defensa> obtenerDefensas(){
+        return this.defensas;
+    }
     public boolean generarConstruccion(Defensa unaDefensa){
-        if(this.cantidadDeCreditos >= unaDefensa.costo()){
+        if(this.obtenerCantidadDeCreditos() >= unaDefensa.costo()){
             this.defensas.add(unaDefensa);
             this.cantidadDeCreditos -= unaDefensa.costo();
+   
             return true;
         }
         return false;
