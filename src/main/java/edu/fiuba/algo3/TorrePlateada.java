@@ -13,7 +13,9 @@ public class TorrePlateada extends Defensa {
         this.danio(2);
     }
 
-    public void atacarEnemigo() {}
+    public Boolean atacarEnemigo(Enemigo enemigo) {
+        return true;
+    }
 
     public void construir() {}
 }

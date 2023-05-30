@@ -1,6 +1,8 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+
 public interface DisponibilidadParcela {
-    Boolean agregar(Defensa defensa, Parcela parcela);
+    void agregar(Defensa defensa, Parcela parcela) throws NoDisponibleParaConstruirException;
 }
 
