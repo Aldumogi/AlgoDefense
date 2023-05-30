@@ -1,7 +1,10 @@
 package edu.fiuba.algo3;
 
 public class PasarelaLargada extends Pasarela {
-    public void construir(Defensa defensa) {
-
+    public PasarelaLargada(Coordenadas coordenadas){
+        super(coordenadas);
+    }
+    public Boolean construir(Defensa defensa) {
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
 public interface Parcela {
-    void construir(Defensa defensa);
+    Boolean construir(Defensa defensa);
+    Boolean ocupar(Defensa defensa);
 }
