@@ -6,6 +6,7 @@ public abstract class Defensa {
     private int tiempoDeConstruccion;
     private int rangoDeAtaque;
     private int danio;
+    private int turnoEnElQueSeInicioLaConstruccion;
 
     public String nombre(){
         return this.nombre;

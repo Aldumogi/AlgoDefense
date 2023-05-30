@@ -7,7 +7,7 @@ import edu.fiuba.algo3.*;
 
 public class Juego {
     private Mapa mapa;
-    private Turno turno;
+    private int numeroDeTurno;
     private Jugador jugador;
     private List<Enemigo> enemigos;
 
@@ -18,7 +18,7 @@ public class Juego {
     public Juego(Jugador jugador, Mapa mapa) {
         this.jugador = jugador;
         this.mapa = mapa;
-        this.turno = new Turno();
+        this.numeroDeTurno = 0;
     }
 
     public void setearJugador(Jugador jugador) {
