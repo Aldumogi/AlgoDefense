@@ -2,7 +2,7 @@ package edu.fiuba.algo3;
 
 import java.util.Random;
 
-public class Arania {
+public class Arania  extends Enemigo {
     private int velocidad;
     private int dañoCausado;
     private int energia;
