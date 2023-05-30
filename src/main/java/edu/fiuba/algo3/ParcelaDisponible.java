@@ -1,8 +1,10 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+
 public class ParcelaDisponible implements DisponibilidadParcela{
 
-    public Boolean agregar(Defensa defensa, Parcela parcela) {
-        return parcela.ocupar(defensa);
+    public void agregar(Defensa defensa, Parcela parcela) throws NoDisponibleParaConstruirException {
+        parcela.ocupar(defensa);
     }
 }

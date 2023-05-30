@@ -38,6 +38,6 @@ public abstract class Defensa {
         this.danio =  unDanio;
     }
     protected AccionesDefensa estado;
-    public abstract void atacarEnemigo();
+    public abstract Boolean atacarEnemigo(Enemigo enemigo);
     public abstract void construir();
 }
