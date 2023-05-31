@@ -194,6 +194,7 @@ public class EnemigoTest {
         juego.agregarEnemigo(hormiga7);
         Hormiga hormiga8 = new Hormiga();
         juego.agregarEnemigo(hormiga8);
+        
         Hormiga hormiga9 = new Hormiga();
         juego.agregarEnemigo(hormiga9);
         Hormiga hormiga10 = new Hormiga();
