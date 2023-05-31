@@ -7,15 +7,7 @@ public abstract class Enemigo {
     private int creditosOtorgados;
 
     //getters
-    public int velocidad(){
-        return this.velocidad;
-    }
-    public int dañoCausado(){
-        return this.dañoCausado;
-    }
-    public int energia(){
-        return this.energia;
-    }
+
     public int creditosOtorgados(){
         return this.creditosOtorgados;
     }
@@ -33,9 +25,21 @@ public abstract class Enemigo {
         this.creditosOtorgados = cred;
     }
 
-    protected EstadoEnemigo estado;
+    public boolean recibirDanio(int unDanio){
+        if (estaVivo()){
+            this.energia = this.energia - unDanio;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean estaVivo() {
+        return (this.energia > 0) ? true : false;
+    }
+
+    //protected EstadoEnemigo estado;
+
     public abstract int cantidadCreditosOtorgados();
 
-    public abstract boolean estaVivo();
 
 }

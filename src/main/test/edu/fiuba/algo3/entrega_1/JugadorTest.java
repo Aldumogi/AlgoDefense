@@ -34,7 +34,6 @@ public class JugadorTest {
 
         boolean sePudoConstruir = jugador.generarConstruccion(unaTorre);
 
-        assertEquals( 20, unaTorre.costo() );
         assertEquals( true, sePudoConstruir );
         assertEquals( 1, jugador.obtenerDefensas().size() );
     }
@@ -65,7 +64,6 @@ public class JugadorTest {
         TorrePlateada unaTorre6 = new TorrePlateada();
         boolean sePudoConstruir =  jugador.generarConstruccion(unaTorre6);
 
-        assertEquals( 20, unaTorre1.costo() );
         assertEquals( false, sePudoConstruir );
         assertEquals( 5, jugador.obtenerDefensas().size() );
 

@@ -17,7 +17,6 @@ public class Arania extends Enemigo {
         return this.creditosOtorgados();
     }
 
-    public boolean estaVivo() {
-        return (this.energia() > 0) ? true : false;
-    }
+
+
 }

@@ -7,21 +7,10 @@ public abstract class Defensa {
     private int rangoDeAtaque;
     private int danio;
 
-    public String nombre(){
-        return this.nombre;
-    }
     public int costo(){
         return this.costo;
     }
-    public int tiempoDeConstruccion(){
-        return this.tiempoDeConstruccion;
-    }
-    public int rangoDeAtaque(){
-        return this.rangoDeAtaque;
-    }
-    public int danio(){
-        return this.danio;
-    }
+    
     public void nombre(String unNombre){
         this.nombre = unNombre;
     }
@@ -38,6 +27,9 @@ public abstract class Defensa {
         this.danio =  unDanio;
     }
     protected AccionesDefensa estado;
-    public abstract Boolean atacarEnemigo(Enemigo enemigo);
+    public Boolean atacarEnemigo(Enemigo enemigo){
+        return enemigo.recibirDanio(this.danio);
+
+    };
     public abstract void construir();
 }

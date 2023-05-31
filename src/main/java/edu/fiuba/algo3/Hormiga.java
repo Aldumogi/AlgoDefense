@@ -11,10 +11,14 @@ public class Hormiga extends Enemigo {
     }
 
     public int cantidadCreditosOtorgados() {
+        
         return 0;
     }
 
-    public boolean estaVivo() {
-        return (this.energia() > 0) ? true : false;
+
+
+
     }
-}
+
+
+

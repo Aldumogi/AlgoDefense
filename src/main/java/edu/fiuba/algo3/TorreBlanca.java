@@ -13,9 +13,6 @@ public class TorreBlanca extends Defensa {
         this.danio(1);
     }
 
-    public Boolean atacarEnemigo(Enemigo enemigo) {
-        return true;
-    }
     public void construir() {
 
     }
