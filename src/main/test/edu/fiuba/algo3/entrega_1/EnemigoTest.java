@@ -141,7 +141,7 @@ public class EnemigoTest {
         jugador.generarConstruccion(unatorre);
 
         assertEquals(80, jugador.obtenerCantidadDeCreditos());  
-        unatorre.atacarEnemigo(unaHormiga);  //despues d atacar, la ho
+        unatorre.atacarEnemigo(unaHormiga); 
         assertEquals(81, jugador.obtenerCantidadDeCreditos());
 
     }
