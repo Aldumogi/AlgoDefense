@@ -24,6 +24,8 @@ class Juego {
 - mapa: Mapa
 - turno: Turno
 + avanzarTurno()
++ agregarEnemigo()
++ juegoTerminado()
 }
 
 class Inicializador {
@@ -36,21 +38,20 @@ abstract Defensa {
 - costo
 - tiempoDeConstruccion
 - rangoDeAtaque
-- daño
-- tierra: Tierra
-- coordenada: Coordenada
+- danio
+- parcela
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(torre:Torre)
++ construir(parcela:Parcela)
 }
 
 class TorreBlanca {
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(torre:Torre)
++ construir(parcela:Parcela)
 }
 
 class TorrePlateada {
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(torre:Torre)
++ construir(parcela:Parcela)
 }
 
 class Jugador {
@@ -65,15 +66,15 @@ class Jugador {
 
 
 interface AccionesDefensa {
-+atacarEnemigo(e: Enemigo, rangoDeAtaque, daño)
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
 }
 
 class EnConstruccion {
-+atacarEnemigo(e: Enemigo, rangoDeAtaque, daño)
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
 }
 
 class Terminada {
-+atacarEnemigo(e: Enemigo, rangoDeAtaque, daño)
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
 }
 
 

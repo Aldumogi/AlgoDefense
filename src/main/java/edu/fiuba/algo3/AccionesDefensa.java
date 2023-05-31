@@ -1,5 +1,5 @@
 package edu.fiuba.algo3;
 
 public interface AccionesDefensa {
-    void atacarEnemigo();
+    Boolean atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa);
 }

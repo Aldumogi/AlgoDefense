@@ -1,6 +1,7 @@
 package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 
 public class Tierra implements Parcela {
     private Coordenadas coordenadas;
@@ -15,7 +16,15 @@ public class Tierra implements Parcela {
     }
 
     public void ocupar(Defensa defensa){
+        defensa.construir(this);
         this.disponibilidad = new ParcelaOcupada();
     }
 
+    public void recibirEnemigo(Enemigo enemigo){
+        throw new NoEsPosibleRecibirEnemigosEnParcelaException();
+    }
+
+    public Coordenadas obtenerCoordenadas(){
+        return this.coordenadas;
+    }
 }

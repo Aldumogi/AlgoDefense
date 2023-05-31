@@ -78,4 +78,74 @@ public class DefensaTest {
             pasarelaMeta.construir(torreBlanca);
         });
     }
+
+    /*
+        CASO de USO 5 - Verificar que las defensas ataquen dentro del rango esperado (y verificar lo contrario)
+     */
+
+    @Test
+    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+        //Arrange
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(3,1);
+        Defensa torreBlanca = new TorreBlanca();
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(torreBlanca); // daño 1 punto, rango 3
+        torreBlanca.terminarDeConstruir();
+        Enemigo hormiga = new Hormiga(coordenadasHormiga);
+
+        //Act, Assert
+        assertTrue(torreBlanca.atacarEnemigo(hormiga));
+        assertFalse(hormiga.estaVivo());
+
+    }
+
+    @Test
+    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+        //Arrange
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(3,1);
+        Defensa torrePlateada = new TorrePlateada();
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(torrePlateada); // daño 2 punto, rango 5
+        torrePlateada.terminarDeConstruir();
+        Enemigo hormiga = new Hormiga(coordenadasHormiga);
+
+        //Act, Assert
+        assertTrue(torrePlateada.atacarEnemigo(hormiga));
+        assertFalse(hormiga.estaVivo());
+    }
+
+    @Test
+    public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException {
+        //Arrange
+        Coordenadas coordenadasTorre = new Coordenadas(2,2); // rango 3
+        Coordenadas coordenadasHormiga = new Coordenadas(30,100);
+        Defensa torreBlanca = new TorreBlanca();
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(torreBlanca); // daño 1 punto, rango 3
+        torreBlanca.terminarDeConstruir();
+        Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
+
+        //Act, Assert
+        assertFalse(torreBlanca.atacarEnemigo(hormiga));
+        assertTrue(hormiga.estaVivo());
+    }
+
+    @Test
+    public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException {
+        //Arrange
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(30,100);
+        Defensa torrePlateada = new TorrePlateada();
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(torrePlateada); // daño 2 punto, rango 5
+        torrePlateada.terminarDeConstruir();
+        Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
+
+        //Act, Assert
+        assertFalse(torrePlateada.atacarEnemigo(hormiga));
+        assertTrue(hormiga.estaVivo());
+    }
+
 }

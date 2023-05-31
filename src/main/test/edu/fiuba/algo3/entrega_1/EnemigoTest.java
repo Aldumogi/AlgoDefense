@@ -27,9 +27,27 @@ public class EnemigoTest {
 
         Hormiga unaHormiga = new Hormiga();
         Defensa unaDefensa = new TorreBlanca(jugador);
+import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class EnemigoTest {
+    @Test
+    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(3,1);
+        Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
+        Defensa unaDefensa = new TorreBlanca();
+
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(unaDefensa);
+        unaDefensa.terminarDeConstruir();
+
         unaDefensa.atacarEnemigo(unaHormiga);
 
-        assertEquals( unaHormiga.estaVivo(), false );
+        assertFalse(unaHormiga.estaVivo());
 
     }
     @Test
@@ -43,10 +61,20 @@ public class EnemigoTest {
 
         Hormiga unaHormiga = new Hormiga();
         Defensa unaDefensa = new TorreBlanca(jugador);
+    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException {
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(3,1);
+        Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
+        Defensa unaDefensa = new TorreBlanca();
+
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(unaDefensa);
+        unaDefensa.terminarDeConstruir();
+
         unaDefensa.atacarEnemigo(unaHormiga);
         boolean pudeAtacar = unaDefensa.atacarEnemigo(unaHormiga);
 
-        assertEquals( pudeAtacar, false );
+        assertFalse(pudeAtacar);
 
     }
     @Test
@@ -59,9 +87,52 @@ public class EnemigoTest {
 
         Arania unaHormiga = new Arania();
         Defensa unaDefensa = new TorreBlanca(jugador);
+    public void unaTorreBlancaAtacaAunaAraniaYNoLaMata() throws NoDisponibleParaConstruirException {
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasArania = new Coordenadas(3,1);
+        Arania unaArania = new Arania(coordenadasArania);
+        Defensa unaDefensa = new TorreBlanca();
+
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(unaDefensa);
+        unaDefensa.terminarDeConstruir();
+
+        unaDefensa.atacarEnemigo(unaArania);
+
+        assertTrue(unaArania.estaVivo());
+
+    }
+    @Test
+    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException {
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasArania = new Coordenadas(3,1);
+        Arania unaArania = new Arania(coordenadasArania);
+        Defensa unaDefensa = new TorreBlanca();
+
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(unaDefensa);
+        unaDefensa.terminarDeConstruir();
+
+        unaDefensa.atacarEnemigo(unaArania);
+        unaDefensa.atacarEnemigo(unaArania);
+
+        assertFalse(unaArania.estaVivo());
+
+    }
+    @Test
+    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(3,1);
+        Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
+        Defensa unaDefensa = new TorrePlateada();
+
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(unaDefensa);
+        unaDefensa.terminarDeConstruir();
+
         unaDefensa.atacarEnemigo(unaHormiga);
 
-        assertEquals( unaHormiga.estaVivo(), true );
+        assertFalse(unaHormiga.estaVivo());
 
     }
     @Test
@@ -76,9 +147,19 @@ public class EnemigoTest {
         Arania unaArania = new Arania();
         Defensa unaDefensa = new TorreBlanca(jugador);
         unaDefensa.atacarEnemigo(unaArania);
+    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasArania = new Coordenadas(3,1);
+        Arania unaArania = new Arania(coordenadasArania);
+        Defensa unaDefensa = new TorrePlateada();
+
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(unaDefensa);
+        unaDefensa.terminarDeConstruir();
+
         unaDefensa.atacarEnemigo(unaArania);
 
-        assertEquals( unaArania.estaVivo(), false );
+        assertFalse(unaArania.estaVivo());
 
     }
     @Test
@@ -92,8 +173,15 @@ public class EnemigoTest {
         Hormiga unaHormiga = new Hormiga();
         Defensa unaDefensa = new TorrePlateada(jugador);
         unaDefensa.atacarEnemigo(unaHormiga);
+    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException {
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasArania = new Coordenadas(3,1);
+        Arania unaArania = new Arania(coordenadasArania);
+        Defensa unaDefensa = new TorrePlateada();
 
-        assertEquals( unaHormiga.estaVivo(), false );
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(unaDefensa);
+        unaDefensa.terminarDeConstruir();
 
     }
     @Test
@@ -123,7 +211,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorrePlateada(jugador);
         unaDefensa.atacarEnemigo(unaArania);
         boolean pudeAtacar = unaDefensa.atacarEnemigo(unaArania);
-        assertEquals( pudeAtacar, false );
+        assertFalse(pudeAtacar);
 
     }
 
@@ -194,7 +282,7 @@ public class EnemigoTest {
         juego.agregarEnemigo(hormiga7);
         Hormiga hormiga8 = new Hormiga();
         juego.agregarEnemigo(hormiga8);
-        
+
         Hormiga hormiga9 = new Hormiga();
         juego.agregarEnemigo(hormiga9);
         Hormiga hormiga10 = new Hormiga();

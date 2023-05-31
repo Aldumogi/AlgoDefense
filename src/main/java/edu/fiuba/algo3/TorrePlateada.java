@@ -7,6 +7,7 @@ public class TorrePlateada extends Defensa {
     // private Coodenada coordenada;
 
     public TorrePlateada(Jugador jugador) {
+    public TorrePlateada() {
         this.nombre("Torre Plateada");
         this.costo(20);
         this.tiempoDeConstruccion(2);
@@ -15,5 +16,10 @@ public class TorrePlateada extends Defensa {
         this.duenio(jugador);
     }
 
-    public void construir() {}
+    public void construir(Tierra tierra) {
+        this.tierra = tierra;
+    }
+    public Boolean atacarEnemigo(Enemigo enemigo){
+        return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
+    }
 }

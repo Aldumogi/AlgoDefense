@@ -7,6 +7,7 @@ public class TorreBlanca extends Defensa {
     // private Coodenada coordenada;
 
     public TorreBlanca(Jugador jugador) {
+    public TorreBlanca() {
         this.nombre("Torre Blanca");
         this.costo(10);
         this.tiempoDeConstruccion(1);
@@ -14,11 +15,15 @@ public class TorreBlanca extends Defensa {
         this.danio(1);
         this.duenio(jugador);
 
+        this.accionesDefensa = new EnConstruccion();
     }
 
-    public void construir() {
-
+    public void construir(Tierra tierra) {
+        this.tierra = tierra;
     }
 
+    public Boolean atacarEnemigo(Enemigo enemigo){
+        return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
+    }
 
 }

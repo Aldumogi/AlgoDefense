@@ -8,7 +8,10 @@ public abstract class Defensa {
     private int danio;
     private Jugador duenio;
 
+    protected int rangoDeAtaque;
+    protected int danio;
 
+    protected Tierra tierra;
     public int costo(){
         return this.costo;
     }
@@ -45,6 +48,13 @@ public abstract class Defensa {
         this.duenio.agregarCreditos(creditos);
         return creditos != 0;
 
+    protected AccionesDefensa accionesDefensa;
+    public Boolean atacarEnemigo(Enemigo enemigo){
+        return enemigo.recibirDanio(this.danio);
     };
-    public abstract void construir();
+    public abstract void construir(Tierra tierra);
+
+    public void terminarDeConstruir(){
+        this.accionesDefensa = new Terminada();
+    }
 }

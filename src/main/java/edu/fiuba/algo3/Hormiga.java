@@ -8,6 +8,14 @@ public class Hormiga extends Enemigo {
         this.dañoCausado(1);
         this.energia(1);
         this.creditosOtorgados(1);
+        this.coordenadas = this.getCoordenadasLargada();
+    }
+    public Hormiga(Coordenadas coordenadas) {
+        this.velocidad(1);
+        this.dañoCausado(1);
+        this.energia(1);
+        this.creditosOtorgados(1);
+        this.coordenadas = coordenadas;
     }
 
     public int cantidadCreditosOtorgados() {
@@ -18,6 +26,10 @@ public class Hormiga extends Enemigo {
 
 
 
+    private Coordenadas getCoordenadasLargada() {
+        // Al mapa le pedira las coordenadas de la parcela de largada
+        return new Coordenadas(3,1);
+    }
 }
 
 
