@@ -40,6 +40,7 @@ public class DefensaTest {
 
         jugador.generarConstruccion(torrePlateada);
         juego.avanzarTurno();
+        juego.avanzarTurno();
         AccionesDefensa estado = torrePlateada.obtenerEstado();
 
         assertTrue(estado.estaTerminada());
