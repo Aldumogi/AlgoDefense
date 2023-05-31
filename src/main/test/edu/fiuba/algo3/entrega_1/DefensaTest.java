@@ -73,4 +73,43 @@ public class DefensaTest {
             pasarelaMeta.construir(torreBlanca);
         });
     }
+
+    /*
+        CASO de USO 5 - Verificar que las defensas ataquen dentro del rango esperado (y verificar lo contrario)
+     */
+
+    @Test
+    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+        //Arrange
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(3,1);
+        Defensa torreBlanca = new TorreBlanca();
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(torreBlanca); // daño 1 punto, rango 3
+        torreBlanca.terminarDeConstruir();
+        Enemigo hormiga = new Hormiga(coordenadasHormiga);
+
+        //Act, Assert
+        assertEquals( true, torreBlanca.atacarEnemigo(hormiga) );
+
+    }
+
+    @Test
+    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+        //Arrange
+        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasHormiga = new Coordenadas(3,1);
+        Defensa torrePlateada = new TorrePlateada();
+        Tierra tierra = new Tierra(coordenadasTorre);
+        tierra.construir(torrePlateada); // daño 2 punto, rango 5
+        torrePlateada.terminarDeConstruir();
+        Enemigo hormiga = new Hormiga(coordenadasHormiga);
+
+        //Act, Assert
+        assertEquals( true, torrePlateada.atacarEnemigo(hormiga) );
+
+    }
+
+
+
 }

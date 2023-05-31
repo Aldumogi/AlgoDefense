@@ -16,6 +16,7 @@ public class Tierra implements Parcela {
     }
 
     public void ocupar(Defensa defensa){
+        defensa.construir(this);
         this.disponibilidad = new ParcelaOcupada();
     }
 
@@ -23,4 +24,7 @@ public class Tierra implements Parcela {
         throw new NoEsPosibleRecibirEnemigosEnParcelaException();
     }
 
+    public Coordenadas obtenerCoordenadas(){
+        return this.coordenadas;
+    }
 }

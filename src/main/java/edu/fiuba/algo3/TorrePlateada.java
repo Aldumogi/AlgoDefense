@@ -2,9 +2,6 @@ package edu.fiuba.algo3;
 
 public class TorrePlateada extends Defensa {
 
-    // private Tierra tierra;
-    // private Coodenada coordenada;
-
     public TorrePlateada() {
         this.nombre("Torre Plateada");
         this.costo(20);
@@ -13,5 +10,10 @@ public class TorrePlateada extends Defensa {
         this.danio(2);
     }
 
-    public void construir() {}
+    public void construir(Tierra tierra) {
+        this.tierra = tierra;
+    }
+    public Boolean atacarEnemigo(Enemigo enemigo){
+        return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
+    }
 }
