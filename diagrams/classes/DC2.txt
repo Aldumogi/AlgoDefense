@@ -27,10 +27,12 @@ class Coordenadas {
 
 interface Parcela {
 + construir(D: Defensa)
++ recibirEnemigo(Enemigo enemigo)
 }
 
 class Pasarela {
-- coordenadas: Coordenadas
+# coordenadas: Coordenadas
+# enemigos: Enemigo
 + construir(D: Defensa)
 }
 
