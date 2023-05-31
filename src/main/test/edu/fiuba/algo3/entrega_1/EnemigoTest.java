@@ -11,6 +11,8 @@ import edu.fiuba.algo3.TorrePlateada;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EnemigoTest {
     @Test
@@ -143,6 +145,26 @@ public class EnemigoTest {
         assertEquals(80, jugador.obtenerCantidadDeCreditos());  
         unatorre.atacarEnemigo(unaHormiga); 
         assertEquals(81, jugador.obtenerCantidadDeCreditos());
+
+    }
+
+    @Test
+    public void matoAUnaAraniaYLeSuma1CredAlJugador() {
+        Inicializador inicio = new Inicializador();
+
+        inicio.agregarJugador("Alberto");
+        Juego juego = inicio.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Arania unaArania = new Arania();
+        juego.agregarEnemigo(unaArania);
+        Defensa unatorre = new TorrePlateada(jugador);
+        jugador.generarConstruccion(unatorre);
+
+        assertEquals(80, jugador.obtenerCantidadDeCreditos());  
+        unatorre.atacarEnemigo(unaArania); 
+        boolean seSumoCreditos = (jugador.obtenerCantidadDeCreditos() != 80);
+        assertTrue(seSumoCreditos);
 
     }
 

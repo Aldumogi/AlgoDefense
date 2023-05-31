@@ -36,7 +36,7 @@ public abstract class Enemigo {
         }
         this.energia = this.energia - unDanio;
         if(!estaVivo()){
-            return this.creditosOtorgados;
+            return cantidadCreditosOtorgados();
         }
         return 0;
 

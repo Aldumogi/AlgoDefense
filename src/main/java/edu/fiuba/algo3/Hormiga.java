@@ -12,13 +12,13 @@ public class Hormiga extends Enemigo {
 
     public int cantidadCreditosOtorgados() {
         
-        return 0;
+        return 1;
     }
 
 
 
 
-    }
+}
 
 
 
