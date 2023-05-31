@@ -14,7 +14,8 @@ public class DefensaTest {
     @Test
     public void defensaPuedeConstruirseSobreTierra() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Jugador unJugador = new Jugador("tornillo");
+        Defensa torreBlanca = new TorreBlanca(unJugador);
         Coordenadas coordenadas = new Coordenadas(10,33);
         Parcela tierra = new Tierra(coordenadas);
 
@@ -28,7 +29,8 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobreRoca() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Jugador unJugador = new Jugador("tornillo");
+        Defensa torreBlanca = new TorreBlanca(unJugador);
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela rocoso = new Rocoso(coordenadas);
 
@@ -42,7 +44,8 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarela() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Jugador unJugador = new Jugador("tornillo");
+        Defensa torreBlanca = new TorreBlanca(unJugador);
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarela = new Pasarela(coordenadas);
         //Act, Assert
@@ -54,7 +57,8 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarelaLargada() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Jugador unJugador = new Jugador("tornillo");
+        Defensa torreBlanca = new TorreBlanca(unJugador);
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarelaLargada = new PasarelaLargada(coordenadas);
         //Act, Assert
@@ -65,7 +69,8 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarelaMeta() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Jugador unJugador = new Jugador("tornillo");
+        Defensa torreBlanca = new TorreBlanca(unJugador);
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarelaMeta = new PasarelaMeta(coordenadas);
         //Act, Assert

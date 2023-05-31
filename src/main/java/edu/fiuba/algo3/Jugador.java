@@ -21,6 +21,9 @@ public class Jugador {
     public int obtenerCantidadDeCreditos(){
         return this.cantidadDeCreditos;
     }
+    public void agregarCreditos(int creditos){
+        this.cantidadDeCreditos += creditos;
+    }
 
     public List<Defensa> obtenerDefensas(){
         return this.defensas;

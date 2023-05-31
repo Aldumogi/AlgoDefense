@@ -30,7 +30,7 @@ public class JugadorTest {
         Juego juego = inicio.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        TorrePlateada unaTorre = new TorrePlateada();
+        TorrePlateada unaTorre = new TorrePlateada(jugador);
 
         boolean sePudoConstruir = jugador.generarConstruccion(unaTorre);
 
@@ -46,22 +46,22 @@ public class JugadorTest {
         Juego juego = inicio.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        TorrePlateada unaTorre1 = new TorrePlateada();
+        TorrePlateada unaTorre1 = new TorrePlateada(jugador);
         jugador.generarConstruccion(unaTorre1);
 
-        TorrePlateada unaTorre2 = new TorrePlateada();
+        TorrePlateada unaTorre2 = new TorrePlateada(jugador);
         jugador.generarConstruccion(unaTorre2);
 
-        TorrePlateada unaTorre3 = new TorrePlateada();
+        TorrePlateada unaTorre3 = new TorrePlateada(jugador);
         jugador.generarConstruccion(unaTorre3);
 
-        TorrePlateada unaTorre4 = new TorrePlateada();
+        TorrePlateada unaTorre4 = new TorrePlateada(jugador);
         jugador.generarConstruccion(unaTorre4);
 
-        TorrePlateada unaTorre5 = new TorrePlateada();
+        TorrePlateada unaTorre5 = new TorrePlateada(jugador);
         jugador.generarConstruccion(unaTorre5);
 
-        TorrePlateada unaTorre6 = new TorrePlateada();
+        TorrePlateada unaTorre6 = new TorrePlateada(jugador);
         boolean sePudoConstruir =  jugador.generarConstruccion(unaTorre6);
 
         assertEquals( false, sePudoConstruir );
