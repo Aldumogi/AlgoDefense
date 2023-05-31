@@ -24,6 +24,8 @@ class Juego {
 - mapa: Mapa
 - turno: Turno
 + avanzarTurno()
++ agregarEnemigo()
++ juegoTerminado()
 }
 
 class Inicializador {

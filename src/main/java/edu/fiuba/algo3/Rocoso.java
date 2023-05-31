@@ -14,4 +14,8 @@ public class Rocoso implements Parcela {
     public void ocupar(Defensa defensa) throws NoDisponibleParaConstruirException {
         throw new NoDisponibleParaConstruirException();
     }
+
+    public void recibirEnemigo(Enemigo enemigo){
+        throw new NoEsPosibleRecibirEnemigosEnParcelaException();
+    }
 }
