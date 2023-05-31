@@ -1,14 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.Defensa;
-import edu.fiuba.algo3.Inicializador;
-import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.TorreBlanca;
-import edu.fiuba.algo3.TorrePlateada;
-import edu.fiuba.algo3.Juego;
+import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
     @Test
@@ -31,11 +27,10 @@ public class JugadorTest {
         Jugador jugador = juego.obtenerJugador();
 
         TorrePlateada unaTorre = new TorrePlateada();
-
         boolean sePudoConstruir = jugador.generarConstruccion(unaTorre);
 
         assertEquals( 20, unaTorre.costo() );
-        assertEquals( true, sePudoConstruir );
+        assertTrue( sePudoConstruir );
         assertEquals( 1, jugador.obtenerDefensas().size() );
     }
     
@@ -63,10 +58,9 @@ public class JugadorTest {
         jugador.generarConstruccion(unaTorre5);
 
         TorrePlateada unaTorre6 = new TorrePlateada();
-        boolean sePudoConstruir =  jugador.generarConstruccion(unaTorre6);
 
         assertEquals( 20, unaTorre1.costo() );
-        assertEquals( false, sePudoConstruir );
+        assertFalse( jugador.generarConstruccion(unaTorre6) );
         assertEquals( 5, jugador.obtenerDefensas().size() );
 
     }
