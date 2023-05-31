@@ -7,8 +7,6 @@ public class Jugador {
     private int cantidadDeCreditos;
     private String nombre;
     private List<Defensa> defensas;
-
-    
     public Jugador(String nombre){
         this.puntosDeVida = 20;
         this.cantidadDeCreditos = 100;
@@ -24,6 +22,9 @@ public class Jugador {
 
     public List<Defensa> obtenerDefensas(){
         return this.defensas;
+    }
+    public void actualizarDefensasAlFinalizarTurno(int numeroDeTurno){
+        this.defensas.forEach(defensa -> defensa.actualizarEstado(numeroDeTurno));
     }
     public boolean generarConstruccion(Defensa unaDefensa){
         if(this.obtenerCantidadDeCreditos() >= unaDefensa.costo()){

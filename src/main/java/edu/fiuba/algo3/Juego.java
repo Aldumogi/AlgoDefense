@@ -13,12 +13,14 @@ public class Juego {
 
     public Juego() {
         this.enemigos = new ArrayList<Enemigo>();
+        this.numeroDeTurno = 0;
     }
 
     public Juego(Jugador jugador, Mapa mapa) {
         this.jugador = jugador;
         this.mapa = mapa;
         this.numeroDeTurno = 0;
+        this.enemigos = new ArrayList<Enemigo>();
     }
 
     public void setearJugador(Jugador jugador) {
@@ -33,5 +35,10 @@ public class Juego {
 
     public boolean juegoTerminado(){
         return enemigos.size() == 0;
+    }
+
+    public void avanzarTurno(){
+        this.numeroDeTurno++;
+        this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
     }
 }

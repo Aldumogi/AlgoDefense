@@ -40,5 +40,10 @@ public abstract class Defensa {
     }
     protected AccionesDefensa estado;
     public abstract Boolean atacarEnemigo(Enemigo enemigo);
+    public void actualizarEstado(int numeroDeTurno) {
+        if( numeroDeTurno - this.turnoEnElQueSeInicioLaConstruccion == this.tiempoDeConstruccion ) {
+            this.estado = new Terminada();
+        }
+    }
     public abstract void construir();
 }
