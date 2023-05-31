@@ -167,5 +167,55 @@ public class EnemigoTest {
         assertTrue(seSumoCreditos);
 
     }
+    @Test
+    public void matoAnceAraniasYElJugadorTieneLosCreditosCorrectos() {
+        Inicializador inicio = new Inicializador();
 
+        inicio.agregarJugador("Alberto");
+        Juego juego = inicio.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Hormiga hormiga1 = new Hormiga();
+        juego.agregarEnemigo(hormiga1);
+
+        Hormiga hormiga2 = new Hormiga();
+        juego.agregarEnemigo(hormiga2);
+
+        Hormiga hormiga3 = new Hormiga();
+        juego.agregarEnemigo(hormiga3);
+
+        Hormiga hormiga4 = new Hormiga();
+        juego.agregarEnemigo(hormiga4);
+        Hormiga hormiga5 = new Hormiga();
+        juego.agregarEnemigo(hormiga5);
+        Hormiga hormiga6 = new Hormiga();
+        juego.agregarEnemigo(hormiga6);
+        Hormiga hormiga7 = new Hormiga();
+        juego.agregarEnemigo(hormiga7);
+        Hormiga hormiga8 = new Hormiga();
+        juego.agregarEnemigo(hormiga8);
+        Hormiga hormiga9 = new Hormiga();
+        juego.agregarEnemigo(hormiga9);
+        Hormiga hormiga10 = new Hormiga();
+        juego.agregarEnemigo(hormiga10);
+        Hormiga hormiga11 = new Hormiga();
+        juego.agregarEnemigo(hormiga11);
+
+        Defensa unatorre = new TorrePlateada(jugador);
+        jugador.generarConstruccion(unatorre);
+
+        assertEquals(80, jugador.obtenerCantidadDeCreditos());  
+        unatorre.atacarEnemigo(hormiga1); 
+        unatorre.atacarEnemigo(hormiga2);
+        unatorre.atacarEnemigo(hormiga3); 
+        unatorre.atacarEnemigo(hormiga4); 
+        unatorre.atacarEnemigo(hormiga5); 
+        unatorre.atacarEnemigo(hormiga6); 
+        unatorre.atacarEnemigo(hormiga7); 
+        unatorre.atacarEnemigo(hormiga8); 
+        unatorre.atacarEnemigo(hormiga9); 
+        unatorre.atacarEnemigo(hormiga10); 
+        unatorre.atacarEnemigo(hormiga11); 
+        assertEquals(93, jugador.obtenerCantidadDeCreditos());
+    }
 }

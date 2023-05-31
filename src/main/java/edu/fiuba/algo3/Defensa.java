@@ -36,6 +36,12 @@ public abstract class Defensa {
     //ataca a un enemigo y devuelve true si lo mata
     public Boolean atacarEnemigo(Enemigo enemigo){
         int creditos = enemigo.recibirDanio(this.danio);
+        if(creditos == 1){ //mate a una hormiga
+            duenio.mateUnaHormiga();
+        }
+        if(duenio.hormigasMuertas() > 9){
+            creditos += 1;
+        }
         this.duenio.agregarCreditos(creditos);
         return creditos != 0;
 
