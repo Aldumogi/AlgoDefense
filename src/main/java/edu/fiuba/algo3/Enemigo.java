@@ -5,7 +5,7 @@ public abstract class Enemigo {
     private int dañoCausado;
     private int energia;
     private int creditosOtorgados;
-
+    protected Coordenadas coordenadas;
     //getters
 
     public int creditosOtorgados(){
@@ -42,4 +42,7 @@ public abstract class Enemigo {
     public abstract int cantidadCreditosOtorgados();
 
 
+    public Coordenadas obtenerCoordenadas() {
+        return this.coordenadas;
+    }
 }

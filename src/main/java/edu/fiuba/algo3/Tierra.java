@@ -15,7 +15,11 @@ public class Tierra implements Parcela {
     }
 
     public void ocupar(Defensa defensa){
+        defensa.construir(this);
         this.disponibilidad = new ParcelaOcupada();
     }
 
+    public Coordenadas obtenerCoordenadas(){
+        return this.coordenadas;
+    }
 }
