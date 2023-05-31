@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+
 public class TorreBlanca extends Defensa {
 
     // private Tierra tierra;
@@ -16,8 +18,16 @@ public class TorreBlanca extends Defensa {
     public Boolean atacarEnemigo(Enemigo enemigo) {
         return true;
     }
-    public void construir() {
-
+    public boolean construir(Coordenadas coordenadas) {
+        Parcela tierra = new Tierra(coordenadas);
+        try {
+            tierra.construir(this);
+        }
+        catch(NoDisponibleParaConstruirException e) {
+            return false;
+        }
+        this.estado = new EnConstruccion();
+        return true;
     }
 
 

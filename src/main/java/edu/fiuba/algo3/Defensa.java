@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+
 public abstract class Defensa {
     private String nombre;
     private int costo;
@@ -40,10 +42,13 @@ public abstract class Defensa {
     }
     protected AccionesDefensa estado;
     public abstract Boolean atacarEnemigo(Enemigo enemigo);
+    public AccionesDefensa obtenerEstado(){
+        return this.estado;
+    }
     public void actualizarEstado(int numeroDeTurno) {
         if( numeroDeTurno - this.turnoEnElQueSeInicioLaConstruccion == this.tiempoDeConstruccion ) {
             this.estado = new Terminada();
         }
     }
-    public abstract void construir();
+    public abstract boolean construir(Coordenadas coordenadas) ;
 }

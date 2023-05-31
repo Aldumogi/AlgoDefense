@@ -1,7 +1,9 @@
 package edu.fiuba.algo3;
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.ThreadLocalRandom;
 public class Jugador {
     private int puntosDeVida;
     private int cantidadDeCreditos;
@@ -26,11 +28,17 @@ public class Jugador {
     public void actualizarDefensasAlFinalizarTurno(int numeroDeTurno){
         this.defensas.forEach(defensa -> defensa.actualizarEstado(numeroDeTurno));
     }
-    public boolean generarConstruccion(Defensa unaDefensa){
+    public boolean generarConstruccion(Defensa unaDefensa) {
         if(this.obtenerCantidadDeCreditos() >= unaDefensa.costo()){
-            this.defensas.add(unaDefensa);
-            this.cantidadDeCreditos -= unaDefensa.costo();
-            return true;
+            int fila = ThreadLocalRandom.current().nextInt(1, 100);
+            int columna = ThreadLocalRandom.current().nextInt(1, 100);
+            Coordenadas coordenadas = new Coordenadas( fila, columna );
+
+            if ( unaDefensa.construir(coordenadas) ) {
+                this.defensas.add(unaDefensa);
+                this.cantidadDeCreditos -= unaDefensa.costo();
+                return true;
+            }
         }
         return false;
     }

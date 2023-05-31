@@ -6,6 +6,9 @@ import static java.util.Objects.isNull;
 
 public class Inicializador {
     private Juego juego;
+    public Inicializador(){
+        this.juego = new Juego();
+    }
     public void agregarJugador(String nombre) {
         int cantidadMinimaDeCaracteres = 6;
         Scanner scanner = new Scanner(System.in);

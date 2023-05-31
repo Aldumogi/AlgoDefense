@@ -4,10 +4,47 @@ import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.exceptions.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class DefensaTest {
+
+    /*
+        CASO de USO 2
+    */
+    @Test
+    public void construirTorreBlancaTardaLoIndicado() {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Defensa torreBlanca = new TorreBlanca();
+
+        jugador.generarConstruccion(torreBlanca);
+        juego.avanzarTurno();
+        AccionesDefensa estado = torreBlanca.obtenerEstado();
+
+        assertTrue(estado.estaTerminada());
+    }
+
+    @Test
+    public void construirTorrePlateadaTardaLoIndicado() {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Defensa torrePlateada = new TorrePlateada();
+
+        jugador.generarConstruccion(torrePlateada);
+        juego.avanzarTurno();
+        AccionesDefensa estado = torrePlateada.obtenerEstado();
+
+        assertTrue(estado.estaTerminada());
+    }
+
     /*
         CASO de USO 4 - Verificar solo se pueda construir defensas sobre tierra (y verificar lo contrario)
      */
