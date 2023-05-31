@@ -2,10 +2,8 @@ package edu.fiuba.algo3;
 
 public class Terminada implements AccionesDefensa {
     public Boolean atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) {
-        if ( this.estaEnRango(enemigo.obtenerCoordenadas(), coordenadasDefensa, rangoDeAtaque) ) {
-            return enemigo.recibirDanio(danio);
-        }
-        return false;
+        return ( this.estaEnRango(enemigo.obtenerCoordenadas(), coordenadasDefensa, rangoDeAtaque) )?
+                enemigo.recibirDanio(danio): false;
     }
 
     private boolean estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque){

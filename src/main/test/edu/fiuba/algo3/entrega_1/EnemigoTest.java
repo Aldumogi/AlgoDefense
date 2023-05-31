@@ -4,7 +4,7 @@ import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemigoTest {
     @Test
@@ -20,7 +20,7 @@ public class EnemigoTest {
 
         unaDefensa.atacarEnemigo(unaHormiga);
 
-        assertEquals( unaHormiga.estaVivo(), false );
+        assertFalse(unaHormiga.estaVivo());
 
     }
     @Test
@@ -37,7 +37,7 @@ public class EnemigoTest {
         unaDefensa.atacarEnemigo(unaHormiga);
         boolean pudeAtacar = unaDefensa.atacarEnemigo(unaHormiga);
 
-        assertEquals( pudeAtacar, false );
+        assertFalse(pudeAtacar);
 
     }
     @Test
@@ -53,7 +53,7 @@ public class EnemigoTest {
 
         unaDefensa.atacarEnemigo(unaArania);
 
-        assertEquals( unaArania.estaVivo(), true );
+        assertTrue(unaArania.estaVivo());
 
     }
     @Test
@@ -70,7 +70,7 @@ public class EnemigoTest {
         unaDefensa.atacarEnemigo(unaArania);
         unaDefensa.atacarEnemigo(unaArania);
 
-        assertEquals( unaArania.estaVivo(), false );
+        assertFalse(unaArania.estaVivo());
 
     }
     @Test
@@ -86,7 +86,7 @@ public class EnemigoTest {
 
         unaDefensa.atacarEnemigo(unaHormiga);
 
-        assertEquals( unaHormiga.estaVivo(), false );
+        assertFalse(unaHormiga.estaVivo());
 
     }
     @Test
@@ -102,7 +102,7 @@ public class EnemigoTest {
 
         unaDefensa.atacarEnemigo(unaArania);
 
-        assertEquals( unaArania.estaVivo(), false );
+        assertFalse(unaArania.estaVivo());
 
     }
     @Test
@@ -118,7 +118,7 @@ public class EnemigoTest {
 
         unaDefensa.atacarEnemigo(unaArania);
         boolean pudeAtacar = unaDefensa.atacarEnemigo(unaArania);
-        assertEquals( pudeAtacar, false );
+        assertFalse(pudeAtacar);
 
     }
 
