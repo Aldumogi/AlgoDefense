@@ -1,32 +1,25 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.Arania;
+import edu.fiuba.algo3.Coordenadas;
 import edu.fiuba.algo3.Defensa;
 import edu.fiuba.algo3.Hormiga;
 import edu.fiuba.algo3.Inicializador;
 import edu.fiuba.algo3.Juego;
 import edu.fiuba.algo3.Jugador;
+import edu.fiuba.algo3.Tierra;
 import edu.fiuba.algo3.TorreBlanca;
 import edu.fiuba.algo3.TorrePlateada;
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class EnemigoTest {
-    @Test
     //Caso de uso 6, verifico que las unidades enemigas son dañadas acorde al
     //daño recibido
-    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() {
-        Inicializador inicio = new Inicializador();
-
-        inicio.agregarJugador("Alberto");
-        Juego juego = inicio.obtenerJuego();
-        Jugador jugador = juego.obtenerJugador();
-
-        Hormiga unaHormiga = new Hormiga();
-        Defensa unaDefensa = new TorreBlanca(jugador);
 
 public class EnemigoTest {
     @Test
@@ -34,7 +27,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorreBlanca();
+        Defensa unaDefensa = new TorreBlanca(new Jugador("carlos"));
 
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(unaDefensa);
@@ -46,21 +39,11 @@ public class EnemigoTest {
 
     }
     @Test
-    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() {
-
-        Inicializador inicio = new Inicializador();
-
-        inicio.agregarJugador("Alberto");
-        Juego juego = inicio.obtenerJuego();
-        Jugador jugador = juego.obtenerJugador();
-
-        Hormiga unaHormiga = new Hormiga();
-        Defensa unaDefensa = new TorreBlanca(jugador);
     public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorreBlanca();
+        Defensa unaDefensa = new TorreBlanca(new Jugador("carlos"));
 
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(unaDefensa);
@@ -73,20 +56,11 @@ public class EnemigoTest {
 
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaYNoLaMata() {
-        Inicializador inicio = new Inicializador();
-
-        inicio.agregarJugador("Alberto");
-        Juego juego = inicio.obtenerJuego();
-        Jugador jugador = juego.obtenerJugador();
-
-        Arania unaHormiga = new Arania();
-        Defensa unaDefensa = new TorreBlanca(jugador);
     public void unaTorreBlancaAtacaAunaAraniaYNoLaMata() throws NoDisponibleParaConstruirException {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorreBlanca();
+        Defensa unaDefensa = new TorreBlanca(new Jugador("carlos"));
 
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(unaDefensa);
@@ -98,11 +72,11 @@ public class EnemigoTest {
 
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorreBlancaAtacaaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorreBlanca();
+        Defensa unaDefensa = new TorreBlanca(new Jugador("carlos"));
 
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(unaDefensa);
@@ -115,11 +89,11 @@ public class EnemigoTest {
 
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorrePlateadaaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorrePlateada();
+        Defensa unaDefensa = new TorrePlateada(new Jugador("carlos"));
 
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(unaDefensa);
@@ -131,22 +105,12 @@ public class EnemigoTest {
 
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() {      
-        Inicializador inicio = new Inicializador();
 
-        inicio.agregarJugador("Alberto");
-        Juego juego = inicio.obtenerJuego();
-        Jugador jugador = juego.obtenerJugador();
-
-
-        Arania unaArania = new Arania();
-        Defensa unaDefensa = new TorreBlanca(jugador);
-        unaDefensa.atacarEnemigo(unaArania);
-    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorrePlateadaaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorrePlateada();
+        Defensa unaDefensa = new TorrePlateada(new Jugador("carlos"));
 
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(unaDefensa);
@@ -158,21 +122,11 @@ public class EnemigoTest {
 
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() {
-        Inicializador inicio = new Inicializador();
-
-        inicio.agregarJugador("Alberto");
-        Juego juego = inicio.obtenerJuego();
-        Jugador jugador = juego.obtenerJugador();
-
-        Hormiga unaHormiga = new Hormiga();
-        Defensa unaDefensa = new TorrePlateada(jugador);
-        unaDefensa.atacarEnemigo(unaHormiga);
-    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException {
+    public void unaTorrePlateadaaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorrePlateada();
+        Defensa unaDefensa = new TorrePlateada(new Jugador("carlos"));
 
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(unaDefensa);

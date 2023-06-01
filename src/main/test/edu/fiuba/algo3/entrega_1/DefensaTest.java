@@ -88,7 +88,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
-        Defensa torreBlanca = new TorreBlanca();
+        Defensa torreBlanca = new TorreBlanca(new Jugador("carlos"));
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torreBlanca); // daño 1 punto, rango 3
         torreBlanca.terminarDeConstruir();
@@ -105,7 +105,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
-        Defensa torrePlateada = new TorrePlateada();
+        Defensa torrePlateada = new TorrePlateada(new Jugador("carlos"));
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torrePlateada); // daño 2 punto, rango 5
         torrePlateada.terminarDeConstruir();
@@ -121,7 +121,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2); // rango 3
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
-        Defensa torreBlanca = new TorreBlanca();
+        Defensa torreBlanca = new TorreBlanca(new Jugador("carlos"));
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torreBlanca); // daño 1 punto, rango 3
         torreBlanca.terminarDeConstruir();
@@ -137,7 +137,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
-        Defensa torrePlateada = new TorrePlateada();
+        Defensa torrePlateada = new TorrePlateada(new Jugador("carlos"));
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torrePlateada); // daño 2 punto, rango 5
         torrePlateada.terminarDeConstruir();
