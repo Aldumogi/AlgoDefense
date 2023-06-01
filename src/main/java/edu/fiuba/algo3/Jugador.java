@@ -45,7 +45,7 @@ public class Jugador {
     public void actualizarDefensasAlFinalizarTurno(int numeroDeTurno){
         this.defensas.forEach(defensa -> defensa.actualizarEstado(numeroDeTurno));
     }
-    public void actualizarCreditos(int creditos) {
-        this.cantidadDeCreditos = creditos;
+    public void agregarCreditosAlMatarEnemigos(int creditos) {
+        this.cantidadDeCreditos += creditos;
     }
 }

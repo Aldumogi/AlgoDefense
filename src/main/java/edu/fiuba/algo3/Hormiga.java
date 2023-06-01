@@ -1,7 +1,8 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
+
 public class Hormiga extends Enemigo {
-    private int cantidadDeHormigasMuertas;
 
     public Hormiga() {
         this.velocidad(1);
@@ -9,7 +10,7 @@ public class Hormiga extends Enemigo {
         this.energia(1);
         this.creditosOtorgados(1);
         this.coordenadas = this.getCoordenadasLargada();
-        this.cantidadDeHormigasMuertas = 0;
+        this.acciones = new Vivo();
     }
     public Hormiga(Coordenadas coordenadas) {
         this.velocidad(1);
@@ -17,10 +18,11 @@ public class Hormiga extends Enemigo {
         this.energia(1);
         this.creditosOtorgados(1);
         this.coordenadas = coordenadas;
+        this.acciones = new Vivo();
     }
 
-    public int cantidadCreditosOtorgados() {
-        return ( this.cantidadDeHormigasMuertas < 11 ) ? 1:2;
+    public void cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {
+        this.creditosOtorgados ( ( cantidadDeHormigasMuertas < 11 ) ? 1:2 );
     }
 
     private Coordenadas getCoordenadasLargada() {
@@ -30,13 +32,14 @@ public class Hormiga extends Enemigo {
     public boolean recibirDanio(int unDanio){
         if (estaVivo()){
             this.energia = this.energia - unDanio;
-            if( this.energia <= 0 ) {
-                this.cantidadDeHormigasMuertas++;
-            }
             return true;
         }
         return false;
     }
+    public boolean esUnaHormiga() {
+        return true;
+    }
+
 }
 
 
