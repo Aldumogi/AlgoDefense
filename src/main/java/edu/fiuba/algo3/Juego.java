@@ -34,6 +34,7 @@ public class Juego {
     }
     public void avanzarTurno(){
         this.numeroDeTurno++;
+        this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
     }
     public boolean juegoTerminado(){
         return enemigos.size() == 0;

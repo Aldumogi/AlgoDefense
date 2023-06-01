@@ -1,4 +1,6 @@
 package edu.fiuba.algo3;
+import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +27,22 @@ public class Jugador {
     public List<Defensa> obtenerDefensas(){
         return this.defensas;
     }
-    public boolean generarConstruccion(Defensa unaDefensa){
+    public boolean generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas, int numeroDeTurno){
         if(this.obtenerCantidadDeCreditos() >= unaDefensa.costo()){
+            Tierra tierra = new Tierra(coordenadas);
+            try{
+                tierra.construir(unaDefensa, numeroDeTurno);
+            }
+            catch (NoDisponibleParaConstruirException e) {
+                return false;
+            }
             this.defensas.add(unaDefensa);
             this.cantidadDeCreditos -= unaDefensa.costo();
             return true;
         }
         return false;
+    }
+    public void actualizarDefensasAlFinalizarTurno(int numeroDeTurno){
+        this.defensas.forEach(defensa -> defensa.actualizarEstado(numeroDeTurno));
     }
 }
