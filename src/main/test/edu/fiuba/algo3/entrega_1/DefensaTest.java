@@ -9,6 +9,41 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DefensaTest {
     /*
+        CASO de USO 2
+    */
+    @Test
+    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Defensa torreBlanca = new TorreBlanca();
+        Coordenadas coordenadas = new Coordenadas(20, 50);
+
+        jugador.generarConstruccion(torreBlanca, coordenadas, juego.obtenerNumeroDeturno());
+
+        assertThrows(DefensaEnConstruccionException.class, () -> torreBlanca.accionesDefensa().estaTerminada() );
+        juego.avanzarTurno();
+        assertDoesNotThrow( () -> torreBlanca.accionesDefensa().estaTerminada() );
+    }
+
+    @Test
+    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Defensa torrePlateada = new TorrePlateada();
+        Coordenadas coordenadas = new Coordenadas(20, 50);
+
+        jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerNumeroDeturno());
+        juego.avanzarTurno();
+
+        assertThrows( DefensaEnConstruccionException.class, () -> torrePlateada.accionesDefensa().estaTerminada() );
+        juego.avanzarTurno();
+        assertDoesNotThrow( () -> torrePlateada.accionesDefensa().estaTerminada() );
+    }
+    /*
         CASO de USO 4 - Verificar solo se pueda construir defensas sobre tierra (y verificar lo contrario)
      */
     @Test
@@ -20,7 +55,7 @@ public class DefensaTest {
 
         //Act, Assert
         assertDoesNotThrow(() -> {
-            tierra.construir(torreBlanca);
+            tierra.construir(torreBlanca, 0);
         });
     }
 
@@ -34,7 +69,7 @@ public class DefensaTest {
 
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            rocoso.construir(torreBlanca);
+            rocoso.construir(torreBlanca, 0);
         });
 
     }
@@ -47,7 +82,7 @@ public class DefensaTest {
         Parcela pasarela = new Pasarela(coordenadas);
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            pasarela.construir(torreBlanca);
+            pasarela.construir(torreBlanca, 0);
         });
     }
 
@@ -59,7 +94,7 @@ public class DefensaTest {
         Parcela pasarelaLargada = new PasarelaLargada(coordenadas);
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            pasarelaLargada.construir(torreBlanca);
+            pasarelaLargada.construir(torreBlanca, 0);
         });
     }
     @Test
@@ -70,7 +105,7 @@ public class DefensaTest {
         Parcela pasarelaMeta = new PasarelaMeta(coordenadas);
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            pasarelaMeta.construir(torreBlanca);
+            pasarelaMeta.construir(torreBlanca, 0);
         });
     }
 
@@ -85,7 +120,7 @@ public class DefensaTest {
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Defensa torreBlanca = new TorreBlanca();
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torreBlanca); // daño 1 punto, rango 3
+        tierra.construir(torreBlanca, 0); // daño 1 punto, rango 3
         torreBlanca.terminarDeConstruir();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
@@ -102,7 +137,7 @@ public class DefensaTest {
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Defensa torrePlateada = new TorrePlateada();
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torrePlateada); // daño 2 punto, rango 5
+        tierra.construir(torrePlateada, 0); // daño 2 punto, rango 5
         torrePlateada.terminarDeConstruir();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
@@ -118,7 +153,7 @@ public class DefensaTest {
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
         Defensa torreBlanca = new TorreBlanca();
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torreBlanca); // daño 1 punto, rango 3
+        tierra.construir(torreBlanca, 0); // daño 1 punto, rango 3
         torreBlanca.terminarDeConstruir();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
 
@@ -134,7 +169,7 @@ public class DefensaTest {
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
         Defensa torrePlateada = new TorrePlateada();
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torrePlateada); // daño 2 punto, rango 5
+        tierra.construir(torrePlateada, 0); // daño 2 punto, rango 5
         torrePlateada.terminarDeConstruir();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
 

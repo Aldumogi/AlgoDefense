@@ -11,12 +11,18 @@ public class Tierra implements Parcela {
         this.disponibilidad = new ParcelaDisponible();
         this.coordenadas = coordenadas;
     }
-    public void construir(Defensa defensa) throws NoDisponibleParaConstruirException {
-        disponibilidad.agregar( defensa, this);
+    public void construir(Defensa defensa, int numeroDeTurno) throws NoDisponibleParaConstruirException {
+        try{
+            this.disponibilidad.verSiEstaDisponible();
+        }
+        catch(NoDisponibleParaConstruirException e) {
+            throw new NoDisponibleParaConstruirException();
+        }
+        defensa.construir(this, numeroDeTurno);
     }
 
     public void ocupar(Defensa defensa){
-        defensa.construir(this);
+        defensa.construir(this, 0);
         this.disponibilidad = new ParcelaOcupada();
     }
 
