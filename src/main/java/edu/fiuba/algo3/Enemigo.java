@@ -25,18 +25,22 @@ public abstract class Enemigo {
         this.creditosOtorgados = cred;
     }
 
-    public boolean recibirDanio(int unDanio){
-        if (estaVivo()){
-            this.energia = this.energia - unDanio;
-            return true;
-        }
-        return false;
-    }
-
+    
     public boolean estaVivo() {
         return (this.energia > 0) ? true : false;
     }
 
+    public int recibirDanio(int unDanio){
+        if(!estaVivo()){
+            return 0;
+        }
+        this.energia = this.energia - unDanio;
+        if(!estaVivo()){
+            return cantidadCreditosOtorgados();
+        }
+        return 0;
+
+    }
     //protected EstadoEnemigo estado;
 
     public abstract int cantidadCreditosOtorgados();

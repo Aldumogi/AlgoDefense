@@ -4,11 +4,12 @@ public abstract class Defensa {
     private String nombre;
     private int costo;
     private int tiempoDeConstruccion;
-    protected int turnoEnElQueSeInicioLaConstruccion;
+    private Jugador duenio;
     protected int rangoDeAtaque;
     protected int danio;
-    protected AccionesDefensa accionesDefensa;
     protected Tierra tierra;
+    protected AccionesDefensa estado;  
+
     public int costo(){
         return this.costo;
     }
@@ -28,16 +29,27 @@ public abstract class Defensa {
     public void danio(int unDanio){
         this.danio =  unDanio;
     }
-    public AccionesDefensa accionesDefensa() { return this.accionesDefensa; }
-    public Boolean atacarEnemigo(Enemigo enemigo){
-        return enemigo.recibirDanio(this.danio);
-    };
-    public abstract void construir(Tierra tierra, int numeroDeTurno);
-    public void actualizarEstado(int numeroDeTurno) {
-        if( numeroDeTurno - this.turnoEnElQueSeInicioLaConstruccion == this.tiempoDeConstruccion ) {
-            this.accionesDefensa = new Terminada();
-        }
+    public void duenio(Jugador jugador){
+        this.duenio =  jugador;
     }
+    
+    //ataca a un enemigo y devuelve true si lo mata
+    public Boolean atacarEnemigo(Enemigo enemigo){
+        int creditos = enemigo.recibirDanio(this.danio);
+        if(creditos == 1){ //mate a una hormiga
+            duenio.mateUnaHormiga();
+        }
+        if(duenio.hormigasMuertas() > 9){
+            creditos += 1;
+        }
+        this.duenio.agregarCreditos(creditos);
+        return creditos != 0;
+    }
+
+    protected AccionesDefensa accionesDefensa;
+
+    public abstract void construir(Tierra tierra);
+
     public void terminarDeConstruir(){
         this.accionesDefensa = new Terminada();
     }

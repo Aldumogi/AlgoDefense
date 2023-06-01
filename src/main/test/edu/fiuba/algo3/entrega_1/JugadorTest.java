@@ -6,7 +6,6 @@ import edu.fiuba.algo3.Jugador;
 import edu.fiuba.algo3.TorreBlanca;
 import edu.fiuba.algo3.TorrePlateada;
 import edu.fiuba.algo3.Juego;
-import edu.fiuba.algo3.Coordenadas;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,10 +30,9 @@ public class JugadorTest {
         Juego juego = inicio.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        TorrePlateada unaTorre = new TorrePlateada();
-        Coordenadas coordenadas = new Coordenadas(10, 20);
+        TorrePlateada unaTorre = new TorrePlateada(jugador);
 
-        boolean sePudoConstruir = jugador.generarConstruccion(unaTorre, coordenadas, 0);
+        boolean sePudoConstruir = jugador.generarConstruccion(unaTorre);
 
         assertEquals( true, sePudoConstruir );
         assertEquals( 1, jugador.obtenerDefensas().size() );
@@ -48,29 +46,23 @@ public class JugadorTest {
         Juego juego = inicio.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        TorrePlateada unaTorre1 = new TorrePlateada();
-        Coordenadas coordenadasTorre1 = new Coordenadas(11, 21);
-        jugador.generarConstruccion(unaTorre1, coordenadasTorre1, 0);
+        TorrePlateada unaTorre1 = new TorrePlateada(jugador);
+        jugador.generarConstruccion(unaTorre1);
 
-        TorrePlateada unaTorre2 = new TorrePlateada();
-        Coordenadas coordenadasTorre2 = new Coordenadas(12, 22);
-        jugador.generarConstruccion(unaTorre2, coordenadasTorre2, 0);
+        TorrePlateada unaTorre2 = new TorrePlateada(jugador);
+        jugador.generarConstruccion(unaTorre2);
 
-        TorrePlateada unaTorre3 = new TorrePlateada();
-        Coordenadas coordenadasTorre3 = new Coordenadas(13, 23);
-        jugador.generarConstruccion(unaTorre3, coordenadasTorre3, 0);
+        TorrePlateada unaTorre3 = new TorrePlateada(jugador);
+        jugador.generarConstruccion(unaTorre3);
 
-        TorrePlateada unaTorre4 = new TorrePlateada();
-        Coordenadas coordenadasTorre4 = new Coordenadas(14, 24);
-        jugador.generarConstruccion(unaTorre4, coordenadasTorre4, 0);
+        TorrePlateada unaTorre4 = new TorrePlateada(jugador);
+        jugador.generarConstruccion(unaTorre4);
 
-        TorrePlateada unaTorre5 = new TorrePlateada();
-        Coordenadas coordenadasTorre5 = new Coordenadas(15, 25);
-        jugador.generarConstruccion(unaTorre5, coordenadasTorre5, 0);
+        TorrePlateada unaTorre5 = new TorrePlateada(jugador);
+        jugador.generarConstruccion(unaTorre5);
 
-        TorrePlateada unaTorre6 = new TorrePlateada();
-        Coordenadas coordenadasTorre6 = new Coordenadas(20, 30);
-        boolean sePudoConstruir =  jugador.generarConstruccion(unaTorre6, coordenadasTorre6, 0);
+        TorrePlateada unaTorre6 = new TorrePlateada(jugador);
+        boolean sePudoConstruir =  jugador.generarConstruccion(unaTorre6);
 
         assertEquals( false, sePudoConstruir );
         assertEquals( 5, jugador.obtenerDefensas().size() );
