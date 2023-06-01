@@ -28,7 +28,7 @@ public class Juego {
     }
 
     public Jugador obtenerJugador() { return this.jugador; };
-
+    public int obtenerNumeroDeturno() { return this.numeroDeTurno; }
     public void agregarEnemigo(Enemigo enemigo){
         enemigos.add(enemigo);
     }

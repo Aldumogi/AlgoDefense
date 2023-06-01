@@ -9,6 +9,41 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DefensaTest {
     /*
+        CASO de USO 2
+    */
+    @Test
+    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Defensa torreBlanca = new TorreBlanca();
+        Coordenadas coordenadas = new Coordenadas(20, 50);
+
+        jugador.generarConstruccion(torreBlanca, coordenadas, juego.obtenerNumeroDeturno());
+
+        assertThrows(DefensaEnConstruccionException.class, () -> torreBlanca.accionesDefensa().estaTerminada() );
+        juego.avanzarTurno();
+        assertDoesNotThrow( () -> torreBlanca.accionesDefensa().estaTerminada() );
+    }
+
+    @Test
+    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Defensa torrePlateada = new TorrePlateada();
+        Coordenadas coordenadas = new Coordenadas(20, 50);
+
+        jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerNumeroDeturno());
+        juego.avanzarTurno();
+
+        assertThrows( DefensaEnConstruccionException.class, () -> torrePlateada.accionesDefensa().estaTerminada() );
+        juego.avanzarTurno();
+        assertDoesNotThrow( () -> torrePlateada.accionesDefensa().estaTerminada() );
+    }
+    /*
         CASO de USO 4 - Verificar solo se pueda construir defensas sobre tierra (y verificar lo contrario)
      */
     @Test
