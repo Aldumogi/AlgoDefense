@@ -21,8 +21,8 @@ public class TorreBlanca extends Defensa {
         this.tierra = tierra;
     }
 
-    public Boolean atacarEnemigo(Enemigo enemigo){
-        return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
-    }
+    //public Boolean atacarEnemigo(Enemigo enemigo){
+    //    return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
+    //}
 
 }

@@ -18,7 +18,7 @@ public class TorrePlateada extends Defensa {
     public void construir(Tierra tierra) {
         this.tierra = tierra;
     }
-    public Boolean atacarEnemigo(Enemigo enemigo){
-        return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
-    }
+    //public Boolean atacarEnemigo(Enemigo enemigo){
+    //   return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
+    //}
 }
