@@ -50,4 +50,9 @@ public abstract class Enemigo {
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;
     }
+
+    public int obtenerDanioCausado () {
+        return this.dañoCausado;
+    }
+
 }

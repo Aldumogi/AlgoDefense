@@ -30,6 +30,11 @@ public class Hormiga extends Enemigo {
         // Al mapa le pedira las coordenadas de la parcela de largada
         return new Coordenadas(3,1);
     }
+
+    private Coordenadas getCoordenadasMeta() {
+        // Al mapa le pedira las coordenadas de la parcela de largada
+        return new Coordenadas(5,2);
+    }
     public boolean recibirDanio(int unDanio){
         if (estaVivo()){
             this.energia = this.energia - unDanio;

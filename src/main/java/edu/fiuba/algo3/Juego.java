@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
 
 public class Juego {
     private Mapa mapa;
@@ -43,6 +44,7 @@ public class Juego {
         this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
         this.actualizarEstadoDeLosEnemigosYObtenerCreditosAlFinalizarTurno();
         this.jugador.agregarCreditosAlMatarEnemigos( this.creditosDelTurno );
+        this.actualizarEnergiaJugador();
 
     }
 
@@ -61,7 +63,29 @@ public class Juego {
             }
         } );
     }
+
+    public void actualizarEnergiaJugador() {
+        Coordenadas coordenadasMeta = new Coordenadas(5,2);
+        this.enemigos.forEach( enemigo -> {
+            if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
+                jugador.restarEnergia(enemigo.obtenerDanioCausado());
+            }
+        });
+    }
+
     public boolean juegoTerminado(){
-        return enemigos.size() == 0;
+        Coordenadas coordenadasMeta = new Coordenadas(5,2);
+        boolean todosLosEnemigosVivosEstanEnLaMeta = true;
+        for (Enemigo enemigo: this.enemigos) {
+            try{
+                    enemigo.acciones.verSiEstaMuerto();
+            }
+            catch(ElEnemigoEstaVivoException e) {
+                if (coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) != 0) {
+                    todosLosEnemigosVivosEstanEnLaMeta = false;
+                }
+            }
+        }
+        return enemigos.size() == 0 || todosLosEnemigosVivosEstanEnLaMeta;
     }
 }

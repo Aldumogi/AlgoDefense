@@ -175,7 +175,7 @@ public class EnemigoTest {
     }
 
     @Test
-    public void matoAnceAraniasYElJugadorTieneLosCreditosCorrectos() {
+    public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -240,4 +240,5 @@ public class EnemigoTest {
         juego.avanzarTurno();
         assertEquals(92, jugador.obtenerCantidadDeCreditos());
     }
+
 }
