@@ -1,11 +1,14 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
+
 public abstract class Enemigo {
     private int velocidad;
     private int dañoCausado;
-    private int energia;
+    protected int energia;
     private int creditosOtorgados;
     protected Coordenadas coordenadas;
+    protected AccionesEnemigo acciones;
     //getters
 
     public int creditosOtorgados(){
@@ -24,24 +27,26 @@ public abstract class Enemigo {
     public void creditosOtorgados(int cred){
         this.creditosOtorgados = cred;
     }
-
-    public boolean recibirDanio(int unDanio){
-        if (estaVivo()){
-            this.energia = this.energia - unDanio;
-            return true;
-        }
-        return false;
-    }
-
     public boolean estaVivo() {
         return (this.energia > 0) ? true : false;
     }
+    public abstract boolean esUnaHormiga();
 
-    //protected EstadoEnemigo estado;
-
-    public abstract int cantidadCreditosOtorgados();
-
-
+    public int energia() {return this.energia;}
+    public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
+    public abstract boolean recibirDanio(int unDanio);
+    public boolean actualizarEstado() {
+        try {
+            this.acciones.verSiEstaMuerto();
+        }
+        catch(ElEnemigoEstaVivoException e) {
+            if (this.energia <= 0) {
+                this.acciones = new Muerto();
+                return true;
+            }
+        }
+        return false;
+    }
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;
     }

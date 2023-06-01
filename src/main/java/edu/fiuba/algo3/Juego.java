@@ -10,10 +10,13 @@ public class Juego {
     private int numeroDeTurno;
     private Jugador jugador;
     private List<Enemigo> enemigos;
+    private int cantidadDeHormigasMuertas;
+    private int creditosDelTurno;
 
     public Juego() {
         this.numeroDeTurno = 0;
         this.enemigos = new ArrayList<Enemigo>();
+        this.creditosDelTurno = 0;
     }
 
     public Juego(Jugador jugador, Mapa mapa) {
@@ -21,6 +24,8 @@ public class Juego {
         this.mapa = mapa;
         this.numeroDeTurno = 0;
         this.enemigos = new ArrayList<Enemigo>();
+        this.cantidadDeHormigasMuertas = 0;
+        this.creditosDelTurno = 0;
     }
 
     public void setearJugador(Jugador jugador) {
@@ -34,7 +39,27 @@ public class Juego {
     }
     public void avanzarTurno(){
         this.numeroDeTurno++;
+        this.creditosDelTurno = 0;
         this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
+        this.actualizarEstadoDeLosEnemigosYObtenerCreditosAlFinalizarTurno();
+        this.jugador.agregarCreditosAlMatarEnemigos( this.creditosDelTurno );
+
+    }
+
+    public void actualizarEstadoDeLosEnemigosYObtenerCreditosAlFinalizarTurno(){
+        this.enemigos.forEach( enemigo -> {
+            boolean cambio = enemigo.actualizarEstado();
+            if ( cambio ) {
+                if ( enemigo.esUnaHormiga() ) {
+                    this.cantidadDeHormigasMuertas++;
+                    enemigo.cantidadCreditosOtorgados(this.cantidadDeHormigasMuertas);
+                }
+                else {
+                    enemigo.cantidadCreditosOtorgados(0);
+                }
+                this.creditosDelTurno += enemigo.creditosOtorgados();
+            }
+        } );
     }
     public boolean juegoTerminado(){
         return enemigos.size() == 0;
