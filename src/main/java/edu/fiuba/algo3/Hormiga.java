@@ -21,8 +21,9 @@ public class Hormiga extends Enemigo {
         this.acciones = new Vivo();
     }
 
-    public void cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {
+    public int cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {
         this.creditosOtorgados ( ( cantidadDeHormigasMuertas < 11 ) ? 1:2 );
+        return this.creditosOtorgados();
     }
 
     private Coordenadas getCoordenadasLargada() {

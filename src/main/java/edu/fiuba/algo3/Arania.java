@@ -22,9 +22,10 @@ public class Arania extends Enemigo {
         this.acciones = new Vivo();
     }
 
-    public void cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {
+    public int cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {
         Random random = new Random();
         this.creditosOtorgados(random.nextInt(10) + 1);
+        return this.creditosOtorgados();
     }
 
     private Coordenadas getCoordenadasLargada() {

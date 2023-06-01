@@ -33,7 +33,7 @@ public abstract class Enemigo {
     public abstract boolean esUnaHormiga();
 
     public int energia() {return this.energia;}
-    public abstract void cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
+    public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public abstract boolean recibirDanio(int unDanio);
     public boolean actualizarEstado() {
         try {
