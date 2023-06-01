@@ -25,6 +25,13 @@ public class Arania extends Enemigo {
         return this.creditosOtorgados();
     }
 
+    public boolean recibirDanio(int unDanio){
+        if (estaVivo()){
+            this.energia = this.energia - unDanio;
+            return true;
+        }
+        return false;
+    }
 
 
 }

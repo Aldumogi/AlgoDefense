@@ -3,7 +3,7 @@ package edu.fiuba.algo3;
 public abstract class Enemigo {
     private int velocidad;
     private int dañoCausado;
-    private int energia;
+    protected int energia;
     private int creditosOtorgados;
     protected Coordenadas coordenadas;
     //getters
@@ -25,14 +25,6 @@ public abstract class Enemigo {
         this.creditosOtorgados = cred;
     }
 
-    public boolean recibirDanio(int unDanio){
-        if (estaVivo()){
-            this.energia = this.energia - unDanio;
-            return true;
-        }
-        return false;
-    }
-
     public boolean estaVivo() {
         return (this.energia > 0) ? true : false;
     }
@@ -40,7 +32,7 @@ public abstract class Enemigo {
     //protected EstadoEnemigo estado;
 
     public abstract int cantidadCreditosOtorgados();
-
+    public abstract boolean recibirDanio(int unDanio);
 
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;

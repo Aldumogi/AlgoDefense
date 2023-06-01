@@ -35,6 +35,16 @@ public class Juego {
     public void avanzarTurno(){
         this.numeroDeTurno++;
         this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
+        this.jugador.actualizarCreditos( this.obtenerCreditosDeLosEnemigosMuertos() );
+    }
+    public int obtenerCreditosDeLosEnemigosMuertos() {
+        int creditos = 0;
+        for (Enemigo enemigo: this.enemigos) {
+            if ( ! enemigo.estaVivo() ) {
+                creditos += enemigo.cantidadCreditosOtorgados();
+            }
+        }
+        return creditos;
     }
     public boolean juegoTerminado(){
         return enemigos.size() == 0;
