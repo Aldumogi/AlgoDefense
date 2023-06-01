@@ -15,7 +15,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorreBlanca();
 
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa);
+        tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
         unaDefensa.atacarEnemigo(unaHormiga);
@@ -31,7 +31,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorreBlanca();
 
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa);
+        tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
         unaDefensa.atacarEnemigo(unaHormiga);
@@ -48,7 +48,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorreBlanca();
 
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa);
+        tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
         unaDefensa.atacarEnemigo(unaArania);
@@ -64,7 +64,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorreBlanca();
 
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa);
+        tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
         unaDefensa.atacarEnemigo(unaArania);
@@ -81,7 +81,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorrePlateada();
 
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa);
+        tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
         unaDefensa.atacarEnemigo(unaHormiga);
@@ -97,7 +97,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorrePlateada();
 
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa);
+        tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
         unaDefensa.atacarEnemigo(unaArania);
@@ -113,7 +113,7 @@ public class EnemigoTest {
         Defensa unaDefensa = new TorrePlateada();
 
         Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa);
+        tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
         unaDefensa.atacarEnemigo(unaArania);

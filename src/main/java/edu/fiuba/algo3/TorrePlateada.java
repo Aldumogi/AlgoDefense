@@ -10,8 +10,10 @@ public class TorrePlateada extends Defensa {
         this.danio(2);
     }
 
-    public void construir(Tierra tierra) {
+    public void construir(Tierra tierra, int numeroDeTurno) {
         this.tierra = tierra;
+        this.accionesDefensa = new EnConstruccion();
+        this.turnoEnElQueSeInicioLaConstruccion = numeroDeTurno;
     }
     public Boolean atacarEnemigo(Enemigo enemigo){
         return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());

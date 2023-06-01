@@ -7,11 +7,12 @@ public class TorreBlanca extends Defensa {
         this.tiempoDeConstruccion(1);
         this.rangoDeAtaque(3);
         this.danio(1);
-        this.accionesDefensa = new EnConstruccion();
     }
 
-    public void construir(Tierra tierra) {
+    public void construir(Tierra tierra, int numeroDeTurno) {
         this.tierra = tierra;
+        this.accionesDefensa = new EnConstruccion();
+        this.turnoEnElQueSeInicioLaConstruccion = numeroDeTurno;
     }
 
     public Boolean atacarEnemigo(Enemigo enemigo){
