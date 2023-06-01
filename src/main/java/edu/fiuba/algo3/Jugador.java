@@ -9,7 +9,6 @@ public class Jugador {
     private int cantidadDeCreditos;
     private String nombre;
     private List<Defensa> defensas;
-    private int hormigasMuertas;
 
     
     public Jugador(String nombre){
@@ -17,22 +16,12 @@ public class Jugador {
         this.cantidadDeCreditos = 100;
         this.nombre = nombre;
         this.defensas = new ArrayList<Defensa>();
-        this.hormigasMuertas = 0;
-    }
-    public int hormigasMuertas(){
-        return this.hormigasMuertas;
-    }
-    public void mateUnaHormiga(){
-        hormigasMuertas += 1;
     }
     public int obtenerPuntosDeVida() {
         return this.puntosDeVida;
     }
     public int obtenerCantidadDeCreditos(){
         return this.cantidadDeCreditos;
-    }
-    public void agregarCreditos(int creditos){
-        this.cantidadDeCreditos += creditos;
     }
 
     public List<Defensa> obtenerDefensas(){

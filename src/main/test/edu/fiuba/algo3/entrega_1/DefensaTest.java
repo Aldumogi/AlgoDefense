@@ -49,8 +49,7 @@ public class DefensaTest {
     @Test
     public void defensaPuedeConstruirseSobreTierra() {
         // Arrange
-        Jugador unJugador = new Jugador("tornillo");
-        Defensa torreBlanca = new TorreBlanca(unJugador);
+        Defensa torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(10,33);
         Parcela tierra = new Tierra(coordenadas);
 
@@ -64,8 +63,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobreRoca() {
         // Arrange
-        Jugador unJugador = new Jugador("tornillo");
-        Defensa torreBlanca = new TorreBlanca(unJugador);
+        Defensa torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela rocoso = new Rocoso(coordenadas);
 
@@ -79,8 +77,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarela() {
         // Arrange
-        Jugador unJugador = new Jugador("tornillo");
-        Defensa torreBlanca = new TorreBlanca(unJugador);
+        Defensa torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarela = new Pasarela(coordenadas);
         //Act, Assert
@@ -92,8 +89,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarelaLargada() {
         // Arrange
-        Jugador unJugador = new Jugador("tornillo");
-        Defensa torreBlanca = new TorreBlanca(unJugador);
+        Defensa torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarelaLargada = new PasarelaLargada(coordenadas);
         //Act, Assert
@@ -104,8 +100,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarelaMeta() {
         // Arrange
-        Jugador unJugador = new Jugador("tornillo");
-        Defensa torreBlanca = new TorreBlanca(unJugador);
+        Defensa torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarelaMeta = new PasarelaMeta(coordenadas);
         //Act, Assert
@@ -123,7 +118,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
-        Defensa torreBlanca = new TorreBlanca(new Jugador("carlos"));
+        Defensa torreBlanca = new TorreBlanca();
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torreBlanca, 0); // daño 1 punto, rango 3
         torreBlanca.terminarDeConstruir();
@@ -140,7 +135,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
-        Defensa torrePlateada = new TorrePlateada(new Jugador("carlos"));
+        Defensa torrePlateada = new TorrePlateada();
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torrePlateada, 0); // daño 2 punto, rango 5
         torrePlateada.terminarDeConstruir();
@@ -156,7 +151,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2); // rango 3
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
-        Defensa torreBlanca = new TorreBlanca(new Jugador("carlos"));
+        Defensa torreBlanca = new TorreBlanca();
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torreBlanca, 0); // daño 1 punto, rango 3
         torreBlanca.terminarDeConstruir();
@@ -172,7 +167,7 @@ public class DefensaTest {
         //Arrange
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
-        Defensa torrePlateada = new TorrePlateada(new Jugador("carlos"));
+        Defensa torrePlateada = new TorrePlateada();
         Tierra tierra = new Tierra(coordenadasTorre);
         tierra.construir(torrePlateada, 0); // daño 2 punto, rango 5
         torrePlateada.terminarDeConstruir();

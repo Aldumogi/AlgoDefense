@@ -20,11 +20,8 @@ public class Hormiga extends Enemigo {
 
     public int cantidadCreditosOtorgados() {
         
-        return 1;
+        return 0;
     }
-
-
-
 
     private Coordenadas getCoordenadasLargada() {
         // Al mapa le pedira las coordenadas de la parcela de largada
