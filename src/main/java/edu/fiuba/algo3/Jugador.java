@@ -48,4 +48,12 @@ public class Jugador {
     public void agregarCreditosAlMatarEnemigos(int creditos) {
         this.cantidadDeCreditos += creditos;
     }
+
+    public boolean estaVivo() {
+        return (this.puntosDeVida > 0);
+    }
+
+    public void restarEnergia(int energia) {
+        this.puntosDeVida -= energia;
+    }
 }

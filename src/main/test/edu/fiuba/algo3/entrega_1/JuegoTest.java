@@ -1,15 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.Arania;
-import edu.fiuba.algo3.Enemigo;
-import edu.fiuba.algo3.Hormiga;
-import edu.fiuba.algo3.Inicializador;
-import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.Juego;
+import edu.fiuba.algo3.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JuegoTest {
     @Test
@@ -43,5 +37,30 @@ public class JuegoTest {
 
       // Assert
       assertTrue(terminado);
+  }
+
+  @Test
+  public void test12() {
+    Inicializador inicio = new Inicializador();
+
+    inicio.agregarJugador("Alberto");
+    Juego juego = inicio.obtenerJuego();
+    Jugador jugador = juego.obtenerJugador();
+    Coordenadas coordenadasMeta = new Coordenadas(5, 2);
+    Enemigo enemigo = new Arania(new Coordenadas(5,2));
+
+    juego.agregarEnemigo(enemigo);
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+    juego.avanzarTurno();
+
+    assertFalse(jugador.estaVivo());
   }
 }

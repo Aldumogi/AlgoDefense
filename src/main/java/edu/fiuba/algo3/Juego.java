@@ -43,6 +43,7 @@ public class Juego {
         this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
         this.actualizarEstadoDeLosEnemigosYObtenerCreditosAlFinalizarTurno();
         this.jugador.agregarCreditosAlMatarEnemigos( this.creditosDelTurno );
+        this.actualizarEnergiaJugador();
 
     }
 
@@ -61,6 +62,16 @@ public class Juego {
             }
         } );
     }
+
+    public void actualizarEnergiaJugador() {
+        Coordenadas coordenadasMeta = new Coordenadas(5,2);
+        this.enemigos.forEach( enemigo -> {
+            if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
+                jugador.restarEnergia(enemigo.obtenerDanioCausado());
+            }
+        });
+    }
+
     public boolean juegoTerminado(){
         return enemigos.size() == 0;
     }
