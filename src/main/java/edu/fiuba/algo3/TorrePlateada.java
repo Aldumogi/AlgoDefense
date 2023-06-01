@@ -7,7 +7,6 @@ public class TorrePlateada extends Defensa {
     // private Coodenada coordenada;
 
     public TorrePlateada(Jugador jugador) {
-    public TorrePlateada() {
         this.nombre("Torre Plateada");
         this.costo(20);
         this.tiempoDeConstruccion(2);

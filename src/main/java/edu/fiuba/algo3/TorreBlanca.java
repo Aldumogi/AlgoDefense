@@ -7,7 +7,6 @@ public class TorreBlanca extends Defensa {
     // private Coodenada coordenada;
 
     public TorreBlanca(Jugador jugador) {
-    public TorreBlanca() {
         this.nombre("Torre Blanca");
         this.costo(10);
         this.tiempoDeConstruccion(1);

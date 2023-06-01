@@ -27,11 +27,6 @@ public class EnemigoTest {
 
         Hormiga unaHormiga = new Hormiga();
         Defensa unaDefensa = new TorreBlanca(jugador);
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemigoTest {
     @Test
