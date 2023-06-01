@@ -6,6 +6,7 @@ abstract Enemigo {
 - creditosOtorgados: int
 - pasarela: Pasarela
 - coordenada: Coordenada
++ recibirDaño()
 + cantidadCreditosOtorgados(): int
 + moverEnemigo()
 }
@@ -22,7 +23,7 @@ class Araña {
 
 class Juego {
 - mapa: Mapa
-- turno: Turno
+- numeroDeTurno: int
 + avanzarTurno()
 + agregarEnemigo()
 + juegoTerminado()
@@ -37,21 +38,23 @@ abstract Defensa {
 - nombre
 - costo
 - tiempoDeConstruccion
+- turnoEnElQueSeInicioLaConstruccion
 - rangoDeAtaque
 - danio
 - parcela
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(parcela:Parcela)
++ actualizarEstado(numeroDeTurno: int)
++ construir(parcela:Parcela, numeroDeTurno:int)
 }
 
 class TorreBlanca {
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(parcela:Parcela)
++ construir(parcela:Parcela, numeroDeTurno:int)
 }
 
 class TorrePlateada {
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(parcela:Parcela)
++ construir(parcela:Parcela, numeroDeTurno:int)
 }
 
 class Jugador {
@@ -60,21 +63,25 @@ class Jugador {
 - puntosDeVida: int
 + descontarCreditos()
 + agregarCreditos()
-+ generarDefensa()
++ generarConstruccion()
++ actualizarDefensasAlFinalizarTurno()
 + descontarPuntosDeVida()
 }
 
 
 interface AccionesDefensa {
 +atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaTerminada()
 }
 
 class EnConstruccion {
 +atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaTerminada()
 }
 
 class Terminada {
 +atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaTerminada()
 }
 
 

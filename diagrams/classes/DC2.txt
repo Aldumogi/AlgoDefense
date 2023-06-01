@@ -2,16 +2,13 @@
 
 class Juego {
 - jugador: Jugador
+- numeroDeTurno: int
 + avanzarTurno()
 }
 
 class Inicializador {
 + agregarJugador()
 + iniciarPartida()
-}
-
-class Turno {
-+ avanzar()
 }
 
 class Mapa {
@@ -26,14 +23,14 @@ class Coordenadas {
 }
 
 interface Parcela {
-+ construir(D: Defensa)
++ construir(D: Defensa, numeroDeTurno: int)
 + recibirEnemigo(Enemigo enemigo)
 }
 
 class Pasarela {
 # coordenadas: Coordenadas
 # enemigos: Enemigo
-+ construir(D: Defensa)
++ construir(D: Defensa, numeroDeTurno: int)
 }
 
 class PasarelaLargada {}
@@ -43,13 +40,13 @@ class PasarelaMeta{}
 class Rocoso {
 - coordenadas: Coordenadas
 - disponibilidad: DisponibilidadParcela
-+ construir(D: Defensa)
++ construir(D: Defensa, numeroDeTurno: int)
 }
 
 class Tierra {
 - coordenadas: Coordenadas
 - disponibilidad: DisponibilidadParcela
-+ construir(D: Defensa)
++ construir(D: Defensa, numeroDeTurno: int)
 }
 
 Parcela <|.. Pasarela
@@ -63,7 +60,6 @@ Pasarela <|-- PasarelaMeta
 
 Inicializador --> Juego
 Juego *- Mapa
-Turno <- Juego
 Mapa "1" *-- "1..*" Parcela
 Coordenadas "1..*" <-- "1" Mapa
 
