@@ -4,6 +4,7 @@ public abstract class Defensa {
     private String nombre;
     private int costo;
     private int tiempoDeConstruccion;
+    private int turnoEnElQueSeInicioLaConstruccion;
     protected int rangoDeAtaque;
     protected int danio;
 
