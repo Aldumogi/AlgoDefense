@@ -78,7 +78,7 @@ public class Juego {
         boolean todosLosEnemigosVivosEstanEnLaMeta = true;
         for (Enemigo enemigo: this.enemigos) {
             try{
-                    enemigo.acciones.verSiEstaMuerto();
+                    enemigo.estado.verSiEstaMuerto();
             }
             catch(ElEnemigoEstaVivoException e) {
                 if (coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) != 0) {

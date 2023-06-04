@@ -10,7 +10,7 @@ public class Hormiga extends Enemigo {
         this.energia(1);
         this.creditosOtorgados(1);
         this.coordenadas = this.getCoordenadasLargada();
-        this.acciones = new Vivo();
+        this.estado = new Vivo();
     }
     public Hormiga(Coordenadas coordenadas) {
         this.velocidad(1);
@@ -18,7 +18,7 @@ public class Hormiga extends Enemigo {
         this.energia(1);
         this.creditosOtorgados(1);
         this.coordenadas = coordenadas;
-        this.acciones = new Vivo();
+        this.estado = new Vivo();
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {

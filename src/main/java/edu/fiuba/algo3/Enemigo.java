@@ -8,7 +8,7 @@ public abstract class Enemigo {
     protected int energia;
     private int creditosOtorgados;
     protected Coordenadas coordenadas;
-    protected AccionesEnemigo acciones;
+    protected EstadoEnemigo estado;
     //getters
 
     public int creditosOtorgados(){
@@ -37,11 +37,11 @@ public abstract class Enemigo {
     public abstract boolean recibirDanio(int unDanio);
     public boolean actualizarEstado() {
         try {
-            this.acciones.verSiEstaMuerto();
+            this.estado.verSiEstaMuerto();
         }
         catch(ElEnemigoEstaVivoException e) {
             if (this.energia <= 0) {
-                this.acciones = new Muerto();
+                this.estado = new Muerto();
                 return true;
             }
         }

@@ -10,7 +10,7 @@ public class Arania extends Enemigo {
         this.energia (2);
         this.creditosOtorgados(0);
         this.coordenadas = getCoordenadasLargada();
-        this.acciones = new Vivo();
+        this.estado = new Vivo();
     }
 
     public Arania(Coordenadas coordenadas) {
@@ -19,7 +19,7 @@ public class Arania extends Enemigo {
         this.energia (2);
         this.creditosOtorgados(0);
         this.coordenadas = coordenadas;
-        this.acciones = new Vivo();
+        this.estado = new Vivo();
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {
