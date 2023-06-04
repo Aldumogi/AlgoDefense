@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
+import java.util.ArrayList;
 
 public class Hormiga extends Enemigo {
 
@@ -35,8 +35,8 @@ public class Hormiga extends Enemigo {
         // Al mapa le pedira las coordenadas de la parcela de largada
         return new Coordenadas(5,2);
     }
-    public int contarHormigaMuerta() {
-        return this.estado.contarMuerto();
+    public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
+        this.estado.acumularHormigasMuertas(hormigasMuertas, this);
     }
 
 }

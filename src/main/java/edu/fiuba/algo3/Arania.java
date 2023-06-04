@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Arania extends Enemigo {
@@ -32,6 +33,6 @@ public class Arania extends Enemigo {
         // Al mapa le pedira las coordenadas de la parcela de largada
         return new Coordenadas(3,2);
     }
-    public int contarHormigaMuerta() { return 0; }
+    public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) { }
 
 }

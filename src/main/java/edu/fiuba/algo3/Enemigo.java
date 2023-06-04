@@ -1,9 +1,9 @@
 package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
 import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Enemigo {
@@ -26,7 +26,7 @@ public abstract class Enemigo {
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio);
     }
-    public abstract int contarHormigaMuerta();
+    public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
     }

@@ -3,9 +3,6 @@ package edu.fiuba.algo3;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
-
 public class Juego {
     private Mapa mapa;
     private int numeroDeTurno;
@@ -38,25 +35,35 @@ public class Juego {
     public void avanzarTurno(){
         this.numeroDeTurno++;
         this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
+        this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
         this.actualizarEnergiaJugador();
-
     }
 
     public void obtenerCreditosYEliminarEnemigosAlFinalizarTurno(){
         int creditosDelTurno = 0;
         List<Integer> indicesEnemigosAEliminar = new ArrayList<Integer>();
         for (int i = 0; i < this.enemigos.size(); i++) {
-            this.cantidadDeHormigasMuertas += this.enemigos.get(i).contarHormigaMuerta();
             creditosDelTurno += this.enemigos.get(i).cantidadCreditosOtorgados(this.cantidadDeHormigasMuertas);
+            // Si el enemigo esta muerto, guardo la posicion correspondiente a la lista de enemigos
             this.enemigos.get(i).agregarIndiceDelEnemigoMuerto(indicesEnemigosAEliminar, i);
         }
         this.jugador.agregarCreditosAlMatarEnemigos( creditosDelTurno );
 
+        /* Voy eliminando los enemigos desde la posicion mas alta para que los indices de la lista
+        * enemigos no se modifiquen */
         for ( int j = 0 ; j < indicesEnemigosAEliminar.size() ; j++ ) {
             int posicion = indicesEnemigosAEliminar.get( indicesEnemigosAEliminar.size() - j - 1);
             this.enemigos.remove( posicion );
         }
+    }
+
+    public int contarMuertosEnElTurnoActual() {
+        ArrayList<Hormiga> hormigasMuertas = new ArrayList<Hormiga>();
+        for (Enemigo enemigo: this.enemigos) {
+            enemigo.acumularMuertos(hormigasMuertas);
+        }
+        return hormigasMuertas.size();
     }
 
     public void actualizarEnergiaJugador() {
