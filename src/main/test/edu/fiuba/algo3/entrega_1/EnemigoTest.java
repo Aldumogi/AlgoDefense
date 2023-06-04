@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+import edu.fiuba.algo3.exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,10 +18,8 @@ public class EnemigoTest {
         tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
-        unaDefensa.atacarEnemigo(unaHormiga);
-
-        assertFalse(unaHormiga.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
     public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException {
@@ -34,14 +32,11 @@ public class EnemigoTest {
         tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
-        unaDefensa.atacarEnemigo(unaHormiga);
-        boolean pudeAtacar = unaDefensa.atacarEnemigo(unaHormiga);
-
-        assertFalse(pudeAtacar);
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaYNoLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoDisponibleParaConstruirException {
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
@@ -51,10 +46,9 @@ public class EnemigoTest {
         tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
-        unaDefensa.atacarEnemigo(unaArania);
-
-        assertTrue(unaArania.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
     public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException {
@@ -67,11 +61,9 @@ public class EnemigoTest {
         tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
-        unaDefensa.atacarEnemigo(unaArania);
-        unaDefensa.atacarEnemigo(unaArania);
-
-        assertFalse(unaArania.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
     public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
@@ -84,10 +76,8 @@ public class EnemigoTest {
         tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
-        unaDefensa.atacarEnemigo(unaHormiga);
-
-        assertFalse(unaHormiga.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
     public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
@@ -100,10 +90,8 @@ public class EnemigoTest {
         tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
-        unaDefensa.atacarEnemigo(unaArania);
-
-        assertFalse(unaArania.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
     public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException {
@@ -116,10 +104,8 @@ public class EnemigoTest {
         tierra.construir(unaDefensa, 0);
         unaDefensa.terminarDeConstruir();
 
-        unaDefensa.atacarEnemigo(unaArania);
-        boolean pudeAtacar = unaDefensa.atacarEnemigo(unaArania);
-        assertFalse(pudeAtacar);
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
 
     /*
@@ -128,7 +114,8 @@ public class EnemigoTest {
     cobra correctamente
     */
     @Test
-    public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoDisponibleParaConstruirException{
+    public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoDisponibleParaConstruirException, ElEnemigoMurioDuranteElAtaqueException,
+            FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -146,14 +133,15 @@ public class EnemigoTest {
 
         assertEquals(80, jugador.obtenerCantidadDeCreditos());
         torrePlateada.atacarEnemigo(unaHormiga);
-        assertEquals(-1, unaHormiga.energia() );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> torrePlateada.atacarEnemigo(unaHormiga) );
         juego.avanzarTurno();
         assertEquals(81, jugador.obtenerCantidadDeCreditos());
 
     }
 
    @Test
-    public void matoAUnaAraniaYLeSuma1CredAlJugador() {
+    public void matoAUnaAraniaYLeSuma1CredAlJugador() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
+           ElEnemigoEstaMuertoException, DefensaEnConstruccionException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -175,7 +163,8 @@ public class EnemigoTest {
     }
 
     @Test
-    public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() {
+    public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
+            ElEnemigoEstaMuertoException, DefensaEnConstruccionException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");

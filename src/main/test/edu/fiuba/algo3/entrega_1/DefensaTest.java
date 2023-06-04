@@ -125,9 +125,7 @@ public class DefensaTest {
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
         //Act, Assert
-        assertTrue(torreBlanca.atacarEnemigo(hormiga));
-        assertFalse(hormiga.estaVivo());
-
+        assertDoesNotThrow( () -> torreBlanca.atacarEnemigo(hormiga) );
     }
 
     @Test
@@ -142,8 +140,7 @@ public class DefensaTest {
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
         //Act, Assert
-        assertTrue(torrePlateada.atacarEnemigo(hormiga));
-        assertFalse(hormiga.estaVivo());
+        assertDoesNotThrow( () -> torrePlateada.atacarEnemigo(hormiga) );
     }
 
     @Test
@@ -158,8 +155,7 @@ public class DefensaTest {
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
 
         //Act, Assert
-        assertFalse(torreBlanca.atacarEnemigo(hormiga));
-        assertTrue(hormiga.estaVivo());
+        assertThrows( FueraDeRangoException.class, () -> torreBlanca.atacarEnemigo(hormiga) );
     }
 
     @Test
@@ -174,8 +170,7 @@ public class DefensaTest {
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
 
         //Act, Assert
-        assertFalse(torrePlateada.atacarEnemigo(hormiga));
-        assertTrue(hormiga.estaVivo());
+        assertThrows( FueraDeRangoException.class, () -> torrePlateada.atacarEnemigo(hormiga) );
     }
 
 }

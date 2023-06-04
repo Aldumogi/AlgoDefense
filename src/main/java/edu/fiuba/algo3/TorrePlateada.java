@@ -1,5 +1,10 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.DefensaEnConstruccionException;
+import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.exceptions.FueraDeRangoException;
+
 public class TorrePlateada extends Defensa {
 
     public TorrePlateada() {
@@ -15,7 +20,8 @@ public class TorrePlateada extends Defensa {
         this.accionesDefensa = new EnConstruccion();
         this.turnoEnElQueSeInicioLaConstruccion = numeroDeTurno;
     }
-    public Boolean atacarEnemigo(Enemigo enemigo){
-        return this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
+    public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
+            DefensaEnConstruccionException, FueraDeRangoException {
+        this.accionesDefensa.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
     }
 }

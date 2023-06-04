@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.exceptions.DefensaEnConstruccionException;
+import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.exceptions.FueraDeRangoException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +44,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso11() {
+  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException {
     Inicializador inicio = new Inicializador();
 
     inicio.agregarJugador("Alberto");
@@ -61,11 +65,14 @@ public class JuegoTest {
     Enemigo enemigo4 = new Arania(new Coordenadas(5,2));
     juego.agregarEnemigo(enemigo);
 
-    defensa.atacarEnemigo(enemigo);
-    defensa.atacarEnemigo(enemigo1);
-    defensa.atacarEnemigo(enemigo2);
-    defensa.atacarEnemigo(enemigo3);
-    defensa.atacarEnemigo(enemigo4);
+    try {
+      defensa.atacarEnemigo(enemigo);
+      defensa.atacarEnemigo(enemigo1);
+      defensa.atacarEnemigo(enemigo2);
+      defensa.atacarEnemigo(enemigo3);
+      defensa.atacarEnemigo(enemigo4);
+    }
+    catch(ElEnemigoMurioDuranteElAtaqueException e) {}
 
     Enemigo enemigo5 = new Arania(new Coordenadas(5, 2));
     Enemigo enemigo6 = new Arania(new Coordenadas(5, 2));
