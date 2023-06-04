@@ -10,7 +10,6 @@ public interface EstadoEnemigo {
     void mover(Enemigo enemigo);
     EstadoEnemigo recibirDanio(int danio) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException;
     int creditosOtorgados(int creditos);
-    void verSiEstaMuerto() throws ElEnemigoEstaVivoException;
 
     int contarMuerto();
     void agregarIndiceDeEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual);

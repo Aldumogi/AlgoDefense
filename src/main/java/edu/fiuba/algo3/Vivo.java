@@ -22,9 +22,6 @@ public class Vivo implements EstadoEnemigo {
     public int creditosOtorgados(int creditos) {
         return 0;
     }
-    public void verSiEstaMuerto() throws ElEnemigoEstaVivoException {
-        throw new ElEnemigoEstaVivoException();
-    }
 
     public int contarMuerto() {
         return 0;

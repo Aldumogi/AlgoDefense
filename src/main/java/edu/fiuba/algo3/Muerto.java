@@ -16,7 +16,6 @@ public class Muerto implements EstadoEnemigo {
     public int creditosOtorgados(int creditos) {
         return creditos;
     }
-    public void verSiEstaMuerto() throws ElEnemigoEstaVivoException {}
 
     public int contarMuerto() {
         return 1;
