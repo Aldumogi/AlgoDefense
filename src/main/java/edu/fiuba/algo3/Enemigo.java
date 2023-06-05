@@ -1,48 +1,21 @@
 package edu.fiuba.algo3;
 
-import com.google.gson.JsonObject;
+import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
-import org.json.simple.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Enemigo {
     protected int velocidad;
     protected int dañoCausado;
-    protected int energia;
+    protected int energiaInicial;
     protected int creditosOtorgados;
     protected Coordenadas coordenadas;
-    protected AccionesEnemigo acciones;
+    protected EstadoEnemigo estado;
+    //getters
 
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
-    public abstract boolean recibirDanio(int unDanio);
-
-    public abstract boolean esUnaHormiga();
-
-    public int creditosOtorgados() {
-        return this.creditosOtorgados;
-    }
-
-    public boolean estaVivo() {
-        return (this.energia > 0) ? true : false;
-    }
-
-    public int energia() {
-        return this.energia;
-    }
-
-    public boolean actualizarEstado() {
-        try {
-            this.acciones.verSiEstaMuerto();
-        }
-        catch(ElEnemigoEstaVivoException e) {
-            if (this.energia <= 0) {
-                this.acciones = new Muerto();
-                return true;
-            }
-        }
-        return false;
-    }
-
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;
     }
@@ -50,5 +23,11 @@ public abstract class Enemigo {
     public int obtenerDanioCausado () {
         return this.dañoCausado;
     }
-
+    public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
+        this.estado = this.estado.recibirDanio(unDanio);
+    }
+    public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
+    public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
+        this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
+    }
 }
