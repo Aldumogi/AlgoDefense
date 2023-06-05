@@ -13,7 +13,6 @@ public abstract class Enemigo {
     protected int creditosOtorgados;
     protected Coordenadas coordenadas;
     protected EstadoEnemigo estado;
-    //getters
 
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public Coordenadas obtenerCoordenadas() {

@@ -17,6 +17,5 @@ public class LoaderEnemigosJuegoTest {
         ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos();
 
         assert(turnos.size() > 0);
-
     }
 }
