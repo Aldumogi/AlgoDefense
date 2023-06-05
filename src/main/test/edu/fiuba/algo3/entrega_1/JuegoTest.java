@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.exceptions.DefensaEnConstruccionException;
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
-import edu.fiuba.algo3.exceptions.FueraDeRangoException;
+import edu.fiuba.algo3.exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +41,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException {
+  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException {
     Inicializador inicio = new Inicializador();
 
     inicio.agregarJugador("Alberto");
@@ -53,7 +50,7 @@ public class JuegoTest {
 
     Defensa defensa = new TorrePlateada();
     Coordenadas coordDefensa = new Coordenadas(4,2);
-    jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerNumeroDeturno());
+    jugador.generarConstruccion(defensa, coordDefensa);
 
     juego.avanzarTurno();
     juego.avanzarTurno();

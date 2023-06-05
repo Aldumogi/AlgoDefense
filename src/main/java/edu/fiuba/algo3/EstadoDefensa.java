@@ -5,8 +5,9 @@ import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.exceptions.FueraDeRangoException;
 
-public interface AccionesDefensa {
+public interface EstadoDefensa {
     void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
-    void estaTerminada() throws DefensaEnConstruccionException;
+    EstadoDefensa pasarTurno();
+    int tiempoDeConstruccion();
 }

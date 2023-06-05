@@ -34,7 +34,7 @@ public class Juego {
     }
     public void avanzarTurno(){
         this.numeroDeTurno++;
-        this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
+        this.jugador.actualizarDefensasAlFinalizarTurno();
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
         this.actualizarEnergiaJugador();

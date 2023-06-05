@@ -9,42 +9,51 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnemigoTest {
     @Test
     public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
         Defensa unaDefensa = new TorreBlanca();
-
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
     public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
         Defensa unaDefensa = new TorreBlanca();
-
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
     public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoDisponibleParaConstruirException {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorreBlanca();
-
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
@@ -52,14 +61,17 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorreBlanca();
-
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
@@ -67,42 +79,54 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
         Defensa unaDefensa = new TorrePlateada();
-
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
     public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorrePlateada();
-
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
     public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException {
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorrePlateada();
-
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
@@ -127,7 +151,7 @@ public class EnemigoTest {
         Coordenadas coordenadas = new Coordenadas(3, 2);
         Defensa torrePlateada = new TorrePlateada();
 
-        jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerNumeroDeturno());
+        jugador.generarConstruccion(torrePlateada, coordenadas);
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -141,7 +165,7 @@ public class EnemigoTest {
 
    @Test
     public void matoAUnaAraniaYLeSuma1CredAlJugador() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
-           ElEnemigoEstaMuertoException, DefensaEnConstruccionException {
+           ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -152,7 +176,7 @@ public class EnemigoTest {
         juego.agregarEnemigo(unaArania);
         Coordenadas coordenadas = new Coordenadas(3, 3);
         Defensa unatorre = new TorrePlateada();
-        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerNumeroDeturno());
+        jugador.generarConstruccion(unatorre, coordenadas);
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -164,7 +188,7 @@ public class EnemigoTest {
 
     @Test
     public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
-            ElEnemigoEstaMuertoException, DefensaEnConstruccionException {
+            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -200,7 +224,7 @@ public class EnemigoTest {
 
         Defensa unatorre = new TorrePlateada();
         Coordenadas coordenadas = new Coordenadas(3,3);
-        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerNumeroDeturno());
+        jugador.generarConstruccion(unatorre, coordenadas);
         juego.avanzarTurno();
         juego.avanzarTurno();
 
