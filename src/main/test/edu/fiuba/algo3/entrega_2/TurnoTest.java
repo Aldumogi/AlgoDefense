@@ -12,6 +12,6 @@ public class TurnoTest {
         turno.agregarEnemigos(2, 1);
 
         assertEquals(1, turno.getTurnoId());
-        assertEquals(3, turno.getListaEnemigosAgregadosEnElTurno().toArray().length);
+        assertEquals(3, turno.getListaEnemigosAgregadosEnElTurno().size());
     }
 }

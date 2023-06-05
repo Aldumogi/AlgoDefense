@@ -1,14 +1,27 @@
 package edu.fiuba.algo3;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.util.Objects.isNull;
 
 public class Inicializador {
     private Juego juego;
-    public Inicializador(){
-        this.juego = new Juego();
+
+    public Inicializador() throws IOException, ParseException {
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos();
+        // LoaderMapaJuego.recuperarMapa();
+        // this. juego = new Juego(turnos, mapa);
+        this.juego = new Juego(turnos);
     }
+
+    public Juego obtenerJuego() {
+        return this.juego;
+    }
+
     public void agregarJugador(String nombre) {
         int cantidadMinimaDeCaracteres = 6;
         Scanner scanner = new Scanner(System.in);
@@ -23,5 +36,4 @@ public class Inicializador {
         this.juego.setearJugador(jugador);
     }
 
-    public Juego obtenerJuego() { return this.juego; }
 }

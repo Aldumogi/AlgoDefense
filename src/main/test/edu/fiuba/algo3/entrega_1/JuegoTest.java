@@ -2,13 +2,16 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.exceptions.*;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JuegoTest {
     @Test
-    public void juegoConDosEnemigosNoDeberiaEstarTerminado() {
+    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException {
       // Arrange
       Inicializador inicio = new Inicializador();
 
@@ -26,7 +29,7 @@ public class JuegoTest {
   }
 
   @Test
-    public void juegoSinEnemigosDeberiaEstarTerminado() {
+    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException {
       // Arrange
       Inicializador inicio = new Inicializador();
 
@@ -41,7 +44,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException {
+  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
     Inicializador inicio = new Inicializador();
 
     inicio.agregarJugador("Alberto");
@@ -86,7 +89,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso12() {
+  public void caso12() throws IOException, ParseException {
     Inicializador inicio = new Inicializador();
 
     inicio.agregarJugador("Alberto");

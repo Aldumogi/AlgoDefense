@@ -9,6 +9,7 @@ public class Turno {
     public Turno(int turnoId) {
         this.turnoId = turnoId;
     }
+
     public Turno(int turnoId, int cantidadHormigas, int cantidadAranias) {
         this.turnoId = turnoId;
         this.agregarEnemigos(cantidadHormigas, cantidadAranias);

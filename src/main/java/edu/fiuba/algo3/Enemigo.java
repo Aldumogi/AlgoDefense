@@ -23,6 +23,7 @@ public abstract class Enemigo {
     public int obtenerDanioCausado () {
         return this.dañoCausado;
     }
+
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio);
     }
