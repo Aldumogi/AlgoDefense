@@ -6,11 +6,11 @@ import edu.fiuba.algo3.exceptions.*;
 
 public class Pasarela implements Parcela {
     protected Coordenadas coordenadas;
-    protected EstadoParcela disponibilidad;
+    protected EstadoParcela estado;
     protected List<Enemigo> enemigos;
 
     public Pasarela(Coordenadas coordenadas){
-        this.disponibilidad = new ParcelaOcupada();
+        this.estado = new ParcelaOcupada();
         this.coordenadas = coordenadas;
         this.enemigos = new ArrayList<Enemigo>();
     }

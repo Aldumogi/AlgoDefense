@@ -3,9 +3,9 @@ import edu.fiuba.algo3.exceptions.*;
 
 public class Rocoso implements Parcela {
     private Coordenadas coordenadas;
-    private EstadoParcela disponibilidad;
+    private EstadoParcela estado;
     public Rocoso(Coordenadas coordenadas){
-        this.disponibilidad = new ParcelaOcupada();
+        this.estado = new ParcelaOcupada();
         this.coordenadas = coordenadas;
     }
     public void construir(Defensa defensa) throws NoDisponibleParaConstruirException {
