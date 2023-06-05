@@ -13,7 +13,8 @@ public abstract class Defensa {
     protected int danio;
     protected EstadoDefensa estado;
     protected Tierra tierra;
-    public int costo(){
+
+    public int costo() {
         return this.costo;
     }
     
@@ -23,5 +24,4 @@ public abstract class Defensa {
     public abstract void construir(Tierra tierra);
     public void pasarTurno() {
         this.estado = this.estado.pasarTurno();
-    }
 }
