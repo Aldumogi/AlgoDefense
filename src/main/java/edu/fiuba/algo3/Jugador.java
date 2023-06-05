@@ -27,23 +27,16 @@ public class Jugador {
     public List<Defensa> obtenerDefensas(){
         return this.defensas;
     }
-    public boolean generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas, int numeroDeTurno){
-        if(this.obtenerCantidadDeCreditos() >= unaDefensa.costo()){
+    public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas) throws NoDisponibleParaConstruirException {
+        if(this.cantidadDeCreditos >= unaDefensa.costo()){
             Tierra tierra = new Tierra(coordenadas);
-            try{
-                tierra.construir(unaDefensa, numeroDeTurno);
-            }
-            catch (NoDisponibleParaConstruirException e) {
-                return false;
-            }
+            tierra.construir(unaDefensa);
             this.defensas.add(unaDefensa);
             this.cantidadDeCreditos -= unaDefensa.costo();
-            return true;
         }
-        return false;
     }
-    public void actualizarDefensasAlFinalizarTurno(int numeroDeTurno){
-        this.defensas.forEach(defensa -> defensa.actualizarEstado(numeroDeTurno));
+    public void actualizarDefensasAlFinalizarTurno(){
+        this.defensas.forEach( Defensa::pasarTurno );
     }
     public void agregarCreditosAlMatarEnemigos(int creditos) {
         this.cantidadDeCreditos += creditos;

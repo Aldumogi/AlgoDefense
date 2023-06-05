@@ -1,29 +1,29 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
+import java.util.ArrayList;
 
 public class Hormiga extends Enemigo {
 
     public Hormiga() {
         this.velocidad = 1;
         this.dañoCausado = 1;
-        this.energia = 1;
+        this.energiaInicial = 1;
         this.creditosOtorgados = 1;
         this.coordenadas = this.getCoordenadasLargada();
-        this.acciones = new Vivo();
+        this.estado = new Vivo(this.energiaInicial);
     }
     public Hormiga(Coordenadas coordenadas) {
         this.velocidad = 1;
         this.dañoCausado = 1;
-        this.energia = 1;
+        this.energiaInicial = 1;
         this.creditosOtorgados = 1;
         this.coordenadas = coordenadas;
-        this.acciones = new Vivo();
+        this.estado = new Vivo(this.energiaInicial);
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {
-        this.creditosOtorgados = (( cantidadDeHormigasMuertas < 11 ) ? 1:2);
-        return this.creditosOtorgados();
+        int creditosOtorgados = ( cantidadDeHormigasMuertas < 11 ) ? 1:2 ;
+        return this.estado.creditosOtorgados(creditosOtorgados);
     }
 
     private Coordenadas getCoordenadasLargada() {
@@ -35,15 +35,8 @@ public class Hormiga extends Enemigo {
         // Al mapa le pedira las coordenadas de la parcela de largada
         return new Coordenadas(5,2);
     }
-    public boolean recibirDanio(int unDanio){
-        if (estaVivo()){
-            this.energia = this.energia - unDanio;
-            return true;
-        }
-        return false;
-    }
-    public boolean esUnaHormiga() {
-        return true;
+    public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
+        this.estado.acumularHormigasMuertas(hormigasMuertas, this);
     }
 
 }
