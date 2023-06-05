@@ -5,26 +5,26 @@ import java.util.Random;
 public class Arania extends Enemigo {
 
     public Arania() {
-        this.velocidad(2) ;
-        this.dañoCausado(2);
-        this.energia (2);
-        this.creditosOtorgados(0);
+        this.velocidad = 2;
+        this.dañoCausado = 2;
+        this.energia = 2;
+        this.creditosOtorgados = 0;
         this.coordenadas = getCoordenadasLargada();
         this.acciones = new Vivo();
     }
 
     public Arania(Coordenadas coordenadas) {
-        this.velocidad(2) ;
-        this.dañoCausado(2);
-        this.energia (2);
-        this.creditosOtorgados(0);
+        this.velocidad = 2;
+        this.dañoCausado = 2;
+        this.energia = 2;
+        this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
         this.acciones = new Vivo();
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {
         Random random = new Random();
-        this.creditosOtorgados(random.nextInt(10) + 1);
+        this.creditosOtorgados = random.nextInt(10) + 1;
         return this.creditosOtorgados();
     }
 

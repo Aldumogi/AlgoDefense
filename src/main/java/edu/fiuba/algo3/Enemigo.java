@@ -1,17 +1,22 @@
 package edu.fiuba.algo3;
 
+import com.google.gson.JsonObject;
+
 import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
+import org.json.simple.JSONObject;
 
 public abstract class Enemigo {
-    private int velocidad;
-    private int dañoCausado;
+    protected int velocidad;
+    protected int dañoCausado;
     protected int energia;
-    private int creditosOtorgados;
+    protected int creditosOtorgados;
     protected Coordenadas coordenadas;
     protected AccionesEnemigo acciones;
 
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public abstract boolean recibirDanio(int unDanio);
+
+    public abstract boolean esUnaHormiga();
 
     public int creditosOtorgados() {
         return this.creditosOtorgados;
@@ -20,8 +25,6 @@ public abstract class Enemigo {
     public boolean estaVivo() {
         return (this.energia > 0) ? true : false;
     }
-
-    public abstract boolean esUnaHormiga();
 
     public int energia() {
         return this.energia;
@@ -47,4 +50,5 @@ public abstract class Enemigo {
     public int obtenerDanioCausado () {
         return this.dañoCausado;
     }
+
 }

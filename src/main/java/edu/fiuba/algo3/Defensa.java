@@ -1,9 +1,9 @@
 package edu.fiuba.algo3;
 
 public abstract class Defensa {
-    private String nombre;
-    private int costo;
-    private int tiempoDeConstruccion;
+    protected String nombre;
+    protected int costo;
+    protected int tiempoDeConstruccion;
     protected int turnoEnElQueSeInicioLaConstruccion;
     protected int rangoDeAtaque;
     protected int danio;
