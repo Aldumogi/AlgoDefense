@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Turno {
