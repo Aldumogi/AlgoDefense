@@ -24,4 +24,5 @@ public abstract class Defensa {
     public abstract void construir(Tierra tierra);
     public void pasarTurno() {
         this.estado = this.estado.pasarTurno();
+    }
 }
