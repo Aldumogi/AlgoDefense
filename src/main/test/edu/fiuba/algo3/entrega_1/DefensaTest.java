@@ -2,7 +2,10 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.exceptions.*;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +15,7 @@ public class DefensaTest {
         CASO de USO 2
     */
     @Test
-    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException {
+    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -28,7 +31,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException {
+    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -114,7 +117,7 @@ public class DefensaTest {
      */
 
     @Test
-    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
@@ -133,7 +136,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
@@ -153,7 +156,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException {
+    public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
@@ -172,7 +175,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException {
+    public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");

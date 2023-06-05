@@ -13,7 +13,6 @@ public abstract class Enemigo {
     protected int creditosOtorgados;
     protected Coordenadas coordenadas;
     protected EstadoEnemigo estado;
-    //getters
 
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public Coordenadas obtenerCoordenadas() {
@@ -23,6 +22,7 @@ public abstract class Enemigo {
     public int obtenerDanioCausado () {
         return this.dañoCausado;
     }
+
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio);
     }

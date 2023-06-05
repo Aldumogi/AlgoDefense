@@ -5,22 +5,31 @@ import java.util.List;
 
 public class Juego {
     private Mapa mapa;
-    private int numeroDeTurno;
+    private int IndiceActualListaTurnos;
     private Jugador jugador;
     private List<Enemigo> enemigos;
     private int cantidadDeHormigasMuertas;
+    private ArrayList<Turno> turnos;
 
     public Juego() {
-        this.numeroDeTurno = 0;
+        this.IndiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
+        this.turnos = new ArrayList<>();
     }
 
     public Juego(Jugador jugador, Mapa mapa) {
         this.jugador = jugador;
         this.mapa = mapa;
-        this.numeroDeTurno = 0;
+        this.IndiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
         this.cantidadDeHormigasMuertas = 0;
+        this.turnos = new ArrayList<Turno>();
+    }
+
+    public Juego(ArrayList<Turno> turnos) {
+        this.IndiceActualListaTurnos = 0;
+        this.enemigos = new ArrayList<Enemigo>();
+        this.turnos = turnos;
     }
 
     public void setearJugador(Jugador jugador) {
@@ -28,12 +37,12 @@ public class Juego {
     }
 
     public Jugador obtenerJugador() { return this.jugador; };
-    public int obtenerNumeroDeturno() { return this.numeroDeTurno; }
+    public int obtenerNumeroDeturno() { return this.IndiceActualListaTurnos; }
     public void agregarEnemigo(Enemigo enemigo){
         enemigos.add(enemigo);
     }
     public void avanzarTurno(){
-        this.numeroDeTurno++;
+        this.IndiceActualListaTurnos++;
         this.jugador.actualizarDefensasAlFinalizarTurno();
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();

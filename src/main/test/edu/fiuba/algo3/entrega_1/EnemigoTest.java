@@ -2,13 +2,16 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.exceptions.*;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemigoTest {
     @Test
-    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -25,7 +28,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException {
+    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -42,7 +45,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -60,7 +63,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -78,7 +81,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -96,7 +99,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
+    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -114,7 +117,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException {
+    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -139,7 +142,7 @@ public class EnemigoTest {
     */
     @Test
     public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoDisponibleParaConstruirException, ElEnemigoMurioDuranteElAtaqueException,
-            FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException {
+            FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, IOException, ParseException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -165,7 +168,7 @@ public class EnemigoTest {
 
    @Test
     public void matoAUnaAraniaYLeSuma1CredAlJugador() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
-           ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException {
+           ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -188,7 +191,7 @@ public class EnemigoTest {
 
     @Test
     public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
-            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException {
+            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
