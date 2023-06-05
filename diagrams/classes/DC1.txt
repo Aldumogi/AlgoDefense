@@ -2,31 +2,42 @@
 abstract Enemigo {
 - velocidad: int
 - dañoCausado: int
-- energía: int
+- energíaInicial: int
 - creditosOtorgados: int
-- pasarela: Pasarela
-- coordenada: Coordenada
+- coordenadas: Coordenadas
 + recibirDaño()
 + cantidadCreditosOtorgados(): int
 + moverEnemigo()
++ acumularMuertos()
++ agregarIndiceDelEnemigoMuerto()
 }
 
 class Hormiga {
++ acumularMuertos()
 + cantidadCreditosOtorgados(): int
 + moverEnemigo()
++ getCoordenadasLargada()
++ getCoordenadasMeta()
 }
 
 class Araña {
++ acumularMuertos()
 + cantidadCreditosOtorgados(): int
 + moverEnemigo()
++ getCoordenadasLargada()
++ getCoordenadasMeta()
 }
 
 class Juego {
 - mapa: Mapa
 - numeroDeTurno: int
+- cantidadDeHormigasMuertas: int
 + avanzarTurno()
 + agregarEnemigo()
 + juegoTerminado()
++ obtenerCreditosYEliminarEnemigosAlFinalizarTurno()
++ contarMuertosEnElTurnoActual()
++ actualizarEnergiaJugador()
 }
 
 class Inicializador {
@@ -38,13 +49,12 @@ abstract Defensa {
 - nombre
 - costo
 - tiempoDeConstruccion
-- turnoEnElQueSeInicioLaConstruccion
 - rangoDeAtaque
 - danio
-- parcela
+- tierra
 + atacarEnemigo(enemigo: Enemigo)
-+ actualizarEstado(numeroDeTurno: int)
 + construir(parcela:Parcela, numeroDeTurno:int)
++ pasarTurno()
 }
 
 class TorreBlanca {
@@ -61,47 +71,63 @@ class Jugador {
 - nombre
 - cantidadDeCreditos: int
 - puntosDeVida: int
-+ descontarCreditos()
-+ agregarCreditos()
-+ generarConstruccion()
 + actualizarDefensasAlFinalizarTurno()
-+ descontarPuntosDeVida()
++ agregarCreditosAlMatarEnemigos()
++ generarConstruccion()
++ estaVivo()
++ restarEnergia()
 }
 
 
-interface AccionesDefensa {
+interface EstadoDefensa {
 +atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
 +estaTerminada()
 }
 
 class EnConstruccion {
+- tiempoDeConstruccion: int
 +atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
-+estaTerminada()
++pasarTurno(): EstadoDefensa
 }
 
 class Terminada {
+- tiempoDeConstruccion: int
 +atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
-+estaTerminada()
++estaEnRango(coordernadasEnemigo, coordenadasDefensa, rangoDeAtaque)
++pasarTurno(): EstadoDefensa
 }
 
 
-interface AccionesEnemigo {
+interface EstadoEnemigo {
++ acumularHormigasMuertas(hormigasMuertas: ArrayList<Enemigo>, enemigo: Hormiga)
++ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
 + mover(velocidad:int)
++ recibirDanio(danio: int): EstadoEnemigo
 }
 
 class Vivo {
+- energia: int
++ acumularHormigasMuertas(hormigasMuertas: ArrayList<Enemigo>, enemigo: Hormiga)
++ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
++ creditosOtorgados(creditos: int)
 + mover(velocidad:int)
++ recibirDanio(danio: int): EstadoEnemigo
 }
 
 class Muerto {
+- energia: int
++ acumularHormigasMuertas(hormigasMuertas: ArrayList<Enemigo>, enemigo: Hormiga)
++ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
++ creditosOtorgados(creditos: int)
 + mover(velocidad:int)
++ recibirDanio(danio: int): EstadoEnemigo
 }
 
-AccionesEnemigo <|.. Vivo
-AccionesEnemigo <|.. Muerto
+EstadoEnemigo <|.. Vivo
+EstadoEnemigo <|.. Muerto
 
-AccionesDefensa <|.. EnConstruccion
-AccionesDefensa <|.. Terminada
+EstadoDefensa <|.. EnConstruccion
+EstadoDefensa <|.. Terminada
 
 Defensa <|-- TorreBlanca
 Defensa <|-- TorrePlateada
@@ -116,6 +142,6 @@ Juego "1" --> "0..*" Enemigo
 Jugador <- Juego
 Jugador "1" --> "0..*" Defensa
 Defensa .> Enemigo
-Defensa --> AccionesDefensa
-Enemigo --> AccionesEnemigo
+Defensa --> EstadoDefensa
+Enemigo --> EstadoEnemigo
 @enduml
