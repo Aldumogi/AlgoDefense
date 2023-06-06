@@ -10,6 +10,19 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JuegoTest {
+    public class TesteableInicializador extends Inicializador {
+      private Juego juego;
+      public TesteableInicializador() throws IOException, ParseException {
+        this.juego = new Juego();
+      }
+      public Juego obtenerJuego() {
+        return this.juego;
+      }
+      public void agregarJugador(String nombre) {
+        Jugador jugador = new Jugador(nombre);
+        this.juego.setearJugador(jugador);
+      }
+    }
     @Test
     public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException {
       // Arrange
@@ -31,7 +44,7 @@ public class JuegoTest {
   @Test
     public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException {
       // Arrange
-      Inicializador inicio = new Inicializador();
+      TesteableInicializador inicio = new TesteableInicializador();
 
       inicio.agregarJugador("NombreDelJugador");
       Juego juego = inicio.obtenerJuego();
@@ -45,7 +58,7 @@ public class JuegoTest {
 
   @Test
   public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
-    Inicializador inicio = new Inicializador();
+    TesteableInicializador inicio = new TesteableInicializador();
 
     inicio.agregarJugador("Alberto");
     Juego juego = inicio.obtenerJuego();
