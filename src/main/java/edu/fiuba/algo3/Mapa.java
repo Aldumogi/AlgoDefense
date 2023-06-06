@@ -51,48 +51,62 @@ public class Mapa {
 
 
     }
-
-    public boolean esPorAca(Coordenadas coordenadaActual, List<Coordenadas> coordenadasVisitadas){
-        int filaActual = coordenadaActual.fila();
-        int columaActual = coordenadaActual.columna();
-
-        String posActual = this.mapa.get(filaActual).get(columaActual);
-        if(posActual.equals("pasarelaLargada")){
+    //recibe una cordenada y chequea, que para ese lado este la meta. 
+    //Tambien recibe una lista, que contenga la posicion actual del enemigo
+    public boolean esPorAca(Coordenadas coordenadaAVerificar, List<Coordenadas> coordenadasVisitadas) {
+        int filaActual = coordenadaAVerificar.fila();
+        int columnaActual = coordenadaAVerificar.columna();
+    
+        String posActual = this.mapa.get(filaActual).get(columnaActual);
+        if (posActual.equals("PasarelaLargada")) {
             return false;
         }
-        if(posActual.equals("pasarelaMeta")){
+        if (posActual.equals("PasarelaMeta")) {
             return true;
         }
-        coordenadasVisitadas.add(coordenadaActual);
-
-        if(filaActual + 1 < this.alto){
-            String posArriba= this.mapa.get(filaActual + 1).get(columaActual);
-            if(posArriba.equals("pasarelaLargada") || posArriba.equals("pasarela") || posArriba.equals("pasarelaMeta")){
-                return esPorAca(new Coordenadas(filaActual+1, columaActual), coordenadasVisitadas);
+        coordenadasVisitadas.add(coordenadaAVerificar);
+    
+        if (filaActual + 1 < this.alto) {
+            String posArriba = this.mapa.get(filaActual + 1).get(columnaActual);
+            Coordenadas nuevaCoordenada = new Coordenadas(filaActual + 1, columnaActual);
+            if ((posArriba.equals("PasarelaLargada") || posArriba.equals("Pasarela") || posArriba.equals("PasarelaMeta"))
+                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
+                return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
-        if((filaActual - 1) >= 0){
-            String posAbajo = this.mapa.get(filaActual - 1).get(columaActual);
-            if(posAbajo.equals("pasarelaLargada") || posAbajo.equals("pasarela") || posAbajo.equals("pasarelaMeta")){
-                return esPorAca(new Coordenadas(filaActual-1, columaActual), coordenadasVisitadas);
+        if ((filaActual - 1) >= 0) {
+            String posAbajo = this.mapa.get(filaActual - 1).get(columnaActual);
+            Coordenadas nuevaCoordenada = new Coordenadas(filaActual - 1, columnaActual);
+            if ((posAbajo.equals("PasarelaLargada") || posAbajo.equals("Pasarela") || posAbajo.equals("PasarelaMeta"))
+                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
+                return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
-        if((columaActual - 1) >= 0){
-            String posIzquierda = this.mapa.get(filaActual ).get(columaActual - 1);
-            if(posIzquierda.equals("pasarelaLargada") || posIzquierda.equals("pasarela") || posIzquierda.equals("pasarelaMeta")){
-                return esPorAca(new Coordenadas(filaActual, columaActual - 1), coordenadasVisitadas);
+        if ((columnaActual - 1) >= 0) {
+            String posIzquierda = this.mapa.get(filaActual).get(columnaActual - 1);
+            Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual - 1);
+            if ((posIzquierda.equals("PasarelaLargada") || posIzquierda.equals("Pasarela") || posIzquierda.equals("PasarelaMeta"))
+                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
+                return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
-        if((columaActual + 1) < this.ancho){
-            String posIzquierda = this.mapa.get(filaActual ).get(columaActual - 1);
-            if(posIzquierda.equals("pasarelaLargada") || posIzquierda.equals("pasarela") || posIzquierda.equals("pasarelaMeta")){
-                return esPorAca(new Coordenadas(filaActual, columaActual - 1), coordenadasVisitadas);
+        if ((columnaActual + 1) < this.ancho) {
+            String posDerecha = this.mapa.get(filaActual).get(columnaActual + 1);
+            Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual + 1);
+            if ((posDerecha.equals("PasarelaLargada") || posDerecha.equals("Pasarela") || posDerecha.equals("PasarelaMeta"))
+                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
+                return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
         return false;
     }
-    
+
+    public Coordenadas devolverSiguientePasarela(Coordenadas cordenadaActual){
+        return cordenadaActual;
+    }
+ 
 }
+    
 
 
 

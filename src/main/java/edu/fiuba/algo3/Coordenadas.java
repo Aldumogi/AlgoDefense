@@ -18,5 +18,20 @@ public class Coordenadas  {
     public int columna(){
         return this.columna;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+    
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+    
+        Coordenadas other = (Coordenadas) obj;
+        return fila == other.fila && columna == other.columna;
+    }
+    
+
 
 }

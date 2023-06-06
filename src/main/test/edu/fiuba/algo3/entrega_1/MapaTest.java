@@ -24,7 +24,7 @@ import java.util.List;
 
 public class MapaTest {
     @Test
-    public void esPorAcaTest() {    
+    public void esPorAcaTestBasico() {    
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(3, 1);
@@ -40,5 +40,20 @@ public class MapaTest {
         assertTrue(esPorAca);
 
     }
+    @Test
+    public void esPorAcaSaliendoDesdeLargadaTest() {    
 
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(0, 1);
+        List<Coordenadas> listaDeVisitados = new ArrayList<>();
+        listaDeVisitados.add(coordenadaActual);
+        Coordenadas cordenadaAChequearVerdadera = new Coordenadas(1,1);
+        Coordenadas cordenadaAChequearFalse = new Coordenadas(1,2);
+
+        Boolean esPorAca = unMapa.esPorAca(cordenadaAChequearVerdadera, listaDeVisitados);
+
+        assertFalse(unMapa.esPorAca(cordenadaAChequearFalse, listaDeVisitados));
+
+        assertTrue(esPorAca);
+    }
 }
