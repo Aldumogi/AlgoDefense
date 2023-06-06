@@ -7,7 +7,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public class LoaderEnemigosJuego {
 
     public static ArrayList<Turno> recuperarTurnosYEnemigos() throws IOException, ParseException {
 
-        String filePath = "src\\main\\java\\edu\\fiuba\\algo3\\resources\\enemigos.json";
+        String filePath = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
         JSONArray jsonArray = (JSONArray) new JSONParser().parse(jsonString);
 
@@ -24,10 +23,10 @@ public class LoaderEnemigosJuego {
         for (Object obj : jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
 
-            int turnoId = Integer.parseInt(jsonObject.get("turno").toString());
+            Integer turnoId = Integer.parseInt(jsonObject.get("turno").toString());
             JSONObject enemigos = (JSONObject) jsonObject.get("enemigos");
-            int cantidadHormigas = Integer.parseInt(enemigos.get("hormiga").toString());
-            int cantidadAranas = Integer.parseInt(enemigos.get("arana").toString());
+            Integer cantidadHormigas = Integer.parseInt(enemigos.get("hormiga").toString());
+            Integer cantidadAranas = Integer.parseInt(enemigos.get("arana").toString());
 
             Turno turno = new Turno (turnoId);
             turno.agregarEnemigos(cantidadHormigas, cantidadAranas);

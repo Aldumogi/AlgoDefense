@@ -12,4 +12,12 @@ public class Coordenadas  {
         return Math.sqrt( Math.pow(this.fila - c1.fila, 2) + Math.pow(this.columna - c1.columna, 2));
     }
 
+    public int obtenerFila() {
+        return fila;
+    }
+
+    public int obtenerColumna() {
+        return columna;
+    }
+
 }
