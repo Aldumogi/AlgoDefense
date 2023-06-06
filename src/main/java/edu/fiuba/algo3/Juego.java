@@ -53,7 +53,7 @@ public class Juego {
         this.enemigos.addAll(enemigosAAgregar);
     }
     public void avanzarTurno(){
-        this.indiceActualListaTurnos++;
+        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < 12) ? this.indiceActualListaTurnos++ : (this.indiceActualListaTurnos % 12 + 1);
         this.jugador.actualizarDefensasAlFinalizarTurno();
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
