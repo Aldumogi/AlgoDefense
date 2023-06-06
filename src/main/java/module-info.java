@@ -5,5 +5,6 @@ module edu.fiuba.algo3 {
     requires json.simple;
     requires com.networknt.schema;
     requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.dataformat.yaml;
     exports edu.fiuba.algo3;
 }
