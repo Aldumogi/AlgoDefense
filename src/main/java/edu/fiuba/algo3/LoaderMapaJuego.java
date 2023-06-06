@@ -20,6 +20,7 @@ public class LoaderMapaJuego {
 
     public static Map<Integer, ArrayList<Parcela>> recuperarMapa() throws IOException, ParseException {
         String filePath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        validarMapa(filePath);
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
         JSONObject jsonObject = (JSONObject) new JSONParser().parse(jsonString);
 
@@ -59,5 +60,9 @@ public class LoaderMapaJuego {
             mapa.put(Integer.parseInt(fila), parcelaArrayList);
         }
         return mapa;
+    }
+    public static void validarMapa(String filePath) {
+        String JsonSchemaPath = "src/main/java/edu/fiuba/algo3/resources/schemas/mapaSchema.json";
+        JsonValidator.validarJsonConSchema(filePath, JsonSchemaPath);
     }
 }

@@ -1,0 +1,32 @@
+{
+  "title": "Mapa Schema",
+  "definitions" : {
+    "address" :{
+      "street-address": {
+        "title": "Street Address",
+        "type": "string"
+      },
+      "pincode": {
+        "title": "Body",
+        "type": "integer"
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "title": "Title",
+      "type": "string",
+      "maxLength": 50
+    },
+    "body": {
+      "title": "Body",
+      "type": "string"
+    },
+    "address": {
+      "title": "Excerpt",
+      "$ref": "#/definitions/address"
+    }
+
+  },
+  "additionalProperties": false
+}
