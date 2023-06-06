@@ -49,6 +49,7 @@ public class Juego {
         enemigos.add(enemigo);
     }
     private void agregarEnemigosDelTurno() {
+        if ( turnos.size() == 0 ) return;
         List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
         this.enemigos.addAll(enemigosAAgregar);
     }
