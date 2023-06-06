@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemigoTest {
     @Test
-    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -28,7 +28,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -45,7 +45,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -63,7 +63,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -81,7 +81,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -99,7 +99,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -117,7 +117,7 @@ public class EnemigoTest {
         assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -142,7 +142,7 @@ public class EnemigoTest {
     */
     @Test
     public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoDisponibleParaConstruirException, ElEnemigoMurioDuranteElAtaqueException,
-            FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, IOException, ParseException {
+            FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -168,7 +168,7 @@ public class EnemigoTest {
 
    @Test
     public void matoAUnaAraniaYLeSuma1CredAlJugador() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
-           ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
+           ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -191,7 +191,7 @@ public class EnemigoTest {
 
     @Test
     public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
-            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
+            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");

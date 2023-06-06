@@ -1,5 +1,7 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -33,5 +35,14 @@ public class LoaderEnemigosJuego {
             turnos.add(turno);
         }
         return turnos;
+    }
+
+    public static void validarJsonEnemigos(String filePath) throws FormatoEnemigosInvalidoException {
+        try {
+            String JsonSchemaPath = "src/main/java/edu/fiuba/algo3/resources/schemas/enemigosSchema.json";
+            JsonValidator.validarJsonConSchema(filePath, JsonSchemaPath);
+        } catch (Exception e) {
+            throw new FormatoEnemigosInvalidoException();
+        }
     }
 }

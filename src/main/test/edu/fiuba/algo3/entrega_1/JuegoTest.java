@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JuegoTest {
     public class TesteableInicializador extends Inicializador {
       private Juego juego;
-      public TesteableInicializador() throws IOException, ParseException {
+      public TesteableInicializador() throws IOException, ParseException, FormatoMapaInvalidoException {
         this.juego = new Juego();
       }
       public Juego obtenerJuego() {
@@ -24,7 +24,7 @@ public class JuegoTest {
       }
     }
     @Test
-    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException {
+    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException {
       // Arrange
       Inicializador inicio = new Inicializador();
 
@@ -42,7 +42,7 @@ public class JuegoTest {
   }
 
   @Test
-    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException {
+    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException {
       // Arrange
       TesteableInicializador inicio = new TesteableInicializador();
 
@@ -57,7 +57,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
+  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
     TesteableInicializador inicio = new TesteableInicializador();
 
     inicio.agregarJugador("Alberto");
@@ -102,7 +102,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso12() throws IOException, ParseException {
+  public void caso12() throws IOException, ParseException, FormatoMapaInvalidoException {
     Inicializador inicio = new Inicializador();
 
     inicio.agregarJugador("Alberto");

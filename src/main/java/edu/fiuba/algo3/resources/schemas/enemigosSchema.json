@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "turno": {
+        "type": "integer"
+      },
+      "enemigos": {
+        "type": "object",
+        "properties": {
+          "hormiga": {
+            "type": "integer"
+          },
+          "arana": {
+            "type": "integer"
+          }
+        },
+        "required": ["hormiga", "arana"],
+        "additionalProperties": false
+      }
+    },
+    "required": ["turno", "enemigos"],
+    "additionalProperties": false
+  }
+}

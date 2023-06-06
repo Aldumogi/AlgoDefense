@@ -19,9 +19,9 @@ import java.util.Map;
 
 public class LoaderMapaJuego {
 
-    public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa() throws IOException, ParseException {
+    public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa() throws IOException, ParseException, FormatoMapaInvalidoException {
         String filePath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-        //validarMapa(filePath);
+        validarMapa(filePath);
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
         JSONObject jsonObject = (JSONObject) new JSONParser().parse(jsonString);
 

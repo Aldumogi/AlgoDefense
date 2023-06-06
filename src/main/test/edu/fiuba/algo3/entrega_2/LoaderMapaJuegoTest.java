@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LoaderMapaJuegoTest {
     @Test
-    public void readJSONTest() throws IOException, ParseException {
+    public void readJSONTest() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa();
 
@@ -27,7 +27,7 @@ public class LoaderMapaJuegoTest {
     }
 
     @Test
-    public void validarFormatoValidoJsonTest() throws IOException, ParseException {
+    public void validarFormatoMapaValidoJsonTest() {
 
         String filePath = "src/main/test/edu/fiuba/algo3/resources/mapaValido.json";
 
@@ -37,7 +37,7 @@ public class LoaderMapaJuegoTest {
     }
 
    @Test
-    public void validarFormatoInvalidoJsonTest() throws IOException, ParseException {
+    public void validarFormatoMapaInvalidoJsonTest() {
         String filePath = "src/main/test/edu/fiuba/algo3/resources/mapaInvalido.json";
 
         assertThrows(FormatoMapaInvalidoException.class, () -> {
