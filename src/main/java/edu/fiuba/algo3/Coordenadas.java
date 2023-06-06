@@ -8,8 +8,15 @@ public class Coordenadas  {
         this.fila = fila;
         this.columna = columna;
     }
+
     public Double distanciaEntreCoordenadas(Coordenadas c1) {
         return Math.sqrt( Math.pow(this.fila - c1.fila, 2) + Math.pow(this.columna - c1.columna, 2));
+    }
+    public int fila(){
+        return this.fila;
+    }
+    public int columna(){
+        return this.columna;
     }
 
 }
