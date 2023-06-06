@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JuegoTest {
     public class TesteableInicializador extends Inicializador {
       private Juego juego;
-      public TesteableInicializador() throws IOException, ParseException, FormatoMapaInvalidoException {
+      public TesteableInicializador() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         this.juego = new Juego();
       }
       public Juego obtenerJuego() {
@@ -24,7 +24,7 @@ public class JuegoTest {
       }
     }
     @Test
-    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException {
+    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
       // Arrange
       Inicializador inicio = new Inicializador();
 
@@ -42,7 +42,7 @@ public class JuegoTest {
   }
 
   @Test
-    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException {
+    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
       // Arrange
       TesteableInicializador inicio = new TesteableInicializador();
 
@@ -57,7 +57,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
+  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
     TesteableInicializador inicio = new TesteableInicializador();
 
     inicio.agregarJugador("Alberto");
@@ -102,7 +102,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso12() throws IOException, ParseException, FormatoMapaInvalidoException {
+  public void caso12() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
     Inicializador inicio = new Inicializador();
 
     inicio.agregarJugador("Alberto");

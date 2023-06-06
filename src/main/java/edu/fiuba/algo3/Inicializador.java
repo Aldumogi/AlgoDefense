@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 
@@ -12,7 +13,7 @@ import static java.util.Objects.isNull;
 public class Inicializador {
     private Juego juego;
 
-    public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException {
+    public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos();
         // LoaderMapaJuego.recuperarMapa();
         // this. juego = new Juego(turnos, mapa);

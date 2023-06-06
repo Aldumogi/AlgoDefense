@@ -15,7 +15,7 @@ public class DefensaTest {
         CASO de USO 2
     */
     @Test
-    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
+    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -31,7 +31,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
+    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -117,7 +117,7 @@ public class DefensaTest {
      */
 
     @Test
-    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
+    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
@@ -136,7 +136,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
+    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
@@ -156,7 +156,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
+    public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
@@ -175,7 +175,7 @@ public class DefensaTest {
     }
 
     @Test
-    public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException {
+    public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");

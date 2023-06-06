@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LoaderEnemigosJuegoTest {
     @Test
-    public void readJSONTest() throws IOException, ParseException {
+    public void readJSONTest() throws IOException, ParseException, FormatoEnemigosInvalidoException {
 
         ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos();
 
