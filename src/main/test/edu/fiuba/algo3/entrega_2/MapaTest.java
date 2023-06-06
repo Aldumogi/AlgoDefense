@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertThat;
+
 public class MapaTest {
 
     @Test
@@ -15,8 +18,8 @@ public class MapaTest {
         Mapa mapa = new Mapa();
 
         for(int i = 1; i <= mapa.obtenerCantidadDeFilas(); i++) {
-            for(int j = 0; j < mapa.obtenerCantidadDeColumnas(); j++) {
-                assert(mapa.obtenerCelda(new Coordenadas(i, j)) instanceof Parcela);
+            for(int j = 1; j <= mapa.obtenerCantidadDeColumnas(); j++) {
+                assertThat(mapa.obtenerCelda(new Coordenadas(i, j)), instanceOf(Parcela.class));
             }
         }
     }

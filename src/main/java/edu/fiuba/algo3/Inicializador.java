@@ -22,7 +22,7 @@ public class Inicializador {
         return this.juego;
     }
 
-    public void agregarJugador(String nombre) {
+    public void agregarJugador(String nombre) throws IOException, ParseException {
         int cantidadMinimaDeCaracteres = 6;
         Scanner scanner = new Scanner(System.in);
 

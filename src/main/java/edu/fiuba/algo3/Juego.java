@@ -1,35 +1,42 @@
 package edu.fiuba.algo3;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Juego {
     private Mapa mapa;
-    private int IndiceActualListaTurnos;
+    private int indiceActualListaTurnos;
     private Jugador jugador;
     private List<Enemigo> enemigos;
     private int cantidadDeHormigasMuertas;
     private ArrayList<Turno> turnos;
 
-    public Juego() {
-        this.IndiceActualListaTurnos = 0;
+    public Juego() throws IOException, ParseException {
+        this.indiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = new ArrayList<>();
+        this.mapa = new Mapa();
     }
 
     public Juego(Jugador jugador, Mapa mapa) {
         this.jugador = jugador;
         this.mapa = mapa;
-        this.IndiceActualListaTurnos = 0;
+        this.indiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
         this.cantidadDeHormigasMuertas = 0;
         this.turnos = new ArrayList<Turno>();
     }
 
-    public Juego(ArrayList<Turno> turnos) {
-        this.IndiceActualListaTurnos = 0;
+    public Juego(ArrayList<Turno> turnos) throws IOException, ParseException {
+        this.indiceActualListaTurnos = 0;
+        this.mapa = new Mapa();
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
+        this.agregarEnemigosDelTurno();
+        this.cantidadDeHormigasMuertas = 0;
     }
 
     public void setearJugador(Jugador jugador) {
@@ -37,16 +44,22 @@ public class Juego {
     }
 
     public Jugador obtenerJugador() { return this.jugador; };
-    public int obtenerNumeroDeturno() { return this.IndiceActualListaTurnos; }
+    public int obtenerNumeroDeturno() { return this.indiceActualListaTurnos; }
     public void agregarEnemigo(Enemigo enemigo){
         enemigos.add(enemigo);
     }
+    private void agregarEnemigosDelTurno() {
+        if ( turnos.size() == 0 ) return;
+        List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
+        this.enemigos.addAll(enemigosAAgregar);
+    }
     public void avanzarTurno(){
-        this.IndiceActualListaTurnos++;
+        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < 12) ? this.indiceActualListaTurnos++ : (this.indiceActualListaTurnos % 12 + 1);
         this.jugador.actualizarDefensasAlFinalizarTurno();
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
         this.actualizarEnergiaJugador();
+        this.agregarEnemigosDelTurno();
     }
 
     public void obtenerCreditosYEliminarEnemigosAlFinalizarTurno(){

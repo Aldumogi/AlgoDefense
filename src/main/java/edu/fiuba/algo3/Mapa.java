@@ -4,10 +4,11 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Mapa {
-    private Map<Integer, ArrayList<Parcela>> mapaDelJuego;
+    private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
 
     public Mapa() throws IOException, ParseException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();

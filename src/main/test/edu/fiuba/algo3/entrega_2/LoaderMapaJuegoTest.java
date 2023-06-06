@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +18,7 @@ public class LoaderMapaJuegoTest {
     @Test
     public void readJSONTest() throws IOException, ParseException {
 
-        Map<Integer, ArrayList<Parcela>> mapa = LoaderMapaJuego.recuperarMapa();
+        Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa();
 
         assert(mapa.size() > 0);
     }

@@ -18,23 +18,25 @@ import java.util.Map;
 
 public class LoaderMapaJuego {
 
-    public static Map<Integer, ArrayList<Parcela>> recuperarMapa() throws IOException, ParseException {
+    public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa() throws IOException, ParseException {
         String filePath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
         validarMapa(filePath);
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
         JSONObject jsonObject = (JSONObject) new JSONParser().parse(jsonString);
 
-        Map<Integer, ArrayList<Parcela>> mapa = new HashMap<>();
+        Map<Integer, HashMap<Integer, Parcela>> mapa = new HashMap<>();
         Map<String, ArrayList<String>> mapaDelArchivo =
                 (Map<String, ArrayList<String>>) jsonObject.get("Mapa");
 
         for (String fila : mapaDelArchivo.keySet()) {
             ArrayList<String> columnas = mapaDelArchivo.get(fila);
-            ArrayList<Parcela> parcelaArrayList = new ArrayList<>();
+            HashMap<Integer, Parcela> parcelaHashMap = new HashMap<>();
 
-            for (int columna = 0; columna < columnas.size(); columna++) {
+            for (int indice = 0; indice < columnas.size(); indice++) {
+                // Sumo 1 por la diferencia entre el indice del Array y la primer coordenada de columna
+                int columna = indice + 1;
+                String nombreParcela = columnas.get(indice);
                 Coordenadas coordenada = new Coordenadas(Integer.parseInt(fila), columna);
-                String nombreParcela = columnas.get(columna);
                 Parcela parcela;
                 switch (nombreParcela) {
                     case ("Rocoso"):
@@ -55,9 +57,9 @@ public class LoaderMapaJuego {
                     default:
                         parcela = null;
                 }
-                parcelaArrayList.add(parcela);
+                parcelaHashMap.put(columna, parcela);
             }
-            mapa.put(Integer.parseInt(fila), parcelaArrayList);
+            mapa.put(Integer.parseInt(fila), parcelaHashMap);
         }
         return mapa;
     }
