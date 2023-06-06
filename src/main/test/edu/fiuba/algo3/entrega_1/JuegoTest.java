@@ -5,7 +5,6 @@ import edu.fiuba.algo3.exceptions.*;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
-import javax.naming.InitialContext;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
