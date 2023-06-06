@@ -1,5 +1,8 @@
 package edu.fiuba.algo3;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +14,11 @@ public class Juego {
     private int cantidadDeHormigasMuertas;
     private ArrayList<Turno> turnos;
 
-    public Juego() {
+    public Juego() throws IOException, ParseException {
         this.IndiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = new ArrayList<>();
+        this.mapa = new Mapa();
     }
 
     public Juego(Jugador jugador, Mapa mapa) {
