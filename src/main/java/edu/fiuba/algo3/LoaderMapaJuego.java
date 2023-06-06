@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static edu.fiuba.algo3.Inicializador.logger;
+
 public class LoaderMapaJuego {
 
     public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa() throws IOException, ParseException {
@@ -60,6 +62,8 @@ public class LoaderMapaJuego {
             }
             mapa.put(Integer.parseInt(fila), parcelaHashMap);
         }
+
+        logger.info("Lectura y carga del archivo del mapa");
         return mapa;
     }
 }

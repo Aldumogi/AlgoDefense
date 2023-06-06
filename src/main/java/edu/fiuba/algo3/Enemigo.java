@@ -15,6 +15,8 @@ public abstract class Enemigo {
     protected EstadoEnemigo estado;
 
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
+    public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
+
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;
     }
@@ -26,7 +28,7 @@ public abstract class Enemigo {
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio);
     }
-    public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
+
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
     }

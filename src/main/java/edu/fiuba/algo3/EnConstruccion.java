@@ -5,6 +5,8 @@ import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.exceptions.FueraDeRangoException;
 
+import static edu.fiuba.algo3.Inicializador.logger;
+
 public class EnConstruccion implements EstadoDefensa {
     private int tiempoDeConstruccion;
     public EnConstruccion(int tiempoDeConstruccion) {
@@ -19,6 +21,7 @@ public class EnConstruccion implements EstadoDefensa {
     public EstadoDefensa pasarTurno() {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
+            logger.info("La construcción terminó");
             return new Terminada();
         }
         return this;
