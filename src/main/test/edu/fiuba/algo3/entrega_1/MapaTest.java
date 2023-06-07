@@ -11,6 +11,7 @@ import edu.fiuba.algo3.TorreBlanca;
 import edu.fiuba.algo3.TorrePlateada;
 import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -18,13 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MapaTest {
     @Test
-    public void esPorAcaTestBasico() {    
+    public void esPorAcaTestBasico() throws IOException, ParseException {    
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(3, 1);
@@ -41,7 +43,7 @@ public class MapaTest {
 
     }
     @Test
-    public void esPorAcaSaliendoDesdeLargadaTest() {    
+    public void esPorAcaSaliendoDesdeLargadaTest() throws IOException, ParseException {    
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(0, 1);
@@ -56,6 +58,7 @@ public class MapaTest {
 
         assertTrue(esPorAca);
     }
+    
     @Test
     public void devuelvoLaSiguientePasarelaMasCercanaALaMetaCorrectamente() {    
 

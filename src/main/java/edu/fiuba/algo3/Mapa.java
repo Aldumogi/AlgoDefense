@@ -5,12 +5,13 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Mapa {
-    private List<List<String>> mapa;
     private int alto;
     private int ancho;
+    private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
 
 
     public Mapa() throws IOException, ParseException {
@@ -37,41 +38,39 @@ public class Mapa {
         if (celdaActual.equals(new PasarelaLargada(coordenadaAVerificar))) {
             return false;
         }
-        if (celdaActual.equals("PasarelaMeta")) {
+        if (celdaActual.equals(new PasarelaMeta(coordenadaAVerificar))) {
             return true;
         }
         coordenadasVisitadas.add(coordenadaAVerificar);
-        private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
-
 
         if (filaActual + 1 < this.alto) {
-            String posArriba = this.mapa.get(filaActual + 1).get(columnaActual);
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual + 1, columnaActual);
-            if ((posArriba.equals("PasarelaLargada") || posArriba.equals("Pasarela") || posArriba.equals("PasarelaMeta"))
+            Parcela posArriba = this.obtenerCelda(nuevaCoordenada);
+            if ((posArriba.equals(new PasarelaLargada(nuevaCoordenada)) || posArriba.equals(new Pasarela(nuevaCoordenada)) || posArriba.equals(new PasarelaMeta(nuevaCoordenada)))
                     && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
         if ((filaActual - 1) >= 0) {
-            String posAbajo = this.mapa.get(filaActual - 1).get(columnaActual);
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual - 1, columnaActual);
-            if ((posAbajo.equals("PasarelaLargada") || posAbajo.equals("Pasarela") || posAbajo.equals("PasarelaMeta"))
+            Parcela posAbajo = this.obtenerCelda(nuevaCoordenada);
+            if ((posAbajo.equals(new PasarelaLargada(nuevaCoordenada)) || posAbajo.equals(new Pasarela(nuevaCoordenada)) || posAbajo.equals(new PasarelaMeta(nuevaCoordenada)))
                     && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
         if ((columnaActual - 1) >= 0) {
-            String posIzquierda = this.mapa.get(filaActual).get(columnaActual - 1);
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual - 1);
-            if ((posIzquierda.equals("PasarelaLargada") || posIzquierda.equals("Pasarela") || posIzquierda.equals("PasarelaMeta"))
+            Parcela posIzquierda = this.obtenerCelda(nuevaCoordenada);
+            if ((posIzquierda.equals(new PasarelaLargada(nuevaCoordenada)) || posIzquierda.equals(new Pasarela(nuevaCoordenada)) || posIzquierda.equals(new PasarelaMeta(nuevaCoordenada)))
                     && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
         if ((columnaActual + 1) < this.ancho) {
-            String posDerecha = this.mapa.get(filaActual).get(columnaActual + 1);
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual + 1);
-            if ((posDerecha.equals("PasarelaLargada") || posDerecha.equals("Pasarela") || posDerecha.equals("PasarelaMeta"))
+            Parcela posDerecha = this.obtenerCelda(nuevaCoordenada);
+            if ((posDerecha.equals(new PasarelaLargada(nuevaCoordenada)) || posDerecha.equals(new Pasarela(nuevaCoordenada)) || posDerecha.equals(new PasarelaMeta(nuevaCoordenada)))
                     && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
@@ -83,35 +82,35 @@ public class Mapa {
 
         int fila = cordenadaActual.fila();
         int columna = cordenadaActual.columna();
-        String tipoDeTerreno = this.mapa.get(fila).get(columna);
+        Parcela celdaActual = this.obtenerCelda(cordenadaActual);
 
-        if(tipoDeTerreno.equals( "PasarelaMeta")){
+        if(celdaActual.equals(new PasarelaMeta(cordenadaActual))){
             return cordenadaActual;
         }
 
         List<Coordenadas> visitados = new ArrayList<>();
         visitados.add(cordenadaActual);
 
-        if((columna + 1) < this.ancho && tipoDeTerreno.equals( "Pasarela")){
+        if((columna + 1) < this.ancho && celdaActual.equals(new Pasarela(cordenadaActual))){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna +1 );
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
             }
         }
 
-        if((columna - 1) >= 0 && tipoDeTerreno.equals( "Pasarela")){
+        if((columna - 1) >= 0 && celdaActual.equals(new Pasarela(cordenadaActual))){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna - 1);
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
             }
         }
-        if((fila - 1) >= 0 && tipoDeTerreno.equals("Pasarela")){
+        if((fila - 1) >= 0 && celdaActual.equals(new Pasarela(cordenadaActual))){
             Coordenadas posibleCordenada = new Coordenadas(fila  - 1, columna);
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
             }
         }
-        if((fila +1) < this.alto && tipoDeTerreno.equals( "Pasarela")){
+        if((fila +1) < this.alto && celdaActual.equals( new Pasarela(cordenadaActual))){
             Coordenadas posibleCordenada = new Coordenadas(fila + 1, columna);
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;

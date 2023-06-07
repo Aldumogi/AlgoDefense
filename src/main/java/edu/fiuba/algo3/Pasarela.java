@@ -29,8 +29,7 @@ public class Pasarela implements Parcela {
             return false;
         }
         Pasarela other = (Pasarela) obj;
-        return (Objects.equals(coordenadas, other.coordenadas) &&
-                estado == other.estado);
+        return (Objects.equals(coordenadas, other.coordenadas));
         }
     }
 
