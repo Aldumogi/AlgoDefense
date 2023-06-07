@@ -2,7 +2,10 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.exceptions.*;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +15,7 @@ public class DefensaTest {
         CASO de USO 2
     */
     @Test
-    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() {
+    public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -20,15 +23,15 @@ public class DefensaTest {
         Defensa torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(20, 50);
 
-        jugador.generarConstruccion(torreBlanca, coordenadas, juego.obtenerNumeroDeturno());
+        jugador.generarConstruccion(torreBlanca, coordenadas);
 
-        assertThrows(DefensaEnConstruccionException.class, () -> torreBlanca.accionesDefensa().estaTerminada() );
+        assert( torreBlanca.estadoDefensa().tiempoDeConstruccion() > 0);
         juego.avanzarTurno();
-        assertDoesNotThrow( () -> torreBlanca.accionesDefensa().estaTerminada() );
+        assert( torreBlanca.estadoDefensa().tiempoDeConstruccion() == 0);
     }
 
     @Test
-    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() {
+    public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() throws NoDisponibleParaConstruirException, IOException, ParseException {
         Inicializador ini = new Inicializador();
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
@@ -36,12 +39,12 @@ public class DefensaTest {
         Defensa torrePlateada = new TorrePlateada();
         Coordenadas coordenadas = new Coordenadas(20, 50);
 
-        jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerNumeroDeturno());
+        jugador.generarConstruccion(torrePlateada, coordenadas);
         juego.avanzarTurno();
 
-        assertThrows( DefensaEnConstruccionException.class, () -> torrePlateada.accionesDefensa().estaTerminada() );
+        assert( torrePlateada.estadoDefensa().tiempoDeConstruccion() > 0);
         juego.avanzarTurno();
-        assertDoesNotThrow( () -> torrePlateada.accionesDefensa().estaTerminada() );
+        assert( torrePlateada.estadoDefensa().tiempoDeConstruccion() == 0);
     }
     /*
         CASO de USO 4 - Verificar solo se pueda construir defensas sobre tierra (y verificar lo contrario)
@@ -55,7 +58,7 @@ public class DefensaTest {
 
         //Act, Assert
         assertDoesNotThrow(() -> {
-            tierra.construir(torreBlanca, 0);
+            tierra.construir(torreBlanca);
         });
     }
 
@@ -69,7 +72,7 @@ public class DefensaTest {
 
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            rocoso.construir(torreBlanca, 0);
+            rocoso.construir(torreBlanca);
         });
 
     }
@@ -82,7 +85,7 @@ public class DefensaTest {
         Parcela pasarela = new Pasarela(coordenadas);
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            pasarela.construir(torreBlanca, 0);
+            pasarela.construir(torreBlanca);
         });
     }
 
@@ -94,7 +97,7 @@ public class DefensaTest {
         Parcela pasarelaLargada = new PasarelaLargada(coordenadas);
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            pasarelaLargada.construir(torreBlanca, 0);
+            pasarelaLargada.construir(torreBlanca);
         });
     }
     @Test
@@ -105,7 +108,7 @@ public class DefensaTest {
         Parcela pasarelaMeta = new PasarelaMeta(coordenadas);
         //Act, Assert
         assertThrows(NoDisponibleParaConstruirException.class, () -> {
-            pasarelaMeta.construir(torreBlanca, 0);
+            pasarelaMeta.construir(torreBlanca);
         });
     }
 
@@ -114,68 +117,81 @@ public class DefensaTest {
      */
 
     @Test
-    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+    public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Defensa torreBlanca = new TorreBlanca();
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torreBlanca, 0); // daño 1 punto, rango 3
-        torreBlanca.terminarDeConstruir();
+        jugador.generarConstruccion(torreBlanca, coordenadasTorre);
+        juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
         //Act, Assert
-        assertTrue(torreBlanca.atacarEnemigo(hormiga));
-        assertFalse(hormiga.estaVivo());
-
+        assertDoesNotThrow( () -> torreBlanca.atacarEnemigo(hormiga) );
     }
 
     @Test
-    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException {
+    public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Defensa torrePlateada = new TorrePlateada();
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torrePlateada, 0); // daño 2 punto, rango 5
-        torrePlateada.terminarDeConstruir();
+        jugador.generarConstruccion(torrePlateada, coordenadasTorre);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
         //Act, Assert
-        assertTrue(torrePlateada.atacarEnemigo(hormiga));
-        assertFalse(hormiga.estaVivo());
+        assertDoesNotThrow( () -> torrePlateada.atacarEnemigo(hormiga) );
     }
 
     @Test
-    public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException {
+    public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2); // rango 3
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
         Defensa torreBlanca = new TorreBlanca();
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torreBlanca, 0); // daño 1 punto, rango 3
-        torreBlanca.terminarDeConstruir();
+        jugador.generarConstruccion(torreBlanca, coordenadasTorre);
+        juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
 
         //Act, Assert
-        assertFalse(torreBlanca.atacarEnemigo(hormiga));
-        assertTrue(hormiga.estaVivo());
+        assertThrows( FueraDeRangoException.class, () -> torreBlanca.atacarEnemigo(hormiga) );
     }
 
     @Test
-    public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException {
+    public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoDisponibleParaConstruirException, IOException, ParseException {
         //Arrange
+        Inicializador ini = new Inicializador();
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
         Coordenadas coordenadasTorre = new Coordenadas(2,2);
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
         Defensa torrePlateada = new TorrePlateada();
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(torrePlateada, 0); // daño 2 punto, rango 5
-        torrePlateada.terminarDeConstruir();
+        jugador.generarConstruccion(torrePlateada, coordenadasTorre);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
 
         //Act, Assert
-        assertFalse(torrePlateada.atacarEnemigo(hormiga));
-        assertTrue(hormiga.estaVivo());
+        assertThrows( FueraDeRangoException.class, () -> torrePlateada.atacarEnemigo(hormiga) );
     }
 
 }

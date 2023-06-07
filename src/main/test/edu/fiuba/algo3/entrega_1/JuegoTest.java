@@ -1,13 +1,30 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.exceptions.*;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JuegoTest {
+    public class TesteableInicializador extends Inicializador {
+      private Juego juego;
+      public TesteableInicializador() throws IOException, ParseException {
+        this.juego = new Juego();
+      }
+      public Juego obtenerJuego() {
+        return this.juego;
+      }
+      public void agregarJugador(String nombre) {
+        Jugador jugador = new Jugador(nombre);
+        this.juego.setearJugador(jugador);
+      }
+    }
     @Test
-    public void juegoConDosEnemigosNoDeberiaEstarTerminado() {
+    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException {
       // Arrange
       Inicializador inicio = new Inicializador();
 
@@ -25,9 +42,9 @@ public class JuegoTest {
   }
 
   @Test
-    public void juegoSinEnemigosDeberiaEstarTerminado() {
+    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException {
       // Arrange
-      Inicializador inicio = new Inicializador();
+      TesteableInicializador inicio = new TesteableInicializador();
 
       inicio.agregarJugador("NombreDelJugador");
       Juego juego = inicio.obtenerJuego();
@@ -40,8 +57,8 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso11() {
-    Inicializador inicio = new Inicializador();
+  public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException {
+    TesteableInicializador inicio = new TesteableInicializador();
 
     inicio.agregarJugador("Alberto");
     Juego juego = inicio.obtenerJuego();
@@ -49,7 +66,7 @@ public class JuegoTest {
 
     Defensa defensa = new TorrePlateada();
     Coordenadas coordDefensa = new Coordenadas(4,2);
-    jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerNumeroDeturno());
+    jugador.generarConstruccion(defensa, coordDefensa);
 
     juego.avanzarTurno();
     juego.avanzarTurno();
@@ -61,11 +78,14 @@ public class JuegoTest {
     Enemigo enemigo4 = new Arania(new Coordenadas(5,2));
     juego.agregarEnemigo(enemigo);
 
-    defensa.atacarEnemigo(enemigo);
-    defensa.atacarEnemigo(enemigo1);
-    defensa.atacarEnemigo(enemigo2);
-    defensa.atacarEnemigo(enemigo3);
-    defensa.atacarEnemigo(enemigo4);
+    try {
+      defensa.atacarEnemigo(enemigo);
+      defensa.atacarEnemigo(enemigo1);
+      defensa.atacarEnemigo(enemigo2);
+      defensa.atacarEnemigo(enemigo3);
+      defensa.atacarEnemigo(enemigo4);
+    }
+    catch(ElEnemigoMurioDuranteElAtaqueException e) {}
 
     Enemigo enemigo5 = new Arania(new Coordenadas(5, 2));
     Enemigo enemigo6 = new Arania(new Coordenadas(5, 2));
@@ -82,7 +102,7 @@ public class JuegoTest {
   }
 
   @Test
-  public void caso12() {
+  public void caso12() throws IOException, ParseException {
     Inicializador inicio = new Inicializador();
 
     inicio.agregarJugador("Alberto");

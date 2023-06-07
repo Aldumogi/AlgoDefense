@@ -34,4 +34,12 @@ public class Coordenadas  {
     
 
 
+    public int obtenerFila() {
+        return fila;
+    }
+
+    public int obtenerColumna() {
+        return columna;
+    }
+
 }

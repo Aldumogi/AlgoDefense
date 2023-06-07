@@ -1,8 +1,11 @@
 package edu.fiuba.algo3;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Mapa {
     private List<List<String>> mapa;
@@ -65,7 +68,20 @@ public class Mapa {
             return true;
         }
         coordenadasVisitadas.add(coordenadaAVerificar);
-    
+        private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
+
+    public Mapa() throws IOException, ParseException {
+        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
+    }
+
+    public Parcela obtenerCelda(Coordenadas coordenada) {
+        return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
+    }
+
+    public int obtenerCantidadDeFilas() {
+        return this.mapaDelJuego.size();
+    }
+
         if (filaActual + 1 < this.alto) {
             String posArriba = this.mapa.get(filaActual + 1).get(columnaActual);
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual + 1, columnaActual);
@@ -140,6 +156,9 @@ public class Mapa {
             }
         }
         return cordenadaActual;
+    }
+    public int obtenerCantidadDeColumnas() {
+        return this.mapaDelJuego.get(1).size();
     }
 }
     

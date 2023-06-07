@@ -1,67 +1,112 @@
 package edu.fiuba.algo3;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaVivoException;
+import static edu.fiuba.algo3.Inicializador.logger;
 
 public class Juego {
     private Mapa mapa;
-    private int numeroDeTurno;
+    private int indiceActualListaTurnos;
     private Jugador jugador;
     private List<Enemigo> enemigos;
     private int cantidadDeHormigasMuertas;
-    private int creditosDelTurno;
+    private ArrayList<Turno> turnos;
 
-    public Juego() {
-        this.numeroDeTurno = 0;
+    public Juego() throws IOException, ParseException {
+        this.indiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
-        this.creditosDelTurno = 0;
+        this.turnos = new ArrayList<>();
+        this.mapa = new Mapa();
+
+        logger.info("Se ha iniciado el juego");
+
     }
 
     public Juego(Jugador jugador, Mapa mapa) {
         this.jugador = jugador;
         this.mapa = mapa;
-        this.numeroDeTurno = 0;
+        this.indiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
         this.cantidadDeHormigasMuertas = 0;
-        this.creditosDelTurno = 0;
+        this.turnos = new ArrayList<Turno>();
+
+        logger.info("Se ha iniciado el juego con un jugador y un mapa");
+    }
+
+    public Juego(ArrayList<Turno> turnos) throws IOException, ParseException {
+        this.indiceActualListaTurnos = 0;
+        this.mapa = new Mapa();
+        this.enemigos = new ArrayList<Enemigo>();
+        this.turnos = turnos;
+        this.agregarEnemigosDelTurno();
+        this.cantidadDeHormigasMuertas = 0;
+
+        logger.info("Se ha iniciado el juego con los turnos");
     }
 
     public void setearJugador(Jugador jugador) {
         this.jugador = jugador;
+
+        logger.info("Seteo del jugador");
     }
 
-    public Jugador obtenerJugador() { return this.jugador; };
-    public int obtenerNumeroDeturno() { return this.numeroDeTurno; }
-    public void agregarEnemigo(Enemigo enemigo){
+    public Jugador obtenerJugador() {
+        return this.jugador;
+    }
+
+    public int obtenerNumeroDeturno() {
+        return this.indiceActualListaTurnos;
+    }
+
+    public void agregarEnemigo(Enemigo enemigo) {
         enemigos.add(enemigo);
     }
-    public void avanzarTurno(){
-        this.numeroDeTurno++;
-        this.creditosDelTurno = 0;
-        this.jugador.actualizarDefensasAlFinalizarTurno(this.numeroDeTurno);
-        this.actualizarEstadoDeLosEnemigosYObtenerCreditosAlFinalizarTurno();
-        this.jugador.agregarCreditosAlMatarEnemigos( this.creditosDelTurno );
-        this.actualizarEnergiaJugador();
 
+    private void agregarEnemigosDelTurno() {
+        if ( turnos.size() == 0 ) return;
+        List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
+        this.enemigos.addAll(enemigosAAgregar);
     }
 
-    public void actualizarEstadoDeLosEnemigosYObtenerCreditosAlFinalizarTurno(){
-        this.enemigos.forEach( enemigo -> {
-            boolean cambio = enemigo.actualizarEstado();
-            if ( cambio ) {
-                if ( enemigo.esUnaHormiga() ) {
-                    this.cantidadDeHormigasMuertas++;
-                    enemigo.cantidadCreditosOtorgados(this.cantidadDeHormigasMuertas);
-                }
-                else {
-                    enemigo.cantidadCreditosOtorgados(0);
-                }
-                this.creditosDelTurno += enemigo.creditosOtorgados();
-            }
-        } );
+    public void avanzarTurno(){
+        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < 12) ? this.indiceActualListaTurnos++ : (this.indiceActualListaTurnos % 12 + 1);
+        this.jugador.actualizarDefensasAlFinalizarTurno();
+        this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
+        this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
+        this.actualizarEnergiaJugador();
+        this.agregarEnemigosDelTurno();
+
+        logger.info("Se avanzó al turno " + this.indiceActualListaTurnos);
+    }
+
+    public void obtenerCreditosYEliminarEnemigosAlFinalizarTurno(){
+        int creditosDelTurno = 0;
+        List<Integer> indicesEnemigosAEliminar = new ArrayList<Integer>();
+        for (int i = 0; i < this.enemigos.size(); i++) {
+            creditosDelTurno += this.enemigos.get(i).cantidadCreditosOtorgados(this.cantidadDeHormigasMuertas);
+            // Si el enemigo esta muerto, guardo la posicion correspondiente a la lista de enemigos
+            this.enemigos.get(i).agregarIndiceDelEnemigoMuerto(indicesEnemigosAEliminar, i);
+        }
+        this.jugador.agregarCreditosAlMatarEnemigos( creditosDelTurno );
+
+        /* Voy eliminando los enemigos desde la posicion mas alta para que los indices de la lista
+        * enemigos no se modifiquen */
+        for ( int j = 0 ; j < indicesEnemigosAEliminar.size() ; j++ ) {
+            int posicion = indicesEnemigosAEliminar.get( indicesEnemigosAEliminar.size() - j - 1);
+            this.enemigos.remove( posicion );
+        }
+    }
+
+    public int contarMuertosEnElTurnoActual() {
+        ArrayList<Hormiga> hormigasMuertas = new ArrayList<Hormiga>();
+        for (Enemigo enemigo: this.enemigos) {
+            enemigo.acumularMuertos(hormigasMuertas);
+        }
+        return hormigasMuertas.size();
     }
 
     public void actualizarEnergiaJugador() {
@@ -71,21 +116,10 @@ public class Juego {
                 jugador.restarEnergia(enemigo.obtenerDanioCausado());
             }
         });
+        logger.info("Se actualizó la energía del jugador");
     }
 
-    public boolean juegoTerminado(){
-        Coordenadas coordenadasMeta = new Coordenadas(5,2);
-        boolean todosLosEnemigosVivosEstanEnLaMeta = true;
-        for (Enemigo enemigo: this.enemigos) {
-            try{
-                    enemigo.acciones.verSiEstaMuerto();
-            }
-            catch(ElEnemigoEstaVivoException e) {
-                if (coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) != 0) {
-                    todosLosEnemigosVivosEstanEnLaMeta = false;
-                }
-            }
-        }
-        return enemigos.size() == 0 || todosLosEnemigosVivosEstanEnLaMeta;
+    public boolean juegoTerminado() {
+        return enemigos.size() == 0;
     }
 }
