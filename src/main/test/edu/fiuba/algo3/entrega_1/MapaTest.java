@@ -29,11 +29,11 @@ public class MapaTest {
     public void esPorAcaTestBasico() throws IOException, ParseException {    
 
         Mapa unMapa = new Mapa();
-        Coordenadas coordenadaActual = new Coordenadas(3, 1);
+        Coordenadas coordenadaActual = new Coordenadas(3, 2);
         List<Coordenadas> listaDeVisitados = new ArrayList<>();
         listaDeVisitados.add(coordenadaActual);
-        Coordenadas cordenadaAChequearVerdadera = new Coordenadas(4,1);
-        Coordenadas cordenadaAChequearFalse = new Coordenadas(2,1);
+        Coordenadas cordenadaAChequearVerdadera = new Coordenadas(4,2);
+        Coordenadas cordenadaAChequearFalse = new Coordenadas(2,2);
 
         Boolean esPorAca = unMapa.esPorAca(cordenadaAChequearVerdadera, listaDeVisitados);
 
@@ -46,11 +46,11 @@ public class MapaTest {
     public void esPorAcaSaliendoDesdeLargadaTest() throws IOException, ParseException {    
 
         Mapa unMapa = new Mapa();
-        Coordenadas coordenadaActual = new Coordenadas(0, 1);
+        Coordenadas coordenadaActual = new Coordenadas(1, 2);
         List<Coordenadas> listaDeVisitados = new ArrayList<>();
         listaDeVisitados.add(coordenadaActual);
-        Coordenadas cordenadaAChequearVerdadera = new Coordenadas(1,1);
-        Coordenadas cordenadaAChequearFalse = new Coordenadas(1,2);
+        Coordenadas cordenadaAChequearVerdadera = new Coordenadas(2,2);
+        Coordenadas cordenadaAChequearFalse = new Coordenadas(2,3);
 
         Boolean esPorAca = unMapa.esPorAca(cordenadaAChequearVerdadera, listaDeVisitados);
 
@@ -60,11 +60,11 @@ public class MapaTest {
     }
     
     @Test
-    public void devuelvoLaSiguientePasarelaMasCercanaALaMetaCorrectamente() {    
+    public void devuelvoLaSiguientePasarelaMasCercanaALaMetaCorrectamente() throws IOException, ParseException {    
 
         Mapa unMapa = new Mapa();
-        Coordenadas coordenadaActual = new Coordenadas(3, 1);
-        Coordenadas cordenadaEsperada = new Coordenadas(4, 1);
+        Coordenadas coordenadaActual = new Coordenadas(4, 2);
+        Coordenadas cordenadaEsperada = new Coordenadas(5, 2);
 
         Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual);
         assertTrue(ATestear.equals(cordenadaEsperada));

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Mapa {
+
     private int alto;
     private int ancho;
     private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
@@ -16,6 +17,8 @@ public class Mapa {
 
     public Mapa() throws IOException, ParseException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
+        this.alto = 15;
+        this.ancho = 15;
     }
 
     public Parcela obtenerCelda(Coordenadas coordenada) {
@@ -43,7 +46,7 @@ public class Mapa {
         }
         coordenadasVisitadas.add(coordenadaAVerificar);
 
-        if (filaActual + 1 < this.alto) {
+        if (filaActual + 1 <= this.alto) {
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual + 1, columnaActual);
             Parcela posArriba = this.obtenerCelda(nuevaCoordenada);
             if ((posArriba.equals(new PasarelaLargada(nuevaCoordenada)) || posArriba.equals(new Pasarela(nuevaCoordenada)) || posArriba.equals(new PasarelaMeta(nuevaCoordenada)))
@@ -51,7 +54,7 @@ public class Mapa {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
-        if ((filaActual - 1) >= 0) {
+        if ((filaActual - 1) > 0) {
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual - 1, columnaActual);
             Parcela posAbajo = this.obtenerCelda(nuevaCoordenada);
             if ((posAbajo.equals(new PasarelaLargada(nuevaCoordenada)) || posAbajo.equals(new Pasarela(nuevaCoordenada)) || posAbajo.equals(new PasarelaMeta(nuevaCoordenada)))
@@ -59,7 +62,7 @@ public class Mapa {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
-        if ((columnaActual - 1) >= 0) {
+        if ((columnaActual - 1) > 0) {
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual - 1);
             Parcela posIzquierda = this.obtenerCelda(nuevaCoordenada);
             if ((posIzquierda.equals(new PasarelaLargada(nuevaCoordenada)) || posIzquierda.equals(new Pasarela(nuevaCoordenada)) || posIzquierda.equals(new PasarelaMeta(nuevaCoordenada)))
@@ -67,7 +70,7 @@ public class Mapa {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
-        if ((columnaActual + 1) < this.ancho) {
+        if ((columnaActual + 1) <= this.ancho) {
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual + 1);
             Parcela posDerecha = this.obtenerCelda(nuevaCoordenada);
             if ((posDerecha.equals(new PasarelaLargada(nuevaCoordenada)) || posDerecha.equals(new Pasarela(nuevaCoordenada)) || posDerecha.equals(new PasarelaMeta(nuevaCoordenada)))
