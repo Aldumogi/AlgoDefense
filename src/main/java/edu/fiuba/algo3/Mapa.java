@@ -12,47 +12,17 @@ public class Mapa {
     private int alto;
     private int ancho;
 
-    public Mapa(){
 
-        List<String> fila1 = new ArrayList<>();
-        fila1.addAll(Arrays.asList("Rocoso","PasarelaLargada","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Rocoso","Rocoso","Rocoso","Rocoso","Rocoso"));
-        List<String> fila2 = new ArrayList<>();
-        fila2.addAll(Arrays.asList("Tierra","Pasarela","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Rocoso","Rocoso","Rocoso","Rocoso","Rocoso"));
-        List<String> fila3 = new ArrayList<>();
-        fila3.addAll(Arrays.asList("Tierra","Pasarela","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Rocoso","Rocoso","Rocoso","Rocoso","Rocoso"));
-        List<String> fila4 = new ArrayList<>();
-        fila4.addAll(Arrays.asList("Tierra","Pasarela","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Rocoso","Rocoso","Rocoso","Rocoso","Rocoso"));
-        List<String> fila5 = new ArrayList<>();
-        fila5.addAll(Arrays.asList("Tierra","Pasarela","Rocoso","Rocoso","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila6 = new ArrayList<>();
-        fila6.addAll(Arrays.asList("Tierra","Pasarela","Rocoso","Rocoso","Tierra","Tierra","Tierra","Rocoso","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila7 = new ArrayList<>();
-        fila7.addAll(Arrays.asList("Tierra","Pasarela","Pasarela","Pasarela","Pasarela","Pasarela","Pasarela","Pasarela","Pasarela","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila8 = new ArrayList<>();
-        fila8.addAll(Arrays.asList("Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Pasarela","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila9 = new ArrayList<>();
-        fila9.addAll(Arrays.asList("Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Pasarela","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila10 = new ArrayList<>();
-        fila10.addAll(Arrays.asList("Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Pasarela","Rocoso","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila11 = new ArrayList<>();
-        fila11.addAll(Arrays.asList("Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Pasarela","Pasarela","Pasarela","Pasarela","Pasarela","Pasarela","PasarelaMeta"));
-        List<String> fila12 = new ArrayList<>();
-        fila12.addAll(Arrays.asList("Rocoso","Rocoso","Rocoso","Rocoso","Rocoso","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila13 = new ArrayList<>();
-        fila13.addAll(Arrays.asList("Rocoso","Rocoso","Rocoso","Rocoso","Rocoso","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila14 = new ArrayList<>();
-        fila14.addAll(Arrays.asList("Rocoso","Rocoso","Rocoso","Rocoso","Rocoso","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        List<String> fila15 = new ArrayList<>();
-        fila15.addAll(Arrays.asList("Rocoso","Rocoso","Rocoso","Rocoso","Rocoso","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra","Tierra"));
-        
-        this.mapa = new ArrayList<>();
-        this.mapa.addAll(Arrays.asList(fila1,fila2,fila3,fila4,fila5,fila6,fila7,fila8,
-                                    fila9,fila10,fila11,fila12,fila13,fila14, fila15));
-                                
-        this.alto = this.mapa.size();
-        this.ancho = this.mapa.get(0).size();
+    public Mapa() throws IOException, ParseException {
+        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
+    }
 
+    public Parcela obtenerCelda(Coordenadas coordenada) {
+        return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
+    }
 
+    public int obtenerCantidadDeFilas() {
+        return this.mapaDelJuego.size();
     }
     //recibe una cordenada y chequea, que para ese lado este la meta. 
     //Tambien recibe una lista, que contenga la posicion actual del enemigo
@@ -70,17 +40,6 @@ public class Mapa {
         coordenadasVisitadas.add(coordenadaAVerificar);
         private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
 
-    public Mapa() throws IOException, ParseException {
-        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
-    }
-
-    public Parcela obtenerCelda(Coordenadas coordenada) {
-        return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
-    }
-
-    public int obtenerCantidadDeFilas() {
-        return this.mapaDelJuego.size();
-    }
 
         if (filaActual + 1 < this.alto) {
             String posArriba = this.mapa.get(filaActual + 1).get(columnaActual);
