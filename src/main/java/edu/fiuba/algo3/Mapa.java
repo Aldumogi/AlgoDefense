@@ -103,7 +103,6 @@ public class Mapa {
 
     public Coordenadas devolverSiguientePasarela(Coordenadas cordenadaActual){
 
-//        Mapa unMapa = new Mapa();"
         int fila = cordenadaActual.fila();
         int columna = cordenadaActual.columna();
         String tipoDeTerreno = this.mapa.get(fila).get(columna);
@@ -121,6 +120,7 @@ public class Mapa {
                 return posibleCordenada;
             }
         }
+
         if((columna - 1) >= 0 && tipoDeTerreno.equals( "Pasarela")){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna - 1);
             if(this.esPorAca(posibleCordenada, visitados)){
@@ -135,9 +135,7 @@ public class Mapa {
         }
         if((fila +1) < this.alto && tipoDeTerreno.equals( "Pasarela")){
             Coordenadas posibleCordenada = new Coordenadas(fila + 1, columna);
-            System.out.println("Hola, mundo!");
             if(this.esPorAca(posibleCordenada, visitados)){
-                System.out.println("Hola, mundo!");
                 return posibleCordenada;
             }
         }
