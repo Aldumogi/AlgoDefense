@@ -1,6 +1,7 @@
 package edu.fiuba.algo3;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import edu.fiuba.algo3.exceptions.*;
 
@@ -20,4 +21,16 @@ public class Pasarela implements Parcela {
     public void recibirEnemigo(Enemigo enemigo){
         enemigos.add(enemigo);
     };
-}
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Pasarela other = (Pasarela) obj;
+        return (Objects.equals(coordenadas, other.coordenadas) &&
+                estado == other.estado);
+        }
+    }
+

@@ -24,17 +24,20 @@ public class Mapa {
     public int obtenerCantidadDeFilas() {
         return this.mapaDelJuego.size();
     }
+
     //recibe una cordenada y chequea, que para ese lado este la meta. 
     //Tambien recibe una lista, que contenga la posicion actual del enemigo
+
     public boolean esPorAca(Coordenadas coordenadaAVerificar, List<Coordenadas> coordenadasVisitadas) {
         int filaActual = coordenadaAVerificar.fila();
         int columnaActual = coordenadaAVerificar.columna();
     
-        String posActual = this.mapa.get(filaActual).get(columnaActual);
-        if (posActual.equals("PasarelaLargada")) {
+        Parcela celdaActual = this.obtenerCelda(coordenadaAVerificar);
+
+        if (celdaActual.equals(new PasarelaLargada(coordenadaAVerificar))) {
             return false;
         }
-        if (posActual.equals("PasarelaMeta")) {
+        if (celdaActual.equals("PasarelaMeta")) {
             return true;
         }
         coordenadasVisitadas.add(coordenadaAVerificar);
