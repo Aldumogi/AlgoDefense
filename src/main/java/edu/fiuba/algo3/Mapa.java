@@ -10,15 +10,11 @@ import java.util.Map;
 
 public class Mapa {
 
-    private int alto;
-    private int ancho;
     private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
 
 
     public Mapa() throws IOException, ParseException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
-        this.alto = 15;
-        this.ancho = 15;
     }
 
     public Parcela obtenerCelda(Coordenadas coordenada) {
@@ -46,7 +42,7 @@ public class Mapa {
         }
         coordenadasVisitadas.add(coordenadaAVerificar);
 
-        if (filaActual + 1 <= this.alto) {
+        if (filaActual + 1 <= this.obtenerCantidadDeFilas()) {
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual + 1, columnaActual);
             Parcela posArriba = this.obtenerCelda(nuevaCoordenada);
             if ((posArriba.equals(new PasarelaLargada(nuevaCoordenada)) || posArriba.equals(new Pasarela(nuevaCoordenada)) || posArriba.equals(new PasarelaMeta(nuevaCoordenada)))
@@ -70,7 +66,7 @@ public class Mapa {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
-        if ((columnaActual + 1) <= this.ancho) {
+        if ((columnaActual + 1) <= this.obtenerCantidadDeColumnas()) {
             Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual + 1);
             Parcela posDerecha = this.obtenerCelda(nuevaCoordenada);
             if ((posDerecha.equals(new PasarelaLargada(nuevaCoordenada)) || posDerecha.equals(new Pasarela(nuevaCoordenada)) || posDerecha.equals(new PasarelaMeta(nuevaCoordenada)))
@@ -94,7 +90,7 @@ public class Mapa {
         List<Coordenadas> visitados = new ArrayList<>();
         visitados.add(cordenadaActual);
 
-        if((columna + 1) < this.ancho && celdaActual.equals(new Pasarela(cordenadaActual))){
+        if((columna + 1) < this.obtenerCantidadDeColumnas() && celdaActual.equals(new Pasarela(cordenadaActual))){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna +1 );
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
@@ -113,7 +109,7 @@ public class Mapa {
                 return posibleCordenada;
             }
         }
-        if((fila +1) < this.alto && celdaActual.equals( new Pasarela(cordenadaActual))){
+        if((fila +1) < this.obtenerCantidadDeFilas() && celdaActual.equals( new Pasarela(cordenadaActual))){
             Coordenadas posibleCordenada = new Coordenadas(fila + 1, columna);
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
