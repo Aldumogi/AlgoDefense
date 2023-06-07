@@ -56,4 +56,14 @@ public class MapaTest {
 
         assertTrue(esPorAca);
     }
+    @Test
+    public void devuelvoLaSiguientePasarelaMasCercanaALaMetaCorrectamente() {    
+
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(3, 1);
+        Coordenadas cordenadaEsperada = new Coordenadas(4, 1);
+
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
 }
