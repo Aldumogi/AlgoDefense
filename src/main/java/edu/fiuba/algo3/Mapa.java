@@ -77,7 +77,7 @@ public class Mapa {
         return false;
     }
 
-    public Coordenadas devolverSiguientePasarela(Coordenadas cordenadaActual){
+    public Coordenadas devolverSiguientePasarela_(Coordenadas cordenadaActual){
 
         int fila = cordenadaActual.fila();
         int columna = cordenadaActual.columna();
@@ -117,6 +117,12 @@ public class Mapa {
         }
         return cordenadaActual;
     }
+    public Coordenadas devolverSiguientePasarela(Coordenadas cordenadaActual, int cantidadDeMovimientos){
+        for(int i = 0; i < cantidadDeMovimientos; i ++ ){
+            cordenadaActual = devolverSiguientePasarela_(cordenadaActual);
+        }
+        return cordenadaActual;
+    };
     public int obtenerCantidadDeColumnas() {
         return this.mapaDelJuego.get(1).size();
     }

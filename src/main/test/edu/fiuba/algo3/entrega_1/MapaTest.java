@@ -66,7 +66,18 @@ public class MapaTest {
         Coordenadas coordenadaActual = new Coordenadas(4, 2);
         Coordenadas cordenadaEsperada = new Coordenadas(5, 2);
 
-        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual);
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela_(coordenadaActual);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
+
+@Test
+public void devuelvoLaSiguientesNPasarelasMasAdelanteCorrectamente() throws IOException, ParseException {    
+
+    Mapa unMapa = new Mapa();
+    Coordenadas coordenadaActual = new Coordenadas(3, 2);
+    Coordenadas cordenadaEsperada = new Coordenadas(5, 2);
+
+    Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 2);
+    assertTrue(ATestear.equals(cordenadaEsperada));
+}
 }
