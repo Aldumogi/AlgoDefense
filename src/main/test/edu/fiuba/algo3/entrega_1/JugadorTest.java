@@ -7,6 +7,8 @@ import edu.fiuba.algo3.TorreBlanca;
 import edu.fiuba.algo3.TorrePlateada;
 import edu.fiuba.algo3.Juego;
 import edu.fiuba.algo3.Coordenadas;
+import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
     @Test
-    public void jugadorEmpiezaConVidaYCreditosCorrespondientes() throws IOException, ParseException {
+    public void jugadorEmpiezaConVidaYCreditosCorrespondientes() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -28,7 +30,7 @@ public class JugadorTest {
         assertEquals(100, jugador.obtenerCantidadDeCreditos());
     }
     @Test
-    public void generoUnaDefensaYSeAgregaAlaListaDeDefensas() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void generoUnaDefensaYSeAgregaAlaListaDeDefensas() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -43,7 +45,7 @@ public class JugadorTest {
     }
     
     @Test
-    public void siMeQuedoSinCreditosNoSeGeneraNingunaDefensa() throws NoDisponibleParaConstruirException, IOException, ParseException {
+    public void siMeQuedoSinCreditosNoSeGeneraNingunaDefensa() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");

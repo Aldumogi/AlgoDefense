@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -12,8 +13,7 @@ public class Mapa {
 
     private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
 
-
-    public Mapa() throws IOException, ParseException {
+    public Mapa() throws IOException, ParseException, FormatoMapaInvalidoException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
     }
 

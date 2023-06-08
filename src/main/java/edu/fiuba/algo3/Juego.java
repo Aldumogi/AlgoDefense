@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class Juego {
     private int cantidadDeHormigasMuertas;
     private ArrayList<Turno> turnos;
 
-    public Juego() throws IOException, ParseException {
+    public Juego() throws IOException, ParseException, FormatoMapaInvalidoException {
         this.indiceActualListaTurnos = 0;
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = new ArrayList<>();
@@ -37,7 +38,7 @@ public class Juego {
         logger.info("Se ha iniciado el juego con un jugador y un mapa");
     }
 
-    public Juego(ArrayList<Turno> turnos) throws IOException, ParseException {
+    public Juego(ArrayList<Turno> turnos) throws IOException, ParseException, FormatoMapaInvalidoException {
         this.indiceActualListaTurnos = 0;
         this.mapa = new Mapa();
         this.enemigos = new ArrayList<Enemigo>();

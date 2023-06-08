@@ -3,6 +3,7 @@ package edu.fiuba.algo3;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,8 +21,9 @@ import static edu.fiuba.algo3.Inicializador.logger;
 
 public class LoaderMapaJuego {
 
-    public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa() throws IOException, ParseException {
+    public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa() throws IOException, ParseException, FormatoMapaInvalidoException {
         String filePath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        validarMapa(filePath);
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
         JSONObject jsonObject = (JSONObject) new JSONParser().parse(jsonString);
 
@@ -65,5 +67,13 @@ public class LoaderMapaJuego {
 
         logger.info("Lectura y carga del archivo del mapa");
         return mapa;
+    }
+    public static void validarMapa(String filePath) throws FormatoMapaInvalidoException {
+        try {
+            String JsonSchemaPath = "src/main/java/edu/fiuba/algo3/resources/schemas/mapaSchema.json";
+            JsonValidator.validarJsonConSchema(filePath, JsonSchemaPath);
+        } catch (Exception e) {
+            throw new FormatoMapaInvalidoException();
+        }
     }
 }

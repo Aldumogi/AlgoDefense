@@ -9,6 +9,7 @@ import edu.fiuba.algo3.Rocoso;
 import edu.fiuba.algo3.Tierra;
 import edu.fiuba.algo3.TorreBlanca;
 import edu.fiuba.algo3.TorrePlateada;
+import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 
 import org.json.simple.parser.ParseException;
@@ -26,7 +27,7 @@ import java.util.List;
 
 public class MapaTest {
     @Test
-    public void esPorAcaTestBasico() throws IOException, ParseException {    
+    public void esPorAcaTestBasico() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(3, 2);
@@ -43,7 +44,7 @@ public class MapaTest {
 
     }
     @Test
-    public void esPorAcaSaliendoDesdeLargadaTest() throws IOException, ParseException {    
+    public void esPorAcaSaliendoDesdeLargadaTest() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(1, 2);
@@ -60,7 +61,7 @@ public class MapaTest {
     }
     
     @Test
-    public void devuelvoLaSiguientePasarelaMasCercanaALaMetaCorrectamente() throws IOException, ParseException {    
+    public void devuelvoLaSiguientePasarelaMasCercanaALaMetaCorrectamente() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(4, 2);
@@ -71,7 +72,7 @@ public class MapaTest {
     }
 
     @Test
-    public void devuelvoLaSiguientesNPasarelasMasAdelanteCorrectamente() throws IOException, ParseException {    
+    public void devuelvoLaSiguientesNPasarelasMasAdelanteCorrectamente() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(3, 2);
@@ -81,7 +82,7 @@ public class MapaTest {
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
     @Test
-    public void devuelvoLaCordenadaDePasarelaMetaAunqueMePaseDeMovimientos() throws IOException, ParseException {    
+    public void devuelvoLaCordenadaDePasarelaMetaAunqueMePaseDeMovimientos() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(11, 13);

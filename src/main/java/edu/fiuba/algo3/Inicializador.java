@@ -2,6 +2,8 @@ package edu.fiuba.algo3;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -15,8 +17,7 @@ public class Inicializador {
 
     public static final Logger logger = LogManager.getLogger(App.class);
 
-    public Inicializador() throws IOException, ParseException {
-
+    public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos();
 
         // LoaderMapaJuego.recuperarMapa();
@@ -28,7 +29,7 @@ public class Inicializador {
         return this.juego;
     }
 
-    public void agregarJugador(String nombre) throws IOException, ParseException {
+    public void agregarJugador(String nombre) throws IOException, ParseException, FormatoMapaInvalidoException {
         int cantidadMinimaDeCaracteres = 6;
         Scanner scanner = new Scanner(System.in);
 
