@@ -13,6 +13,7 @@ public class Muerto implements EstadoEnemigo {
     public EstadoEnemigo recibirDanio(int danio) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         throw new ElEnemigoEstaMuertoException();
     }
+
     public int creditosOtorgados(int creditos) {
         return creditos;
     }
@@ -20,6 +21,7 @@ public class Muerto implements EstadoEnemigo {
     public void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo) {
         hormigasMuertas.add(enemigo);
     }
+
     public void agregarIndiceDeEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         indicesEnemigosMuertos.add( posicionActual );
     }

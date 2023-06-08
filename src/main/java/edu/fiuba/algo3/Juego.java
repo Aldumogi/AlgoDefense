@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.fiuba.algo3.Inicializador.logger;
+
 public class Juego {
     private Mapa mapa;
     private int indiceActualListaTurnos;
@@ -20,6 +22,9 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = new ArrayList<>();
         this.mapa = new Mapa();
+
+        logger.info("Se ha iniciado el juego");
+
     }
 
     public Juego(Jugador jugador, Mapa mapa, ArrayList<Turno> turnos) {
@@ -30,6 +35,9 @@ public class Juego {
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
         this.cantidadDeHormigasMuertas = 0;
+        this.turnos = new ArrayList<Turno>();
+
+        logger.info("Se ha iniciado el juego con un jugador y un mapa");
     }
 
     public Juego(ArrayList<Turno> turnos) throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -39,22 +47,34 @@ public class Juego {
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
         this.cantidadDeHormigasMuertas = 0;
+
+        logger.info("Se ha iniciado el juego con los turnos");
     }
 
     public void setearJugador(Jugador jugador) {
         this.jugador = jugador;
+
+        logger.info("Seteo del jugador");
     }
 
-    public Jugador obtenerJugador() { return this.jugador; };
-    public int obtenerNumeroDeturno() { return this.indiceActualListaTurnos; }
-    public void agregarEnemigo(Enemigo enemigo){
+    public Jugador obtenerJugador() {
+        return this.jugador;
+    }
+
+    public int obtenerNumeroDeturno() {
+        return this.indiceActualListaTurnos;
+    }
+
+    public void agregarEnemigo(Enemigo enemigo) {
         enemigos.add(enemigo);
     }
+
     private void agregarEnemigosDelTurno() {
         if ( turnos.size() == 0 ) return;
         List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
         this.enemigos.addAll(enemigosAAgregar);
     }
+
     public void avanzarTurno(){
         this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size())? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12 + 1);
         this.jugador.actualizarDefensasAlFinalizarTurno();
@@ -62,6 +82,8 @@ public class Juego {
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
         this.actualizarEnergiaJugador();
         this.agregarEnemigosDelTurno();
+
+        logger.info("Se avanzó al turno " + this.indiceActualListaTurnos);
     }
 
     public void obtenerCreditosYEliminarEnemigosAlFinalizarTurno(){
@@ -97,6 +119,7 @@ public class Juego {
                 jugador.restarEnergia(enemigo.obtenerDanioCausado());
             }
         });
+        logger.info("Se actualizó la energía del jugador");
     }
 
     public boolean juegoTerminado(){
