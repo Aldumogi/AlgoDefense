@@ -2,6 +2,7 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +36,19 @@ public abstract class Enemigo {
 
     public void setCoordenadas(Coordenadas coordenadas){
         this.coordenadas = coordenadas;
+    }
+
+    public void mover(Mapa mapa) throws NoSePudoBorrarElEnemigoException{
+        // Pedir a mapa pasarela actual y eliminar enemigo
+        Parcela pasarela = mapa.obtenerCelda(this.coordenadas);
+        pasarela.borrarObjeto(this);
+
+        // Mover a la siguiente pasarela
+        Coordenadas coordenadaSiguiente = mapa.devolverSiguientePasarela(this.coordenadas, this.velocidad);
+        Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);
+        pasarelaSiguiente.recibir(this);
+
+        this.coordenadas = coordenadaSiguiente;
+
     }
 }
