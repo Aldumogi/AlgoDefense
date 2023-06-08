@@ -1,0 +1,20 @@
+@startuml
+interface DisponibilidadParcela {
++ agregar(D: Defensa, P: Parcela)
++ verSiEstaDisponible()
+}
+
+class ParcelaOcupada {
++ agregar(D: Defensa, P: Parcela)
++ verSiEstaDisponible()
+}
+
+class ParcelaDisponible {
++ agregar(D: Defensa, P: Parcela)
++ verSiEstaDisponible()
+}
+
+DisponibilidadParcela <|.. ParcelaOcupada
+DisponibilidadParcela <|.. ParcelaDisponible
+
+@enduml

@@ -6,22 +6,27 @@ abstract Enemigo {
 - creditosOtorgados: int
 - pasarela: Pasarela
 - coordenada: Coordenada
++ recibirDaño()
 + cantidadCreditosOtorgados(): int
-+ estaVivo(): boolean
++ moverEnemigo()
 }
 
 class Hormiga {
 + cantidadCreditosOtorgados(): int
++ moverEnemigo()
 }
 
 class Araña {
 + cantidadCreditosOtorgados(): int
++ moverEnemigo()
 }
 
 class Juego {
 - mapa: Mapa
-- turno: Turno
+- numeroDeTurno: int
 + avanzarTurno()
++ agregarEnemigo()
++ juegoTerminado()
 }
 
 class Inicializador {
@@ -33,22 +38,23 @@ abstract Defensa {
 - nombre
 - costo
 - tiempoDeConstruccion
+- turnoEnElQueSeInicioLaConstruccion
 - rangoDeAtaque
-- daño
-- tierra: Tierra
-- coordenada: Coordenada
+- danio
+- parcela
 + atacarEnemigo(enemigo: Enemigo)
-+ construirTorre(torre:Torre)
++ actualizarEstado(numeroDeTurno: int)
++ construir(parcela:Parcela, numeroDeTurno:int)
 }
 
 class TorreBlanca {
 + atacarEnemigo(enemigo: Enemigo)
-+ construirTorre(torre:Torre)
++ construir(parcela:Parcela, numeroDeTurno:int)
 }
 
 class TorrePlateada {
 + atacarEnemigo(enemigo: Enemigo)
-+ construirTorre(torre:Torre)
++ construir(parcela:Parcela, numeroDeTurno:int)
 }
 
 class Jugador {
@@ -57,20 +63,59 @@ class Jugador {
 - puntosDeVida: int
 + descontarCreditos()
 + agregarCreditos()
-+ generarDefensa()
++ generarConstruccion()
++ actualizarDefensasAlFinalizarTurno()
 + descontarPuntosDeVida()
 }
+
+
+interface AccionesDefensa {
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaTerminada()
+}
+
+class EnConstruccion {
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaTerminada()
+}
+
+class Terminada {
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaTerminada()
+}
+
+
+interface AccionesEnemigo {
++ mover(velocidad:int)
+}
+
+class Vivo {
++ mover(velocidad:int)
+}
+
+class Muerto {
++ mover(velocidad:int)
+}
+
+AccionesEnemigo <|.. Vivo
+AccionesEnemigo <|.. Muerto
+
+AccionesDefensa <|.. EnConstruccion
+AccionesDefensa <|.. Terminada
 
 Defensa <|-- TorreBlanca
 Defensa <|-- TorrePlateada
 
+
+
 Enemigo <|-- Hormiga
 Enemigo <|-- Araña
 
-Juego <- Inicializador 
+Juego <- Inicializador
 Juego "1" --> "0..*" Enemigo
 Jugador <- Juego
 Jugador "1" --> "0..*" Defensa
 Defensa .> Enemigo
-
+Defensa --> AccionesDefensa
+Enemigo --> AccionesEnemigo
 @enduml

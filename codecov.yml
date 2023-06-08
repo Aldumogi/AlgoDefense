@@ -1,1 +1,3 @@
 ignore:
+codecov:
+  branch: entrega1_am
