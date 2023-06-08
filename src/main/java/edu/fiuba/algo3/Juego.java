@@ -62,6 +62,7 @@ public class Juego {
     public int obtenerNumeroDeturno() {
         return this.indiceActualListaTurnos;
     }
+    public Mapa obtenerMapa() { return this.mapa; }
 
     public void agregarEnemigo(Enemigo enemigo) {
         enemigos.add(enemigo);
@@ -70,11 +71,14 @@ public class Juego {
     private void agregarEnemigosDelTurno() {
         if ( turnos.size() == 0 ) return;
         List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
+        enemigosAAgregar.forEach( enemigo -> {
+            enemigo.coordenadas = this.mapa.recibir(null, enemigo);
+        } );
         this.enemigos.addAll(enemigosAAgregar);
     }
 
     public void avanzarTurno(){
-        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < 12) ? this.indiceActualListaTurnos++ : (this.indiceActualListaTurnos % 12 + 1);
+        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < 11) ? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12);
         this.jugador.actualizarDefensasAlFinalizarTurno();
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
