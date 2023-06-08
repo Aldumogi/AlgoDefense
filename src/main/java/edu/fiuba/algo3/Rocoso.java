@@ -10,8 +10,8 @@ public class Rocoso implements Parcela {
         this.estado = new ParcelaOcupada();
         this.coordenadas = coordenadas;
     }
-    public void construir(Defensa defensa) throws NoDisponibleParaConstruirException {
-        throw new NoDisponibleParaConstruirException();
+    public void construir(Defensa defensa) throws NoSePudoConstruirException {
+        throw new NoSePudoConstruirException();
     }
 
     public Coordenadas recibir(Enemigo enemigo){

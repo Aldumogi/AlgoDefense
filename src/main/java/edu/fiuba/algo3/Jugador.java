@@ -1,5 +1,5 @@
 package edu.fiuba.algo3;
-import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class Jugador {
         return this.defensas;
     }
 
-    public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas) throws NoDisponibleParaConstruirException {
+    public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         if(this.cantidadDeCreditos >= unaDefensa.costo()){
             Tierra tierra = new Tierra(coordenadas);
             tierra.construir(unaDefensa);

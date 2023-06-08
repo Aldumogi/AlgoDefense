@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
 
@@ -14,7 +14,7 @@ public class Tierra implements Parcela {
         this.estado = new ParcelaDisponible();
         this.coordenadas = coordenadas;
     }
-    public void construir(Defensa defensa) throws NoDisponibleParaConstruirException {
+    public void construir(Defensa defensa) throws NoSePudoConstruirException {
         this.estado = this.estado.construir(defensa, this);
     }
 

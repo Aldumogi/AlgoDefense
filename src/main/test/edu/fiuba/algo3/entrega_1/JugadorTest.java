@@ -1,15 +1,13 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.Defensa;
 import edu.fiuba.algo3.Inicializador;
 import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.TorreBlanca;
 import edu.fiuba.algo3.TorrePlateada;
 import edu.fiuba.algo3.Juego;
 import edu.fiuba.algo3.Coordenadas;
 import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
-import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +28,7 @@ public class JugadorTest {
         assertEquals(100, jugador.obtenerCantidadDeCreditos());
     }
     @Test
-    public void generoUnaDefensaYSeAgregaAlaListaDeDefensas() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+    public void generoUnaDefensaYSeAgregaAlaListaDeDefensas() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
@@ -45,7 +43,7 @@ public class JugadorTest {
     }
     
     @Test
-    public void siMeQuedoSinCreditosNoSeGeneraNingunaDefensa() throws NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+    public void siMeQuedoSinCreditosNoSeGeneraNingunaDefensa() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");

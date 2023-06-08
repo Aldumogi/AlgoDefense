@@ -128,7 +128,7 @@ public class JuegoTest {
     Caso de Uso 18 - Simular y verificar que el jugador gane una partida
    */
   @Test
-  public void caso18() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoDisponibleParaConstruirException {
+  public void caso18() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
     // Arrange
     Jugador jugador = new Jugador("Alberto");
     Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
@@ -165,7 +165,7 @@ public class JuegoTest {
     Caso de Uso 19 - Simular y verificar que el jugador pierde una partida
    */
   @Test
-  public void caso19() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoDisponibleParaConstruirException {
+  public void caso19() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
     // Arrange
     Jugador jugador = new Jugador("Alberto");
     Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");

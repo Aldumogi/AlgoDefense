@@ -15,8 +15,8 @@ public class Pasarela implements Parcela {
         this.coordenadas = coordenadas;
         this.enemigos = new ArrayList<Enemigo>();
     }
-    public void construir(Defensa defensa) throws NoDisponibleParaConstruirException {
-        throw new NoDisponibleParaConstruirException();
+    public void construir(Defensa defensa) throws NoSePudoConstruirException {
+        throw new NoSePudoConstruirException();
     }
     public Coordenadas recibir(Enemigo enemigo){
         enemigos.add(enemigo);

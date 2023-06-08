@@ -1,20 +1,15 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.LoaderEnemigosJuego;
 import edu.fiuba.algo3.LoaderMapaJuego;
 import edu.fiuba.algo3.Parcela;
-import edu.fiuba.algo3.Turno;
-import edu.fiuba.algo3.exceptions.FormatoJsonInvalidoException;
 import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
-import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoaderMapaJuegoTest {
