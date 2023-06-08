@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import static edu.fiuba.algo3.Inicializador.logger;
+
 public class LoaderEnemigosJuego {
 
     public static ArrayList<Turno> recuperarTurnosYEnemigos() throws IOException, ParseException, FormatoEnemigosInvalidoException {
@@ -35,6 +37,8 @@ public class LoaderEnemigosJuego {
             turno.agregarEnemigos(cantidadHormigas, cantidadAranas);
             turnos.add(turno);
         }
+
+        logger.info("Lectura y carga del archivo de enemigos");
         return turnos;
     }
 

@@ -3,6 +3,8 @@ package edu.fiuba.algo3;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static edu.fiuba.algo3.Inicializador.logger;
+
 public class Arania extends Enemigo {
 
     public Arania() {
@@ -12,6 +14,8 @@ public class Arania extends Enemigo {
         this.creditosOtorgados = 0;
         this.coordenadas = getCoordenadasLargada();
         this.estado = new Vivo(this.energiaInicial);
+
+        logger.info("Se creó una araña");
     }
 
     public Arania(Coordenadas coordenadas) {
@@ -21,6 +25,8 @@ public class Arania extends Enemigo {
         this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
         this.estado = new Vivo(this.energiaInicial);
+
+        logger.info("Se creó una araña");
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {

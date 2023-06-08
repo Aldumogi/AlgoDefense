@@ -13,12 +13,15 @@ public class Terminada implements EstadoDefensa {
         this.estaEnRango(enemigo.obtenerCoordenadas(), coordenadasDefensa, rangoDeAtaque);
         enemigo.recibirDanio(danio);
     }
+
     private void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
         if ( coordenadasDefensa.distanciaEntreCoordenadas( coordenadasEnemigo) > rangoDeAtaque ) throw new FueraDeRangoException();
     }
+
     public EstadoDefensa pasarTurno() {
         return this;
     }
+
     public int tiempoDeConstruccion() {
         return this.tiempoDeConstruccion;
     }

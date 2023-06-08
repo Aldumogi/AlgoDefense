@@ -14,14 +14,19 @@ public abstract class Defensa {
     protected EstadoDefensa estado;
     protected Tierra tierra;
 
+    public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
+            DefensaEnConstruccionException, FueraDeRangoException;
+
+    public abstract void construir(Tierra tierra);
+
     public int costo() {
         return this.costo;
     }
-    
-    public EstadoDefensa estadoDefensa() { return this.estado; }
-    public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
-            DefensaEnConstruccionException, FueraDeRangoException;
-    public abstract void construir(Tierra tierra);
+
+    public EstadoDefensa estadoDefensa() {
+        return this.estado;
+    }
+
     public void pasarTurno() {
         this.estado = this.estado.pasarTurno();
     }

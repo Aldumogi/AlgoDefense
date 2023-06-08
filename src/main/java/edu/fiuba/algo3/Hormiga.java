@@ -2,6 +2,8 @@ package edu.fiuba.algo3;
 
 import java.util.ArrayList;
 
+import static edu.fiuba.algo3.Inicializador.logger;
+
 public class Hormiga extends Enemigo {
 
     public Hormiga() {
@@ -11,6 +13,8 @@ public class Hormiga extends Enemigo {
         this.creditosOtorgados = 1;
         this.coordenadas = this.getCoordenadasLargada();
         this.estado = new Vivo(this.energiaInicial);
+
+        logger.info("Se creó una hormiga");
     }
     public Hormiga(Coordenadas coordenadas) {
         this.velocidad = 1;
@@ -19,6 +23,8 @@ public class Hormiga extends Enemigo {
         this.creditosOtorgados = 1;
         this.coordenadas = coordenadas;
         this.estado = new Vivo(this.energiaInicial);
+
+        logger.info("Se creó una hormiga");
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {

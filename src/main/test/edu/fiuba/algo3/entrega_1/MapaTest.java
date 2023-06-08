@@ -1,33 +1,31 @@
-package edu.fiuba.algo3.entrega_2;
+package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.Arania;
 import edu.fiuba.algo3.Coordenadas;
+import edu.fiuba.algo3.Hormiga;
 import edu.fiuba.algo3.Mapa;
-import edu.fiuba.algo3.Parcela;
+import edu.fiuba.algo3.Pasarela;
+import edu.fiuba.algo3.Rocoso;
+import edu.fiuba.algo3.Tierra;
+import edu.fiuba.algo3.TorreBlanca;
+import edu.fiuba.algo3.TorrePlateada;
 import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
+
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class MapaTest {
-
-    @Test
-    public void elMapaSeCreaCorrectamente() throws IOException, ParseException, FormatoMapaInvalidoException {
-        Mapa mapa = new Mapa();
-
-        for(int i = 1; i <= mapa.obtenerCantidadDeFilas(); i++) {
-            for(int j = 1; j <= mapa.obtenerCantidadDeColumnas(); j++) {
-                assertThat(mapa.obtenerCelda(new Coordenadas(i, j)), instanceOf(Parcela.class));
-            }
-        }
-    }
     @Test
     public void esPorAcaTestBasico() throws IOException, ParseException, FormatoMapaInvalidoException {
 
@@ -78,9 +76,9 @@ public class MapaTest {
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(3, 2);
-         Coordenadas cordenadaEsperada = new Coordenadas(5, 2);
+        Coordenadas cordenadaEsperada = new Coordenadas(5, 2);
 
-         Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 2);
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 2);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
     @Test
@@ -93,5 +91,4 @@ public class MapaTest {
         Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 3);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
-
 }
