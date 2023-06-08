@@ -1,6 +1,8 @@
 package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
+import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -12,6 +14,8 @@ import java.util.Map;
 public class Mapa {
 
     private Map<Integer, HashMap<Integer, Parcela>> mapaDelJuego;
+    private Coordenadas coordenadasLargada;
+    private Coordenadas coordenadasMeta;
 
     public Mapa() throws IOException, ParseException, FormatoMapaInvalidoException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
@@ -23,6 +27,26 @@ public class Mapa {
 
     public int obtenerCantidadDeFilas() {
         return this.mapaDelJuego.size();
+    }
+    /* En el futuro puede agregar otra cosas si se desea, no solo enemigo */
+    public Coordenadas recibir(Coordenadas coordenadas, Enemigo enemigo) {
+        if ( enemigo != null ) {
+            for (int fila = 1 ; fila <= this.mapaDelJuego.size() ; fila ++ ) {
+                for (int columna = 1 ; columna <= this.mapaDelJuego.get(fila).size() ; columna ++ ) {
+                    try {
+                        return this.mapaDelJuego.get(fila).get(columna).recibir(enemigo);
+                    }
+                    catch(NoEsPosibleRecibirEnemigosEnParcelaException e){
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public void borrar(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
+        Coordenadas coordenadas = enemigo.obtenerCoordenadas();
+        this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).borrarObjeto(enemigo);
     }
 
     //recibe una cordenada y chequea, que para ese lado este la meta. 
