@@ -17,6 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class JuegoTest {
+    /*
+    Caso de Uso 17 - Verificar que el juego se cree acorde a ambos JSON
+   */
     @Test
     public void elJuegoSeCreaAcordeAAmbosJSON() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoBorrarElEnemigoException {
 
