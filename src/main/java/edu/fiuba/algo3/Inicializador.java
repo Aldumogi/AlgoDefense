@@ -14,7 +14,7 @@ public class Inicializador {
     private Juego juego;
 
     public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos();
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(null);
         // LoaderMapaJuego.recuperarMapa();
         // this. juego = new Juego(turnos, mapa);
         this.juego = new Juego(turnos);

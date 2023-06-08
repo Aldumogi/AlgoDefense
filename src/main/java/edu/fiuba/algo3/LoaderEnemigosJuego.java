@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class LoaderEnemigosJuego {
 
-    public static ArrayList<Turno> recuperarTurnosYEnemigos() throws IOException, ParseException, FormatoEnemigosInvalidoException {
+    public static ArrayList<Turno> recuperarTurnosYEnemigos(String jsonFilePath) throws IOException, ParseException, FormatoEnemigosInvalidoException {
 
-        String filePath = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        String filePath = (jsonFilePath != null)? jsonFilePath : "src/main/java/edu/fiuba/algo3/resources/enemigos.json" ;
         validarJsonEnemigos(filePath);
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
         JSONArray jsonArray = (JSONArray) new JSONParser().parse(jsonString);

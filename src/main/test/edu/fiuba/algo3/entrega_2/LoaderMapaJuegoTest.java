@@ -14,14 +14,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoaderMapaJuegoTest {
     @Test
     public void readJSONTest() throws IOException, ParseException, FormatoMapaInvalidoException {
 
-        Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa();
+        Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa(null);
 
         assert(mapa.size() > 0);
     }

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.exceptions.*;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -22,13 +22,14 @@ public class Juego {
         this.mapa = new Mapa();
     }
 
-    public Juego(Jugador jugador, Mapa mapa) {
+    public Juego(Jugador jugador, Mapa mapa, ArrayList<Turno> turnos) {
         this.jugador = jugador;
-        this.mapa = mapa;
         this.indiceActualListaTurnos = 0;
+        this.mapa = mapa;
         this.enemigos = new ArrayList<Enemigo>();
+        this.turnos = turnos;
+        this.agregarEnemigosDelTurno();
         this.cantidadDeHormigasMuertas = 0;
-        this.turnos = new ArrayList<Turno>();
     }
 
     public Juego(ArrayList<Turno> turnos) throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -55,7 +56,7 @@ public class Juego {
         this.enemigos.addAll(enemigosAAgregar);
     }
     public void avanzarTurno(){
-        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < 12) ? this.indiceActualListaTurnos++ : (this.indiceActualListaTurnos % 12 + 1);
+        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size())? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12 + 1);
         this.jugador.actualizarDefensasAlFinalizarTurno();
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
@@ -99,6 +100,20 @@ public class Juego {
     }
 
     public boolean juegoTerminado(){
-        return enemigos.size() == 0;
+        return (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 );
+    }
+
+    public void jugar() {
+        List<Defensa> defensas = jugador.obtenerDefensas();
+        for (Defensa defensa: defensas) {
+            for (Enemigo enemigo: enemigos){
+                try {
+                    defensa.atacarEnemigo(enemigo);
+                } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
+                catch (ElEnemigoEstaMuertoException e) {}
+                catch (DefensaEnConstruccionException e) {}
+                catch (FueraDeRangoException e) {}
+            }
+        }
     }
 }
