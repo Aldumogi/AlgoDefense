@@ -32,4 +32,8 @@ public abstract class Enemigo {
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
     }
+
+    public void setCoordenadas(Coordenadas coordenadas){
+        this.coordenadas = coordenadas;
+    }
 }

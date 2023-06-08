@@ -35,7 +35,6 @@ public class Juego {
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
         this.cantidadDeHormigasMuertas = 0;
-        this.turnos = new ArrayList<Turno>();
 
         logger.info("Se ha iniciado el juego con un jugador y un mapa");
     }
@@ -113,7 +112,7 @@ public class Juego {
     }
 
     public void actualizarEnergiaJugador() {
-        Coordenadas coordenadasMeta = new Coordenadas(5,2);
+        Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
         this.enemigos.forEach( enemigo -> {
             if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
                 jugador.restarEnergia(enemigo.obtenerDanioCausado());
@@ -138,5 +137,13 @@ public class Juego {
                 catch (FueraDeRangoException e) {}
             }
         }
+    }
+
+    public void moverEnemigosAMeta() {
+        Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
+        this.enemigos.forEach( enemigo -> {
+            enemigo.setCoordenadas(coordenadasMeta);
+
+        });
     }
 }

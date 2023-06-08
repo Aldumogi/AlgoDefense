@@ -129,6 +129,10 @@ public class Mapa {
     public int obtenerCantidadDeColumnas() {
         return this.mapaDelJuego.get(1).size();
     }
+
+    public Coordenadas getCoordenadasMeta() {
+        return new Coordenadas(5,2);
+    }
 }
     
 

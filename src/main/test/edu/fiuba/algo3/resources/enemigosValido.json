@@ -27,7 +27,7 @@
 		"turno": 4,
 		"enemigos": {
 			"hormiga": 0,
-			"arana": 1
+			"arana": 20
 		}
 		
 	},	
