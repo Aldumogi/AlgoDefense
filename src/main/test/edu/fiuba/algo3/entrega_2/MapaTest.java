@@ -17,7 +17,10 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class MapaTest {
-
+    /*
+     * Caso de USO 16 - Verificar la lectura y posterior conversion a unidades
+     * del modelo de dominio del JSON de enemigos
+     * */
     @Test
     public void elMapaSeCreaCorrectamente() throws IOException, ParseException, FormatoMapaInvalidoException {
         Mapa mapa = new Mapa();
@@ -28,6 +31,9 @@ public class MapaTest {
             }
         }
     }
+    /*
+    * Tests adicionales
+    * */
     @Test
     public void esPorAcaTestBasico() throws IOException, ParseException, FormatoMapaInvalidoException {
 

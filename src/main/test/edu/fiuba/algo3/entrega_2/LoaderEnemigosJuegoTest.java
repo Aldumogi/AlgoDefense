@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoaderEnemigosJuegoTest {
+    /*
+    * Caso de USO 15 - Verificar la lectura y posterior conversion a unidades
+    * del modelo de dominio del JSON de enemigos
+    * */
     @Test
     public void readJSONTest() throws IOException, ParseException, FormatoEnemigosInvalidoException {
 
@@ -22,7 +26,9 @@ public class LoaderEnemigosJuegoTest {
         assert(turnos.size() > 0);
 
     }
-
+    /*
+     * Caso de USO 13 - Verificar el formato valido del JSON de enemigos
+     * */
     @Test
     public void validarFormatoEnemigosValido(){
         String filePath = "src/main/test/edu/fiuba/algo3/resources/enemigosValido.json";

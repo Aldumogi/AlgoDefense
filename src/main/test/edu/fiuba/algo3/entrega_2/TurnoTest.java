@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TurnoTest {
+    /*
+     * Caso de USO 15 - Verificar la lectura y posterior conversion a unidades
+     * del modelo de dominio del JSON de enemigos
+     * */
     @Test
     public void elTurnoSeCreaCorrectamente() {
         Turno turno = new Turno(1);
