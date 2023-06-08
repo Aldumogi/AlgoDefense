@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Mapa {
 
@@ -18,9 +19,11 @@ public class Mapa {
     private Coordenadas coordenadasMeta;
 
     public Mapa() throws IOException, ParseException, FormatoMapaInvalidoException {
-        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa();
+        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa(null);
     }
-
+    public Mapa(String jsonFilePath) throws IOException, ParseException, FormatoMapaInvalidoException {
+        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa(jsonFilePath);
+    }
     public Parcela obtenerCelda(Coordenadas coordenada) {
         return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
     }

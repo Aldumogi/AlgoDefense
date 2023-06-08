@@ -18,8 +18,7 @@ public class Inicializador {
     public static final Logger logger = LogManager.getLogger(App.class);
 
     public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos();
-
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(null);
         // LoaderMapaJuego.recuperarMapa();
         // this. juego = new Juego(turnos, mapa);
         this.juego = new Juego(turnos);

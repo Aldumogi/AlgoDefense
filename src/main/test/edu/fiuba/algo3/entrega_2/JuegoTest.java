@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
-import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.exceptions.*;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +11,9 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JuegoTest {
     @Test
@@ -118,4 +119,42 @@ public class JuegoTest {
         assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
 
     }
+
+  /*
+    Caso de Uso 18 - Simular y verificar que el jugador gane una partida
+   */
+  @Test
+  public void caso18() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoDisponibleParaConstruirException {
+    // Arrange
+    // Inicializador inicio = new Inicializador();
+    Jugador jugador = new Jugador("Alberto");
+    Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
+    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json");
+    // turno 1
+    Juego juego = new Juego(jugador, mapa, turnos);
+
+    Defensa defensa1 = new TorrePlateada();
+    Coordenadas coordDefensa1 = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
+    jugador.generarConstruccion(defensa1, coordDefensa1);
+
+    Defensa defensa2 = new TorrePlateada();
+    Coordenadas coordDefensa2 = new Coordenadas(1,3);
+    jugador.generarConstruccion(defensa2, coordDefensa2);
+
+    juego.avanzarTurno(); // pasa a turno 2
+
+    Defensa defensa3 = new TorrePlateada();
+    Coordenadas coordDefensa3 = new Coordenadas(4,3);
+    jugador.generarConstruccion(defensa3, coordDefensa3);
+
+    juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa1 y defensa2
+    juego.jugar();  // aca defensa1 y defensa2 deben atacar a enemigos dentro de su rango
+    juego.avanzarTurno(); // pasa a turno 4, se termina de construir defensa3
+    juego.avanzarTurno(); // pasa a turno 5
+
+    // ASSERT
+    assertTrue(juego.juegoTerminado());
+    assertTrue(jugador.estaVivo());
+  }
+
 }
