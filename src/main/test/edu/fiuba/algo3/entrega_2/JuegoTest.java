@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class JuegoTest {
     @Test
@@ -126,7 +127,6 @@ public class JuegoTest {
   @Test
   public void caso18() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoDisponibleParaConstruirException {
     // Arrange
-    // Inicializador inicio = new Inicializador();
     Jugador jugador = new Jugador("Alberto");
     Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
     ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json");
@@ -141,6 +141,7 @@ public class JuegoTest {
     Coordenadas coordDefensa2 = new Coordenadas(1,3);
     jugador.generarConstruccion(defensa2, coordDefensa2);
 
+    // Act
     juego.avanzarTurno(); // pasa a turno 2
 
     Defensa defensa3 = new TorrePlateada();
@@ -152,9 +153,38 @@ public class JuegoTest {
     juego.avanzarTurno(); // pasa a turno 4, se termina de construir defensa3
     juego.avanzarTurno(); // pasa a turno 5
 
-    // ASSERT
+    // Assert
     assertTrue(juego.juegoTerminado());
     assertTrue(jugador.estaVivo());
+  }
+
+  /*
+    Caso de Uso 19 - Simular y verificar que el jugador pierde una partida
+   */
+  @Test
+  public void caso19() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoDisponibleParaConstruirException {
+    // Arrange
+    Jugador jugador = new Jugador("Alberto");
+    Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
+    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json");
+    // turno 1
+    Juego juego = new Juego(jugador, mapa, turnos);
+
+    Defensa defensa = new TorrePlateada();
+    Coordenadas coordDefensa = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
+    jugador.generarConstruccion(defensa, coordDefensa);
+
+    // Act
+    juego.avanzarTurno(); // pasa a turno 2
+    juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa
+    juego.jugar();  // defensa deben atacar a enemigo dentro de su rango
+    juego.avanzarTurno(); // pasa a turno 4
+    juego.moverEnemigosAMeta();
+    juego.avanzarTurno(); // pasa a turno 5
+
+    // Assert
+    assertTrue(juego.juegoTerminado());
+    assertFalse(jugador.estaVivo());
   }
 
 }
