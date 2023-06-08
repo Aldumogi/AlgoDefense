@@ -25,4 +25,14 @@ public class Muerto implements EstadoEnemigo {
     public void agregarIndiceDeEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         indicesEnemigosMuertos.add( posicionActual );
     }
+    @Override
+    public boolean equals(Object o) {
+        if ( o == this ) {
+            return true;
+        }
+        if ( !(o instanceof Muerto) ) {
+            return false;
+        }
+        return true;
+    }
 }
