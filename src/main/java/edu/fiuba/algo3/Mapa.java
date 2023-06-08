@@ -90,7 +90,7 @@ public class Mapa {
         List<Coordenadas> visitados = new ArrayList<>();
         visitados.add(cordenadaActual);
 
-        if((columna + 1) < this.obtenerCantidadDeColumnas() && celdaActual.equals(new Pasarela(cordenadaActual))){
+        if((columna + 1) <= this.obtenerCantidadDeColumnas() && celdaActual.equals(new Pasarela(cordenadaActual))){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna +1 );
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;

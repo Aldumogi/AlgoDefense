@@ -70,14 +70,24 @@ public class MapaTest {
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
 
-@Test
-public void devuelvoLaSiguientesNPasarelasMasAdelanteCorrectamente() throws IOException, ParseException {    
+    @Test
+    public void devuelvoLaSiguientesNPasarelasMasAdelanteCorrectamente() throws IOException, ParseException {    
 
-    Mapa unMapa = new Mapa();
-    Coordenadas coordenadaActual = new Coordenadas(3, 2);
-    Coordenadas cordenadaEsperada = new Coordenadas(5, 2);
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(3, 2);
+        Coordenadas cordenadaEsperada = new Coordenadas(5, 2);
 
-    Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 2);
-    assertTrue(ATestear.equals(cordenadaEsperada));
-}
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 2);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
+    @Test
+    public void devuelvoLaCordenadaDePasarelaMetaAunqueMePaseDeMovimientos() throws IOException, ParseException {    
+
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(11, 13);
+        Coordenadas cordenadaEsperada = new Coordenadas(11, 15);
+
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 3);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
 }

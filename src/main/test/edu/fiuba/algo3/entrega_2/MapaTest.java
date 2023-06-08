@@ -82,5 +82,15 @@ public class MapaTest {
          Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 2);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
+    @Test
+    public void devuelvoLaCordenadaDePasarelaMetaAunqueMePaseDeMovimientos() throws IOException, ParseException {    
+
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(11, 13);
+        Coordenadas cordenadaEsperada = new Coordenadas(11, 15);
+
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 3);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
 
 }
