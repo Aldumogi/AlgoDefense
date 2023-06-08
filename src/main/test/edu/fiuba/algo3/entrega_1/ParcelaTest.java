@@ -24,7 +24,7 @@ public class ParcelaTest {
         Pasarela pasarela = new Pasarela(coordenadaPasarela);
 
 
-        assertDoesNotThrow(() -> pasarela.recibirEnemigo(hormiga));
+        assertDoesNotThrow(() -> pasarela.recibir(hormiga));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ParcelaTest {
 
 
         assertThrows(NoEsPosibleRecibirEnemigosEnParcelaException.class, 
-        () -> rocoso.recibirEnemigo(hormiga));
+        () -> rocoso.recibir(hormiga));
     }
 
     @Test
@@ -48,6 +48,6 @@ public class ParcelaTest {
 
 
         assertThrows(NoEsPosibleRecibirEnemigosEnParcelaException.class, 
-        () -> tierra.recibirEnemigo(hormiga));
+        () -> tierra.recibir(hormiga));
     }
 }

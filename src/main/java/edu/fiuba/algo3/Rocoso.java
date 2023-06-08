@@ -1,6 +1,8 @@
 package edu.fiuba.algo3;
 import edu.fiuba.algo3.exceptions.*;
 
+import java.util.List;
+
 public class Rocoso implements Parcela {
     private Coordenadas coordenadas;
     private EstadoParcela estado;
@@ -12,7 +14,13 @@ public class Rocoso implements Parcela {
         throw new NoDisponibleParaConstruirException();
     }
 
-    public void recibirEnemigo(Enemigo enemigo){
+    public Coordenadas recibir(Enemigo enemigo){
         throw new NoEsPosibleRecibirEnemigosEnParcelaException();
+    }
+
+    public List<Enemigo> obtener() { return null; }
+
+    public void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
+        throw new NoSePudoBorrarElEnemigoException();
     }
 }

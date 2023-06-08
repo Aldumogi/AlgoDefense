@@ -44,7 +44,17 @@ public class Hormiga extends Enemigo {
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
         this.estado.acumularHormigasMuertas(hormigasMuertas, this);
     }
-
+    @Override
+    public boolean equals(Object e2) {
+        if ( e2 == this ) {
+            return true;
+        }
+        if ( !(e2 instanceof Hormiga) ) {
+            return false;
+        }
+        Hormiga e = (Hormiga) e2;
+        return e.coordenadas == this.coordenadas && e.estado == this.estado;
+    }
 }
 
 

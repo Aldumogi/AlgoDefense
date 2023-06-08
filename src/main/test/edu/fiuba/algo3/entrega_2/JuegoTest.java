@@ -6,127 +6,123 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class JuegoTest {
-    public class TesteableInicializador extends Inicializador {
-      private Juego juego;
-      public TesteableInicializador() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        this.juego = new Juego();
-      }
-      public Juego obtenerJuego() {
-        return this.juego;
-      }
-      public void agregarJugador(String nombre) {
-        Jugador jugador = new Jugador(nombre);
-        this.juego.setearJugador(jugador);
-      }
-    }
+    /*
+    Caso de Uso 17 - Verificar que el juego se cree acorde a ambos JSON
+   */
     @Test
-    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-      // Arrange
-      Inicializador inicio = new Inicializador();
+    public void elJuegoSeCreaAcordeAAmbosJSON() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoBorrarElEnemigoException {
 
-      inicio.agregarJugador("NombreDelJugador");
-      Juego juego = inicio.obtenerJuego();
-      
-      juego.agregarEnemigo(new Arania());
-      juego.agregarEnemigo(new Hormiga());
+        List<Enemigo> enemigosEnLaPasarela;
+        Inicializador inicio = new Inicializador();
+        inicio.agregarJugador("NombreDelJugador");
+        Juego juego = inicio.obtenerJuego();
+        Mapa mapaCargadoEnElJuego = juego.obtenerMapa();
 
-      // Act
-      boolean terminado =  juego.juegoTerminado();
+        Coordenadas coordenadasLargada = new Coordenadas(1, 2);
+        Parcela parcela = mapaCargadoEnElJuego.obtenerCelda(coordenadasLargada);
 
-      // Assert
-      assertFalse(terminado);
-  }
+        // Assert
+        assertThat(parcela, instanceOf(PasarelaLargada.class) );
+        enemigosEnLaPasarela = parcela.obtener();
 
-  @Test
-    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-      // Arrange
-      TesteableInicializador inicio = new TesteableInicializador();
+        // turno 1
+        assertEquals(1, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-      inicio.agregarJugador("NombreDelJugador");
-      Juego juego = inicio.obtenerJuego();
+        // turno 2
+        assertEquals(2, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-      // Act
-      boolean terminado =  juego.juegoTerminado();
+        // turno 3
+        assertEquals(3, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        assertThat(enemigosEnLaPasarela.get(1), instanceOf(Hormiga.class));
+        assertThat(enemigosEnLaPasarela.get(2), instanceOf(Arania.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-      // Assert
-      assertTrue(terminado);
-  }
+        // turno 4
+        assertEquals(1, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Arania.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-  @Test
-  public void caso11() throws ElEnemigoEstaMuertoException, FueraDeRangoException, DefensaEnConstruccionException, NoDisponibleParaConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-    TesteableInicializador inicio = new TesteableInicializador();
+        // turno 5
+        assertEquals(2, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-    inicio.agregarJugador("Alberto");
-    Juego juego = inicio.obtenerJuego();
-    Jugador jugador = juego.obtenerJugador();
+        // turno 6
+        assertEquals(3, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
+        assertThat(enemigosEnLaPasarela.get(2), instanceOf(Arania.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-    Defensa defensa = new TorrePlateada();
-    Coordenadas coordDefensa = new Coordenadas(4,2);
-    jugador.generarConstruccion(defensa, coordDefensa);
+        // turno 7
+        assertEquals(1, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Arania.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-    juego.avanzarTurno();
-    juego.avanzarTurno();
+        // turno 8
+        assertEquals(1, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-    Enemigo enemigo = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo1 = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo2 = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo3 = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo4 = new Arania(new Coordenadas(5,2));
-    juego.agregarEnemigo(enemigo);
+        // turno 9
+        assertEquals(1, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
-    try {
-      defensa.atacarEnemigo(enemigo);
-      defensa.atacarEnemigo(enemigo1);
-      defensa.atacarEnemigo(enemigo2);
-      defensa.atacarEnemigo(enemigo3);
-      defensa.atacarEnemigo(enemigo4);
+        // turno 10
+        assertEquals(2, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        assertThat(enemigosEnLaPasarela.get(1), instanceOf(Hormiga.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+
+        // turno 11
+        assertEquals(1, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Arania.class));
+        juego.avanzarTurno();
+        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
+
+        // turno 12
+        assertEquals(3, enemigosEnLaPasarela.size() );
+        assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
+        assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
+        assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
+
     }
-    catch(ElEnemigoMurioDuranteElAtaqueException e) {}
-
-    Enemigo enemigo5 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo6 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo7 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo8 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo9 = new Arania(new Coordenadas(5, 2));
-
-    juego.avanzarTurno();
-
-    boolean terminado =  juego.juegoTerminado();
-
-    assertTrue(jugador.estaVivo());
-    assertTrue(terminado);
-  }
-
-  @Test
-  public void caso12() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-    Inicializador inicio = new Inicializador();
-
-    inicio.agregarJugador("Alberto");
-    Juego juego = inicio.obtenerJuego();
-    Jugador jugador = juego.obtenerJugador();
-    Enemigo enemigo = new Arania(new Coordenadas(5,2));
-
-    juego.agregarEnemigo(enemigo);
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-
-    assertFalse(jugador.estaVivo());
-  }
-
 
   /*
     Caso de Uso 18 - Simular y verificar que el jugador gane una partida

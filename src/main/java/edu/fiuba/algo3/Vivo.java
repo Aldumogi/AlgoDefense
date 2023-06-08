@@ -26,4 +26,16 @@ public class Vivo implements EstadoEnemigo {
     public void mover(Enemigo enemigo) {}
     public void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo) {}
     public void agregarIndiceDeEnemigoMuerto(List<Integer> enemigosMuertos, int enemigo) {}
+
+    @Override
+    public boolean equals(Object o) {
+        if ( o == this ) {
+            return true;
+        }
+        if ( !(o instanceof Vivo) ) {
+            return false;
+        }
+        Vivo e = (Vivo) o;
+        return e.energia == this.energia;
+    }
 }

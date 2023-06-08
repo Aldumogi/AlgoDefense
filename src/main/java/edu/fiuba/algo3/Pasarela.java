@@ -18,9 +18,19 @@ public class Pasarela implements Parcela {
     public void construir(Defensa defensa) throws NoDisponibleParaConstruirException {
         throw new NoDisponibleParaConstruirException();
     }
-    public void recibirEnemigo(Enemigo enemigo){
+    public Coordenadas recibir(Enemigo enemigo){
         enemigos.add(enemigo);
-    };
+        return this.coordenadas;
+    }
+
+    public List<Enemigo> obtener() {
+        return this.enemigos;
+    }
+
+    public void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
+        this.enemigos.remove(enemigo);
+    }
+
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

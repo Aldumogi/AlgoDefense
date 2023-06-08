@@ -63,6 +63,7 @@ public class Juego {
     public int obtenerNumeroDeturno() {
         return this.indiceActualListaTurnos;
     }
+    public Mapa obtenerMapa() { return this.mapa; }
 
     public void agregarEnemigo(Enemigo enemigo) {
         enemigos.add(enemigo);
@@ -71,11 +72,14 @@ public class Juego {
     private void agregarEnemigosDelTurno() {
         if ( turnos.size() == 0 || this.indiceActualListaTurnos >= turnos.size()) return;
         List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
+        enemigosAAgregar.forEach( enemigo -> {
+            enemigo.coordenadas = this.mapa.recibir(null, enemigo);
+        } );
         this.enemigos.addAll(enemigosAAgregar);
     }
 
     public void avanzarTurno(){
-        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size())? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12 + 1);
+        this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size() - 1 )? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12);
         this.jugador.actualizarDefensasAlFinalizarTurno();
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
@@ -124,6 +128,14 @@ public class Juego {
     public boolean juegoTerminado(){
         return (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 );
     }
+    
+    public void moverEnemigosAMeta() {
+        Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
+        this.enemigos.forEach( enemigo -> {
+            enemigo.setCoordenadas(coordenadasMeta);
+
+        });
+    }
 
     public void jugar() {
         List<Defensa> defensas = jugador.obtenerDefensas();
@@ -137,13 +149,5 @@ public class Juego {
                 catch (FueraDeRangoException e) {}
             }
         }
-    }
-
-    public void moverEnemigosAMeta() {
-        Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
-        this.enemigos.forEach( enemigo -> {
-            enemigo.setCoordenadas(coordenadasMeta);
-
-        });
     }
 }

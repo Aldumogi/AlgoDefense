@@ -40,5 +40,15 @@ public class Arania extends Enemigo {
         return new Coordenadas(3,2);
     }
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) { }
-
+    @Override
+    public boolean equals(Object e2) {
+        if ( e2 == this ) {
+            return true;
+        }
+        if ( !(e2 instanceof Arania) ) {
+            return false;
+        }
+        Arania e = (Arania) e2;
+        return e.coordenadas == this.coordenadas && e.estado == this.estado;
+    }
 }
