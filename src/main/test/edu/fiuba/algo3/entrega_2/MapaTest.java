@@ -61,11 +61,11 @@ public class MapaTest {
         Coordenadas cordenadaAChequearVerdadera = new Coordenadas(2,2);
         Coordenadas cordenadaAChequearFalse = new Coordenadas(2,3);
 
-        Boolean esPorAca = unMapa.esPorAca(cordenadaAChequearVerdadera, listaDeVisitados);
+        Boolean esPorAcaVerdadero = unMapa.esPorAca(cordenadaAChequearVerdadera, listaDeVisitados);
 
         assertFalse(unMapa.esPorAca(cordenadaAChequearFalse, listaDeVisitados));
 
-        assertTrue(esPorAca);
+        assertTrue(esPorAcaVerdadero);
     }
     
     @Test
@@ -97,6 +97,18 @@ public class MapaTest {
         Coordenadas cordenadaEsperada = new Coordenadas(11, 15);
 
         Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 3);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
+
+    
+    @Test
+    public void devuevloLaCordenadaSiguienteSaliendoDesdeLargada() throws IOException, ParseException, FormatoMapaInvalidoException {
+
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(1, 2);
+        Coordenadas cordenadaEsperada = new Coordenadas(2, 2);
+
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 1);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
 
