@@ -112,6 +112,17 @@ public class MapaTest {
     }
 
     @Test
+    public void devuevloLaCordenadaSiguienteSaliendoDesdeLargada_() throws IOException, ParseException, FormatoMapaInvalidoException {
+
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(6, 2);
+        Coordenadas cordenadaEsperada = new Coordenadas(7, 2);
+
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 1);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
+
+    @Test
     public void devolverPasarelaAlSumarDeADosEnLaCoordenada52() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador inicio = new Inicializador();
         inicio.agregarJugador("NombreDelJugador");

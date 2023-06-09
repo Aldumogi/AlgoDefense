@@ -67,6 +67,9 @@ public class Mapa {
         if (celdaActual.equals(new PasarelaMeta(coordenadaAVerificar))) {
             return true;
         }
+        if (!celdaActual.equals(new Pasarela(coordenadaAVerificar))) {
+            return false;
+        }
         coordenadasVisitadas.add(coordenadaAVerificar);
     
         return buscarSiguienteCoordenada(new Coordenadas(filaActual + 1, columnaActual), coordenadasVisitadas) ||
@@ -96,10 +99,7 @@ public class Mapa {
 
         int fila = cordenadaActual.fila();
         int columna = cordenadaActual.columna();
-        Parcela celdaActual = this.obtenerCelda(cordenadaActual);
-        if(celdaActual.equals(new PasarelaLargada(cordenadaActual))){
-            celdaActual = new Pasarela(cordenadaActual);
-        }
+        //Parcela celdaActual = this.obtenerCelda(cordenadaActual);
 
         List<Coordenadas> visitados = new ArrayList<>();
         visitados.add(cordenadaActual);
@@ -110,6 +110,7 @@ public class Mapa {
                 return posibleCordenada;
             }
         }
+    
 
         if((columna - 1) > 0){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna - 1);
