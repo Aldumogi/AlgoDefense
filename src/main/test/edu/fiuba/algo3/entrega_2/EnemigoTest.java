@@ -27,9 +27,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class EnemigoTest {
-     /*
-    * Tests adicionales
-    * */
     @Test
     public void moverHormigaDesdePasarelaDeLargada() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, NoSePudoBorrarElEnemigoException {
 
@@ -43,19 +40,57 @@ public class EnemigoTest {
         Parcela largada = mapa.obtenerCelda(new Coordenadas(1, 2));
         Enemigo enemigo = largada.obtener().get(0);
 
-        // Coordenadas coordenadaInicial = enemigo.obtenerCoordenadas();
+        // Act
+        enemigo.mover(mapa);
+        Coordenadas coordenadaSiguiente = enemigo.obtenerCoordenadas();
+
+        // Assert
+        assertTrue(coordenadaSiguiente.equals(new Coordenadas(2, 2)));
+    }
+
+    @Test
+    public void moverAraniaDesdePasarelaDeLargada() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, NoSePudoBorrarElEnemigoException {
+
+        // Arrange
+        Jugador jugador = new Jugador("Alberto");
+        Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaArania.json");
+
+        Juego juego = new Juego(jugador, mapa, turnos);
+
+        Parcela largada = mapa.obtenerCelda(new Coordenadas(1, 2));
+        Enemigo enemigo = largada.obtener().get(0);
 
         // Act
         enemigo.mover(mapa);
         Coordenadas coordenadaSiguiente = enemigo.obtenerCoordenadas();
         
-        
-        // Coordenadas coordenadaEsperada = new Coordenadas(2,2);
-        // Pasarela pasarelaEsperada = new Pasarela(coordenadaEsperada);
-        // assertFalse(unMapa.esPorAca(cordenadaAChequearFalse, listaDeVisitados));
-        
         // Assert
-        assertTrue(coordenadaSiguiente.equals(new Coordenadas(2, 2)));
+        assertTrue(coordenadaSiguiente.equals(new Coordenadas(3, 2)));
+    }
+
+    @Test
+    public void moverHormigaDesdePasarelaDeLargadaNoDebeEstarEnRocosoOTierraOInicial() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, NoSePudoBorrarElEnemigoException {
+
+        // Arrange
+        Jugador jugador = new Jugador("Alberto");
+        Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaHormiga.json");
+
+        Juego juego = new Juego(jugador, mapa, turnos);
+
+        Parcela largada = mapa.obtenerCelda(new Coordenadas(1, 2));
+        Enemigo enemigo = largada.obtener().get(0);
+
+        // Act
+        enemigo.mover(mapa);
+        Coordenadas coordenadaSiguiente = enemigo.obtenerCoordenadas();
+
+        // Assert
+        assertFalse(coordenadaSiguiente.equals(new Coordenadas(1, 1)));
+        assertFalse(coordenadaSiguiente.equals(new Coordenadas(1, 3)));
+        assertFalse(coordenadaSiguiente.equals(new Coordenadas(2, 1)));
+        assertFalse(coordenadaSiguiente.equals(new Coordenadas(2, 3)));
     }
     
 }

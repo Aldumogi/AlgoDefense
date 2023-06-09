@@ -60,7 +60,7 @@ public class Mapa {
         int columnaActual = coordenadaAVerificar.columna();
     
         Parcela celdaActual = this.obtenerCelda(coordenadaAVerificar);
-
+    
         if (celdaActual.equals(new PasarelaLargada(coordenadaAVerificar))) {
             return false;
         }
@@ -68,36 +68,24 @@ public class Mapa {
             return true;
         }
         coordenadasVisitadas.add(coordenadaAVerificar);
-
-        if (filaActual + 1 <= this.obtenerCantidadDeFilas()) {
-            Coordenadas nuevaCoordenada = new Coordenadas(filaActual + 1, columnaActual);
-            Parcela posArriba = this.obtenerCelda(nuevaCoordenada);
-            if ((posArriba.equals(new PasarelaLargada(nuevaCoordenada)) || posArriba.equals(new Pasarela(nuevaCoordenada)) || posArriba.equals(new PasarelaMeta(nuevaCoordenada)))
-                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
-                return esPorAca(nuevaCoordenada, coordenadasVisitadas);
-            }
+    
+        return buscarSiguienteCoordenada(new Coordenadas(filaActual + 1, columnaActual), coordenadasVisitadas) ||
+               buscarSiguienteCoordenada(new Coordenadas(filaActual - 1, columnaActual), coordenadasVisitadas) ||
+               buscarSiguienteCoordenada(new Coordenadas(filaActual, columnaActual - 1), coordenadasVisitadas) ||
+               buscarSiguienteCoordenada(new Coordenadas(filaActual, columnaActual + 1), coordenadasVisitadas);
+    }
+    
+    private boolean buscarSiguienteCoordenada(Coordenadas nuevaCoordenada, List<Coordenadas> coordenadasVisitadas) {
+        if (nuevaCoordenada.fila() <= 0 || nuevaCoordenada.columna() <= 0 ){
+            return false;
         }
-        if ((filaActual - 1) > 0) {
-            Coordenadas nuevaCoordenada = new Coordenadas(filaActual - 1, columnaActual);
-            Parcela posAbajo = this.obtenerCelda(nuevaCoordenada);
-            if ((posAbajo.equals(new PasarelaLargada(nuevaCoordenada)) || posAbajo.equals(new Pasarela(nuevaCoordenada)) || posAbajo.equals(new PasarelaMeta(nuevaCoordenada)))
-                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
-                return esPorAca(nuevaCoordenada, coordenadasVisitadas);
-            }
-        }
-        if ((columnaActual - 1) > 0) {
-            Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual - 1);
-            Parcela posIzquierda = this.obtenerCelda(nuevaCoordenada);
-            if ((posIzquierda.equals(new PasarelaLargada(nuevaCoordenada)) || posIzquierda.equals(new Pasarela(nuevaCoordenada)) || posIzquierda.equals(new PasarelaMeta(nuevaCoordenada)))
-                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
-                return esPorAca(nuevaCoordenada, coordenadasVisitadas);
-            }
-        }
-        if ((columnaActual + 1) <= this.obtenerCantidadDeColumnas()) {
-            Coordenadas nuevaCoordenada = new Coordenadas(filaActual, columnaActual + 1);
-            Parcela posDerecha = this.obtenerCelda(nuevaCoordenada);
-            if ((posDerecha.equals(new PasarelaLargada(nuevaCoordenada)) || posDerecha.equals(new Pasarela(nuevaCoordenada)) || posDerecha.equals(new PasarelaMeta(nuevaCoordenada)))
-                    && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
+        Parcela parcela = this.obtenerCelda(nuevaCoordenada);
+        if (parcela != null) {
+            boolean esPasarelaValida = parcela.equals(new PasarelaLargada(nuevaCoordenada))
+                                    || parcela.equals(new Pasarela(nuevaCoordenada))
+                                    || parcela.equals(new PasarelaMeta(nuevaCoordenada));
+    
+            if (esPasarelaValida && !(coordenadasVisitadas.contains(nuevaCoordenada))) {
                 return esPorAca(nuevaCoordenada, coordenadasVisitadas);
             }
         }
@@ -109,34 +97,33 @@ public class Mapa {
         int fila = cordenadaActual.fila();
         int columna = cordenadaActual.columna();
         Parcela celdaActual = this.obtenerCelda(cordenadaActual);
-
-        if(celdaActual.equals(new PasarelaMeta(cordenadaActual))){
-            return cordenadaActual;
+        if(celdaActual.equals(new PasarelaLargada(cordenadaActual))){
+            celdaActual = new Pasarela(cordenadaActual);
         }
 
         List<Coordenadas> visitados = new ArrayList<>();
         visitados.add(cordenadaActual);
 
-        if((columna + 1) <= this.obtenerCantidadDeColumnas() && celdaActual.equals(new Pasarela(cordenadaActual))){
+        if((columna + 1) <= this.obtenerCantidadDeColumnas() ){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna +1 );
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
             }
         }
 
-        if((columna - 1) >= 0 && celdaActual.equals(new Pasarela(cordenadaActual))){
+        if((columna - 1) > 0){
             Coordenadas posibleCordenada = new Coordenadas(fila, columna - 1);
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
             }
         }
-        if((fila - 1) >= 0 && celdaActual.equals(new Pasarela(cordenadaActual))){
+        if((fila - 1) > 0 ){
             Coordenadas posibleCordenada = new Coordenadas(fila  - 1, columna);
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
             }
         }
-        if((fila +1) < this.obtenerCantidadDeFilas() && celdaActual.equals( new Pasarela(cordenadaActual))){
+        if((fila +1) <= this.obtenerCantidadDeFilas()){
             Coordenadas posibleCordenada = new Coordenadas(fila + 1, columna);
             if(this.esPorAca(posibleCordenada, visitados)){
                 return posibleCordenada;
@@ -150,6 +137,7 @@ public class Mapa {
         }
         return cordenadaActual;
     };
+
     public int obtenerCantidadDeColumnas() {
         return this.mapaDelJuego.get(1).size();
     }
