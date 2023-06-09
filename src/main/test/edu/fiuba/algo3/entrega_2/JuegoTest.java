@@ -40,15 +40,12 @@ public class JuegoTest {
         assertEquals(1, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 2
         assertEquals(2, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
         assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 3
         assertEquals(3, enemigosEnLaPasarela.size() );
@@ -56,23 +53,17 @@ public class JuegoTest {
         assertThat(enemigosEnLaPasarela.get(1), instanceOf(Hormiga.class));
         assertThat(enemigosEnLaPasarela.get(2), instanceOf(Arania.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 4
         assertEquals(1, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Arania.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 5
         assertEquals(2, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
         assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 6
         assertEquals(3, enemigosEnLaPasarela.size() );
@@ -80,41 +71,32 @@ public class JuegoTest {
         assertThat(enemigosEnLaPasarela.get(1), instanceOf(Arania.class));
         assertThat(enemigosEnLaPasarela.get(2), instanceOf(Arania.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 7
         assertEquals(1, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Arania.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 8
         assertEquals(1, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 9
         assertEquals(1, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 10
         assertEquals(2, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Hormiga.class));
         assertThat(enemigosEnLaPasarela.get(1), instanceOf(Hormiga.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 11
         assertEquals(1, enemigosEnLaPasarela.size() );
         assertThat(enemigosEnLaPasarela.get(0), instanceOf(Arania.class));
         juego.avanzarTurno();
-        mapaCargadoEnElJuego.borrar( enemigosEnLaPasarela.get(0) );
 
         // turno 12
         assertEquals(3, enemigosEnLaPasarela.size() );

@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.Coordenadas;
-import edu.fiuba.algo3.Mapa;
-import edu.fiuba.algo3.Parcela;
+import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
@@ -112,4 +111,26 @@ public class MapaTest {
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
 
+    @Test
+    public void devuevloLaCordenadaSiguienteSaliendoDesdeLargada_() throws IOException, ParseException, FormatoMapaInvalidoException {
+
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(6, 2);
+        Coordenadas cordenadaEsperada = new Coordenadas(7, 2);
+
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 1);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
+
+    @Test
+    public void devolverPasarelaAlSumarDeADosEnLaCoordenada52() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, FormatoEnemigosInvalidoException {
+        Inicializador inicio = new Inicializador();
+        inicio.agregarJugador("NombreDelJugador");
+        Juego juego = inicio.obtenerJuego();
+        Mapa unMapa = juego.obtenerMapa();Coordenadas coordenadaActual = new Coordenadas(5, 2);
+
+        Coordenadas ATestear = unMapa.devolverSiguientePasarela(coordenadaActual, 2);
+        Parcela parcela = unMapa.obtenerCelda(ATestear);
+        assertThat(parcela, instanceOf(Pasarela.class));
+    }
 }

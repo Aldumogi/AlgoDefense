@@ -84,11 +84,20 @@ public class Juego {
         this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
         this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
         this.actualizarEnergiaJugador();
+        this.avanzarEnemigos();
         this.agregarEnemigosDelTurno();
-
         logger.info("Se avanzó al turno " + this.indiceActualListaTurnos);
     }
 
+    public void avanzarEnemigos(){
+        this.enemigos.forEach( enemigo -> {
+            try{
+                enemigo.mover(this.mapa);
+            } catch(NoSePudoBorrarElEnemigoException e) {
+                logger.error("No se pudo borrar el enemigo");
+            }
+        });
+    }
     public void obtenerCreditosYEliminarEnemigosAlFinalizarTurno(){
         int creditosDelTurno = 0;
         List<Integer> indicesEnemigosAEliminar = new ArrayList<Integer>();
