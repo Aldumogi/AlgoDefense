@@ -27,6 +27,9 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class EnemigoTest {
+    /*
+    Caso de Uso 9 - Verificar que al pasar un turno las unidades se hayan movido segun sus capacidades
+   */
     @Test
     public void moverHormigaDesdePasarelaDeLargada() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, NoSePudoBorrarElEnemigoException {
 
