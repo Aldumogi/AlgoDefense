@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.Arania;
-import edu.fiuba.algo3.Coordenadas;
-import edu.fiuba.algo3.Hormiga;
-import edu.fiuba.algo3.Pasarela;
-import edu.fiuba.algo3.Rocoso;
-import edu.fiuba.algo3.Tierra;
-import edu.fiuba.algo3.TorreBlanca;
-import edu.fiuba.algo3.TorrePlateada;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.parcela.Pasarela;
+import edu.fiuba.algo3.modelo.parcela.Rocoso;
+import edu.fiuba.algo3.modelo.parcela.Tierra;
 import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 
 import org.junit.jupiter.api.Test;

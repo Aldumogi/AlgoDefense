@@ -8,4 +8,10 @@ module edu.fiuba.algo3 {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.dataformat.yaml;
     exports edu.fiuba.algo3;
+    exports edu.fiuba.algo3.modelo.defensa;
+    exports edu.fiuba.algo3.modelo.enemigo;
+    exports edu.fiuba.algo3.modelo.parcela;
+    exports edu.fiuba.algo3.modelo.mapa;
+    exports edu.fiuba.algo3.modelo.juego;
+    exports edu.fiuba.algo3.modelo.utils;
 }

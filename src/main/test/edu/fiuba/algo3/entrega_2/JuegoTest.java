@@ -1,7 +1,20 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.*;
 import edu.fiuba.algo3.exceptions.*;
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
+import edu.fiuba.algo3.modelo.enemigo.Arania;
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.enemigo.LoaderEnemigosJuego;
+import edu.fiuba.algo3.modelo.juego.Inicializador;
+import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.juego.Turno;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
+import edu.fiuba.algo3.modelo.parcela.Parcela;
+import edu.fiuba.algo3.modelo.parcela.PasarelaLargada;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 

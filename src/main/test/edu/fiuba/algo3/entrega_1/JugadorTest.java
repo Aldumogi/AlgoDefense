@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.Inicializador;
-import edu.fiuba.algo3.Jugador;
-import edu.fiuba.algo3.TorrePlateada;
-import edu.fiuba.algo3.Juego;
-import edu.fiuba.algo3.Coordenadas;
+import edu.fiuba.algo3.modelo.juego.Inicializador;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
+import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
