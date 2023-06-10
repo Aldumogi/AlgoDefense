@@ -10,11 +10,10 @@ import java.util.List;
 public abstract class Enemigo {
     protected int velocidad;
     protected int dañoCausado;
-    protected int energiaInicial;
     protected int creditosOtorgados;
     protected Coordenadas coordenadas;
     protected EstadoEnemigo estado;
-
+    protected int cantidadDeMovimientosRealizados;
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
 
@@ -22,7 +21,7 @@ public abstract class Enemigo {
         return this.coordenadas;
     }
 
-    public int obtenerDanioCausado () {
+    public int obtenerDanioCausado (int numeroDeTurno) {
         return this.dañoCausado;
     }
 
@@ -49,6 +48,7 @@ public abstract class Enemigo {
         pasarelaSiguiente.recibir(this);
 
         this.coordenadas = coordenadaSiguiente;
-
+        this._actualizarVelocidadSegunCantidadDeMovimientos();
     }
+    protected abstract void _actualizarVelocidadSegunCantidadDeMovimientos();
 }

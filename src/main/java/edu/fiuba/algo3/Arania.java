@@ -8,23 +8,23 @@ import static edu.fiuba.algo3.Inicializador.logger;
 public class Arania extends Enemigo {
 
     public Arania() {
+        int energia = 2;
         this.velocidad = 2 ;
         this.dañoCausado = 2;
-        this.energiaInicial = 2;
         this.creditosOtorgados = 0;
         this.coordenadas = getCoordenadasLargada();
-        this.estado = new Vivo(this.energiaInicial);
+        this.estado = new Vivo( energia );
 
         logger.info("Se creó una araña");
     }
 
     public Arania(Coordenadas coordenadas) {
+        int energia = 2;
         this.velocidad = 2 ;
         this.dañoCausado = 2;
-        this.energiaInicial = 2;
         this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
-        this.estado = new Vivo(this.energiaInicial);
+        this.estado = new Vivo( energia );
 
         logger.info("Se creó una araña");
     }
@@ -40,6 +40,9 @@ public class Arania extends Enemigo {
         return new Coordenadas(3,2);
     }
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) { }
+
+    protected void _actualizarVelocidadSegunCantidadDeMovimientos() { }
+
     @Override
     public boolean equals(Object e2) {
         if ( e2 == this ) {

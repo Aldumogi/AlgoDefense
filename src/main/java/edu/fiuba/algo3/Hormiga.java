@@ -7,22 +7,22 @@ import static edu.fiuba.algo3.Inicializador.logger;
 public class Hormiga extends Enemigo {
 
     public Hormiga() {
+        int energia = 1;
         this.velocidad = 1;
         this.dañoCausado = 1;
-        this.energiaInicial = 1;
         this.creditosOtorgados = 1;
         this.coordenadas = this.getCoordenadasLargada();
-        this.estado = new Vivo(this.energiaInicial);
+        this.estado = new Vivo( energia );
 
         logger.info("Se creó una hormiga");
     }
     public Hormiga(Coordenadas coordenadas) {
+        int energia = 1;
         this.velocidad = 1;
         this.dañoCausado = 1;
-        this.energiaInicial = 1;
         this.creditosOtorgados = 1;
         this.coordenadas = coordenadas;
-        this.estado = new Vivo(this.energiaInicial);
+        this.estado = new Vivo( energia );
 
         logger.info("Se creó una hormiga");
     }
@@ -44,6 +44,9 @@ public class Hormiga extends Enemigo {
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
         this.estado.acumularHormigasMuertas(hormigasMuertas, this);
     }
+
+    protected void _actualizarVelocidadSegunCantidadDeMovimientos() {  }
+
     @Override
     public boolean equals(Object e2) {
         if ( e2 == this ) {
