@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.Coordenadas;
 import edu.fiuba.algo3.Enemigo;
 import edu.fiuba.algo3.Turno;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ public class TurnoTest {
     @Test
     public void elTurnoSeCreaCorrectamente() {
         Turno turno = new Turno(1);
-        turno.agregarEnemigos(2, 1);
+        turno.agregarEnemigos(2, 1, new Coordenadas(1, 2));
 
         ArrayList<Enemigo> listaEnemigos = turno.getListaEnemigosAgregadosEnElTurno();
 

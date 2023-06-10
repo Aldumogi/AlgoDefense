@@ -8,16 +8,6 @@ import java.util.ArrayList;
 import static edu.fiuba.algo3.Inicializador.logger;
 
 public class Topo extends Enemigo{
-    public Topo() {
-        int energia = 100;
-        this.velocidad = 1 ;
-        this.dañoCausado = 2;
-        this.creditosOtorgados = 0;
-        this.coordenadas = getCoordenadasLargada();
-        this.estado = new Vivo( energia );
-        this.cantidadDeMovimientosRealizados = 0;
-        logger.info("Se creó un topo");
-    }
     public Topo(Coordenadas coordenadas) {
         int energia = 100;
         this.velocidad = 1 ;
@@ -27,9 +17,6 @@ public class Topo extends Enemigo{
         this.estado = new Vivo( energia );
 
         logger.info("Se creó un topo");
-    }
-    private Coordenadas getCoordenadasLargada() {
-        return new Coordenadas(3, 2);
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo) {
@@ -50,5 +37,16 @@ public class Topo extends Enemigo{
     public int obtenerDanioCausado (int numeroDeTurno) {
         int dañoEnTurnoImpar = 5;
         return ( numeroDeTurno % 2 == 0 ) ? this.dañoCausado : dañoEnTurnoImpar;
+    }
+    @Override
+    public boolean equals(Object e2) {
+        if ( e2 == this ) {
+            return true;
+        }
+        if ( !(e2 instanceof Arania) ) {
+            return false;
+        }
+        Topo e = (Topo) e2;
+        return e.coordenadas == this.coordenadas && e.estado == this.estado;
     }
 }

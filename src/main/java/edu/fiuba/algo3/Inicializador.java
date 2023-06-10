@@ -25,7 +25,7 @@ public class Inicializador {
     }
     public Inicializador(String jsonArchivoEnemigos, String jsonArchivoMapa) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Mapa mapa = new Mapa( jsonArchivoMapa );
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(jsonArchivoEnemigos, mapa);
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(jsonArchivoEnemigos, mapa.getCoordenadasLargada());
         this.juego = new Juego(turnos, mapa);
     }
 

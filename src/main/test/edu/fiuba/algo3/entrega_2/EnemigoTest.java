@@ -36,7 +36,7 @@ public class EnemigoTest {
         // Arrange
         Jugador jugador = new Jugador("Alberto");
         Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaHormiga.json", mapa);
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaHormiga.json", mapa.getCoordenadasLargada());
 
         Juego juego = new Juego(jugador, mapa, turnos);
 
@@ -57,7 +57,7 @@ public class EnemigoTest {
         // Arrange
         Jugador jugador = new Jugador("Alberto");
         Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaArania.json", mapa);
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaArania.json", mapa.getCoordenadasLargada());
 
         Juego juego = new Juego(jugador, mapa, turnos);
 
@@ -78,7 +78,7 @@ public class EnemigoTest {
         // Arrange
         Jugador jugador = new Jugador("Alberto");
         Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaHormiga.json", mapa);
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/unaHormiga.json", mapa.getCoordenadasLargada());
 
         Juego juego = new Juego(jugador, mapa, turnos);
 

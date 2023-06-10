@@ -20,9 +20,10 @@ public class JuegoTest {
 
         inicio.agregarJugador("NombreDelJugador");
         Juego juego = inicio.obtenerJuego();
+        Mapa mapa = juego.obtenerMapa();
 
-        juego.agregarEnemigo(new Arania());
-        juego.agregarEnemigo(new Hormiga());
+        juego.agregarEnemigo(new Arania(mapa.getCoordenadasLargada()));
+        juego.agregarEnemigo(new Hormiga(mapa.getCoordenadasLargada()));
 
         // Act
         boolean terminado =  juego.juegoTerminado();
@@ -100,8 +101,9 @@ public class JuegoTest {
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
+        Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
-        Enemigo enemigo = new Arania();
+        Enemigo enemigo = new Arania( mapa.getCoordenadasLargada() );
 
         juego.agregarEnemigo(enemigo);
         juego.avanzarTurno();
