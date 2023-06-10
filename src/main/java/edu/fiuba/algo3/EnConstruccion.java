@@ -26,7 +26,8 @@ public class EnConstruccion implements EstadoDefensa {
     public void ralentizarEnemigo(Enemigo enemigo, double ralentizacion) { }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
-                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas) {
+                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
+                                    double factorDeRalentizacion) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
             logger.info("La construcción terminó");

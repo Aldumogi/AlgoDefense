@@ -15,6 +15,7 @@ public class TorreBlanca extends Defensa {
         this.rangoDeAtaque = 3;
         this.danio = 1;
         this.tiempoDeRalentizacion = -1;
+        this.factorDeRalentizacion = 1;
     }
 
     public void construir(Parcela tierra) {

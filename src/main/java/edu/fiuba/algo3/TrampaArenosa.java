@@ -6,14 +6,13 @@ import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.exceptions.FueraDeRangoException;
 
 public class TrampaArenosa extends Defensa{
-    private double ralentizacion;
     public TrampaArenosa() {
         this.nombre = "Trampa arenosa";
         this.costo = 25;
         this.tiempoDeConstruccion = 1;
         this.rangoDeAtaque = 3;
         this.danio = 0;
-        this.ralentizacion = 0.5;
+        this.factorDeRalentizacion = 0.5;
         this.tiempoDeRalentizacion = 3;
     }
 
@@ -22,7 +21,7 @@ public class TrampaArenosa extends Defensa{
     }
 
     public void ralentizarEnemigo(Enemigo enemigo) {
-        this.estado.ralentizarEnemigo(enemigo, this.ralentizacion);
+        this.estado.ralentizarEnemigo(enemigo, this.factorDeRalentizacion);
     }
 
     public void construir(Parcela pasarela) {

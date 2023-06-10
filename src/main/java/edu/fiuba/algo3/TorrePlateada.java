@@ -16,6 +16,7 @@ public class TorrePlateada extends Defensa {
         this.rangoDeAtaque = 5;
         this.danio = 2;
         this.tiempoDeRalentizacion = -1;
+        this.factorDeRalentizacion = 1;
     }
 
     public void construir(Parcela tierra) {

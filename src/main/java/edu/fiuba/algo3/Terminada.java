@@ -11,6 +11,7 @@ import java.util.List;
 public class Terminada implements EstadoDefensa {
     private int tiempoDeConstruccion = 0;
     private int tiempoDeRalentizacion;
+    private double factorDeRalentizacion;
     public Terminada(int tiempoDeRalentizacion) {
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
     }
@@ -26,12 +27,13 @@ public class Terminada implements EstadoDefensa {
     }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos,  int rangoDeAtaque, int danio,
-                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas) {
+                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas, double factorDeRalentizacion) {
         for (Enemigo enemigo: enemigos) {
             try {
                 this.atacarEnemigo(enemigo, rangoDeAtaque, danio, coordenadasDefensa);
                 enemigo.acumularMuertos( hormigasAsesinadas );
                 enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
+                this.ralentizarEnemigo(enemigo, factorDeRalentizacion);
 
             } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
             catch (ElEnemigoEstaMuertoException e) {}

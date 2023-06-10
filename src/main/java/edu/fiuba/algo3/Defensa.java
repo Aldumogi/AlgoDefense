@@ -17,6 +17,7 @@ public abstract class Defensa {
     protected EstadoDefensa estado;
     protected Parcela parcela;
     protected int tiempoDeRalentizacion;
+    protected double factorDeRalentizacion;
     public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException;
 
@@ -32,7 +33,7 @@ public abstract class Defensa {
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
         this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
-                this.parcela.obtenerCoordenadas(), hormigasAsesinadas);
+                this.parcela.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion);
     }
 
 }
