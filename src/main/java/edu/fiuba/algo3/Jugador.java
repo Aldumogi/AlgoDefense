@@ -1,7 +1,5 @@
 package edu.fiuba.algo3;
 import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
-import edu.fiuba.algo3.Hormiga;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,6 @@ public class Jugador {
     public List<Defensa> obtenerDefensas(){
         return this.defensas;
     }
-    public ArrayList<Hormiga> obtenerHormigasAsesinadas() { return this.hormigasAsesinadas; }
 
     public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         if(this.cantidadDeCreditos >= unaDefensa.costo()){

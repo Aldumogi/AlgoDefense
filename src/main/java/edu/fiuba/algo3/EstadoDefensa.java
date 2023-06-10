@@ -17,5 +17,4 @@ public interface EstadoDefensa {
 
     void ralentizarEnemigo(Enemigo enemigo, double ralentizacion);
 
-    int cantidadDeHormigasAsesinadas();
 }

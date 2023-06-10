@@ -22,7 +22,6 @@ public class EnConstruccion implements EstadoDefensa {
         throw new DefensaEnConstruccionException();
     }
     public int tiempoDeConstruccion() { return this.tiempoDeConstruccion; }
-    public int cantidadDeHormigasAsesinadas() { return 0; }
 
     public void ralentizarEnemigo(Enemigo enemigo, double ralentizacion) { }
 

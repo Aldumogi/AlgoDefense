@@ -14,7 +14,6 @@ public class Juego {
     private int indiceActualListaTurnos;
     private Jugador jugador;
     private List<Enemigo> enemigos;
-    private int cantidadDeHormigasMuertas;
     private ArrayList<Turno> turnos;
 
     public Juego() throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -34,7 +33,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-        this.cantidadDeHormigasMuertas = 0;
 
         logger.info("Se ha iniciado el juego con un jugador y un mapa");
     }
@@ -45,7 +43,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-        this.cantidadDeHormigasMuertas = 0;
 
         logger.info("Se ha iniciado el juego con los turnos");
     }
