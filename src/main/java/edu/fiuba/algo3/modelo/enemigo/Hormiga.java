@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 
 import java.util.ArrayList;
 
-import static edu.fiuba.algo3.modelo.juego.Inicializador.logger;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Hormiga extends Enemigo {
     public Hormiga(Coordenadas coordenadas) {

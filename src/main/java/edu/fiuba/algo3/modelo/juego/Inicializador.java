@@ -3,10 +3,10 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.enemigo.LoaderEnemigosJuego;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
-import org.apache.logging.log4j.LogManager;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
+import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import org.apache.logging.log4j.Logger;
-import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -15,8 +15,6 @@ import java.util.Scanner;
 
 public class Inicializador {
     private Juego juego;
-
-    public static final Logger logger = LogManager.getLogger(App.class);
     public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException {
         // inicializador sin enemigos
         Mapa mapa = new Mapa( "src/main/java/edu/fiuba/algo3/resources/mapa.json" );

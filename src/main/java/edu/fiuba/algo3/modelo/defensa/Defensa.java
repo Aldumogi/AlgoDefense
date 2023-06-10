@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo.defensa;
 
-import edu.fiuba.algo3.exceptions.DefensaEnConstruccionException;
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
-import edu.fiuba.algo3.exceptions.FueraDeRangoException;
+import edu.fiuba.algo3.modelo.exceptions.DefensaEnConstruccionException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.modelo.exceptions.FueraDeRangoException;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.parcela.Parcela;

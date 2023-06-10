@@ -4,7 +4,7 @@ import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.ValidationMessage;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.fiuba.algo3.exceptions.FormatoJsonInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoJsonInvalidoException;
 
 import java.io.*;
 import java.util.Set;

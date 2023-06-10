@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.mapa.LoaderMapaJuego;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
