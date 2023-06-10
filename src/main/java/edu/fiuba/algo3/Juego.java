@@ -142,17 +142,4 @@ public class Juego {
         });
     }
 
-    public void jugar() {
-        List<Defensa> defensas = jugador.obtenerDefensas();
-        for (Defensa defensa: defensas) {
-            for (Enemigo enemigo: enemigos){
-                try {
-                    defensa.atacarEnemigo(enemigo);
-                } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
-                catch (ElEnemigoEstaMuertoException e) {}
-                catch (DefensaEnConstruccionException e) {}
-                catch (FueraDeRangoException e) {}
-            }
-        }
-    }
 }
