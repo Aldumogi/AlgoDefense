@@ -19,7 +19,7 @@ public class LoaderEnemigosJuegoTest {
     @Test
     public void readJSONTest() throws IOException, ParseException, FormatoEnemigosInvalidoException {
 
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(null, null);
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json", null);
 
         assert(turnos.size() > 0);
 

@@ -83,7 +83,6 @@ public class Juego {
         if (this.turnos.size() == 0 || this.indiceActualListaTurnos >= turnos.size()) return;
         List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
         enemigosAAgregar.forEach( enemigo -> {
-            //enemigo.coordenadas = this.mapa.getCoordenadasLargada();
             enemigo.setCoordenadas(this.mapa.getCoordenadasLargada());
             this.mapa.recibir(this.mapa.getCoordenadasLargada(), enemigo);
         } );
