@@ -5,6 +5,9 @@ import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.exceptions.FueraDeRangoException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Defensa {
     protected String nombre;
     protected int costo;
@@ -14,7 +17,6 @@ public abstract class Defensa {
     protected EstadoDefensa estado;
     protected Parcela parcela;
     protected int tiempoDeRalentizacion;
-
     public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException;
 
@@ -28,7 +30,9 @@ public abstract class Defensa {
         return this.estado;
     }
 
-    public void pasarTurno() {
-        this.estado = this.estado.pasarTurno();
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
+        this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
+                this.parcela.obtenerCoordenadas(), hormigasAsesinadas);
     }
+
 }

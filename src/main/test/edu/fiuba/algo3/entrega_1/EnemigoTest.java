@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -157,9 +158,7 @@ public class EnemigoTest {
     @Test
     public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoSePudoConstruirException, ElEnemigoMurioDuranteElAtaqueException,
             FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
-        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
+        Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
@@ -177,9 +176,8 @@ public class EnemigoTest {
         juego.avanzarTurno();
 
         assertEquals(80, jugador.obtenerCantidadDeCreditos());
-        torrePlateada.atacarEnemigo(unaHormiga);
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> torrePlateada.atacarEnemigo(unaHormiga) );
         juego.avanzarTurno();
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> torrePlateada.atacarEnemigo(unaHormiga) );
         assertEquals(81, jugador.obtenerCantidadDeCreditos());
 
     }
@@ -214,42 +212,18 @@ public class EnemigoTest {
     @Test
     public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
-        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
+        Inicializador inicio = new Inicializador();
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
         Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
         Coordenadas coordenadasLargada = mapa.getCoordenadasLargada();
-
-        Hormiga hormiga1 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga1);
-
-        Hormiga hormiga2 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga2);
-
-        Hormiga hormiga3 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga3);
-
-        Hormiga hormiga4 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga4);
-        Hormiga hormiga5 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga5);
-        Hormiga hormiga6 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga6);
-        Hormiga hormiga7 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga7);
-        Hormiga hormiga8 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga8);
-
-        Hormiga hormiga9 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga9);
-        Hormiga hormiga10 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga10);
-        Hormiga hormiga11 = new Hormiga(coordenadasLargada);
-        juego.agregarEnemigo(hormiga11);
+        ArrayList<Hormiga> hormigas = new ArrayList<>();
+        for ( int i = 0; i < 11 ; i++ ) {
+            hormigas.add(new Hormiga(coordenadasLargada));
+            juego.agregarEnemigo( hormigas.get(i) );
+        }
 
         Defensa unatorre = new TorrePlateada();
         Coordenadas coordenadas = new Coordenadas(2,3);
@@ -262,28 +236,8 @@ public class EnemigoTest {
         juego.avanzarTurno();
 
         assertEquals(60, jugador.obtenerCantidadDeCreditos());
-        unatorre.atacarEnemigo(hormiga1);
         juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga2);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga3);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga4);
-        juego.avanzarTurno();
-        otratorre.atacarEnemigo(hormiga5);
-        juego.avanzarTurno();
-        otratorre.atacarEnemigo(hormiga6);
-        juego.avanzarTurno();
-        otratorre.atacarEnemigo(hormiga7);
-        juego.avanzarTurno();
-        otratorre.atacarEnemigo(hormiga8);
-        juego.avanzarTurno();
-        otratorre.atacarEnemigo(hormiga9);
-        juego.avanzarTurno();
-        otratorre.atacarEnemigo(hormiga10);
-        juego.avanzarTurno();
-        otratorre.atacarEnemigo(hormiga11);
-        juego.avanzarTurno();
+
         assertEquals(72, jugador.obtenerCantidadDeCreditos());
     }
 

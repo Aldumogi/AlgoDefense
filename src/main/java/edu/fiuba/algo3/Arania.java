@@ -20,7 +20,8 @@ public class Arania extends Enemigo {
     public int cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {
         Random random = new Random();
         int creditosOtorgados = random.nextInt(10) + 1;
-        return this.estado.creditosOtorgados( creditosOtorgados );
+        this.creditosOtorgados = this.estado.creditosOtorgados( creditosOtorgados );
+        return this.creditosOtorgados;
     }
 
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) { }

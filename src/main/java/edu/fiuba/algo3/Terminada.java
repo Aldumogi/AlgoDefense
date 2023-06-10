@@ -5,11 +5,19 @@ import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.exceptions.FueraDeRangoException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Terminada implements EstadoDefensa {
     private int tiempoDeConstruccion = 0;
     private int tiempoDeRalentizacion;
+    private ArrayList<Hormiga> hormigasAsesinadasPorEstaDefensa;
+    private int cantidadDeHormigasAsesinadas = 0;
+    private int creditosObtenidosPorMatarEnemigos = 0;
     public Terminada(int tiempoDeRalentizacion) {
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
+        this.hormigasAsesinadasPorEstaDefensa = new ArrayList<>();
+        this.cantidadDeHormigasAsesinadas = 0;
     }
     public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
@@ -21,8 +29,22 @@ public class Terminada implements EstadoDefensa {
     private void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
         if ( coordenadasDefensa.distanciaEntreCoordenadas( coordenadasEnemigo) > rangoDeAtaque ) throw new FueraDeRangoException();
     }
+    public int cantidadDeHormigasAsesinadas() { return this.cantidadDeHormigasAsesinadas; }
 
-    public EstadoDefensa pasarTurno() {
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos,  int rangoDeAtaque, int danio,
+                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas) {
+        for (Enemigo enemigo: enemigos) {
+            try {
+                this.atacarEnemigo(enemigo, rangoDeAtaque, danio, coordenadasDefensa);
+                enemigo.acumularMuertos( hormigasAsesinadas );
+                enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
+
+            } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
+            catch (ElEnemigoEstaMuertoException e) {}
+            catch (DefensaEnConstruccionException e) {}
+            catch (FueraDeRangoException e) {}
+
+        }
         return this;
     }
 

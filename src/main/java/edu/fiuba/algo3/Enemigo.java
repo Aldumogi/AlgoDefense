@@ -30,6 +30,8 @@ public abstract class Enemigo {
         this.estado = this.estado.recibirDanio(unDanio);
     }
 
+    public int obtenerCreditos() { return this.creditosOtorgados; }
+
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
     }
