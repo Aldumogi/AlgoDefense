@@ -31,6 +31,12 @@ public class Pasarela implements Parcela {
         this.enemigos.remove(enemigo);
     }
 
+    public Coordenadas devolverCoordenadasMeta() {
+        return null;
+    }
+
+    public Coordenadas devolverCoordenadasLargada() { return null; }
+
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

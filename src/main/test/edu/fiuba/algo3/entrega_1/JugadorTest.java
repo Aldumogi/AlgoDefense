@@ -18,7 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JugadorTest {
     @Test
     public void jugadorEmpiezaConVidaYCreditosCorrespondientes() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
@@ -29,7 +31,9 @@ public class JugadorTest {
     }
     @Test
     public void generoUnaDefensaYSeAgregaAlaListaDeDefensas() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
@@ -44,7 +48,9 @@ public class JugadorTest {
     
     @Test
     public void siMeQuedoSinCreditosNoSeGeneraNingunaDefensa() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();

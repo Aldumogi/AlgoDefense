@@ -50,6 +50,16 @@ public class Juego {
         logger.info("Se ha iniciado el juego con los turnos");
     }
 
+    public Juego(ArrayList<Turno> turnos, Mapa mapa) throws IOException, ParseException, FormatoMapaInvalidoException {
+        this.indiceActualListaTurnos = 0;
+        this.mapa = mapa;
+        this.enemigos = new ArrayList<Enemigo>();
+        this.turnos = turnos;
+        this.agregarEnemigosDelTurno();
+        this.cantidadDeHormigasMuertas = 0;
+
+        logger.info("Se ha iniciado el juego con los turnos");
+    }
     public void setearJugador(Jugador jugador) {
         this.jugador = jugador;
 
@@ -71,10 +81,11 @@ public class Juego {
     }
 
     private void agregarEnemigosDelTurno() {
-        if ( turnos.size() == 0 || this.indiceActualListaTurnos >= turnos.size()) return;
+        if (this.turnos.size() == 0 || this.indiceActualListaTurnos >= turnos.size()) return;
         List<Enemigo> enemigosAAgregar = turnos.get(this.indiceActualListaTurnos).getListaEnemigosAgregadosEnElTurno();
         enemigosAAgregar.forEach( enemigo -> {
-            enemigo.coordenadas = this.mapa.recibir(null, enemigo);
+            enemigo.coordenadas = this.mapa.getCoordenadasLargada();
+            this.mapa.recibir(this.mapa.getCoordenadasLargada(), enemigo);
         } );
         this.enemigos.addAll(enemigosAAgregar);
     }
@@ -142,8 +153,7 @@ public class Juego {
     public void moverEnemigosAMeta() {
         Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
         this.enemigos.forEach( enemigo -> {
-            enemigo.setCoordenadas(coordenadasMeta);
-
+            enemigo.coordenadas = coordenadasMeta;
         });
     }
 

@@ -30,6 +30,10 @@ public class Tierra implements Parcela {
         throw new NoSePudoBorrarElEnemigoException();
     }
 
+    public Coordenadas devolverCoordenadasMeta() { return null; }
+
+    public Coordenadas devolverCoordenadasLargada() { return null; }
+
     public Coordenadas obtenerCoordenadas(){
         return this.coordenadas;
     }

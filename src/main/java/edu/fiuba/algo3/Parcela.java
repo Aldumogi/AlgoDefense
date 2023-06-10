@@ -11,4 +11,8 @@ public interface Parcela {
     Coordenadas recibir(Enemigo enemigo) throws NoEsPosibleRecibirEnemigosEnParcelaException;
     List<Enemigo> obtener();
     void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException;
+
+    Coordenadas devolverCoordenadasMeta();
+
+    Coordenadas devolverCoordenadasLargada();
 }

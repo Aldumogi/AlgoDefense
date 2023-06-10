@@ -33,10 +33,6 @@ public abstract class Enemigo {
         this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
     }
 
-    public void setCoordenadas(Coordenadas coordenadas){
-        this.coordenadas = coordenadas;
-    }
-
     public void mover(Mapa mapa) throws NoSePudoBorrarElEnemigoException{
         // Pedir a mapa pasarela actual y eliminar enemigo
         Parcela pasarela = mapa.obtenerCelda(this.coordenadas);

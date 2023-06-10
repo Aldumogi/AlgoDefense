@@ -16,7 +16,9 @@ public class DefensaTest {
     */
     @Test
     public void construirTorreBlancaTardaLoIndicadoEnConstruirseYRecienEstaOperativaAlTerminarDeConstruirse() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -32,7 +34,9 @@ public class DefensaTest {
 
     @Test
     public void construirTorrePlateadaTardaLoIndicadoYRecienEstaOperativaAlTerminarDeConstruirse() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -119,7 +123,9 @@ public class DefensaTest {
     @Test
     public void defensaTorreBlancaPuedeAtacarDentroDelRangoEsperado() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -138,7 +144,9 @@ public class DefensaTest {
     @Test
     public void defensaTorrePlateadaPuedeAtacarDentroDelRangoEsperado() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -158,7 +166,9 @@ public class DefensaTest {
     @Test
     public void defensaTorreBlancaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -177,7 +187,9 @@ public class DefensaTest {
     @Test
     public void defensaTorrePlateadaIntentaAtacarEnemigoFueraDelRangoNoCausaNingunDanio() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         //Arrange
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();

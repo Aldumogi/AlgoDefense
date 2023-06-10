@@ -21,7 +21,7 @@ public class LoaderEnemigosJuegoTest {
     @Test
     public void readJSONTest() throws IOException, ParseException, FormatoEnemigosInvalidoException {
 
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(null);
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(null, null);
 
         assert(turnos.size() > 0);
 

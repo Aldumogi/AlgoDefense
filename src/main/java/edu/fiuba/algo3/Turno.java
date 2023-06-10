@@ -11,19 +11,19 @@ public class Turno {
         this.turnoId = turnoId;
     }
 
-    public Turno(int turnoId, int cantidadHormigas, int cantidadAranias) {
+    public Turno(int turnoId, int cantidadHormigas, int cantidadAranias, Coordenadas coordenadasLargada) {
         this.turnoId = turnoId;
-        this.agregarEnemigos(cantidadHormigas, cantidadAranias);
+        this.agregarEnemigos(cantidadHormigas, cantidadAranias, coordenadasLargada);
     }
 
-    public void agregarEnemigos(int cantidadHormigas, int cantidadAranas) {
+    public void agregarEnemigos(int cantidadHormigas, int cantidadAranas, Coordenadas coordenadasLargada) {
         for(int i = 0; i < cantidadHormigas; i++) {
-            Enemigo enemigo = new Hormiga();
+            Enemigo enemigo = new Hormiga(coordenadasLargada);
             this.listaEnemigosAgregadosEnElTurno.add(enemigo);
         }
 
         for(int i = 0; i < cantidadAranas; i++) {
-            Enemigo enemigo = new Arania();
+            Enemigo enemigo = new Arania(coordenadasLargada);
             this.listaEnemigosAgregadosEnElTurno.add(enemigo);
         }
     }

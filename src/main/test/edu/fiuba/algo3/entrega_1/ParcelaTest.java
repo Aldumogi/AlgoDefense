@@ -19,8 +19,8 @@ public class ParcelaTest {
     @Test
     public void unaPasarelaPuedeRecibirUnEnemigo() {
 
-        Hormiga hormiga = new Hormiga();
         Coordenadas coordenadaPasarela = new Coordenadas(1, 1);
+        Hormiga hormiga = new Hormiga( coordenadaPasarela );
         Pasarela pasarela = new Pasarela(coordenadaPasarela);
 
 
@@ -30,8 +30,8 @@ public class ParcelaTest {
     @Test
     public void parcelaRocosoNoPuedeRecibirUnEnemigo() {
 
-        Hormiga hormiga = new Hormiga();
         Coordenadas coordenadaRocoso = new Coordenadas(1, 1);
+        Hormiga hormiga = new Hormiga( coordenadaRocoso );
         Rocoso rocoso = new Rocoso(coordenadaRocoso);
 
 
@@ -42,8 +42,8 @@ public class ParcelaTest {
     @Test
     public void parcelaTierraNoPuedeRecibirUnEnemigo() {
 
-        Hormiga hormiga = new Hormiga();
         Coordenadas coordenadaRocoso = new Coordenadas(1, 1);
+        Hormiga hormiga = new Hormiga( coordenadaRocoso );
         Tierra tierra = new Tierra(coordenadaRocoso);
 
 
