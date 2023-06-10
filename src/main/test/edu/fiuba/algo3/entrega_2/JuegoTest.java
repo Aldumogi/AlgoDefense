@@ -22,9 +22,10 @@ public class JuegoTest {
    */
     @Test
     public void elJuegoSeCreaAcordeAAmbosJSON() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoBorrarElEnemigoException {
-
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
         List<Enemigo> enemigosEnLaPasarela;
-        Inicializador inicio = new Inicializador();
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
         inicio.agregarJugador("NombreDelJugador");
         Juego juego = inicio.obtenerJuego();
         Mapa mapaCargadoEnElJuego = juego.obtenerMapa();
@@ -114,7 +115,7 @@ public class JuegoTest {
     // Arrange
     Jugador jugador = new Jugador("Alberto");
     Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
-    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json");
+    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json", mapa);
     // turno 1
     Juego juego = new Juego(jugador, mapa, turnos);
 
@@ -151,7 +152,7 @@ public class JuegoTest {
     // Arrange
     Jugador jugador = new Jugador("Alberto");
     Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
-    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json");
+    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json", mapa);
     // turno 1
     Juego juego = new Juego(jugador, mapa, turnos);
 
@@ -166,6 +167,7 @@ public class JuegoTest {
     juego.avanzarTurno(); // pasa a turno 4
     juego.moverEnemigosAMeta();
     juego.avanzarTurno(); // pasa a turno 5
+    juego.avanzarTurno();
 
     // Assert
     assertTrue(juego.juegoTerminado());

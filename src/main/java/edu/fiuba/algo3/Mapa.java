@@ -20,9 +20,25 @@ public class Mapa {
 
     public Mapa() throws IOException, ParseException, FormatoMapaInvalidoException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa(null);
+        this.buscarCoordenadasLargadaYMeta();
     }
     public Mapa(String jsonFilePath) throws IOException, ParseException, FormatoMapaInvalidoException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa(jsonFilePath);
+        this.buscarCoordenadasLargadaYMeta();
+    }
+    private void buscarCoordenadasLargadaYMeta() {
+        for ( int fila = 1 ; fila <= this.mapaDelJuego.size() ; fila++ ) {
+            for ( int columna = 1 ; columna <= this.mapaDelJuego.get(fila).size() ; columna++ ) {
+                Coordenadas coord = new Coordenadas(fila, columna);
+                Parcela parcela = this.mapaDelJuego.get(fila).get(columna);
+                if ( parcela.equals( new PasarelaMeta( coord ) ) ) {
+                    this.coordenadasMeta = coord;
+                }
+                if ( parcela.equals( new PasarelaLargada( coord ) ) ) {
+                    this.coordenadasLargada = coord;
+                }
+            }
+        }
     }
     public Parcela obtenerCelda(Coordenadas coordenada) {
         return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
@@ -32,19 +48,18 @@ public class Mapa {
         return this.mapaDelJuego.size();
     }
     /* En el futuro puede agregar otra cosas si se desea, no solo enemigo */
-    public Coordenadas recibir(Coordenadas coordenadas, Enemigo enemigo) {
+    public void recibir(Coordenadas coordenadas, Enemigo enemigo) {
         if ( enemigo != null ) {
             for (int fila = 1 ; fila <= this.mapaDelJuego.size() ; fila ++ ) {
                 for (int columna = 1 ; columna <= this.mapaDelJuego.get(fila).size() ; columna ++ ) {
                     try {
-                        return this.mapaDelJuego.get(fila).get(columna).recibir(enemigo);
+                        this.mapaDelJuego.get(fila).get(columna).recibir(enemigo);
                     }
                     catch(NoEsPosibleRecibirEnemigosEnParcelaException e){
                     }
                 }
             }
         }
-        return null;
     }
 
     public void borrar(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
@@ -61,10 +76,10 @@ public class Mapa {
     
         Parcela celdaActual = this.obtenerCelda(coordenadaAVerificar);
     
-        if (celdaActual.equals(new PasarelaLargada(coordenadaAVerificar))) {
+        if ( coordenadaAVerificar.equals( this.coordenadasLargada ) ) {
             return false;
         }
-        if (celdaActual.equals(new PasarelaMeta(coordenadaAVerificar))) {
+        if ( coordenadaAVerificar.equals( this.coordenadasMeta ) ) {
             return true;
         }
         if (!celdaActual.equals(new Pasarela(coordenadaAVerificar))) {
@@ -144,7 +159,10 @@ public class Mapa {
     }
 
     public Coordenadas getCoordenadasMeta() {
-        return new Coordenadas(5,2);
+        return this.coordenadasMeta;
+    }
+    public Coordenadas getCoordenadasLargada() {
+        return this.coordenadasLargada;
     }
 }
     

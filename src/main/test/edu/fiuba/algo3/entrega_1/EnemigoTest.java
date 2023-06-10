@@ -12,7 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnemigoTest {
     @Test
     public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -29,7 +31,9 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -46,7 +50,9 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -64,7 +70,9 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -82,7 +90,9 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -100,7 +110,9 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -118,7 +130,9 @@ public class EnemigoTest {
     }
     @Test
     public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador ini = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
@@ -143,7 +157,9 @@ public class EnemigoTest {
     @Test
     public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoSePudoConstruirException, ElEnemigoMurioDuranteElAtaqueException,
             FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
@@ -169,9 +185,11 @@ public class EnemigoTest {
    @Test
     public void matoAUnaAraniaYLeSuma1CredAlJugador() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
-        inicio.agregarJugador("Alberto");
+       inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
@@ -192,7 +210,9 @@ public class EnemigoTest {
     @Test
     public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();

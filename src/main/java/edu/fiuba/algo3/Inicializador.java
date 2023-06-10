@@ -7,6 +7,7 @@ import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,12 +17,16 @@ public class Inicializador {
     private Juego juego;
 
     public static final Logger logger = LogManager.getLogger(App.class);
-
-    public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(null);
-        // LoaderMapaJuego.recuperarMapa();
-        // this. juego = new Juego(turnos, mapa);
-        this.juego = new Juego(turnos);
+    public Inicializador() throws IOException, ParseException, FormatoMapaInvalidoException {
+        // inicializador sin enemigos
+        Mapa mapa = new Mapa( "src/main/java/edu/fiuba/algo3/resources/mapa.json" );
+        ArrayList<Turno> turnos = new ArrayList<>();
+        this.juego = new Juego(turnos, mapa);
+    }
+    public Inicializador(String jsonArchivoEnemigos, String jsonArchivoMapa) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        Mapa mapa = new Mapa( jsonArchivoMapa );
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(jsonArchivoEnemigos, mapa);
+        this.juego = new Juego(turnos, mapa);
     }
 
     public Juego obtenerJuego() {

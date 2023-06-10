@@ -16,7 +16,7 @@ import static edu.fiuba.algo3.Inicializador.logger;
 
 public class LoaderEnemigosJuego {
 
-    public static ArrayList<Turno> recuperarTurnosYEnemigos(String jsonFilePath) throws IOException, ParseException, FormatoEnemigosInvalidoException {
+    public static ArrayList<Turno> recuperarTurnosYEnemigos(String jsonFilePath, Mapa mapa) throws IOException, ParseException, FormatoEnemigosInvalidoException {
 
         String filePath = (jsonFilePath != null)? jsonFilePath : "src/main/java/edu/fiuba/algo3/resources/enemigos.json" ;
         validarJsonEnemigos(filePath);

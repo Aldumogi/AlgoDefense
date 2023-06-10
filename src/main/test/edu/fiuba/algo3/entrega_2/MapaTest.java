@@ -124,7 +124,9 @@ public class MapaTest {
 
     @Test
     public void devolverPasarelaAlSumarDeADosEnLaCoordenada52() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
         inicio.agregarJugador("NombreDelJugador");
         Juego juego = inicio.obtenerJuego();
         Mapa unMapa = juego.obtenerMapa();Coordenadas coordenadaActual = new Coordenadas(5, 2);
