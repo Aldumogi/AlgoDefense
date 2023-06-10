@@ -15,7 +15,7 @@ public class Topo extends Enemigo{
         this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
         this.estado = new Vivo( energia );
-
+        this.coeficienteDeRalentizacion = 1;
         logger.info("Se creó un topo");
     }
 
