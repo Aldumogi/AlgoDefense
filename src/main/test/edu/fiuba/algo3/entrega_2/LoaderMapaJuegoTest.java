@@ -16,7 +16,7 @@ public class LoaderMapaJuegoTest {
     @Test
     public void readJSONTest() throws IOException, ParseException, FormatoMapaInvalidoException {
 
-        Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa(null);
+        Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa("src/main/java/edu/fiuba/algo3/resources/mapa.json");
 
         assert(mapa.size() > 0);
     }

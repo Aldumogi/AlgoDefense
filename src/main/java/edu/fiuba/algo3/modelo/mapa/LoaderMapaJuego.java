@@ -18,8 +18,7 @@ import static edu.fiuba.algo3.modelo.juego.Inicializador.logger;
 
 public class LoaderMapaJuego {
 
-    public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa(String jsonFilePath ) throws IOException, ParseException, FormatoMapaInvalidoException {
-        String filePath = (jsonFilePath != null)? jsonFilePath : "src/main/java/edu/fiuba/algo3/resources/mapa.json" ;
+    public static Map<Integer, HashMap<Integer, Parcela>> recuperarMapa(String filePath ) throws IOException, ParseException, FormatoMapaInvalidoException {
         validarMapa(filePath);
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
         JSONObject jsonObject = (JSONObject) new JSONParser().parse(jsonString);

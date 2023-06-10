@@ -23,7 +23,7 @@ public class Mapa {
     private Coordenadas coordenadasMeta;
 
     public Mapa() throws IOException, ParseException, FormatoMapaInvalidoException {
-        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa(null);
+        this.mapaDelJuego = LoaderMapaJuego.recuperarMapa("src/main/java/edu/fiuba/algo3/resources/mapa.json");
         this.buscarCoordenadasLargadaYMeta();
     }
     public Mapa(String jsonFilePath) throws IOException, ParseException, FormatoMapaInvalidoException {
