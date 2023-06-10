@@ -6,13 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
     @Override
     public void start(Stage stage) {
         var javaVersion = SystemInfo.javaVersion();
