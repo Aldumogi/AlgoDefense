@@ -37,6 +37,10 @@ public class Pasarela implements Parcela {
 
     public Coordenadas devolverCoordenadasLargada() { return null; }
 
+    public Coordenadas obtenerCoordenadas() {
+        return this.coordenadas;
+    }
+
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

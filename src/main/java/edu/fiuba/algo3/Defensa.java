@@ -12,12 +12,13 @@ public abstract class Defensa {
     protected int rangoDeAtaque;
     protected int danio;
     protected EstadoDefensa estado;
-    protected Tierra tierra;
+    protected Parcela parcela;
+    protected int tiempoDeRalentizacion;
 
     public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException;
 
-    public abstract void construir(Tierra tierra);
+    public abstract void construir(Parcela parcela);
 
     public int costo() {
         return this.costo;

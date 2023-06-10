@@ -9,8 +9,10 @@ import static edu.fiuba.algo3.Inicializador.logger;
 
 public class EnConstruccion implements EstadoDefensa {
     private int tiempoDeConstruccion;
-    public EnConstruccion(int tiempoDeConstruccion) {
+    private int tiempoDeRalentizacion;
+    public EnConstruccion(int tiempoDeConstruccion, int tiempoDeRalentizacion) {
         this.tiempoDeConstruccion = tiempoDeConstruccion;
+        this.tiempoDeRalentizacion = tiempoDeRalentizacion;
     }
     public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
@@ -18,11 +20,13 @@ public class EnConstruccion implements EstadoDefensa {
     }
     public int tiempoDeConstruccion() { return this.tiempoDeConstruccion; }
 
+    public void ralentizarEnemigo(Enemigo enemigo, double ralentizacion) { }
+
     public EstadoDefensa pasarTurno() {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
             logger.info("La construcción terminó");
-            return new Terminada();
+            return new Terminada(this.tiempoDeRalentizacion);
         }
         return this;
     }

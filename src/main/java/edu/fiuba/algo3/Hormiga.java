@@ -12,7 +12,7 @@ public class Hormiga extends Enemigo {
         this.creditosOtorgados = 1;
         this.coordenadas = coordenadas;
         this.estado = new Vivo( energia );
-
+        this.coeficienteDeRalentizacion = 1;
         logger.info("Se creó una hormiga");
     }
 

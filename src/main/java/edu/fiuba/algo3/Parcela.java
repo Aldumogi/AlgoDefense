@@ -15,4 +15,5 @@ public interface Parcela {
     Coordenadas devolverCoordenadasMeta();
 
     Coordenadas devolverCoordenadasLargada();
+    Coordenadas obtenerCoordenadas();
 }

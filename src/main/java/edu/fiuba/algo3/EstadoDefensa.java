@@ -10,4 +10,6 @@ public interface EstadoDefensa {
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
     EstadoDefensa pasarTurno();
     int tiempoDeConstruccion();
+
+    void ralentizarEnemigo(Enemigo enemigo, double ralentizacion);
 }
