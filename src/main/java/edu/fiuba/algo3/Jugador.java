@@ -44,6 +44,7 @@ public class Jugador {
         logger.info("El jugador creó una" + unaDefensa.nombre);
     }
 
+
     public void finalizarTurno(List<Enemigo> enemigos){
         this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas) );
         this.agregarCreditosAlMatarEnemigos(enemigos);
@@ -61,5 +62,11 @@ public class Jugador {
 
     public void restarEnergia(int energia) {
         this.puntosDeVida -= energia;
+    }
+
+    public void destruirPrimeraTorre() {
+        if(this.defensas.isEmpty()){
+            defensas.remove(0);
+        }
     }
 }
