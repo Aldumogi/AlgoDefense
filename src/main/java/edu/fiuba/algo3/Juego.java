@@ -61,7 +61,8 @@ public class Juego {
     }
 
     public int obtenerNumeroDeturno() {
-        return this.indiceActualListaTurnos;
+        // aca deberia devolver el numero de turno real
+        return this.indiceActualListaTurnos + 1;
     }
     public Mapa obtenerMapa() { return this.mapa; }
 
@@ -128,7 +129,7 @@ public class Juego {
         Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
         this.enemigos.forEach( enemigo -> {
             if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
-                jugador.restarEnergia(enemigo.obtenerDanioCausado());
+                jugador.restarEnergia(enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() ));
             }
         });
         logger.info("Se actualizó la energía del jugador");
