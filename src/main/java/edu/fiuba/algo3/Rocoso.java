@@ -27,4 +27,8 @@ public class Rocoso implements Parcela {
     public Coordenadas devolverCoordenadasMeta() { return null; }
 
     public Coordenadas devolverCoordenadasLargada() { return null; }
+
+    public Coordenadas obtenerCoordenadas() {
+        return this.coordenadas;
+    }
 }

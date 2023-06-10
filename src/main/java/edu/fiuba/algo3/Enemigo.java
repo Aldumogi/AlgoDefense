@@ -14,6 +14,7 @@ public abstract class Enemigo {
     protected Coordenadas coordenadas;
     protected EstadoEnemigo estado;
     protected int cantidadDeMovimientosRealizados;
+    protected double coeficienteDeRalentizacion;
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
 
@@ -29,6 +30,8 @@ public abstract class Enemigo {
         this.estado = this.estado.recibirDanio(unDanio);
     }
 
+    public int obtenerCreditos() { return this.creditosOtorgados; }
+
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
     }
@@ -39,7 +42,8 @@ public abstract class Enemigo {
         pasarela.borrarObjeto(this);
 
         // Mover a la siguiente pasarela
-        Coordenadas coordenadaSiguiente = mapa.devolverSiguientePasarela(this.coordenadas, this.velocidad);
+        double velocidad = this.velocidad * this.coeficienteDeRalentizacion;
+        Coordenadas coordenadaSiguiente = mapa.devolverSiguientePasarela(this.coordenadas, velocidad);
         Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);
         pasarelaSiguiente.recibir(this);
 
@@ -47,4 +51,7 @@ public abstract class Enemigo {
         this._actualizarVelocidadSegunCantidadDeMovimientos();
     }
     protected abstract void _actualizarVelocidadSegunCantidadDeMovimientos();
+    public void recibirRalentizacion(double coeficienteDeRalentizacion) {
+        this.coeficienteDeRalentizacion = coeficienteDeRalentizacion;
+    }
 }

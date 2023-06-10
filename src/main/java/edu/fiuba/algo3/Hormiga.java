@@ -9,16 +9,17 @@ public class Hormiga extends Enemigo {
         int energia = 1;
         this.velocidad = 1;
         this.dañoCausado = 1;
-        this.creditosOtorgados = 1;
+        this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
         this.estado = new Vivo( energia );
-
+        this.coeficienteDeRalentizacion = 1;
         logger.info("Se creó una hormiga");
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {
         int creditosOtorgados = ( cantidadDeHormigasMuertas < 11 ) ? 1:2 ;
-        return this.estado.creditosOtorgados(creditosOtorgados);
+        this.creditosOtorgados = this.estado.creditosOtorgados(creditosOtorgados);
+        return this.creditosOtorgados;
     }
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
         this.estado.acumularHormigasMuertas(hormigasMuertas, this);

@@ -147,8 +147,9 @@ public class Mapa {
         }
         return cordenadaActual;
     }
-    public Coordenadas devolverSiguientePasarela(Coordenadas cordenadaActual, int cantidadDeMovimientos){
-        for(int i = 0; i < cantidadDeMovimientos; i ++ ){
+    public Coordenadas devolverSiguientePasarela(Coordenadas cordenadaActual, double cantidadDeMovimientos){
+        int cantidadDeMovs = (int) cantidadDeMovimientos;
+        for(int i = 0; i < cantidadDeMovs; i ++ ){
             cordenadaActual = devolverSiguientePasarela_(cordenadaActual);
         }
         return cordenadaActual;

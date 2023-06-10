@@ -14,7 +14,6 @@ public class Juego {
     private int indiceActualListaTurnos;
     private Jugador jugador;
     private List<Enemigo> enemigos;
-    private int cantidadDeHormigasMuertas;
     private ArrayList<Turno> turnos;
 
     public Juego() throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -34,7 +33,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-        this.cantidadDeHormigasMuertas = 0;
 
         logger.info("Se ha iniciado el juego con un jugador y un mapa");
     }
@@ -45,7 +43,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-        this.cantidadDeHormigasMuertas = 0;
 
         logger.info("Se ha iniciado el juego con los turnos");
     }
@@ -56,7 +53,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-        this.cantidadDeHormigasMuertas = 0;
 
         logger.info("Se ha iniciado el juego con los turnos");
     }
@@ -92,9 +88,8 @@ public class Juego {
 
     public void avanzarTurno(){
         this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size() - 1 )? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12);
-        this.jugador.actualizarDefensasAlFinalizarTurno();
-        this.cantidadDeHormigasMuertas += this.contarMuertosEnElTurnoActual();
-        this.obtenerCreditosYEliminarEnemigosAlFinalizarTurno();
+        this.jugador.finalizarTurno(this.enemigos);
+        this.eliminarEnemigosMuertos();
         this.actualizarEnergiaJugador();
         this.avanzarEnemigos();
         this.agregarEnemigosDelTurno();
@@ -110,15 +105,13 @@ public class Juego {
             }
         });
     }
-    public void obtenerCreditosYEliminarEnemigosAlFinalizarTurno(){
-        int creditosDelTurno = 0;
+    public void eliminarEnemigosMuertos(){
+
         List<Integer> indicesEnemigosAEliminar = new ArrayList<Integer>();
         for (int i = 0; i < this.enemigos.size(); i++) {
-            creditosDelTurno += this.enemigos.get(i).cantidadCreditosOtorgados(this.cantidadDeHormigasMuertas);
             // Si el enemigo esta muerto, guardo la posicion correspondiente a la lista de enemigos
             this.enemigos.get(i).agregarIndiceDelEnemigoMuerto(indicesEnemigosAEliminar, i);
         }
-        this.jugador.agregarCreditosAlMatarEnemigos( creditosDelTurno );
 
         /* Voy eliminando los enemigos desde la posicion mas alta para que los indices de la lista
         * enemigos no se modifiquen */
@@ -126,14 +119,6 @@ public class Juego {
             int posicion = indicesEnemigosAEliminar.get( indicesEnemigosAEliminar.size() - j - 1);
             this.enemigos.remove( posicion );
         }
-    }
-
-    public int contarMuertosEnElTurnoActual() {
-        ArrayList<Hormiga> hormigasMuertas = new ArrayList<Hormiga>();
-        for (Enemigo enemigo: this.enemigos) {
-            enemigo.acumularMuertos(hormigasMuertas);
-        }
-        return hormigasMuertas.size();
     }
 
     public void actualizarEnergiaJugador() {
@@ -157,17 +142,4 @@ public class Juego {
         });
     }
 
-    public void jugar() {
-        List<Defensa> defensas = jugador.obtenerDefensas();
-        for (Defensa defensa: defensas) {
-            for (Enemigo enemigo: enemigos){
-                try {
-                    defensa.atacarEnemigo(enemigo);
-                } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
-                catch (ElEnemigoEstaMuertoException e) {}
-                catch (DefensaEnConstruccionException e) {}
-                catch (FueraDeRangoException e) {}
-            }
-        }
-    }
 }

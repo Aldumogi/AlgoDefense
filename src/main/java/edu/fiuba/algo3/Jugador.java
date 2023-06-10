@@ -1,12 +1,12 @@
 package edu.fiuba.algo3;
 import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static edu.fiuba.algo3.Inicializador.logger;
 
 public class Jugador {
+    private ArrayList<Hormiga> hormigasAsesinadas;
     private int puntosDeVida;
     private int cantidadDeCreditos;
     private String nombre;
@@ -18,6 +18,7 @@ public class Jugador {
         this.cantidadDeCreditos = 100;
         this.nombre = nombre;
         this.defensas = new ArrayList<Defensa>();
+        this.hormigasAsesinadas = new ArrayList<Hormiga>();
     }
 
     public int obtenerPuntosDeVida() {
@@ -43,12 +44,15 @@ public class Jugador {
         logger.info("El jugador creó una" + unaDefensa.nombre);
     }
 
-    public void actualizarDefensasAlFinalizarTurno(){
-        this.defensas.forEach( Defensa::pasarTurno );
+    public void finalizarTurno(List<Enemigo> enemigos){
+        this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas) );
+        this.agregarCreditosAlMatarEnemigos(enemigos);
     }
 
-    public void agregarCreditosAlMatarEnemigos(int creditos) {
-        this.cantidadDeCreditos += creditos;
+    private void agregarCreditosAlMatarEnemigos(List<Enemigo> enemigos) {
+        enemigos.forEach( enemigo -> {
+            this.cantidadDeCreditos += enemigo.obtenerCreditos();
+        } );
     }
 
     public boolean estaVivo() {

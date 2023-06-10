@@ -135,7 +135,6 @@ public class JuegoTest {
     jugador.generarConstruccion(defensa3, coordDefensa3);
 
     juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa1 y defensa2
-    juego.jugar();  // aca defensa1 y defensa2 deben atacar a enemigos dentro de su rango
     juego.avanzarTurno(); // pasa a turno 4, se termina de construir defensa3
     juego.avanzarTurno(); // pasa a turno 5
 
@@ -163,7 +162,6 @@ public class JuegoTest {
     // Act
     juego.avanzarTurno(); // pasa a turno 2
     juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa
-    juego.jugar();  // defensa deben atacar a enemigo dentro de su rango
     juego.avanzarTurno(); // pasa a turno 4
     juego.moverEnemigosAMeta();
     juego.avanzarTurno(); // pasa a turno 5

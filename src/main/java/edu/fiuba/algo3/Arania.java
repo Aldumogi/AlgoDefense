@@ -13,14 +13,15 @@ public class Arania extends Enemigo {
         this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
         this.estado = new Vivo( energia );
-
+        this.coeficienteDeRalentizacion = 1;
         logger.info("Se creó una araña");
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {
         Random random = new Random();
         int creditosOtorgados = random.nextInt(10) + 1;
-        return this.estado.creditosOtorgados( creditosOtorgados );
+        this.creditosOtorgados = this.estado.creditosOtorgados( creditosOtorgados );
+        return this.creditosOtorgados;
     }
 
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) { }

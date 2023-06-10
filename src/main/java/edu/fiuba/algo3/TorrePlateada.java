@@ -15,17 +15,19 @@ public class TorrePlateada extends Defensa {
         this.tiempoDeConstruccion = 2;
         this.rangoDeAtaque = 5;
         this.danio = 2;
+        this.tiempoDeRalentizacion = -1;
+        this.factorDeRalentizacion = 1;
     }
 
-    public void construir(Tierra tierra) {
-        this.tierra = tierra;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion);
+    public void construir(Parcela tierra) {
+        this.parcela = tierra;
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
 
         logger.info("Se pusó en construcción una Torre Plateada");
     }
     public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException {
-        this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.tierra.obtenerCoordenadas());
+        this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.parcela.obtenerCoordenadas());
 
         logger.info("Torre Plateada atacó a un enemigo");
     }
