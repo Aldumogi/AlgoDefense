@@ -64,4 +64,6 @@ public abstract class Enemigo {
     }
 
     public double obtenerVelocidad() { return this.velocidad; }
+
+    public Object obtenerEnergia() { return this.estado.obtenerEnergia(); }
 }

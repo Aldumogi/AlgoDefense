@@ -22,7 +22,7 @@ public class Vivo implements EstadoEnemigo {
     public int creditosOtorgados(int creditos) {
         return 0;
     }
-
+    public int obtenerEnergia() { return this.energia; }
     public void mover(Enemigo enemigo) {}
     public void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo) {}
     public void agregarIndiceDeEnemigoMuerto(List<Integer> enemigosMuertos, int enemigo) {}

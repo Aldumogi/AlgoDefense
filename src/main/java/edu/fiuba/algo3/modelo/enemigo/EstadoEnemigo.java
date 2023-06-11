@@ -13,4 +13,6 @@ public interface EstadoEnemigo {
 
     void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo);
     void agregarIndiceDeEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual);
+
+    int obtenerEnergia();
 }

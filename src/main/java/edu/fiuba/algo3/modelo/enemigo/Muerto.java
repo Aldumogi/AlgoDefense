@@ -13,7 +13,7 @@ public class Muerto implements EstadoEnemigo {
     public EstadoEnemigo recibirDanio(int danio) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         throw new ElEnemigoEstaMuertoException();
     }
-
+    public int obtenerEnergia() { return 0; }
     public int creditosOtorgados(int creditos) {
         return creditos;
     }
