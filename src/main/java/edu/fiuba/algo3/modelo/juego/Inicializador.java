@@ -21,6 +21,11 @@ public class Inicializador {
         ArrayList<Turno> turnos = new ArrayList<>();
         this.juego = new Juego(turnos, mapa);
     }
+    public Inicializador(ArrayList<Turno> turnos) throws IOException, ParseException, FormatoMapaInvalidoException {
+        // inicializador sin enemigos
+        Mapa mapa = new Mapa( "src/main/java/edu/fiuba/algo3/resources/mapa.json" );
+        this.juego = new Juego(turnos, mapa);
+    }
     public Inicializador(String jsonArchivoEnemigos, String jsonArchivoMapa) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Mapa mapa = new Mapa( jsonArchivoMapa );
         ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(jsonArchivoEnemigos, mapa.getCoordenadasLargada());
