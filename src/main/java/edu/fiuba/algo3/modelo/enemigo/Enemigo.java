@@ -49,6 +49,7 @@ public abstract class Enemigo {
         Coordenadas coordenadaSiguiente = mapa.devolverSiguientePasarela(this.coordenadas, velocidad);
         Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);
         pasarelaSiguiente.recibir(this);
+        this.cantidadDeMovimientosRealizados++;
 
         this.coordenadas = coordenadaSiguiente;
         this._actualizarVelocidadSegunCantidadDeMovimientos();
@@ -61,4 +62,8 @@ public abstract class Enemigo {
     public void setCoordenadas(Coordenadas coordenadas) {
         this.coordenadas = coordenadas;
     }
+
+    public double obtenerVelocidad() { return this.velocidad; }
+
+    public Object obtenerEnergia() { return this.estado.obtenerEnergia(); }
 }
