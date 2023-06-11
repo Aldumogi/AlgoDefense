@@ -2,6 +2,7 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
 
 import java.util.ArrayList;
 import static edu.fiuba.algo3.Inicializador.logger;
@@ -34,6 +35,23 @@ public class Lechuza extends Enemigo{
         public int obtenerDanioCausado (int numeroDeTurno) {
                 return this.dañoCausado;
         }
+
+        public void mover(Mapa mapa) throws NoSePudoBorrarElEnemigoException{
+                // Pedir a mapa pasarela actual y eliminar enemigo
+                Parcela pasarela = mapa.obtenerCelda(this.coordenadas);
+                pasarela.borrarObjeto(this);
+
+                // Mover a la siguiente pasarela
+                double velocidad = this.velocidad * this.coeficienteDeRalentizacion;
+                
+                Coordenadas coordenadaSiguiente = mapa.devolverSiguientePasarela(this.coordenadas, velocidad);
+                Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);
+                pasarelaSiguiente.recibir(this);
+
+                this.coordenadas = coordenadaSiguiente;
+                this._actualizarVelocidadSegunCantidadDeMovimientos();
+        }
+
                 
         public boolean equals(Object e2) {
                 if ( e2 == this ) {

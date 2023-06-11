@@ -35,5 +35,4 @@ public abstract class Defensa {
         this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
                 this.parcela.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion);
     }
-
 }

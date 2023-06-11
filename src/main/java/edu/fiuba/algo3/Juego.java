@@ -140,7 +140,7 @@ public class Juego {
             }
         });
     }
-  
+    
     public boolean juegoTerminado(){
         return (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 );
     }
