@@ -13,6 +13,10 @@ public class Vivo implements EstadoEnemigo {
         this.energia = energia;
     }
 
+    public int energia(){
+        return this.energia;
+    }
+
     public EstadoEnemigo recibirDanio(int danio) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         this.energia = this.energia - danio;
         if ( this.energia < danio ) return new Muerto();

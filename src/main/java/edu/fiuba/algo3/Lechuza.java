@@ -43,8 +43,10 @@ public class Lechuza extends Enemigo{
 
                 // Mover a la siguiente pasarela
                 double velocidad = this.velocidad * this.coeficienteDeRalentizacion;
-                
-                Coordenadas coordenadaSiguiente = mapa.devolverSiguientePasarela(this.coordenadas, velocidad);
+                Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCordenadaEnL(this.coordenadas, velocidad); //(this.coordenadas, velocidad);
+                if(this.estado.energia() <= 2){
+                        coordenadaSiguiente = mapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(this.coordenadas, (int)velocidad);
+                }
                 Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);
                 pasarelaSiguiente.recibir(this);
 
