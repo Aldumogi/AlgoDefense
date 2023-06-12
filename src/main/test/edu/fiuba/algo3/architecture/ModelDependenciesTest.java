@@ -15,12 +15,13 @@ public class ModelDependenciesTest {
     private final String JSON = "org.json.simple..";
     private final String JSONSchema = "com.networknt.schema..";
     private final String ObjectMapper = "com.fasterxml.jackson.databind..";
+    private final String COLOR = "javafx.scene.paint..";
 
     @Test
     public void elModeloSoloPuedeReferenciarClasesDelModeloAdemasJavaAdemasJunit() {
         JavaClasses importedClasses = new ClassFileImporter().importPackages("edu.fiuba.algo3");
 
-        String[] listOfPackages = {MODEL, JAVA_LANG, JUNIT, LOG4J, JSON, JSONSchema, ObjectMapper};
+        String[] listOfPackages = {MODEL, JAVA_LANG, JUNIT, LOG4J, JSON, JSONSchema, ObjectMapper, COLOR};
 
         ArchRule myRule = classes().that().resideInAPackage(MODEL)
                 .should().onlyDependOnClassesThat().resideInAnyPackage(listOfPackages);

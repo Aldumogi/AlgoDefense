@@ -45,7 +45,7 @@ public class JuegoTest {
     public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         // Arrange
         String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-        Inicializador inicio = new Inicializador();
+        Inicializador inicio = new Inicializador(fileMapa);
 
         inicio.agregarJugador("NombreDelJugador");
         Juego juego = inicio.obtenerJuego();
@@ -60,7 +60,7 @@ public class JuegoTest {
     @Test
     public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-        Inicializador inicio = new Inicializador();
+        Inicializador inicio = new Inicializador(fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
