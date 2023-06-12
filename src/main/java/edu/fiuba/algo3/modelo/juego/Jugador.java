@@ -39,6 +39,10 @@ public class Jugador {
         return this.defensas;
     }
 
+    public String obtenerNombre() {
+        return this.nombre;
+    }
+
     public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         if(this.cantidadDeCreditos >= unaDefensa.costo()){
             Tierra tierra = new Tierra(coordenadas);

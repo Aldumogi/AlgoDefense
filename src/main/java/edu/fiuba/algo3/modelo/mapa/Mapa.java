@@ -44,6 +44,7 @@ public class Mapa {
             }
         }
     }
+
     public Parcela obtenerCelda(Coordenadas coordenada) {
         return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
     }
