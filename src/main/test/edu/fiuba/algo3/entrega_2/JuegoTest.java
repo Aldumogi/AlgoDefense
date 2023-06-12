@@ -1,12 +1,16 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.exceptions.*;
+import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
 import edu.fiuba.algo3.modelo.enemigo.Arania;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.enemigo.LoaderEnemigosJuego;
+import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;

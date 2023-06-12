@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
-import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
@@ -49,6 +49,7 @@ public abstract class Enemigo {
         Coordenadas coordenadaSiguiente = mapa.devolverSiguientePasarela(this.coordenadas, velocidad);
         Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);
         pasarelaSiguiente.recibir(this);
+        this.cantidadDeMovimientosRealizados++;
 
         this.coordenadas = coordenadaSiguiente;
         this._actualizarVelocidadSegunCantidadDeMovimientos();
@@ -61,4 +62,8 @@ public abstract class Enemigo {
     public void setCoordenadas(Coordenadas coordenadas) {
         this.coordenadas = coordenadas;
     }
+
+    public double obtenerVelocidad() { return this.velocidad; }
+
+    public Object obtenerEnergia() { return this.estado.obtenerEnergia(); }
 }

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
-import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.utils.JsonValidator;
 import edu.fiuba.algo3.modelo.juego.Turno;
@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import static edu.fiuba.algo3.modelo.juego.Inicializador.logger;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class LoaderEnemigosJuego {
 

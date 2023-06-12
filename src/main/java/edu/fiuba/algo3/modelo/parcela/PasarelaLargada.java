@@ -6,6 +6,7 @@ public class PasarelaLargada extends Pasarela {
     public PasarelaLargada(Coordenadas coordenadas){
         super(coordenadas);
     }
+
     @Override
     public Coordenadas devolverCoordenadasLargada() {
         return this.coordenadas;

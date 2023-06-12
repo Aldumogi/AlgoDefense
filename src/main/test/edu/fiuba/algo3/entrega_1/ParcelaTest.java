@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.parcela.Pasarela;
 import edu.fiuba.algo3.modelo.parcela.Rocoso;
 import edu.fiuba.algo3.modelo.parcela.Tierra;
-import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
+import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -26,8 +26,8 @@ public class App extends Application {
     static String MAP_RELATIVE_PATH = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
 
     @Override
-    public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException {
-        Inicializador partida = new Inicializador(MAP_RELATIVE_PATH);
+    public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoMapaInvalidoException {
+        Inicializador partida = new Inicializador();
         this.primaryStage = primaryStage;
         primaryStage.setTitle("AlgoDefense");
 
@@ -54,7 +54,7 @@ public class App extends Application {
         if (result.isPresent()) {
             String nombre = result.get();
             if (nombre.length() >= 6) {
-                partida.agregarJug(nombre);
+                partida.agregarJugador(nombre);
                 mostrarPantallaIniciarPartida(partida);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -74,7 +74,7 @@ public class App extends Application {
         vbox.setSpacing(10);
         vbox.setAlignment(Pos.CENTER);
 
-        Label messageLabel = new Label("¡Bienvenido, " + partida.obtenerJuego().obtenerJugador() + "!");
+        Label messageLabel = new Label("¡Bienvenido, " + partida.obtenerJuego().obtenerJugador().obtenerNombre() + "!");
         messageLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
 
         Button iniciarPartidaButton = new Button("Iniciar Partida");

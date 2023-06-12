@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.juego;
-import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.parcela.Tierra;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.fiuba.algo3.modelo.juego.Inicializador.logger;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Jugador {
     private ArrayList<Hormiga> hormigasAsesinadas;
@@ -37,6 +37,10 @@ public class Jugador {
 
     public List<Defensa> obtenerDefensas(){
         return this.defensas;
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
     }
 
     public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas) throws NoSePudoConstruirException {

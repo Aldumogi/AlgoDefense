@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 
 import java.util.ArrayList;
 
-import static edu.fiuba.algo3.modelo.juego.Inicializador.logger;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Topo extends Enemigo{
     public Topo(Coordenadas coordenadas) {

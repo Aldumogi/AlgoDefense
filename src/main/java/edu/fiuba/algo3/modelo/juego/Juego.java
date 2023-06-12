@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import edu.fiuba.algo3.exceptions.*;
+import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import org.json.simple.parser.ParseException;
@@ -10,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.fiuba.algo3.modelo.juego.Inicializador.logger;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Juego {
     private Mapa mapa;

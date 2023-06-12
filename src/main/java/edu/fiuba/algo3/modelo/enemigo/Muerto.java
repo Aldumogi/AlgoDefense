@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Muerto implements EstadoEnemigo {
     public EstadoEnemigo recibirDanio(int danio) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         throw new ElEnemigoEstaMuertoException();
     }
-
+    public int obtenerEnergia() { return 0; }
     public int creditosOtorgados(int creditos) {
         return creditos;
     }

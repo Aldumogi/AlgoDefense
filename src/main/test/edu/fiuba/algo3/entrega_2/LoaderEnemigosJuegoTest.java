@@ -2,7 +2,7 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.enemigo.LoaderEnemigosJuego;
 import edu.fiuba.algo3.modelo.juego.Turno;
-import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 

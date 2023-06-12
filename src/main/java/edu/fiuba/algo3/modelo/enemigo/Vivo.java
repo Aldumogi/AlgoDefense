@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
+import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Vivo implements EstadoEnemigo {
     public int creditosOtorgados(int creditos) {
         return 0;
     }
-
+    public int obtenerEnergia() { return this.energia; }
     public void mover(Enemigo enemigo) {}
     public void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo) {}
     public void agregarIndiceDeEnemigoMuerto(List<Integer> enemigosMuertos, int enemigo) {}

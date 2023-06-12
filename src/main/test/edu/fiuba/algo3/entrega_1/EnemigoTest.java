@@ -1,11 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.exceptions.*;
+import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
 import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
 import edu.fiuba.algo3.modelo.enemigo.Arania;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;

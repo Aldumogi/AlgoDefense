@@ -8,9 +8,9 @@ import edu.fiuba.algo3.modelo.enemigo.LoaderEnemigosJuego;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
 import edu.fiuba.algo3.modelo.juego.Turno;
-import edu.fiuba.algo3.exceptions.FormatoEnemigosInvalidoException;
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
-import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;

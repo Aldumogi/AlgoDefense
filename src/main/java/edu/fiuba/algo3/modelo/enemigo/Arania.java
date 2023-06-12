@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static edu.fiuba.algo3.modelo.juego.Inicializador.logger;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Arania extends Enemigo {
     public Arania(Coordenadas coordenadas) {

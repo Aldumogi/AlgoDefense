@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.mapa;
 
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
-import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
-import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
 import edu.fiuba.algo3.modelo.parcela.Pasarela;
@@ -44,6 +44,7 @@ public class Mapa {
             }
         }
     }
+
     public Parcela obtenerCelda(Coordenadas coordenada) {
         return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
     }

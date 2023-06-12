@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.parcela;
 
-import edu.fiuba.algo3.exceptions.NoSePudoConstruirException;
-import edu.fiuba.algo3.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
-import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
+import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
