@@ -1,13 +1,17 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.exceptions.ElEnemigoMurioDuranteElAtaqueException;
-import edu.fiuba.algo3.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.enemigo.Vivo;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
+import edu.fiuba.algo3.modelo.parcela.Parcela;
 
 import java.util.ArrayList;
-import static edu.fiuba.algo3.Inicializador.logger;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
-public class Lechuza extends Enemigo{
+public class Lechuza extends Enemigo {
 
         public Lechuza(Coordenadas coordenadas) {
                 int energia = 5;
@@ -44,7 +48,7 @@ public class Lechuza extends Enemigo{
                 // Mover a la siguiente pasarela
                 double velocidad = this.velocidad * this.coeficienteDeRalentizacion;
                 Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCordenadaEnL(this.coordenadas, velocidad); //(this.coordenadas, velocidad);
-                if(this.estado.energia() <= 2){
+                if(this.estado.obtenerEnergia() <= 2){
                         coordenadaSiguiente = mapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(this.coordenadas, (int)velocidad);
                 }
                 Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);

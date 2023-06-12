@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.LoaderMapaJuego;
-import edu.fiuba.algo3.Parcela;
-import edu.fiuba.algo3.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.mapa.LoaderMapaJuego;
+import edu.fiuba.algo3.modelo.parcela.Parcela;
+import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class LoaderMapaJuegoTest {
     @Test
     public void readJSONTest() throws IOException, ParseException, FormatoMapaInvalidoException {
 
-        Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa(null);
+        Map<Integer, HashMap<Integer, Parcela>> mapa = LoaderMapaJuego.recuperarMapa("src/main/java/edu/fiuba/algo3/resources/mapa.json");
 
         assert(mapa.size() > 0);
     }
