@@ -44,7 +44,7 @@ public class Topo extends Enemigo{
         if ( e2 == this ) {
             return true;
         }
-        if ( !(e2 instanceof Arania) ) {
+        if ( !(e2 instanceof Topo) ) {
             return false;
         }
         Topo e = (Topo) e2;

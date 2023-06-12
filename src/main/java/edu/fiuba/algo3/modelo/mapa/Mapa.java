@@ -158,6 +158,57 @@ public class Mapa {
         }
         return cordenadaActual;
     };
+    public Coordenadas devolverSiguienteCordenadaEnL(Coordenadas cordenadaActual, double cantidadDeMovimientos){
+        Coordenadas meta = this.getCoordenadasMeta();
+        int columnaMeta = meta.columna();
+        int filaMeta = meta.fila();
+
+        while(cantidadDeMovimientos != 0){
+            if(columnaMeta > cordenadaActual.columna()){
+                cordenadaActual = new Coordenadas(cordenadaActual.fila(), cordenadaActual.columna() + 1);
+            }else if(columnaMeta < cordenadaActual.columna()){
+                cordenadaActual = new Coordenadas(cordenadaActual.fila(), cordenadaActual.columna() - 1);   
+            }else if(filaMeta > cordenadaActual.fila()){
+                cordenadaActual = new Coordenadas(cordenadaActual.fila() + 1, cordenadaActual.columna());   
+            }else if(filaMeta < cordenadaActual.fila()){
+                cordenadaActual = new Coordenadas(cordenadaActual.fila() - 1, cordenadaActual.columna());   
+            }
+            cantidadDeMovimientos -= 1;
+            if (meta.equals(cordenadaActual)){
+                return cordenadaActual;
+            }
+        }
+        return cordenadaActual;
+        
+    }
+    public Coordenadas devolverSiguienteCordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas cordenadaActual){
+        Coordenadas meta = this.getCoordenadasMeta();
+        int columnaMeta = meta.columna();
+        int filaMeta = meta.fila();
+        int filaActual = cordenadaActual.fila();
+        int columnaActual = cordenadaActual.columna();
+        if (columnaMeta == columnaActual || filaMeta == filaActual){
+            return devolverSiguienteCordenadaEnL(cordenadaActual, 1);
+        }
+        if(columnaMeta > columnaActual && filaMeta > filaActual ){
+            cordenadaActual = new Coordenadas(filaActual + 1, columnaActual + 1);
+        }else if(columnaMeta < columnaActual && filaMeta < filaActual ){
+            cordenadaActual = new Coordenadas(filaActual - 1, columnaActual - 1); 
+
+        }else if(columnaMeta > columnaActual && filaMeta < filaActual ){
+            cordenadaActual = new Coordenadas(filaActual - 1, columnaActual + 1); 
+        }else if(columnaMeta < columnaActual && filaMeta > filaActual ){
+            cordenadaActual = new Coordenadas(filaActual + 1, columnaActual - 1); 
+        }
+        return cordenadaActual;
+    }
+    public Coordenadas devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas cordenadaActual, int cantidadDeMovimientos){
+        for(int i = 0; i < cantidadDeMovimientos; i++){
+            cordenadaActual = devolverSiguienteCordenadaUsandoDiagonalesMasCercanaALaMeta(cordenadaActual);
+        }
+        return cordenadaActual;
+    }
+
 
     public int obtenerCantidadDeColumnas() {
         return this.mapaDelJuego.get(1).size();

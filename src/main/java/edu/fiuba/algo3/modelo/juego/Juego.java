@@ -136,6 +136,16 @@ public class Juego {
         logger.info("Se actualizó la energía del jugador");
     }
 
+    public void actualizarTorresJugador() {
+        Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
+        this.enemigos.forEach( enemigo -> {
+            if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0 && enemigo.atacaTorres()) {
+                jugador.destruirPrimeraTorre();
+                logger.info("Se destruyo una Torre si es que habia");
+            }
+        });
+    }
+    
     public boolean juegoTerminado(){
         return (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 );
     }

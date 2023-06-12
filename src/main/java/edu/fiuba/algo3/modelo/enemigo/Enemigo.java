@@ -28,6 +28,10 @@ public abstract class Enemigo {
     public int obtenerDanioCausado (int numeroDeTurno) {
         return this.dañoCausado;
     }
+    
+    public boolean atacaTorres(){
+        return false;
+    }
 
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio);
