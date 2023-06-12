@@ -28,7 +28,8 @@ public class EnemigoTest {
     * */
     @Test
     public void enSusPrimerosCincoMovimientosElTopoTieneUnoDeVelocidad() throws IOException, ParseException, FormatoMapaInvalidoException {
-        Inicializador ini = new Inicializador();
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
         Topo topo = new Topo(juego.obtenerMapa().getCoordenadasLargada());
@@ -49,7 +50,8 @@ public class EnemigoTest {
 
     @Test
     public void laVelocidadDelTopoEsDosEntreSusMovimientosSeisYDiez() throws IOException, ParseException, FormatoMapaInvalidoException {
-        Inicializador ini = new Inicializador();
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
         Topo topo = new Topo(juego.obtenerMapa().getCoordenadasLargada());
@@ -76,7 +78,8 @@ public class EnemigoTest {
 
     @Test
     public void laVelocidadDelTopoAPartirDelMovimientoOnceQuedaDefinitivamenteEnTres() throws IOException, ParseException, FormatoMapaInvalidoException {
-        Inicializador ini = new Inicializador();
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
         Topo topo = new Topo(juego.obtenerMapa().getCoordenadasLargada());
@@ -135,7 +138,8 @@ public class EnemigoTest {
 
     @Test
     public void torreBlancaNoPuedeAtacarAlTopo() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
-        Inicializador ini = new Inicializador();
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
         Topo topo = new Topo(juego.obtenerMapa().getCoordenadasLargada());
@@ -156,7 +160,8 @@ public class EnemigoTest {
 
     @Test
     public void torrePlateadaNoPuedeAtacarAlTopo() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
-        Inicializador ini = new Inicializador();
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
         Topo topo = new Topo(juego.obtenerMapa().getCoordenadasLargada());
