@@ -138,18 +138,18 @@ public class JuegoTest {
 
     Defensa defensa1 = new TorrePlateada();
     Coordenadas coordDefensa1 = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
-    jugador.generarConstruccion(defensa1, coordDefensa1);
+    jugador.generarConstruccion(defensa1, coordDefensa1, juego.obtenerMapa());
 
     Defensa defensa2 = new TorrePlateada();
     Coordenadas coordDefensa2 = new Coordenadas(1,3);
-    jugador.generarConstruccion(defensa2, coordDefensa2);
+    jugador.generarConstruccion(defensa2, coordDefensa2, juego.obtenerMapa());
 
     // Act
     juego.avanzarTurno(); // pasa a turno 2
 
     Defensa defensa3 = new TorrePlateada();
     Coordenadas coordDefensa3 = new Coordenadas(4,3);
-    jugador.generarConstruccion(defensa3, coordDefensa3);
+    jugador.generarConstruccion(defensa3, coordDefensa3, juego.obtenerMapa());
 
     juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa1 y defensa2
     juego.avanzarTurno(); // pasa a turno 4, se termina de construir defensa3
@@ -174,7 +174,7 @@ public class JuegoTest {
 
     Defensa defensa = new TorrePlateada();
     Coordenadas coordDefensa = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
-    jugador.generarConstruccion(defensa, coordDefensa);
+    jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerMapa());
 
     // Act
     juego.avanzarTurno(); // pasa a turno 2

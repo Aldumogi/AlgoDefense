@@ -1,9 +1,13 @@
 package edu.fiuba.algo3.modelo.mapa;
 
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+import edu.fiuba.algo3.modelo.defensa.Torre;
+import edu.fiuba.algo3.modelo.defensa.TrampaArenosa;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
 import edu.fiuba.algo3.modelo.parcela.Pasarela;
 import edu.fiuba.algo3.modelo.parcela.PasarelaLargada;
@@ -66,7 +70,18 @@ public class Mapa {
             }
         }
     }
-
+    public void recibir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {
+        if ( trampaArenosa != null ) {
+            Coordenadas coordenadas = trampaArenosa.obtenerCoordenadas();
+            this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).construir(trampaArenosa);
+        }
+    }
+    public void recibir(Torre torre) throws NoSePudoConstruirException {
+        if ( torre != null ) {
+            Coordenadas coordenadas = torre.obtenerCoordenadas();
+            this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).construir(torre);
+        }
+    }
     public void borrar(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
         Coordenadas coordenadas = enemigo.obtenerCoordenadas();
         this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).borrarObjeto(enemigo);

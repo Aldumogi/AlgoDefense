@@ -67,8 +67,8 @@ public class JuegoTest {
         Jugador jugador = juego.obtenerJugador();
 
         Defensa defensa = new TorrePlateada();
-        Coordenadas coordDefensa = new Coordenadas(4,2);
-        jugador.generarConstruccion(defensa, coordDefensa);
+        Coordenadas coordDefensa = new Coordenadas(4, 3);
+        jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerMapa());
 
         juego.avanzarTurno();
         juego.avanzarTurno();

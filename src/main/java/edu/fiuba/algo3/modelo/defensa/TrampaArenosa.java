@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.modelo.exceptions.FueraDeRangoException;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
 import edu.fiuba.algo3.modelo.parcela.Pasarela;
 import edu.fiuba.algo3.modelo.parcela.PasarelaLargada;
@@ -38,4 +40,9 @@ public class TrampaArenosa extends Defensa{
             this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
         }
     }
+
+    public void construir(Mapa mapa, Coordenadas coordenadas) {
+        
+    }
+
 }

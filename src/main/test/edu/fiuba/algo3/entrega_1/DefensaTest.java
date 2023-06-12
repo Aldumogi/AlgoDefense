@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.defensa.Torre;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
@@ -36,9 +37,9 @@ public class DefensaTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
         Defensa torreBlanca = new TorreBlanca();
-        Coordenadas coordenadas = new Coordenadas(20, 50);
+        Coordenadas coordenadasTierra = new Coordenadas(2, 1);
 
-        jugador.generarConstruccion(torreBlanca, coordenadas);
+        jugador.generarConstruccion(torreBlanca, coordenadasTierra, juego.obtenerMapa());
 
         assert( torreBlanca.estadoDefensa().tiempoDeConstruccion() > 0);
         juego.avanzarTurno();
@@ -54,9 +55,9 @@ public class DefensaTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
         Defensa torrePlateada = new TorrePlateada();
-        Coordenadas coordenadas = new Coordenadas(20, 50);
+        Coordenadas coordenadasTierra = new Coordenadas(2, 1);
 
-        jugador.generarConstruccion(torrePlateada, coordenadas);
+        jugador.generarConstruccion(torrePlateada, coordenadasTierra, juego.obtenerMapa());
         juego.avanzarTurno();
 
         assert( torrePlateada.estadoDefensa().tiempoDeConstruccion() > 0);
@@ -69,9 +70,9 @@ public class DefensaTest {
     @Test
     public void defensaPuedeConstruirseSobreTierra() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
-        Coordenadas coordenadas = new Coordenadas(10,33);
-        Parcela tierra = new Tierra(coordenadas);
+        Torre torreBlanca = new TorreBlanca();
+        Coordenadas coordenadasTierra = new Coordenadas(2,1);
+        Parcela tierra = new Tierra(coordenadasTierra);
 
         //Act, Assert
         assertDoesNotThrow(() -> {
@@ -83,7 +84,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobreRoca() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Torre torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela rocoso = new Rocoso(coordenadas);
 
@@ -97,7 +98,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarela() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Torre torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarela = new Pasarela(coordenadas);
         //Act, Assert
@@ -109,7 +110,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarelaLargada() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Torre torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarelaLargada = new PasarelaLargada(coordenadas);
         //Act, Assert
@@ -120,7 +121,7 @@ public class DefensaTest {
     @Test
     public void defensaNoPuedeConstruirseSobrePasarelaMeta() {
         // Arrange
-        Defensa torreBlanca = new TorreBlanca();
+        Torre torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
         Parcela pasarelaMeta = new PasarelaMeta(coordenadas);
         //Act, Assert
@@ -143,10 +144,10 @@ public class DefensaTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Defensa torreBlanca = new TorreBlanca();
-        jugador.generarConstruccion(torreBlanca, coordenadasTorre);
+        jugador.generarConstruccion(torreBlanca, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
@@ -164,10 +165,10 @@ public class DefensaTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Defensa torrePlateada = new TorrePlateada();
-        jugador.generarConstruccion(torrePlateada, coordenadasTorre);
+        jugador.generarConstruccion(torrePlateada, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
@@ -186,10 +187,10 @@ public class DefensaTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2); // rango 3
+        Coordenadas coordenadasTorre = new Coordenadas(2,1); // rango 3
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
         Defensa torreBlanca = new TorreBlanca();
-        jugador.generarConstruccion(torreBlanca, coordenadasTorre);
+        jugador.generarConstruccion(torreBlanca, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
 
@@ -207,10 +208,10 @@ public class DefensaTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
         Defensa torrePlateada = new TorrePlateada();
-        jugador.generarConstruccion(torrePlateada, coordenadasTorre);
+        jugador.generarConstruccion(torrePlateada, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia

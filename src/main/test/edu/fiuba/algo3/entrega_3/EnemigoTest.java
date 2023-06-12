@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Turno;
 import edu.fiuba.algo3.modelo.enemigo.Topo;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -143,7 +144,7 @@ public class EnemigoTest {
         Jugador jugador = juego.obtenerJugador();
         TorreBlanca torreBlanca = new TorreBlanca();
 
-        jugador.generarConstruccion( torreBlanca, juego.obtenerMapa().getCoordenadasLargada() );
+        jugador.generarConstruccion( torreBlanca, new Coordenadas(2,1), juego.obtenerMapa() );
         juego.avanzarTurno();
 
         assertThat( torreBlanca.estadoDefensa() , instanceOf( Terminada.class ) );
@@ -164,7 +165,7 @@ public class EnemigoTest {
         Jugador jugador = juego.obtenerJugador();
         TorrePlateada torrePlateada = new TorrePlateada();
 
-        jugador.generarConstruccion( torrePlateada, juego.obtenerMapa().getCoordenadasLargada() );
+        jugador.generarConstruccion( torrePlateada, new Coordenadas(2,1), juego.obtenerMapa() );
         juego.avanzarTurno();
         juego.avanzarTurno();
 

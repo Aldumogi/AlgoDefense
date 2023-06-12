@@ -30,11 +30,11 @@ public class EnemigoTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
         Defensa unaDefensa = new TorreBlanca();
-        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
@@ -49,11 +49,11 @@ public class EnemigoTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
         Defensa unaDefensa = new TorreBlanca();
-        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
@@ -68,11 +68,11 @@ public class EnemigoTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorreBlanca();
-        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
@@ -88,11 +88,11 @@ public class EnemigoTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorreBlanca();
-        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
         assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
@@ -108,11 +108,11 @@ public class EnemigoTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
         Defensa unaDefensa = new TorrePlateada();
-        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -128,11 +128,11 @@ public class EnemigoTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorrePlateada();
-        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -148,11 +148,11 @@ public class EnemigoTest {
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
         Defensa unaDefensa = new TorrePlateada();
-        jugador.generarConstruccion(unaDefensa, coordenadasTorre);
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -178,10 +178,10 @@ public class EnemigoTest {
 
         Hormiga unaHormiga = new Hormiga(coordenadasLargada);
         juego.agregarEnemigo(unaHormiga);
-        Coordenadas coordenadas = new Coordenadas(3, 2);
+        Coordenadas coordenadas = new Coordenadas(3, 1);
         Defensa torrePlateada = new TorrePlateada();
 
-        jugador.generarConstruccion(torrePlateada, coordenadas);
+        jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -209,7 +209,7 @@ public class EnemigoTest {
         juego.agregarEnemigo(unaArania);
         Coordenadas coordenadas = new Coordenadas(3, 3);
         Defensa unatorre = new TorrePlateada();
-        jugador.generarConstruccion(unatorre, coordenadas);
+        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -237,10 +237,10 @@ public class EnemigoTest {
 
         Defensa unatorre = new TorrePlateada();
         Coordenadas coordenadas = new Coordenadas(2,3);
-        jugador.generarConstruccion(unatorre, coordenadas);
+        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerMapa());
         Defensa otratorre = new TorrePlateada();
         Coordenadas coordenadasTorre2 = new Coordenadas(11,5);
-        jugador.generarConstruccion(otratorre, coordenadasTorre2);
+        jugador.generarConstruccion(otratorre, coordenadasTorre2, juego.obtenerMapa());
 
         juego.avanzarTurno();
         juego.avanzarTurno();
