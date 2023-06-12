@@ -53,9 +53,6 @@ public class Mapa {
         return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
     }
 
-    public int obtenerCantidadDeFilas() {
-        return this.mapaDelJuego.size();
-    }
     /* En el futuro puede agregar otra cosas si se desea, no solo enemigo */
     public void recibir(Coordenadas coordenadas, Enemigo enemigo) {
         if ( enemigo != null ) {
@@ -230,9 +227,14 @@ public class Mapa {
         return this.mapaDelJuego.get(1).size();
     }
 
+    public int obtenerCantidadDeFilas() {
+        return this.mapaDelJuego.size();
+    }
+
     public Coordenadas getCoordenadasMeta() {
         return this.coordenadasMeta;
     }
+
     public Coordenadas getCoordenadasLargada() {
         return this.coordenadasLargada;
     }

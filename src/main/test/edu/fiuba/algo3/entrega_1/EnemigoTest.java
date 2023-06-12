@@ -166,9 +166,9 @@ public class EnemigoTest {
     cobra correctamente
     */
     @Test
-    public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoSePudoConstruirException, ElEnemigoMurioDuranteElAtaqueException,
-            FueraDeRangoException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+    public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador inicio = new Inicializador(filepath);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
@@ -222,7 +222,8 @@ public class EnemigoTest {
     @Test
     public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        Inicializador inicio = new Inicializador();
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador inicio = new Inicializador(fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();

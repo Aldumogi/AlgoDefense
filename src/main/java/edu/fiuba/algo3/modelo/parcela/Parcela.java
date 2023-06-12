@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaExce
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface Parcela {
 
     Coordenadas devolverCoordenadasLargada();
     Coordenadas obtenerCoordenadas();
+    Color obtenerColor();
 }

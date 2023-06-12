@@ -6,17 +6,17 @@ import java.util.Objects;
 import edu.fiuba.algo3.modelo.defensa.Torre;
 import edu.fiuba.algo3.modelo.defensa.TrampaArenosa;
 import edu.fiuba.algo3.modelo.exceptions.*;
-import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
-import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import javafx.scene.paint.Color;
 
 public class Pasarela implements Parcela {
     protected Coordenadas coordenadas;
     protected EstadoParcela estado;
     protected List<Enemigo> enemigos;
     protected TrampaArenosa trampaArenosa;
+    public final Color color = Color.YELLOW;
 
     public Pasarela(Coordenadas coordenadas){
         this.estado = new ParcelaOcupada();
@@ -50,10 +50,16 @@ public class Pasarela implements Parcela {
         return null;
     }
 
-    public Coordenadas devolverCoordenadasLargada() { return null; }
+    public Coordenadas devolverCoordenadasLargada() {
+        return null;
+    }
 
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;
+    }
+
+    public Color obtenerColor() {
+        return this.color;
     }
 
     public boolean equals(Object obj) {
