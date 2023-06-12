@@ -23,6 +23,14 @@ public class Inicializador {
         ArrayList<Turno> turnos = new ArrayList<>();
         this.juego = new Juego(turnos, mapa);
     }
+
+    public Inicializador(String mapFilepath) throws IOException, ParseException, FormatoMapaInvalidoException {
+        // inicializador sin enemigos
+        Mapa mapa = new Mapa( mapFilepath);
+        ArrayList<Turno> turnos = new ArrayList<>();
+        this.juego = new Juego(turnos, mapa);
+    }
+
     public Inicializador(String jsonArchivoEnemigos, String jsonArchivoMapa) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Mapa mapa = new Mapa( jsonArchivoMapa );
         ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(jsonArchivoEnemigos, mapa.getCoordenadasLargada());
@@ -46,6 +54,13 @@ public class Inicializador {
         if ( juego == null ) this.juego = new Juego();
         this.juego.setearJugador(jugador);
         logger.info(nombre + "se ha unido al juego");
+    }
+
+    public void agregarJug(String nombre) {
+        Jugador jugador = new Jugador(nombre);
+        //this.juego = new Juego();
+        //this.juego.setearJugador(jugador);
+        System.out.println(nombre);
     }
 
 }
