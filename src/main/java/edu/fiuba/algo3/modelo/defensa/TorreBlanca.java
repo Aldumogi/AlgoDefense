@@ -19,13 +19,6 @@ public class TorreBlanca extends Torre {
         this.factorDeRalentizacion = 1;
     }
 
-    public void construir(Parcela tierra) {
-        this.parcela = tierra;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
-
-        logger.info("Se pusó en construcción una Torre Blanca");
-    }
-
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);

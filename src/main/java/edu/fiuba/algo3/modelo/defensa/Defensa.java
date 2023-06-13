@@ -24,8 +24,6 @@ public abstract class Defensa {
     public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException;
 
-    public abstract void construir(Parcela parcela);
-
     public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
     public int costo() {

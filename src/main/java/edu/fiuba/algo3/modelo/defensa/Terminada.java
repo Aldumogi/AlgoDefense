@@ -36,13 +36,12 @@ public class Terminada implements EstadoDefensa {
                 this.atacarEnemigo(enemigo, rangoDeAtaque, danio, coordenadasDefensa);
                 enemigo.acumularMuertos( hormigasAsesinadas );
                 enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
-                this.ralentizarEnemigo(enemigo, factorDeRalentizacion);
 
             } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
             catch (ElEnemigoEstaMuertoException e) {}
             catch (DefensaEnConstruccionException e) {}
             catch (FueraDeRangoException e) {}
-
+            this.ralentizarEnemigo(enemigo, factorDeRalentizacion);
         }
         return this;
     }

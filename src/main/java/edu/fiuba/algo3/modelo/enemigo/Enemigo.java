@@ -69,5 +69,7 @@ public abstract class Enemigo {
 
     public double obtenerVelocidad() { return this.velocidad; }
 
+    public double obtenerVelocidadReal() { return this.velocidad * this.coeficienteDeRalentizacion; }
+
     public Object obtenerEnergia() { return this.estado.obtenerEnergia(); }
 }

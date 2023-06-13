@@ -20,19 +20,12 @@ public class TorrePlateada extends Torre {
         this.factorDeRalentizacion = 1;
     }
 
-    public void construir(Parcela tierra) {
-        this.parcela = tierra;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
-
-        logger.info("Se pusó en construcción una Torre Plateada");
-    }
-
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
         this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
 
-        logger.info("Se pusó en construcción una Torre Blanca");
+        logger.info("Se pusó en construcción una Torre Plateada");
     }
 
     public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,

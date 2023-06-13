@@ -28,16 +28,6 @@ public class TrampaArenosa extends Defensa{
         this.estado.ralentizarEnemigo(enemigo, this.factorDeRalentizacion);
     }
 
-    public void construir(Parcela pasarela) {
-        /* Tal vez aca tendriamos que crear una PasarelaNormal para evitar el if aca */
-        if ( pasarela.equals( new Pasarela(pasarela.obtenerCoordenadas()) ) &&
-                ! pasarela.equals( new PasarelaMeta(pasarela.obtenerCoordenadas()) )
-            && ! pasarela.equals( new PasarelaLargada(pasarela.obtenerCoordenadas()) ) ){
-            this.parcela = pasarela;
-            this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
-        }
-    }
-
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);

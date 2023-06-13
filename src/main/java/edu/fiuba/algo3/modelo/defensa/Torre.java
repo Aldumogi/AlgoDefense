@@ -11,8 +11,5 @@ public class Torre extends Defensa {
 
     }
 
-    public void construir(Parcela parcela) { }
-
-
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {}
 }
