@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Tierra;
 
 import java.util.ArrayList;
@@ -43,10 +44,9 @@ public class Jugador {
         return this.nombre;
     }
 
-    public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas) throws NoSePudoConstruirException {
+    public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas, Mapa mapa) throws NoSePudoConstruirException {
         if(this.cantidadDeCreditos >= unaDefensa.costo()){
-            Tierra tierra = new Tierra(coordenadas);
-            tierra.construir(unaDefensa);
+            unaDefensa.construir(mapa, coordenadas);
             this.defensas.add(unaDefensa);
             this.cantidadDeCreditos -= unaDefensa.costo();
         }

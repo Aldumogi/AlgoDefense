@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.modelo.defensa;
 
-import edu.fiuba.algo3.modelo.exceptions.DefensaEnConstruccionException;
-import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
-import edu.fiuba.algo3.modelo.exceptions.FueraDeRangoException;
+import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
 
 import java.util.ArrayList;
@@ -18,13 +17,11 @@ public abstract class Defensa {
     protected int rangoDeAtaque;
     protected int danio;
     protected EstadoDefensa estado;
-    protected Parcela parcela;
+    protected Coordenadas coordenadas;
     protected int tiempoDeRalentizacion;
     protected double factorDeRalentizacion;
-    public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
-            DefensaEnConstruccionException, FueraDeRangoException;
 
-    public abstract void construir(Parcela parcela);
+    public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
     public int costo() {
         return this.costo;
@@ -34,12 +31,13 @@ public abstract class Defensa {
         return this.estado;
     }
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
-        this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
-                this.parcela.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion);
-    }
+    public abstract void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas);
 
     public String getNombre(){
         return this.nombre;
+    }
+
+    public Coordenadas obtenerCoordenadas() {
+        return this.coordenadas;
     }
 }

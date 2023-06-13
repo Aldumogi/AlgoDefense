@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.parcela;
 
+import edu.fiuba.algo3.modelo.defensa.Torre;
+import edu.fiuba.algo3.modelo.defensa.TrampaArenosa;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
@@ -11,14 +13,21 @@ import java.util.List;
 public class Tierra implements Parcela {
     private Coordenadas coordenadas;
     private EstadoParcela estado;
+    protected Defensa defensa;
     public final Color color = Color.BROWN;
 
     public Tierra(Coordenadas coordenadas){
         this.estado = new ParcelaDisponible();
         this.coordenadas = coordenadas;
     }
-    public void construir(Defensa defensa) throws NoSePudoConstruirException {
-        this.estado = this.estado.construir(defensa, this);
+
+    public void construir(Torre torre) throws NoSePudoConstruirException {
+        this.estado = this.estado.construir(torre);
+        this.defensa = torre;
+    }
+
+    public void construir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {
+        throw new NoSePudoConstruirException();
     }
 
     public Coordenadas recibir(Enemigo enemigo){

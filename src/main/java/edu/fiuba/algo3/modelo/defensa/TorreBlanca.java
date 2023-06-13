@@ -1,15 +1,13 @@
 package edu.fiuba.algo3.modelo.defensa;
 
-import edu.fiuba.algo3.modelo.exceptions.DefensaEnConstruccionException;
-import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
-import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
-import edu.fiuba.algo3.modelo.exceptions.FueraDeRangoException;
+import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
-import edu.fiuba.algo3.modelo.parcela.Parcela;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
-public class TorreBlanca extends Defensa {
+public class TorreBlanca extends Torre {
     public TorreBlanca() {
         this.nombre = "Torre Blanca";
         this.costo = 10;
@@ -20,8 +18,9 @@ public class TorreBlanca extends Defensa {
         this.factorDeRalentizacion = 1;
     }
 
-    public void construir(Parcela tierra) {
-        this.parcela = tierra;
+    public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
+        this.coordenadas = coordenadas;
+        mapa.recibir(this);
         this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
 
         logger.info("Se pusó en construcción una Torre Blanca");
@@ -29,7 +28,7 @@ public class TorreBlanca extends Defensa {
 
     public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException {
-        this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.parcela.obtenerCoordenadas());
+        this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.obtenerCoordenadas());
 
         logger.info("Torre Blanca atacó a un enemigo");
     }

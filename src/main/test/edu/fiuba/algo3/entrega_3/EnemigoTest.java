@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.defensa.Defensa;
-import edu.fiuba.algo3.modelo.defensa.Terminada;
-import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
-import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
+import edu.fiuba.algo3.modelo.defensa.*;
+import edu.fiuba.algo3.modelo.enemigo.Arania;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
@@ -11,6 +10,7 @@ import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Turno;
 import edu.fiuba.algo3.modelo.enemigo.Topo;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -147,7 +147,7 @@ public class EnemigoTest {
         Jugador jugador = juego.obtenerJugador();
         TorreBlanca torreBlanca = new TorreBlanca();
 
-        jugador.generarConstruccion( torreBlanca, juego.obtenerMapa().getCoordenadasLargada() );
+        jugador.generarConstruccion( torreBlanca, new Coordenadas(2,1), juego.obtenerMapa() );
         juego.avanzarTurno();
 
         assertThat( torreBlanca.estadoDefensa() , instanceOf( Terminada.class ) );
@@ -169,7 +169,7 @@ public class EnemigoTest {
         Jugador jugador = juego.obtenerJugador();
         TorrePlateada torrePlateada = new TorrePlateada();
 
-        jugador.generarConstruccion( torrePlateada, juego.obtenerMapa().getCoordenadasLargada() );
+        jugador.generarConstruccion( torrePlateada, new Coordenadas(2,1), juego.obtenerMapa() );
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -179,5 +179,113 @@ public class EnemigoTest {
         assertEquals(100, topo.obtenerEnergia() );
         juego.avanzarTurno();
         assertEquals(100, topo.obtenerEnergia() );
+    }
+
+    @Test
+    public void elTopoEsRalentizadoSiHayUnaTrampaArenosa() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
+        ini.agregarJugador("Roberto");
+        Juego juego = ini.obtenerJuego();
+        Topo topo = new Topo(juego.obtenerMapa().getCoordenadasLargada());
+        juego.agregarEnemigo(topo);
+        Jugador jugador = juego.obtenerJugador();
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
+        juego.avanzarTurno();
+
+        assertThat( trampa.estadoDefensa(), instanceOf(Terminada.class) );
+        assertEquals(1, topo.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(0.5, topo.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(0.5, topo.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(0.5, topo.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(2, topo.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(3,2), topo.obtenerCoordenadas());
+
+    }
+
+    @Test
+    public void laHormigaEsRalentizadaSiHayUnaTrampaArenosa() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
+        ini.agregarJugador("Roberto");
+        Juego juego = ini.obtenerJuego();
+        Hormiga hormiga = new Hormiga(juego.obtenerMapa().getCoordenadasLargada());
+        juego.agregarEnemigo(hormiga);
+        Jugador jugador = juego.obtenerJugador();
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
+        juego.avanzarTurno();
+
+        assertThat( trampa.estadoDefensa(), instanceOf(Terminada.class) );
+        assertEquals(1, hormiga.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(0.5, hormiga.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(0.5, hormiga.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(0.5, hormiga.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(1, hormiga.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(3,2), hormiga.obtenerCoordenadas());
+
+    }
+
+    @Test
+    public void laArañaEsRalentizadaSiHayUnaTrampaArenosa() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
+        ini.agregarJugador("Roberto");
+        Juego juego = ini.obtenerJuego();
+        Arania arania = new Arania(juego.obtenerMapa().getCoordenadasLargada());
+        juego.agregarEnemigo(arania);
+        Jugador jugador = juego.obtenerJugador();
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
+        juego.avanzarTurno();
+
+        assertThat( trampa.estadoDefensa(), instanceOf(Terminada.class) );
+        assertEquals(2, arania.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(3,2), arania.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(1, arania.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(4,2), arania.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(1, arania.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(5,2), arania.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(1, arania.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(6,2), arania.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(2, arania.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(7,3), arania.obtenerCoordenadas());
+
     }
 }

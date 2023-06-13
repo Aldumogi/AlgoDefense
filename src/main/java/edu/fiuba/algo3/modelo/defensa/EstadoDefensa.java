@@ -17,6 +17,8 @@ public interface EstadoDefensa {
     EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
                              Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
                              double factorDeRalentizacion);
+    EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa,
+                             double factorDeRalentizacion);
     int tiempoDeConstruccion();
 
     void ralentizarEnemigo(Enemigo enemigo, double ralentizacion);

@@ -40,9 +40,9 @@ public class JugadorTest {
         Jugador jugador = juego.obtenerJugador();
 
         TorrePlateada unaTorre = new TorrePlateada();
-        Coordenadas coordenadas = new Coordenadas(10, 20);
+        Coordenadas coordenadas = new Coordenadas(10, 1);
 
-        assertDoesNotThrow( () -> jugador.generarConstruccion(unaTorre, coordenadas) );
+        assertDoesNotThrow( () -> jugador.generarConstruccion(unaTorre, coordenadas, juego.obtenerMapa()) );
         assertEquals( 1, jugador.obtenerDefensas().size() );
     }
     
@@ -57,29 +57,29 @@ public class JugadorTest {
         Jugador jugador = juego.obtenerJugador();
 
         TorrePlateada unaTorre1 = new TorrePlateada();
-        Coordenadas coordenadasTorre1 = new Coordenadas(11, 21);
-        jugador.generarConstruccion(unaTorre1, coordenadasTorre1);
+        Coordenadas coordenadasTorre1 = new Coordenadas(8, 1);
+        jugador.generarConstruccion(unaTorre1, coordenadasTorre1, juego.obtenerMapa());
 
         TorrePlateada unaTorre2 = new TorrePlateada();
-        Coordenadas coordenadasTorre2 = new Coordenadas(12, 22);
-        jugador.generarConstruccion(unaTorre2, coordenadasTorre2);
+        Coordenadas coordenadasTorre2 = new Coordenadas(8, 2);
+        jugador.generarConstruccion(unaTorre2, coordenadasTorre2, juego.obtenerMapa());
 
         TorrePlateada unaTorre3 = new TorrePlateada();
-        Coordenadas coordenadasTorre3 = new Coordenadas(13, 23);
-        jugador.generarConstruccion(unaTorre3, coordenadasTorre3);
+        Coordenadas coordenadasTorre3 = new Coordenadas(8, 3);
+        jugador.generarConstruccion(unaTorre3, coordenadasTorre3, juego.obtenerMapa());
 
         TorrePlateada unaTorre4 = new TorrePlateada();
-        Coordenadas coordenadasTorre4 = new Coordenadas(14, 24);
-        jugador.generarConstruccion(unaTorre4, coordenadasTorre4);
+        Coordenadas coordenadasTorre4 = new Coordenadas(8, 4);
+        jugador.generarConstruccion(unaTorre4, coordenadasTorre4, juego.obtenerMapa());
 
         TorrePlateada unaTorre5 = new TorrePlateada();
-        Coordenadas coordenadasTorre5 = new Coordenadas(15, 25);
-        jugador.generarConstruccion(unaTorre5, coordenadasTorre5);
+        Coordenadas coordenadasTorre5 = new Coordenadas(8, 5);
+        jugador.generarConstruccion(unaTorre5, coordenadasTorre5, juego.obtenerMapa());
 
         TorrePlateada unaTorre6 = new TorrePlateada();
-        Coordenadas coordenadasTorre6 = new Coordenadas(20, 30);
+        Coordenadas coordenadasTorre6 = new Coordenadas(8, 6);
 
-        assertDoesNotThrow( () -> jugador.generarConstruccion(unaTorre6, coordenadasTorre6) );
+        assertDoesNotThrow( () -> jugador.generarConstruccion(unaTorre6, coordenadasTorre6, juego.obtenerMapa()) );
         assertEquals( 5, jugador.obtenerDefensas().size() );
 
     }
