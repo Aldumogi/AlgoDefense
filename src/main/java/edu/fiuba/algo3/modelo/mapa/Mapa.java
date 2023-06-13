@@ -8,10 +8,7 @@ import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaExce
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
-import edu.fiuba.algo3.modelo.parcela.Parcela;
-import edu.fiuba.algo3.modelo.parcela.Pasarela;
-import edu.fiuba.algo3.modelo.parcela.PasarelaLargada;
-import edu.fiuba.algo3.modelo.parcela.PasarelaMeta;
+import edu.fiuba.algo3.modelo.parcela.*;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -99,7 +96,7 @@ public class Mapa {
         if ( coordenadaAVerificar.equals( this.coordenadasMeta ) ) {
             return true;
         }
-        if (!celdaActual.equals(new Pasarela(coordenadaAVerificar))) {
+        if (!celdaActual.equals(new PasarelaNormal(coordenadaAVerificar))) {
             return false;
         }
         coordenadasVisitadas.add(coordenadaAVerificar);
@@ -117,7 +114,7 @@ public class Mapa {
         Parcela parcela = this.obtenerCelda(nuevaCoordenada);
         if (parcela != null) {
             boolean esPasarelaValida = parcela.equals(new PasarelaLargada(nuevaCoordenada))
-                                    || parcela.equals(new Pasarela(nuevaCoordenada))
+                                    || parcela.equals(new PasarelaNormal(nuevaCoordenada))
                                     || parcela.equals(new PasarelaMeta(nuevaCoordenada));
     
             if (esPasarelaValida && !(coordenadasVisitadas.contains(nuevaCoordenada))) {

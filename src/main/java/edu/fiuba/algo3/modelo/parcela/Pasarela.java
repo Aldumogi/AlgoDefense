@@ -29,9 +29,7 @@ public class Pasarela implements Parcela {
         throw new NoSePudoConstruirException();
     }
 
-    public void construir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {
-        this.trampaArenosa = trampaArenosa;
-    }
+    public void construir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {  }
 
     public Coordenadas recibir(Enemigo enemigo){
         enemigos.add(enemigo);

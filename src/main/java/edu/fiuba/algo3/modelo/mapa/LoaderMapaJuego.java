@@ -42,7 +42,7 @@ public class LoaderMapaJuego {
                         parcela = new Rocoso(coordenada);
                         break;
                     case ("Pasarela"):
-                        parcela = new Pasarela(coordenada);
+                        parcela = new PasarelaNormal(coordenada);
                         break;
                     case ("Tierra"):
                         parcela = new Tierra(coordenada);
