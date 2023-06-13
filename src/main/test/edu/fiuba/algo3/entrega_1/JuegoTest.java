@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.defensa.Torre;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
@@ -66,9 +67,9 @@ public class JuegoTest {
         Juego juego = inicio.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
 
-        Defensa defensa = new TorrePlateada();
+        Torre torrePlateada = new TorrePlateada();
         Coordenadas coordDefensa = new Coordenadas(4, 3);
-        jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerMapa());
+        jugador.generarConstruccion(torrePlateada, coordDefensa, juego.obtenerMapa());
 
         juego.avanzarTurno();
         juego.avanzarTurno();
@@ -81,11 +82,11 @@ public class JuegoTest {
         juego.agregarEnemigo(enemigo);
 
         try {
-          defensa.atacarEnemigo(enemigo);
-          defensa.atacarEnemigo(enemigo1);
-          defensa.atacarEnemigo(enemigo2);
-          defensa.atacarEnemigo(enemigo3);
-          defensa.atacarEnemigo(enemigo4);
+            torrePlateada.atacarEnemigo(enemigo);
+            torrePlateada.atacarEnemigo(enemigo1);
+            torrePlateada.atacarEnemigo(enemigo2);
+            torrePlateada.atacarEnemigo(enemigo3);
+            torrePlateada.atacarEnemigo(enemigo4);
         }
         catch(ElEnemigoMurioDuranteElAtaqueException e) {}
 

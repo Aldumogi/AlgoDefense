@@ -146,7 +146,7 @@ public class DefensaTest {
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
-        Defensa torreBlanca = new TorreBlanca();
+        Torre torreBlanca = new TorreBlanca();
         jugador.generarConstruccion(torreBlanca, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
@@ -167,7 +167,7 @@ public class DefensaTest {
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
-        Defensa torrePlateada = new TorrePlateada();
+        Torre torrePlateada = new TorrePlateada();
         jugador.generarConstruccion(torrePlateada, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
@@ -189,7 +189,7 @@ public class DefensaTest {
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1); // rango 3
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
-        Defensa torreBlanca = new TorreBlanca();
+        Torre torreBlanca = new TorreBlanca();
         jugador.generarConstruccion(torreBlanca, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
@@ -210,7 +210,7 @@ public class DefensaTest {
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(30,100);
-        Defensa torrePlateada = new TorrePlateada();
+        Torre torrePlateada = new TorrePlateada();
         jugador.generarConstruccion(torrePlateada, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();

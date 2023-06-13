@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.defensa.Torre;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
@@ -33,7 +34,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
@@ -52,7 +53,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
@@ -71,7 +72,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
@@ -91,7 +92,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
@@ -111,7 +112,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorrePlateada();
+        Torre unaDefensa = new TorrePlateada();
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
@@ -131,7 +132,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorrePlateada();
+        Torre unaDefensa = new TorrePlateada();
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
@@ -151,7 +152,7 @@ public class EnemigoTest {
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorrePlateada();
+        Torre unaDefensa = new TorrePlateada();
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
@@ -179,7 +180,7 @@ public class EnemigoTest {
         Hormiga unaHormiga = new Hormiga(coordenadasLargada);
         juego.agregarEnemigo(unaHormiga);
         Coordenadas coordenadas = new Coordenadas(3, 1);
-        Defensa torrePlateada = new TorrePlateada();
+        Torre torrePlateada = new TorrePlateada();
 
         jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerMapa());
         juego.avanzarTurno();
@@ -208,7 +209,7 @@ public class EnemigoTest {
         Arania unaArania = new Arania(coordenadasLargada);
         juego.agregarEnemigo(unaArania);
         Coordenadas coordenadas = new Coordenadas(3, 3);
-        Defensa unatorre = new TorrePlateada();
+        Torre unatorre = new TorrePlateada();
         jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
@@ -236,10 +237,10 @@ public class EnemigoTest {
             juego.agregarEnemigo( hormigas.get(i) );
         }
 
-        Defensa unatorre = new TorrePlateada();
+        Torre unatorre = new TorrePlateada();
         Coordenadas coordenadas = new Coordenadas(2,3);
         jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerMapa());
-        Defensa otratorre = new TorrePlateada();
+        Torre otratorre = new TorrePlateada();
         Coordenadas coordenadasTorre2 = new Coordenadas(11,5);
         jugador.generarConstruccion(otratorre, coordenadasTorre2, juego.obtenerMapa());
 

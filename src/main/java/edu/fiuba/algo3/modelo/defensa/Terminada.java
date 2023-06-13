@@ -41,6 +41,18 @@ public class Terminada implements EstadoDefensa {
             catch (ElEnemigoEstaMuertoException e) {}
             catch (DefensaEnConstruccionException e) {}
             catch (FueraDeRangoException e) {}
+        }
+        return this;
+    }
+
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion) {
+        for (Enemigo enemigo: enemigos) {
+            /* Falta chequear que el enemigo pase sobre la trampa */
+            /*
+            * if( coordenadasDefensa.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0 ) {
+            *       // Aca va this.ralentizarEnemigo
+            * }
+            * */
             this.ralentizarEnemigo(enemigo, factorDeRalentizacion);
         }
         return this;

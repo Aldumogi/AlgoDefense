@@ -46,9 +46,6 @@ public class Jugador {
 
     public void generarConstruccion(Defensa unaDefensa, Coordenadas coordenadas, Mapa mapa) throws NoSePudoConstruirException {
         if(this.cantidadDeCreditos >= unaDefensa.costo()){
-            /*Tierra tierra = new Tierra(coordenadas);
-            tierra.construir(unaDefensa);
-            */
             unaDefensa.construir(mapa, coordenadas);
             this.defensas.add(unaDefensa);
             this.cantidadDeCreditos -= unaDefensa.costo();

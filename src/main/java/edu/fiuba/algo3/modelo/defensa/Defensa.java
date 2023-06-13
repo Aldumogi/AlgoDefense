@@ -18,11 +18,8 @@ public abstract class Defensa {
     protected int danio;
     protected EstadoDefensa estado;
     protected Coordenadas coordenadas;
-    protected Parcela parcela;
     protected int tiempoDeRalentizacion;
     protected double factorDeRalentizacion;
-    public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
-            DefensaEnConstruccionException, FueraDeRangoException;
 
     public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
@@ -34,10 +31,7 @@ public abstract class Defensa {
         return this.estado;
     }
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
-        this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
-                this.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion);
-    }
+    public abstract void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas);
 
     public String getNombre(){
         return this.nombre;

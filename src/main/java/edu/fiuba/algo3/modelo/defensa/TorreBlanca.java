@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
-import edu.fiuba.algo3.modelo.parcela.Parcela;
 
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 

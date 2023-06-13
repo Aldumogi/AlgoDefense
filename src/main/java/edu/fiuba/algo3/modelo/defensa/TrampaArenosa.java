@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.defensa;
 
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
@@ -8,6 +9,9 @@ import edu.fiuba.algo3.modelo.parcela.Parcela;
 import edu.fiuba.algo3.modelo.parcela.Pasarela;
 import edu.fiuba.algo3.modelo.parcela.PasarelaLargada;
 import edu.fiuba.algo3.modelo.parcela.PasarelaMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrampaArenosa extends Defensa{
     public TrampaArenosa() {
@@ -34,4 +38,7 @@ public class TrampaArenosa extends Defensa{
         this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
     }
 
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
+        this.estado = this.estado.pasarTurno(enemigos, this.obtenerCoordenadas(), this.factorDeRalentizacion);
+    }
 }

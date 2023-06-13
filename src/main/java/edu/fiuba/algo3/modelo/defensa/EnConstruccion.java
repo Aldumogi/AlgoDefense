@@ -37,4 +37,8 @@ public class EnConstruccion implements EstadoDefensa {
         }
         return this;
     }
+
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion) {
+        return this.pasarTurno(enemigos, 0, 0, null, null, 0);
+    }
 }
