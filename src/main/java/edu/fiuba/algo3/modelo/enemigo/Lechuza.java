@@ -1,8 +1,5 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo.enemigo;
 
-import edu.fiuba.algo3.modelo.enemigo.Enemigo;
-import edu.fiuba.algo3.modelo.enemigo.Hormiga;
-import edu.fiuba.algo3.modelo.enemigo.Vivo;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
@@ -46,8 +43,8 @@ public class Lechuza extends Enemigo {
                 pasarela.borrarObjeto(this);
 
                 // Mover a la siguiente pasarela
-                double velocidad = this.velocidad * this.coeficienteDeRalentizacion;
-                Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCordenadaEnL(this.coordenadas, velocidad); //(this.coordenadas, velocidad);
+                double velocidad = this.velocidad;
+                Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCordenadaEnL(this.coordenadas, velocidad);
                 if(this.estado.obtenerEnergia() <= 2){
                         coordenadaSiguiente = mapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(this.coordenadas, (int)velocidad);
                 }

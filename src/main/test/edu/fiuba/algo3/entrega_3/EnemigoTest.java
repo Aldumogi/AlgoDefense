@@ -1,16 +1,12 @@
 package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.defensa.*;
-import edu.fiuba.algo3.modelo.enemigo.Arania;
-import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.enemigo.*;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
-import edu.fiuba.algo3.modelo.juego.Inicializador;
-import edu.fiuba.algo3.modelo.juego.Juego;
-import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.juego.Turno;
-import edu.fiuba.algo3.modelo.enemigo.Topo;
+import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.parcela.PasarelaNormal;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -280,7 +276,22 @@ public class EnemigoTest {
     }
 
     @Test
-    public void laLechuzaNoEsRalentizadaPorLaTrampaArenosa() {
+    public void laLechuzaNoEsRalentizadaPorLaTrampaArenosa() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
+        ini.agregarJugador("Roberto");
+        Juego juego = ini.obtenerJuego();
+        Lechuza lechuza = new Lechuza( new Coordenadas(1,2) );
+        juego.agregarEnemigo(lechuza);
+        Jugador jugador = juego.obtenerJugador();
+        TrampaArenosa trampa = new TrampaArenosa();
+        jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
 
+        juego.avanzarTurno();
+        assertThat( juego.obtenerMapa().obtenerCelda(new Coordenadas(2,2)), instanceOf(PasarelaNormal.class) );
+
+        juego.avanzarTurno();
+        assertEquals( new Coordenadas(1,7), lechuza.obtenerCoordenadas());
+        //assertEquals( new Coordenadas(6,2), lechuza.obtenerCoordenadas());
     }
 }
