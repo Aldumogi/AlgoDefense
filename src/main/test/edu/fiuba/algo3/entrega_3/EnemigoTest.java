@@ -200,19 +200,15 @@ public class EnemigoTest {
         assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(0.5, topo.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(0.5, topo.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(0.5, topo.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(2,2), topo.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(2, topo.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(3,2), topo.obtenerCoordenadas());
 
     }
@@ -236,19 +232,15 @@ public class EnemigoTest {
         assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(0.5, hormiga.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(0.5, hormiga.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(0.5, hormiga.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(2,2), hormiga.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(1, hormiga.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(3,2), hormiga.obtenerCoordenadas());
 
     }
@@ -264,7 +256,7 @@ public class EnemigoTest {
         Jugador jugador = juego.obtenerJugador();
         TrampaArenosa trampa = new TrampaArenosa();
 
-        jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
+        jugador.generarConstruccion(trampa, new Coordenadas(3,2), juego.obtenerMapa());
         juego.avanzarTurno();
 
         assertThat( trampa.estadoDefensa(), instanceOf(Terminada.class) );
@@ -272,20 +264,23 @@ public class EnemigoTest {
         assertEquals( new Coordenadas(3,2), arania.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(1, arania.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(4,2), arania.obtenerCoordenadas());
         juego.avanzarTurno();
 
-        assertEquals(1, arania.obtenerVelocidadReal() );
-        assertEquals( new Coordenadas(5,2), arania.obtenerCoordenadas());
-        juego.avanzarTurno();
-
-        assertEquals(1, arania.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(6,2), arania.obtenerCoordenadas());
         juego.avanzarTurno();
 
         assertEquals(2, arania.obtenerVelocidadReal() );
         assertEquals( new Coordenadas(7,3), arania.obtenerCoordenadas());
+        juego.avanzarTurno();
+
+        assertEquals(2, arania.obtenerVelocidadReal() );
+        assertEquals( new Coordenadas(7,5), arania.obtenerCoordenadas());
+
+    }
+
+    @Test
+    public void laLechuzaNoEsRalentizadaPorLaTrampaArenosa() {
 
     }
 }

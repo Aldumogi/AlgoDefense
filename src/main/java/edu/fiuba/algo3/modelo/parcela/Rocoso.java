@@ -39,6 +39,8 @@ public class Rocoso implements Parcela {
         throw new NoSePudoBorrarElEnemigoException();
     }
 
+    public void borrarObjeto(Defensa defensa) { }
+
     public Coordenadas devolverCoordenadasMeta() {
         return null;
     }

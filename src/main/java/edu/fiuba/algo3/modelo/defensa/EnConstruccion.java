@@ -25,7 +25,9 @@ public class EnConstruccion implements EstadoDefensa {
     }
     public int tiempoDeConstruccion() { return this.tiempoDeConstruccion; }
 
-    public void ralentizarEnemigo(Enemigo enemigo, double ralentizacion) { }
+    public void ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadas, double ralentizacion) { }
+
+    public int obtenerTiempoDeRalentizacion() { return this.tiempoDeRalentizacion; }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
                                     Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,

@@ -62,5 +62,24 @@ public class DefensaTest {
 
     }
 
+    @Test
+    public void trampaArenosaEsEliminadaDespuesDeTresTurnos() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        String rutaMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(rutaMapa);
+        ini.agregarJugador("Roberto");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Mapa mapa = juego.obtenerMapa();
+        TrampaArenosa trampa = new TrampaArenosa();
+
+        jugador.generarConstruccion(trampa, new Coordenadas(2,2), mapa);
+        juego.avanzarTurno();
+
+        assertEquals(1, jugador.obtenerDefensas().size());
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        assertEquals(0, jugador.obtenerDefensas().size());
+    }
 
 }

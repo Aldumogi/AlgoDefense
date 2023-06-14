@@ -5,10 +5,6 @@ import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
-import edu.fiuba.algo3.modelo.parcela.Parcela;
-import edu.fiuba.algo3.modelo.parcela.Pasarela;
-import edu.fiuba.algo3.modelo.parcela.PasarelaLargada;
-import edu.fiuba.algo3.modelo.parcela.PasarelaMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +24,17 @@ public class TrampaArenosa extends Defensa{
 
     }
 
-    public void ralentizarEnemigo(Enemigo enemigo) {
-        this.estado.ralentizarEnemigo(enemigo, this.factorDeRalentizacion);
-    }
-
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
         this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
     }
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar) {
         this.estado = this.estado.pasarTurno(enemigos, this.obtenerCoordenadas(), this.factorDeRalentizacion);
+        if ( this.estado.obtenerTiempoDeRalentizacion() == 0 ) {
+            mapa.borrar(this);
+            trampasAEliminar.add(this);
+        }
     }
 }

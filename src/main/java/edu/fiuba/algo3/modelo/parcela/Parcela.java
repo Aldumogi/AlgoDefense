@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.parcela;
 
 import edu.fiuba.algo3.modelo.defensa.*;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarLaDefensaException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
@@ -16,6 +17,7 @@ public interface Parcela {
     Coordenadas recibir(Enemigo enemigo) throws NoEsPosibleRecibirEnemigosEnParcelaException;
     List<Enemigo> obtener();
     void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException;
+    void borrarObjeto(Defensa defensa) ;
 
     Coordenadas devolverCoordenadasMeta();
 

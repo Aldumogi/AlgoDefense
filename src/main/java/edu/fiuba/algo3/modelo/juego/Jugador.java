@@ -55,12 +55,16 @@ public class Jugador {
     }
 
 
-    public void finalizarTurno(List<Enemigo> enemigos){
-        this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas) );
-        this.agregarCreditosAlMatarEnemigos(enemigos);
+    public void finalizarTurno(List<Enemigo> enemigos, Mapa mapa){
+        List<Defensa> trampasAEliminar = new ArrayList<>();
+        this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas, this.defensas, mapa, trampasAEliminar) );
+        for (Defensa trampa: trampasAEliminar) {
+            this.defensas.remove(trampa);
+        }
+        this._agregarCreditosAlMatarEnemigos(enemigos);
     }
 
-    private void agregarCreditosAlMatarEnemigos(List<Enemigo> enemigos) {
+    private void _agregarCreditosAlMatarEnemigos(List<Enemigo> enemigos) {
         enemigos.forEach( enemigo -> {
             this.cantidadDeCreditos += enemigo.obtenerCreditos();
         } );

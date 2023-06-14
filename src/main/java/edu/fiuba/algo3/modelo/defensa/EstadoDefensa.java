@@ -21,6 +21,7 @@ public interface EstadoDefensa {
                              double factorDeRalentizacion);
     int tiempoDeConstruccion();
 
-    void ralentizarEnemigo(Enemigo enemigo, double ralentizacion);
+    void ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadas, double ralentizacion);
 
+    int obtenerTiempoDeRalentizacion();
 }

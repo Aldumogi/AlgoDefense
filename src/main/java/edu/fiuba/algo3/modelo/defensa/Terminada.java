@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.exceptions.FueraDeRangoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +46,11 @@ public class Terminada implements EstadoDefensa {
         return this;
     }
 
-    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion) {
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa,
+                                    double factorDeRalentizacion) {
+        this.tiempoDeRalentizacion--;
         for (Enemigo enemigo: enemigos) {
-            /* Falta chequear que el enemigo pase sobre la trampa */
-            /*
-            * if( coordenadasDefensa.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0 ) {
-            *       // Aca va this.ralentizarEnemigo
-            * }
-            * */
-            this.ralentizarEnemigo(enemigo, factorDeRalentizacion);
+            this.ralentizarEnemigo(enemigo, coordenadasDefensa, factorDeRalentizacion);
         }
         return this;
     }
@@ -61,15 +58,11 @@ public class Terminada implements EstadoDefensa {
     public int tiempoDeConstruccion() {
         return this.tiempoDeConstruccion;
     }
-
-    public void ralentizarEnemigo(Enemigo enemigo, double ralentizacion) {
-        if ( this.tiempoDeRalentizacion < 0 ) {
-            return;
+    public int obtenerTiempoDeRalentizacion() { return this.tiempoDeRalentizacion; }
+    public void ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadasDefensa, double ralentizacion) {
+        if( coordenadasDefensa.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0
+                && this.tiempoDeRalentizacion >= 0) {
+            enemigo.recibirRalentizacion(ralentizacion);
         }
-        if ( this.tiempoDeRalentizacion == 0 ) {
-            ralentizacion = 1;
-        }
-        enemigo.recibirRalentizacion(ralentizacion);
-        this.tiempoDeRalentizacion--;
     }
 }
