@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
-import edu.fiuba.algo3.modelo.parcela.Parcela;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public abstract class Defensa {
         return this.estado;
     }
 
-    public abstract void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas);
+    public abstract void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar);
 
     public String getNombre(){
         return this.nombre;

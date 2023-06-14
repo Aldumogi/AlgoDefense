@@ -57,6 +57,10 @@ public abstract class Enemigo {
 
         this.coordenadas = coordenadaSiguiente;
         this._actualizarVelocidadSegunCantidadDeMovimientos();
+        this._restaurarVelocidadNormal();
+    }
+    private void _restaurarVelocidadNormal() {
+        this.coeficienteDeRalentizacion = 1;
     }
     protected abstract void _actualizarVelocidadSegunCantidadDeMovimientos();
     public void recibirRalentizacion(double coeficienteDeRalentizacion) {

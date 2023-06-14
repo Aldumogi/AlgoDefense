@@ -19,7 +19,7 @@ public class Pasarela implements Parcela {
     public final Color color = Color.YELLOW;
 
     public Pasarela(Coordenadas coordenadas){
-        this.estado = new ParcelaOcupada();
+        this.estado = new ParcelaDisponible();
         this.coordenadas = coordenadas;
         this.enemigos = new ArrayList<Enemigo>();
         this.trampaArenosa = null;
@@ -42,6 +42,9 @@ public class Pasarela implements Parcela {
 
     public void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
         this.enemigos.remove(enemigo);
+    }
+
+    public void borrarObjeto(Defensa defensa) {
     }
 
     public Coordenadas devolverCoordenadasMeta() {

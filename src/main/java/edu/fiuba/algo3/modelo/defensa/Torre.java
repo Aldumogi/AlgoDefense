@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
-import edu.fiuba.algo3.modelo.parcela.Parcela;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class Torre extends Defensa {
 
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {}
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar) {
         this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
                 this.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion);
     }

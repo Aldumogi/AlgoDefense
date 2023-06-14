@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
@@ -93,7 +92,7 @@ public class Juego {
 
     public void avanzarTurno(){
         this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size() - 1 )? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12);
-        this.jugador.finalizarTurno(this.enemigos);
+        this.jugador.finalizarTurno(this.enemigos, this.mapa);
         this.eliminarEnemigosMuertos();
         this.actualizarEnergiaJugador();
         this.avanzarEnemigos();

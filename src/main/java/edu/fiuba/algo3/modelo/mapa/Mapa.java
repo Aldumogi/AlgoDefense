@@ -3,11 +3,8 @@ package edu.fiuba.algo3.modelo.mapa;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.defensa.Torre;
 import edu.fiuba.algo3.modelo.defensa.TrampaArenosa;
-import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
-import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
-import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
-import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.parcela.*;
 import org.json.simple.parser.ParseException;
 
@@ -80,7 +77,10 @@ public class Mapa {
         Coordenadas coordenadas = enemigo.obtenerCoordenadas();
         this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).borrarObjeto(enemigo);
     }
-
+    public void borrar(Defensa defensa) {
+        Coordenadas coordenadas = defensa.obtenerCoordenadas();
+        this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).borrarObjeto(defensa);
+    }
     //recibe una cordenada y chequea, que para ese lado este la meta. 
     //Tambien recibe una lista, que contenga la posicion actual del enemigo
 

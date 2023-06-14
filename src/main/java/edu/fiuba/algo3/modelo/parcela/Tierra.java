@@ -42,6 +42,10 @@ public class Tierra implements Parcela {
         throw new NoSePudoBorrarElEnemigoException();
     }
 
+    public void borrarObjeto(Defensa defensa) {
+        this.defensa = null;
+    }
+
     public Coordenadas devolverCoordenadasMeta() {
         return null;
     }
