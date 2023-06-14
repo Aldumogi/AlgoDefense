@@ -281,14 +281,15 @@ public class EnemigoTest {
         Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
-        Lechuza lechuza = new Lechuza( new Coordenadas(2,2) );
+        Lechuza lechuza = new Lechuza( new Coordenadas(1,2) );
+        juego.agregarEnemigo(lechuza);
         Jugador jugador = juego.obtenerJugador();
         TrampaArenosa trampa = new TrampaArenosa();
         jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
 
         juego.avanzarTurno();
         assertThat( juego.obtenerMapa().obtenerCelda(new Coordenadas(2,2)), instanceOf(PasarelaNormal.class) );
-        juego.agregarEnemigo(lechuza);
+
         juego.avanzarTurno();
         assertEquals( new Coordenadas(1,7), lechuza.obtenerCoordenadas());
         //assertEquals( new Coordenadas(6,2), lechuza.obtenerCoordenadas());

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import edu.fiuba.algo3.modelo.defensa.Torre;
 import edu.fiuba.algo3.modelo.defensa.TrampaArenosa;
+import edu.fiuba.algo3.modelo.enemigo.Lechuza;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
@@ -33,6 +34,11 @@ public class Pasarela implements Parcela {
 
     public Coordenadas recibir(Enemigo enemigo){
         enemigos.add(enemigo);
+        return this.coordenadas;
+    }
+
+    public Coordenadas recibir(Lechuza lechuza) throws NoEsPosibleRecibirEnemigosEnParcelaException {
+        enemigos.add(lechuza);
         return this.coordenadas;
     }
 
