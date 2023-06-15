@@ -17,6 +17,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -114,9 +115,11 @@ public class JuegoTest {
         Juego juego = inicio.obtenerJuego();
         Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
-        Enemigo enemigo = new Arania( mapa.getCoordenadasLargada() );
+        for( int i = 0; i < 7 ; i++ ){
+            juego.agregarEnemigo( new Arania( mapa.getCoordenadasLargada() ) );
+            juego.agregarEnemigo( new Hormiga( mapa.getCoordenadasLargada() ) );
+        }
 
-        juego.agregarEnemigo(enemigo);
         juego.avanzarTurno();
         juego.avanzarTurno();
         juego.avanzarTurno();
