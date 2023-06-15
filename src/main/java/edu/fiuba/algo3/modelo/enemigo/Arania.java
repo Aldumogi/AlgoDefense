@@ -8,15 +8,16 @@ import java.util.Random;
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Arania extends Enemigo {
+    final String nombre = "Araña";
+
     public Arania(Coordenadas coordenadas) {
         int energia = 2;
         this.velocidad = 2 ;
         this.dañoCausado = 2;
         this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
-        this.estado = new Vivo( energia );
+        this.estado = new Vivo( energia , this.nombre);
         this.coeficienteDeRalentizacion = 1;
-        logger.info("Se creó una araña");
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeAraniasMuertas) {
@@ -40,5 +41,9 @@ public class Arania extends Enemigo {
         }
         Arania e = (Arania) e2;
         return e.coordenadas == this.coordenadas && e.estado == this.estado;
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
     }
 }

@@ -15,9 +15,12 @@ import java.util.List;
 public class EnConstruccion implements EstadoDefensa {
     private int tiempoDeConstruccion;
     private int tiempoDeRalentizacion;
-    public EnConstruccion(int tiempoDeConstruccion, int tiempoDeRalentizacion) {
+    private String mensajeAlFinalizarConstruccion;
+
+    public EnConstruccion(int tiempoDeConstruccion, int tiempoDeRalentizacion, String mensajeAlFinalizarConstruccion) {
         this.tiempoDeConstruccion = tiempoDeConstruccion;
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
+        this.mensajeAlFinalizarConstruccion = mensajeAlFinalizarConstruccion;
     }
     public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
@@ -34,13 +37,13 @@ public class EnConstruccion implements EstadoDefensa {
                                     double factorDeRalentizacion) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
-            logger.info("La construcción terminó");
+            logger.info( this.mensajeAlFinalizarConstruccion );
             return new Terminada(this.tiempoDeRalentizacion);
         }
         return this;
     }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion) {
-        return this.pasarTurno(enemigos, 0, 0, null, null, 0);
+        return this.pasarTurno(enemigos, 0, 0, coordenadasDefensa, null, factorDeRalentizacion);
     }
 }

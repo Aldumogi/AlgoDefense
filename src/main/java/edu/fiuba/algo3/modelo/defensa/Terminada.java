@@ -11,11 +11,11 @@ import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import java.util.ArrayList;
 import java.util.List;
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Terminada implements EstadoDefensa {
     private int tiempoDeConstruccion = 0;
     private int tiempoDeRalentizacion;
-    private double factorDeRalentizacion;
     public Terminada(int tiempoDeRalentizacion) {
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
     }

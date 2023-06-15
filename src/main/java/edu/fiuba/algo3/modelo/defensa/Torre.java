@@ -13,7 +13,6 @@ public class Torre extends Defensa {
     public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException {}
 
-
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {}
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar) {

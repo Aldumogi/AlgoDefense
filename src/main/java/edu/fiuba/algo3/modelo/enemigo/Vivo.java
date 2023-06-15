@@ -2,20 +2,28 @@ package edu.fiuba.algo3.modelo.enemigo;
 
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vivo implements EstadoEnemigo {
     private int energia;
+    private String nombre;
 
-    public Vivo(int energia) {
+    public Vivo(int energia, String nombre) {
+        this.nombre = nombre;
         this.energia = energia;
     }
 
-    public EstadoEnemigo recibirDanio(int danio) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
+    public EstadoEnemigo recibirDanio(int danio, Coordenadas coordenadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         this.energia = this.energia - danio;
-        if ( this.energia < danio ) return new Muerto();
+        if ( this.energia < danio ) {
+            logger.info( "Se murió " + this.nombre + " en la posición (" + coordenadas.obtenerFila()
+                    + ", " + coordenadas.obtenerColumna() + ")" );
+            return new Muerto();
+        }
         return this;
     }
 

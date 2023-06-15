@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Lechuza extends Enemigo {
+        final String nombre = "Lechuza";
 
         public Lechuza(Coordenadas coordenadas) {
                 int energia = 5;
                 this.velocidad = 5 ;
                 this.dañoCausado = 0;
                 this.coordenadas = coordenadas;
-                this.estado = new Vivo( energia );
+                this.estado = new Vivo( energia , this.nombre );
                 this.coeficienteDeRalentizacion = 1;
                 logger.info("Se creó una Lechuza");
         }
@@ -32,10 +33,6 @@ public class Lechuza extends Enemigo {
         public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) { }
 
         protected void _actualizarVelocidadSegunCantidadDeMovimientos() {  }
-
-        public int obtenerDanioCausado (int numeroDeTurno) {
-                return this.dañoCausado;
-        }
 
         public void mover(Mapa mapa) throws NoSePudoBorrarElEnemigoException{
                 // Pedir a mapa pasarela actual y eliminar enemigo
@@ -66,4 +63,13 @@ public class Lechuza extends Enemigo {
                 Lechuza e = (Lechuza) e2;
                 return e.coordenadas == this.coordenadas && e.estado == this.estado;
         }
+
+        public String obtenerNombre() {
+                return this.nombre;
+        }
+
+        public int obtenerDanioCausado (int numeroDeTurno) {
+                return this.dañoCausado;
+        }
+
 }

@@ -26,7 +26,6 @@ public class Juego {
         this.turnos = new ArrayList<>();
         this.mapa = new Mapa();
 
-        logger.info("Se ha iniciado el juego");
 
     }
 
@@ -37,8 +36,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-
-        logger.info("Se ha iniciado el juego con un jugador y un mapa");
     }
 
     public Juego(ArrayList<Turno> turnos) throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -47,8 +44,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-
-        logger.info("Se ha iniciado el juego con los turnos");
     }
 
     public Juego(ArrayList<Turno> turnos, Mapa mapa) throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -57,13 +52,9 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-
-        logger.info("Se ha iniciado el juego con los turnos");
     }
     public void setearJugador(Jugador jugador) {
         this.jugador = jugador;
-
-        logger.info("Seteo del jugador");
     }
 
     public Jugador obtenerJugador() {
@@ -74,7 +65,6 @@ public class Juego {
         // aca deberia devolver el numero de turno real
         return this.indiceActualListaTurnos + 1;
     }
-    public Mapa obtenerMapa() { return this.mapa; }
 
     public void agregarEnemigo(Enemigo enemigo) {
         enemigos.add(enemigo);
@@ -97,7 +87,7 @@ public class Juego {
         this.actualizarEnergiaJugador();
         this.avanzarEnemigos();
         this.agregarEnemigosDelTurno();
-        logger.info("Se avanzó al turno " + this.indiceActualListaTurnos);
+        logger.info("Se avanzó al turno " + (this.indiceActualListaTurnos + 1));
     }
 
     public void avanzarEnemigos(){
@@ -127,12 +117,16 @@ public class Juego {
 
     public void actualizarEnergiaJugador() {
         Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
+        ArrayList<Enemigo> enemigosEnLaMeta = new ArrayList<>();
         this.enemigos.forEach( enemigo -> {
             if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
-                jugador.restarEnergia(enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() ));
+                int danio = enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() );
+                logger.info( enemigo.obtenerNombre() + " llega a la meta, produce " + danio + " de daño al jugador" );
+                jugador.restarEnergia( danio );
+                enemigosEnLaMeta.add(enemigo);
             }
         });
-        logger.info("Se actualizó la energía del jugador");
+        this.enemigos.removeAll(enemigosEnLaMeta);
     }
 
     public void actualizarTorresJugador() {
@@ -146,7 +140,15 @@ public class Juego {
     }
     
     public boolean juegoTerminado(){
-        return (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 );
+        if ( ! jugador.estaVivo() ) {
+            logger.info("Jugador pierde la partida");
+            return true;
+        }
+        if (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 ) {
+            logger.info("Jugador gana la partida");
+            return true;
+        }
+        return false;
     }
     
     public void moverEnemigosAMeta() {
@@ -154,6 +156,10 @@ public class Juego {
         this.enemigos.forEach( enemigo -> {
             enemigo.setCoordenadas(coordenadasMeta);
         });
+    }
+
+    public Mapa obtenerMapa() {
+        return this.mapa;
     }
 
 }
