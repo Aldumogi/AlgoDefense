@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.defensa.Torre;
 import edu.fiuba.algo3.modelo.defensa.TrampaArenosa;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.loaders.LoaderMapaJuego;
 import edu.fiuba.algo3.modelo.parcela.*;
 import org.json.simple.parser.ParseException;
 

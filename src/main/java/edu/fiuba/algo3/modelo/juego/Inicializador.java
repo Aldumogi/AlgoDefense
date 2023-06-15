@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import edu.fiuba.algo3.modelo.enemigo.LoaderEnemigosJuego;
+import edu.fiuba.algo3.modelo.loaders.LoaderEnemigosJuego;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
