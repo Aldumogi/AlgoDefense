@@ -279,7 +279,7 @@ public class EnemigoTest {
 
     @Test
     public void laLechuzaNoEsRalentizadaPorLaTrampaArenosa() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
-        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String filepath = "src/main/test/edu/fiuba/algo3/resources/mapaValido.json";
         Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
@@ -287,14 +287,14 @@ public class EnemigoTest {
         juego.agregarEnemigo(lechuza);
         Jugador jugador = juego.obtenerJugador();
         TrampaArenosa trampa = new TrampaArenosa();
-        jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
+        jugador.generarConstruccion(trampa, new Coordenadas(1,7), juego.obtenerMapa());
 
         juego.avanzarTurno();
-        assertThat( juego.obtenerMapa().obtenerCelda(new Coordenadas(2,2)), instanceOf(PasarelaNormal.class) );
+        assertThat( juego.obtenerMapa().obtenerCelda(new Coordenadas(1,7)), instanceOf(PasarelaNormal.class) );
+        assertEquals( new Coordenadas(1,7), lechuza.obtenerCoordenadas() );
 
         juego.avanzarTurno();
-        assertEquals( new Coordenadas(1,7), lechuza.obtenerCoordenadas());
-        //assertEquals( new Coordenadas(6,2), lechuza.obtenerCoordenadas());
+        assertEquals( new Coordenadas(1,12), lechuza.obtenerCoordenadas());
     }
     /*
     * LECHUZA
