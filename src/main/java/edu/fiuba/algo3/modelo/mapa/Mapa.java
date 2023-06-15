@@ -23,13 +23,13 @@ public class Mapa {
 
     public Mapa() throws IOException, ParseException, FormatoMapaInvalidoException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa("src/main/java/edu/fiuba/algo3/resources/mapa.json");
-        this.buscarCoordenadasLargadaYMeta();
+        this._buscarCoordenadasLargadaYMeta();
     }
     public Mapa(String jsonFilePath) throws IOException, ParseException, FormatoMapaInvalidoException {
         this.mapaDelJuego = LoaderMapaJuego.recuperarMapa(jsonFilePath);
-        this.buscarCoordenadasLargadaYMeta();
+        this._buscarCoordenadasLargadaYMeta();
     }
-    private void buscarCoordenadasLargadaYMeta() {
+    private void _buscarCoordenadasLargadaYMeta() {
         for ( int fila = 1 ; fila <= this.mapaDelJuego.size() ; fila++ ) {
             for ( int columna = 1 ; columna <= this.mapaDelJuego.get(fila).size() ; columna++ ) {
                 Coordenadas coord = new Coordenadas(fila, columna);
@@ -65,29 +65,29 @@ public class Mapa {
     public void recibir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {
         if ( trampaArenosa != null ) {
             Coordenadas coordenadas = trampaArenosa.obtenerCoordenadas();
-            this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).construir(trampaArenosa);
+            this.mapaDelJuego.get(coordenadas.obtenerFila()).get(coordenadas.obtenerColumna()).construir(trampaArenosa);
         }
     }
     public void recibir(Torre torre) throws NoSePudoConstruirException {
         if ( torre != null ) {
             Coordenadas coordenadas = torre.obtenerCoordenadas();
-            this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).construir(torre);
+            this.mapaDelJuego.get(coordenadas.obtenerFila()).get(coordenadas.obtenerColumna()).construir(torre);
         }
     }
     public void borrar(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
         Coordenadas coordenadas = enemigo.obtenerCoordenadas();
-        this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).borrarObjeto(enemigo);
+        this.mapaDelJuego.get(coordenadas.obtenerFila()).get(coordenadas.obtenerColumna()).borrarObjeto(enemigo);
     }
     public void borrar(Defensa defensa) {
         Coordenadas coordenadas = defensa.obtenerCoordenadas();
-        this.mapaDelJuego.get(coordenadas.fila()).get(coordenadas.columna()).borrarObjeto(defensa);
+        this.mapaDelJuego.get(coordenadas.obtenerFila()).get(coordenadas.obtenerColumna()).borrarObjeto(defensa);
     }
     //recibe una cordenada y chequea, que para ese lado este la meta. 
     //Tambien recibe una lista, que contenga la posicion actual del enemigo
 
     public boolean esPorAca(Coordenadas coordenadaAVerificar, List<Coordenadas> coordenadasVisitadas) {
-        int filaActual = coordenadaAVerificar.fila();
-        int columnaActual = coordenadaAVerificar.columna();
+        int filaActual = coordenadaAVerificar.obtenerFila();
+        int columnaActual = coordenadaAVerificar.obtenerColumna();
     
         Parcela celdaActual = this.obtenerCelda(coordenadaAVerificar);
     
@@ -109,7 +109,7 @@ public class Mapa {
     }
     
     private boolean buscarSiguienteCoordenada(Coordenadas nuevaCoordenada, List<Coordenadas> coordenadasVisitadas) {
-        if (nuevaCoordenada.fila() <= 0 || nuevaCoordenada.columna() <= 0 ){
+        if (nuevaCoordenada.obtenerFila() <= 0 || nuevaCoordenada.obtenerColumna() <= 0 ){
             return false;
         }
         Parcela parcela = this.obtenerCelda(nuevaCoordenada);
@@ -127,8 +127,8 @@ public class Mapa {
 
     public Coordenadas devolverSiguientePasarela_(Coordenadas cordenadaActual){
 
-        int fila = cordenadaActual.fila();
-        int columna = cordenadaActual.columna();
+        int fila = cordenadaActual.obtenerFila();
+        int columna = cordenadaActual.obtenerColumna();
         //Parcela celdaActual = this.obtenerCelda(cordenadaActual);
 
         List<Coordenadas> visitados = new ArrayList<>();
@@ -171,18 +171,18 @@ public class Mapa {
     };
     public Coordenadas devolverSiguienteCordenadaEnL(Coordenadas cordenadaActual, double cantidadDeMovimientos){
         Coordenadas meta = this.getCoordenadasMeta();
-        int columnaMeta = meta.columna();
-        int filaMeta = meta.fila();
+        int columnaMeta = meta.obtenerColumna();
+        int filaMeta = meta.obtenerFila();
 
         while(cantidadDeMovimientos != 0){
-            if(columnaMeta > cordenadaActual.columna()){
-                cordenadaActual = new Coordenadas(cordenadaActual.fila(), cordenadaActual.columna() + 1);
-            }else if(columnaMeta < cordenadaActual.columna()){
-                cordenadaActual = new Coordenadas(cordenadaActual.fila(), cordenadaActual.columna() - 1);   
-            }else if(filaMeta > cordenadaActual.fila()){
-                cordenadaActual = new Coordenadas(cordenadaActual.fila() + 1, cordenadaActual.columna());   
-            }else if(filaMeta < cordenadaActual.fila()){
-                cordenadaActual = new Coordenadas(cordenadaActual.fila() - 1, cordenadaActual.columna());   
+            if(columnaMeta > cordenadaActual.obtenerColumna()){
+                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila(), cordenadaActual.obtenerColumna() + 1);
+            }else if(columnaMeta < cordenadaActual.obtenerColumna()){
+                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila(), cordenadaActual.obtenerColumna() - 1);   
+            }else if(filaMeta > cordenadaActual.obtenerFila()){
+                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila() + 1, cordenadaActual.obtenerColumna());   
+            }else if(filaMeta < cordenadaActual.obtenerFila()){
+                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila() - 1, cordenadaActual.obtenerColumna());   
             }
             cantidadDeMovimientos -= 1;
             if (meta.equals(cordenadaActual)){
@@ -194,10 +194,10 @@ public class Mapa {
     }
     public Coordenadas devolverSiguienteCordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas cordenadaActual){
         Coordenadas meta = this.getCoordenadasMeta();
-        int columnaMeta = meta.columna();
-        int filaMeta = meta.fila();
-        int filaActual = cordenadaActual.fila();
-        int columnaActual = cordenadaActual.columna();
+        int columnaMeta = meta.obtenerColumna();
+        int filaMeta = meta.obtenerFila();
+        int filaActual = cordenadaActual.obtenerFila();
+        int columnaActual = cordenadaActual.obtenerColumna();
         if (columnaMeta == columnaActual || filaMeta == filaActual){
             return devolverSiguienteCordenadaEnL(cordenadaActual, 1);
         }
