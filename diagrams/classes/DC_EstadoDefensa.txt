@@ -1,0 +1,21 @@
+interface EstadoDefensa {
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaTerminada()
+}
+
+class EnConstruccion {
+- tiempoDeConstruccion: int
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++pasarTurno(): EstadoDefensa
+}
+
+class Terminada {
+- tiempoDeConstruccion: int
++atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
++estaEnRango(coordernadasEnemigo, coordenadasDefensa, rangoDeAtaque)
++pasarTurno(): EstadoDefensa
+}
+
+
+EstadoDefensa <|.. EnConstruccion
+EstadoDefensa <|.. Terminada
