@@ -9,11 +9,36 @@ import edu.fiuba.algo3.modelo.mapa.Mapa;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Torre extends Defensa {
-    public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
-            DefensaEnConstruccionException, FueraDeRangoException {}
+public abstract class Torre implements Defensa {
+    protected String nombre;
+    protected int costo;
+    protected int tiempoDeConstruccion;
+    protected int rangoDeAtaque;
+    protected int danio;
+    protected EstadoDefensa estado;
+    protected Coordenadas coordenadas;
+    protected int tiempoDeRalentizacion;
+    protected double factorDeRalentizacion;
 
-    public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {}
+    public int costo() {
+        return this.costo;
+    }
+
+    public EstadoDefensa estadoDefensa() {
+        return this.estado;
+    }
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public Coordenadas obtenerCoordenadas() {
+        return this.coordenadas;
+    }
+
+    public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
+            DefensaEnConstruccionException, FueraDeRangoException;
+
+    public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar) {
         this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,

@@ -9,34 +9,16 @@ import edu.fiuba.algo3.modelo.mapa.Mapa;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Defensa {
-    protected String nombre;
-    protected int costo;
-    protected int tiempoDeConstruccion;
-    protected int rangoDeAtaque;
-    protected int danio;
-    protected EstadoDefensa estado;
-    protected Coordenadas coordenadas;
-    protected int tiempoDeRalentizacion;
-    protected double factorDeRalentizacion;
+public interface Defensa {
+    void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
-    public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
+    int costo();
 
-    public int costo() {
-        return this.costo;
-    }
+    EstadoDefensa estadoDefensa();
 
-    public EstadoDefensa estadoDefensa() {
-        return this.estado;
-    }
+    void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar);
 
-    public abstract void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar);
+    String getNombre();
 
-    public String getNombre(){
-        return this.nombre;
-    }
-
-    public Coordenadas obtenerCoordenadas() {
-        return this.coordenadas;
-    }
+    Coordenadas obtenerCoordenadas();
 }
