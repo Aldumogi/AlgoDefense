@@ -21,16 +21,22 @@ public class TorreBlanca extends Torre {
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
+        String mensajeAlFinalizarConstruccion = "La construcción de " + this.nombre + " en la posición ("
+                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") terminó" ;
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion, mensajeAlFinalizarConstruccion);
 
-        logger.info("Se pusó en construcción una Torre Blanca");
+        logger.info("Jugador inicia la construcción de una Torre Blanca en la posición (" +
+                coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
+                + ")");
     }
 
     public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException {
         this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.obtenerCoordenadas());
 
-        logger.info("Torre Blanca atacó a un enemigo");
+        logger.info("Torre Blanca ataca a una " + enemigo.obtenerNombre() + " en la posicion (" +
+                enemigo.obtenerCoordenadas().obtenerFila() + ", " +
+                enemigo.obtenerCoordenadas().obtenerColumna() + ")");
     }
 
 }

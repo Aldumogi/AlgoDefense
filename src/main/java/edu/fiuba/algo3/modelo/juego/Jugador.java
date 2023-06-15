@@ -19,7 +19,6 @@ public class Jugador {
     private String nombre;
     private List<Defensa> defensas;
 
-    
     public Jugador(String nombre){
         this.puntosDeVida = 20;
         this.cantidadDeCreditos = 100;
@@ -50,8 +49,6 @@ public class Jugador {
             this.defensas.add(unaDefensa);
             this.cantidadDeCreditos -= unaDefensa.costo();
         }
-
-        logger.info("El jugador creó una" + unaDefensa.getNombre());
     }
 
 

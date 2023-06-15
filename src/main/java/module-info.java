@@ -7,6 +7,7 @@ module edu.fiuba.algo3 {
     requires com.networknt.schema;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.dataformat.yaml;
+    requires org.apache.logging.log4j.core;
     exports edu.fiuba.algo3;
     exports edu.fiuba.algo3.modelo.defensa;
     exports edu.fiuba.algo3.modelo.enemigo;
