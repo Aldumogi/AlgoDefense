@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.enemigo;
+package edu.fiuba.algo3.modelo.loaders;
 
 import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;

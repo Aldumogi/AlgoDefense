@@ -12,12 +12,6 @@ public class Coordenadas  {
     public Double distanciaEntreCoordenadas(Coordenadas c1) {
         return Math.sqrt( Math.pow(this.fila - c1.fila, 2) + Math.pow(this.columna - c1.columna, 2));
     }
-    public int fila(){
-        return this.fila;
-    }
-    public int columna(){
-        return this.columna;
-    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -35,11 +29,11 @@ public class Coordenadas  {
 
 
     public int obtenerFila() {
-        return fila;
+        return this.fila;
     }
 
     public int obtenerColumna() {
-        return columna;
+        return this.columna;
     }
 
 }

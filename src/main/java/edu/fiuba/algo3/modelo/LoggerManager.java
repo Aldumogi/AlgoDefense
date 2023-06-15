@@ -8,7 +8,6 @@ public class LoggerManager {
         String configLocation = "src/main/java/edu/fiuba/algo3/resources/log4j2.xml";
         Configurator.initialize(null, configLocation);
     }
-
     public static final Logger logger = LogManager.getLogger(LoggerManager.class);
 }
 

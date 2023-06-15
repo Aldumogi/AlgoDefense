@@ -15,4 +15,6 @@ module edu.fiuba.algo3 {
     exports edu.fiuba.algo3.modelo.mapa;
     exports edu.fiuba.algo3.modelo.juego;
     exports edu.fiuba.algo3.modelo.utils;
+    exports edu.fiuba.algo3.modelo.loaders;
+    exports edu.fiuba.algo3.modelo;
 }

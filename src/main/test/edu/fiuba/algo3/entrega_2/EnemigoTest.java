@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.enemigo.LoaderEnemigosJuego;
+import edu.fiuba.algo3.modelo.loaders.LoaderEnemigosJuego;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
 import edu.fiuba.algo3.modelo.juego.Turno;

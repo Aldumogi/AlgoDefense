@@ -2,14 +2,19 @@
 abstract Enemigo {
 - velocidad: int
 - dañoCausado: int
-- energíaInicial: int
 - creditosOtorgados: int
 - coordenadas: Coordenadas
-+ recibirDaño()
+- estado: EstadoEnemigo
+- cantidadDeMovimientosRealizados
+- coeficienteDeRalentizacion
 + cantidadCreditosOtorgados(): int
-+ moverEnemigo()
 + acumularMuertos()
 + agregarIndiceDelEnemigoMuerto()
++ mover(m: Mapa)
++ recibirRalentizacion(coeficienteDeRalentizacion: int)
++ recibirDaño()
+- actualizarVelocidadSegunCantidadDeMovimientos
+- restaurarVelocidadNormal()
 }
 
 class Hormiga {
@@ -32,105 +37,87 @@ class Juego {
 - mapa: Mapa
 - numeroDeTurno: int
 - cantidadDeHormigasMuertas: int
++ actualizarEnergiaJugador()
 + avanzarTurno()
 + agregarEnemigo()
++ agregarEnemigosDelTurno()
++ avanzarEnemigos()
++ eliminarEnemigosMuertos()
 + juegoTerminado()
-+ obtenerCreditosYEliminarEnemigosAlFinalizarTurno()
-+ contarMuertosEnElTurnoActual()
-+ actualizarEnergiaJugador()
++ moverEnemigosAMeta()
+}
+
+class Turno {
+- listaEnemigosAgregados
+- turnoId
++ agregarEnemigos(cantidadHormigas, cantArañas, coordenadasLargada)
 }
 
 class Inicializador {
++ Inicializador(filepath: String)
++ Inicializador(turnos: Turno)
++ Inicializador(jsonEnemigos: String, jsonMapa: String)
 + agregarJugador()
-+ iniciarPartida()
 }
 
-abstract Defensa {
+interface Defensa {
++ construir(mapa: Mapa, coordenadas: Coordenadas)
++ pasarTurno(enemigos, hormigasAsesinadas, defensas, mapa, trampasAEliminar)
+}
+
+class TrampaArenosa {
+- nombre
+- costo
+- tiempoDeConstruccion
+- estado: EstadoDefensa
+- coordenadas
+- tiempoDeRalentizacion
+- factorDeRalentizacion
++ construir(m: Mapa, c: Coordenadas)
++ pasarTurno(enemigos, hormigasAsesinadas, defensas, mapa, trampasAEliminar)
+}
+
+class Torre {
 - nombre
 - costo
 - tiempoDeConstruccion
 - rangoDeAtaque
 - danio
-- tierra
-+ atacarEnemigo(enemigo: Enemigo)
-+ construir(parcela:Parcela, numeroDeTurno:int)
-+ pasarTurno()
+- estado: EstadoDefensa
+- tiempoDeRalentizacion
+- factorDeRalentizacion
++ atacarEnemigo(e: Enemigo)
++ construir(m: Mapa, c: Coordenadas)
++ pasarTurno(enemigos, hormigasAsesinadas, defensas, mapa, trampasAEliminar)
 }
 
 class TorreBlanca {
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(parcela:Parcela, numeroDeTurno:int)
++ construir(m:Mapa, c:Coordenadas)
 }
 
 class TorrePlateada {
 + atacarEnemigo(enemigo: Enemigo)
-+ construir(parcela:Parcela, numeroDeTurno:int)
++ construir(m:Mapa, c:Coordenadas)
 }
 
 class Jugador {
 - nombre
 - cantidadDeCreditos: int
 - puntosDeVida: int
+- hormigasAsesinadas: Hormiga
 + actualizarDefensasAlFinalizarTurno()
-+ agregarCreditosAlMatarEnemigos()
-+ generarConstruccion()
++ finalizarTurno(enemigos: Enemigo, m: Mapa)
++ generarConstruccion(d: Defensa, c: Coordenadas, m: Mapa)
 + estaVivo()
 + restarEnergia()
+- agregarCreditosAlMatarEnemigos()
 }
 
-
-interface EstadoDefensa {
-+atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
-+estaTerminada()
-}
-
-class EnConstruccion {
-- tiempoDeConstruccion: int
-+atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
-+pasarTurno(): EstadoDefensa
-}
-
-class Terminada {
-- tiempoDeConstruccion: int
-+atacarEnemigo(e: Enemigo, rangoDeAtaque, daño, coordenadasDefensa)
-+estaEnRango(coordernadasEnemigo, coordenadasDefensa, rangoDeAtaque)
-+pasarTurno(): EstadoDefensa
-}
-
-
-interface EstadoEnemigo {
-+ acumularHormigasMuertas(hormigasMuertas: ArrayList<Enemigo>, enemigo: Hormiga)
-+ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
-+ mover(velocidad:int)
-+ recibirDanio(danio: int): EstadoEnemigo
-}
-
-class Vivo {
-- energia: int
-+ acumularHormigasMuertas(hormigasMuertas: ArrayList<Enemigo>, enemigo: Hormiga)
-+ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
-+ creditosOtorgados(creditos: int)
-+ mover(velocidad:int)
-+ recibirDanio(danio: int): EstadoEnemigo
-}
-
-class Muerto {
-- energia: int
-+ acumularHormigasMuertas(hormigasMuertas: ArrayList<Enemigo>, enemigo: Hormiga)
-+ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
-+ creditosOtorgados(creditos: int)
-+ mover(velocidad:int)
-+ recibirDanio(danio: int): EstadoEnemigo
-}
-
-EstadoEnemigo <|.. Vivo
-EstadoEnemigo <|.. Muerto
-
-EstadoDefensa <|.. EnConstruccion
-EstadoDefensa <|.. Terminada
-
-Defensa <|-- TorreBlanca
-Defensa <|-- TorrePlateada
+Defensa <|-- TrampaArenosa
+Defensa <|-- Torre
+Torre <|-- TorreBlanca
+Torre <|-- TorrePlateada
 
 
 
@@ -139,9 +126,8 @@ Enemigo <|-- Araña
 
 Juego <- Inicializador
 Juego "1" --> "0..*" Enemigo
+Juego "1" --> "0..*" Turno
 Jugador <- Juego
 Jugador "1" --> "0..*" Defensa
 Defensa .> Enemigo
-Defensa --> EstadoDefensa
-Enemigo --> EstadoEnemigo
 @enduml
