@@ -44,11 +44,11 @@ public class Tierra implements Parcela {
     }
 
     public List<Enemigo> obtener() {
-        return null;
+        return this.enemigos;
     }
 
     public void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
-        throw new NoSePudoBorrarElEnemigoException();
+        this.enemigos.remove(enemigo);
     }
 
     public void borrarObjeto(Defensa defensa) {

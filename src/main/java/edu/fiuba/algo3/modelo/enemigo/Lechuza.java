@@ -39,7 +39,7 @@ public class Lechuza extends Enemigo {
                 Parcela pasarela = mapa.obtenerCelda(this.coordenadas);
                 pasarela.borrarObjeto(this);
 
-                // Mover a la siguiente pasarela
+                // Mover a la siguiente parsela
                 double velocidad = this.velocidad;
                 Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCordenadaEnL(this.coordenadas, velocidad);
                 if(this.estado.obtenerEnergia() <= 2){
@@ -49,7 +49,8 @@ public class Lechuza extends Enemigo {
                 pasarelaSiguiente.recibir(this);
 
                 this.coordenadas = coordenadaSiguiente;
-                this._actualizarVelocidadSegunCantidadDeMovimientos();
+  
+                
         }
 
                 

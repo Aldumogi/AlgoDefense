@@ -19,7 +19,7 @@ public class Vivo implements EstadoEnemigo {
 
     public EstadoEnemigo recibirDanio(int danio, Coordenadas coordenadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         this.energia = this.energia - danio;
-        if ( this.energia < danio ) {
+        if ( this.energia <= 0 ) {
             logger.info( "Se murió " + this.nombre + " en la posición (" + coordenadas.obtenerFila()
                     + ", " + coordenadas.obtenerColumna() + ")" );
             return new Muerto();

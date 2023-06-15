@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
+import edu.fiuba.algo3.modelo.parcela.Parcela;
 import edu.fiuba.algo3.modelo.parcela.PasarelaNormal;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
@@ -293,5 +295,59 @@ public class EnemigoTest {
         juego.avanzarTurno();
         assertEquals( new Coordenadas(1,7), lechuza.obtenerCoordenadas());
         //assertEquals( new Coordenadas(6,2), lechuza.obtenerCoordenadas());
+    }
+    /*
+    * LECHUZA
+    * */
+    @Test
+    public void CuandoTieneTodaLaVidaSeMueveEnL() throws IOException, ParseException, FormatoMapaInvalidoException {
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(filepath);
+        ini.agregarJugador("Roberto");
+        Juego juego = ini.obtenerJuego();
+        Lechuza lechuza = new Lechuza(juego.obtenerMapa().getCoordenadasLargada());
+        juego.agregarEnemigo(lechuza);
+        // un movimiento
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada = new Coordenadas(1, 7);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada);
+        // dos movimientos
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada1 = new Coordenadas(1, 12);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada1);
+        // tres movimientos
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada3 = new Coordenadas(3, 15);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada3);
+    }
+    
+    @Test
+    public void CuandoMenosDeLaMitadDeLaVidaSeMuevePorDiagonales() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        String rutaMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador ini = new Inicializador(rutaMapa);
+        ini.agregarJugador("Roberto");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+        Mapa mapa = juego.obtenerMapa();
+        //Construyo La torre Que Ataca la Lechuza
+        jugador.generarConstruccion(new TorrePlateada(), new Coordenadas(1, 3), mapa);
+        juego.avanzarTurno();        
+        juego.avanzarTurno();
+        
+        Lechuza lechuza = new Lechuza(juego.obtenerMapa().getCoordenadasLargada());
+        juego.agregarEnemigo(lechuza);
+        // un movimiento
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada1 = new Coordenadas(1, 7);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada1);
+        // dos movimientos - Aca se deberiaMoverEnDiagonal
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada2 = new Coordenadas(6, 12);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada2);
+        // dos movimientos - Aca se deberiaMoverEnDiagonal
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada3 = new Coordenadas(11, 15);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada3);
+
     }
 }
