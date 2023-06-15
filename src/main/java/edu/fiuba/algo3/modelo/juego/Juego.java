@@ -87,7 +87,7 @@ public class Juego {
         this.actualizarEnergiaJugador();
         this.avanzarEnemigos();
         this.agregarEnemigosDelTurno();
-        logger.info("Se avanzó al turno " + this.indiceActualListaTurnos + 1);
+        logger.info("Se avanzó al turno " + (this.indiceActualListaTurnos + 1));
     }
 
     public void avanzarEnemigos(){
@@ -117,12 +117,17 @@ public class Juego {
 
     public void actualizarEnergiaJugador() {
         Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
+        ArrayList<Enemigo> enemigosEnLaMeta = new ArrayList<>();
         this.enemigos.forEach( enemigo -> {
             if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
-                jugador.restarEnergia(enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() ));
+                int danio = enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() );
+                logger.info( enemigo.obtenerNombre() + " llega a la meta, produce " + danio + " al jugador" );
+                jugador.restarEnergia( danio );
+                enemigosEnLaMeta.add(enemigo);
             }
         });
         logger.info("Se actualizó la energía del jugador");
+        this.enemigos.removeAll(enemigosEnLaMeta);
     }
 
     public void actualizarTorresJugador() {
