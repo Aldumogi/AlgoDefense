@@ -43,12 +43,6 @@ public class TrampaArenosa implements Defensa{
         return this.coordenadas;
     }
 
-    public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
-        logger.info("Trampa Arenosa atrapó a una " + enemigo.obtenerNombre() + "en la posicion (" +
-                enemigo.obtenerCoordenadas().obtenerFila() + ", " +
-                enemigo.obtenerCoordenadas().obtenerColumna() + ")");
-    }
-
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
