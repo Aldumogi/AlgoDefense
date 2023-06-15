@@ -55,8 +55,8 @@ public class TrampaArenosa implements Defensa{
                 + ")");
     }
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar) {
-        this.estado = this.estado.pasarTurno(enemigos, this.obtenerCoordenadas(), this.factorDeRalentizacion);
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
+        this.estado = this.estado.pasarTurno(enemigos, this.obtenerCoordenadas(), this.factorDeRalentizacion, nombre);
         if ( this.estado.obtenerTiempoDeRalentizacion() == 0 ) {
             mapa.borrar(this);
             trampasAEliminar.add(this);

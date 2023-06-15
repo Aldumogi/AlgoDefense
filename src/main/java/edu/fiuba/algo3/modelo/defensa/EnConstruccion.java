@@ -22,7 +22,7 @@ public class EnConstruccion implements EstadoDefensa {
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
         this.mensajeAlFinalizarConstruccion = mensajeAlFinalizarConstruccion;
     }
-    public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) throws ElEnemigoMurioDuranteElAtaqueException,
+    public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
         throw new DefensaEnConstruccionException();
     }
@@ -34,7 +34,7 @@ public class EnConstruccion implements EstadoDefensa {
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
                                     Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
-                                    double factorDeRalentizacion) {
+                                    double factorDeRalentizacion, String nombre) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
             logger.info( this.mensajeAlFinalizarConstruccion );
@@ -43,7 +43,7 @@ public class EnConstruccion implements EstadoDefensa {
         return this;
     }
 
-    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion) {
-        return this.pasarTurno(enemigos, 0, 0, coordenadasDefensa, null, factorDeRalentizacion);
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion, String nombre) {
+        return this.pasarTurno(enemigos, 0, 0, coordenadasDefensa, null, factorDeRalentizacion, nombre);
     }
 }

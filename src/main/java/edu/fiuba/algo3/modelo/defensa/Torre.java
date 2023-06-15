@@ -40,8 +40,8 @@ public abstract class Torre implements Defensa {
 
     public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar) {
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
         this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
-                this.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion);
+                this.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion, nombre);
     }
 }
