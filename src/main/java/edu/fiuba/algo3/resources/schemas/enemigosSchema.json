@@ -15,9 +15,15 @@
           },
           "arana": {
             "type": "integer"
+          },
+          "lechuza": {
+            "type": "integer"
+          },
+          "topo": {
+            "type": "integer"
           }
         },
-        "required": ["hormiga", "arana"],
+        "required": ["hormiga", "arana", "lechuza", "topo"],
         "additionalProperties": false
       }
     },
