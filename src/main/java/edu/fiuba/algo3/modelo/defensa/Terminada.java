@@ -19,11 +19,14 @@ public class Terminada implements EstadoDefensa {
     public Terminada(int tiempoDeRalentizacion) {
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
     }
-    public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) throws ElEnemigoMurioDuranteElAtaqueException,
+    public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
 
         this.estaEnRango(enemigo.obtenerCoordenadas(), coordenadasDefensa, rangoDeAtaque);
         enemigo.recibirDanio(danio);
+        logger.info( nombre + " ataca a una " + enemigo.obtenerNombre() + " en la posicion (" +
+                enemigo.obtenerCoordenadas().obtenerFila() + ", " +
+                enemigo.obtenerCoordenadas().obtenerColumna() + ")");
     }
 
     private void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
@@ -31,10 +34,11 @@ public class Terminada implements EstadoDefensa {
     }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
-                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas, double factorDeRalentizacion) {
+                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
+                                    double factorDeRalentizacion, String nombre) {
         for (Enemigo enemigo: enemigos) {
             try {
-                this.atacarEnemigo(enemigo, rangoDeAtaque, danio, coordenadasDefensa);
+                this.atacarEnemigo(enemigo, rangoDeAtaque, danio, coordenadasDefensa, nombre);
                 enemigo.acumularMuertos( hormigasAsesinadas );
                 enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
 
@@ -47,7 +51,7 @@ public class Terminada implements EstadoDefensa {
     }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa,
-                                    double factorDeRalentizacion) {
+                                    double factorDeRalentizacion, String nombre) {
         this.tiempoDeRalentizacion--;
         for (Enemigo enemigo: enemigos) {
             this.ralentizarEnemigo(enemigo, coordenadasDefensa, factorDeRalentizacion);

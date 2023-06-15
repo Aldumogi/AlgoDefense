@@ -54,7 +54,7 @@ public class Jugador {
 
     public void finalizarTurno(List<Enemigo> enemigos, Mapa mapa){
         List<Defensa> trampasAEliminar = new ArrayList<>();
-        this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas, this.defensas, mapa, trampasAEliminar) );
+        this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas, this.defensas, mapa, trampasAEliminar, defensa.getNombre()) );
         for (Defensa trampa: trampasAEliminar) {
             this.defensas.remove(trampa);
         }

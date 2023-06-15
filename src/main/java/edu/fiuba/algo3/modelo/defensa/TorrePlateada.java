@@ -34,7 +34,7 @@ public class TorrePlateada extends Torre {
 
     public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException {
-        this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.obtenerCoordenadas());
+        this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.obtenerCoordenadas(), this.nombre);
 
         logger.info("Torre Plateada ataca a una " + enemigo.obtenerNombre() + "en la posicion (" +
                 enemigo.obtenerCoordenadas().obtenerFila() + ", " +
