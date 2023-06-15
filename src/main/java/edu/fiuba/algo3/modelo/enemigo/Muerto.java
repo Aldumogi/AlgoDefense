@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.enemigo;
 
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public class Muerto implements EstadoEnemigo {
     public void mover(Enemigo enemigo) {
 
     }
-    public EstadoEnemigo recibirDanio(int danio) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
+    public EstadoEnemigo recibirDanio(int danio, Coordenadas coordenadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         throw new ElEnemigoEstaMuertoException();
     }
     public int obtenerEnergia() { return 0; }

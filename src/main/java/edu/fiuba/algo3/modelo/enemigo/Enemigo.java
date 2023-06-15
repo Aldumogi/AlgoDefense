@@ -32,7 +32,7 @@ public abstract class Enemigo {
     }
 
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
-        this.estado = this.estado.recibirDanio(unDanio);
+        this.estado = this.estado.recibirDanio(unDanio, this.coordenadas);
     }
 
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {

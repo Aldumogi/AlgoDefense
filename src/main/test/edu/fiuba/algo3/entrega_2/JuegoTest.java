@@ -124,69 +124,68 @@ public class JuegoTest {
 
     }
 
-  /*
+    /*
     Caso de Uso 18 - Simular y verificar que el jugador gane una partida
-   */
-  @Test
-  public void caso18() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
-    // Arrange
-    Jugador jugador = new Jugador("Alberto");
-    Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
-    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json", mapa.getCoordenadasLargada());
-    // turno 1
-    Juego juego = new Juego(jugador, mapa, turnos);
+    */
+    @Test
+    public void caso18() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        // Arrange
+        Jugador jugador = new Jugador("Alberto");
+        Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json", mapa.getCoordenadasLargada());
+        // turno 1
+        Juego juego = new Juego(jugador, mapa, turnos);
 
-    Defensa defensa1 = new TorrePlateada();
-    Coordenadas coordDefensa1 = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
-    jugador.generarConstruccion(defensa1, coordDefensa1, juego.obtenerMapa());
+        Defensa defensa1 = new TorrePlateada();
+        Coordenadas coordDefensa1 = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
+        jugador.generarConstruccion(defensa1, coordDefensa1, juego.obtenerMapa());
 
-    Defensa defensa2 = new TorrePlateada();
-    Coordenadas coordDefensa2 = new Coordenadas(1,3);
-    jugador.generarConstruccion(defensa2, coordDefensa2, juego.obtenerMapa());
+        Defensa defensa2 = new TorrePlateada();
+        Coordenadas coordDefensa2 = new Coordenadas(1,3);
+        jugador.generarConstruccion(defensa2, coordDefensa2, juego.obtenerMapa());
 
-    // Act
-    juego.avanzarTurno(); // pasa a turno 2
+        // Act
+        juego.avanzarTurno(); // pasa a turno 2
 
-    Defensa defensa3 = new TorrePlateada();
-    Coordenadas coordDefensa3 = new Coordenadas(4,3);
-    jugador.generarConstruccion(defensa3, coordDefensa3, juego.obtenerMapa());
+        Defensa defensa3 = new TorrePlateada();
+        Coordenadas coordDefensa3 = new Coordenadas(4,3);
+        jugador.generarConstruccion(defensa3, coordDefensa3, juego.obtenerMapa());
 
-    juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa1 y defensa2
-    juego.avanzarTurno(); // pasa a turno 4, se termina de construir defensa3
-    juego.avanzarTurno(); // pasa a turno 5
+        juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa1 y defensa2
+        juego.avanzarTurno(); // pasa a turno 4, se termina de construir defensa3
+        juego.avanzarTurno(); // pasa a turno 5
 
-    // Assert
-    assertTrue(juego.juegoTerminado());
-    assertTrue(jugador.estaVivo());
-  }
+        // Assert
+        assertTrue(juego.juegoTerminado());
+        assertTrue(jugador.estaVivo());
+    }
 
-  /*
+    /*
     Caso de Uso 19 - Simular y verificar que el jugador pierde una partida
-   */
-  @Test
-  public void caso19() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
-    // Arrange
-    Jugador jugador = new Jugador("Alberto");
-    Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
-    ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json", mapa.getCoordenadasLargada());
-    // turno 1
-    Juego juego = new Juego(jugador, mapa, turnos);
+    */
+    @Test
+    public void caso19() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
+        // Arrange
+          Jugador jugador = new Jugador("Alberto");
+        Mapa mapa = new Mapa("src/main/test/edu/fiuba/algo3/resources/mapaValido.json");
+        ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos("src/main/test/edu/fiuba/algo3/resources/enemigosValido.json", mapa.getCoordenadasLargada());
+        // turno 1
+        Juego juego = new Juego(jugador, mapa, turnos);
 
-    Defensa defensa = new TorrePlateada();
-    Coordenadas coordDefensa = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
-    jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerMapa());
+        Defensa defensa = new TorrePlateada();
+        Coordenadas coordDefensa = new Coordenadas(2,1); // coordenadas validas de mapaValido.Json
+        jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerMapa());
 
-    // Act
-    juego.avanzarTurno(); // pasa a turno 2
-    juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa
-    juego.avanzarTurno(); // pasa a turno 4
-    juego.moverEnemigosAMeta();
-    juego.avanzarTurno(); // pasa a turno 5
-    juego.avanzarTurno();
+        // Act
+        juego.avanzarTurno(); // pasa a turno 2
+        juego.avanzarTurno(); // pasa a turno 3, se termina de construir defensa
+        juego.avanzarTurno(); // pasa a turno 4
+        juego.moverEnemigosAMeta();
+        juego.avanzarTurno(); // pasa a turno 5
 
-    // Assert
-    assertTrue(juego.juegoTerminado());
-    assertFalse(jugador.estaVivo());
-  }
+        // Assert
+        assertTrue(juego.juegoTerminado());
+        assertFalse(jugador.estaVivo());
+    }
 
 }

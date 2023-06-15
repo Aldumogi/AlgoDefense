@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Topo extends Enemigo {
-    final String nombre = "topo";
+    final String nombre = "Topo";
 
     public Topo(Coordenadas coordenadas) {
         int energia = 100;
@@ -17,7 +17,7 @@ public class Topo extends Enemigo {
         this.dañoCausado = 2;
         this.creditosOtorgados = 0;
         this.coordenadas = coordenadas;
-        this.estado = new Vivo( energia );
+        this.estado = new Vivo( energia , this.nombre);
         this.coeficienteDeRalentizacion = 1;
     }
 

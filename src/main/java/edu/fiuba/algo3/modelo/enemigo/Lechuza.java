@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Lechuza extends Enemigo {
-        final String nombre = "lechuza";
+        final String nombre = "Lechuza";
 
         public Lechuza(Coordenadas coordenadas) {
                 int energia = 5;
                 this.velocidad = 5 ;
                 this.dañoCausado = 0;
                 this.coordenadas = coordenadas;
-                this.estado = new Vivo( energia );
+                this.estado = new Vivo( energia , this.nombre );
                 this.coeficienteDeRalentizacion = 1;
                 logger.info("Se creó una Lechuza");
         }

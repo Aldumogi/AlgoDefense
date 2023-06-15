@@ -31,7 +31,9 @@ public class TrampaArenosa extends Defensa{
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
+        String mensajeAlFinalizarConstruccion = this.nombre + " está operativa en la posición ("
+                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") " ;
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion, mensajeAlFinalizarConstruccion);
 
         logger.info("Jugador agrega una Trampa Arenosa en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()

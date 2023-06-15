@@ -15,10 +15,12 @@ import java.util.List;
 public class EnConstruccion implements EstadoDefensa {
     private int tiempoDeConstruccion;
     private int tiempoDeRalentizacion;
+    private String mensajeAlFinalizarConstruccion;
 
-    public EnConstruccion(int tiempoDeConstruccion, int tiempoDeRalentizacion) {
+    public EnConstruccion(int tiempoDeConstruccion, int tiempoDeRalentizacion, String mensajeAlFinalizarConstruccion) {
         this.tiempoDeConstruccion = tiempoDeConstruccion;
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
+        this.mensajeAlFinalizarConstruccion = mensajeAlFinalizarConstruccion;
     }
     public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
@@ -35,8 +37,7 @@ public class EnConstruccion implements EstadoDefensa {
                                     double factorDeRalentizacion) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
-            logger.info("La construcción terminó en la posición (" + coordenadasDefensa.obtenerFila() + ", " +
-                    coordenadasDefensa.obtenerColumna() + ")");
+            logger.info( this.mensajeAlFinalizarConstruccion );
             return new Terminada(this.tiempoDeRalentizacion);
         }
         return this;

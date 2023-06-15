@@ -121,12 +121,11 @@ public class Juego {
         this.enemigos.forEach( enemigo -> {
             if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
                 int danio = enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() );
-                logger.info( enemigo.obtenerNombre() + " llega a la meta, produce " + danio + " al jugador" );
+                logger.info( enemigo.obtenerNombre() + " llega a la meta, produce " + danio + " de daño al jugador" );
                 jugador.restarEnergia( danio );
                 enemigosEnLaMeta.add(enemigo);
             }
         });
-        logger.info("Se actualizó la energía del jugador");
         this.enemigos.removeAll(enemigosEnLaMeta);
     }
 
@@ -141,7 +140,15 @@ public class Juego {
     }
     
     public boolean juegoTerminado(){
-        return (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 );
+        if ( ! jugador.estaVivo() ) {
+            logger.info("Jugador pierde la partida");
+            return true;
+        }
+        if (enemigos.size() == 0 || this.indiceActualListaTurnos == turnos.size()-1 ) {
+            logger.info("Jugador gana la partida");
+            return true;
+        }
+        return false;
     }
     
     public void moverEnemigosAMeta() {
