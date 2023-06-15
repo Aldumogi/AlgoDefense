@@ -10,6 +10,8 @@ import edu.fiuba.algo3.modelo.parcela.Parcela;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.fiuba.algo3.modelo.LoggerManager.logger;
+
 public abstract class Enemigo {
     protected int velocidad;
     protected int dañoCausado;
@@ -18,26 +20,20 @@ public abstract class Enemigo {
     protected EstadoEnemigo estado;
     protected int cantidadDeMovimientosRealizados;
     protected double coeficienteDeRalentizacion;
+
+    protected abstract void _actualizarVelocidadSegunCantidadDeMovimientos();
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
+    public abstract String obtenerNombre();
 
-    public Coordenadas obtenerCoordenadas() {
-        return this.coordenadas;
-    }
 
-    public int obtenerDanioCausado (int numeroDeTurno) {
-        return this.dañoCausado;
-    }
-    
-    public boolean atacaTorres(){
+    public boolean atacaTorres() {
         return false;
     }
 
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio);
     }
-
-    public int obtenerCreditos() { return this.creditosOtorgados; }
 
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
         this.estado.agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos, posicionActual);
@@ -59,10 +55,11 @@ public abstract class Enemigo {
         this._actualizarVelocidadSegunCantidadDeMovimientos();
         this._restaurarVelocidadNormal();
     }
+
     private void _restaurarVelocidadNormal() {
         this.coeficienteDeRalentizacion = 1;
     }
-    protected abstract void _actualizarVelocidadSegunCantidadDeMovimientos();
+
     public void recibirRalentizacion(double coeficienteDeRalentizacion) {
         this.coeficienteDeRalentizacion = coeficienteDeRalentizacion;
     }
@@ -71,9 +68,27 @@ public abstract class Enemigo {
         this.coordenadas = coordenadas;
     }
 
-    public double obtenerVelocidad() { return this.velocidad; }
+    public double obtenerVelocidad() {
+        return this.velocidad;
+    }
 
-    public double obtenerVelocidadReal() { return this.velocidad * this.coeficienteDeRalentizacion; }
+    public double obtenerVelocidadReal() {
+        return this.velocidad * this.coeficienteDeRalentizacion;
+    }
 
-    public Object obtenerEnergia() { return this.estado.obtenerEnergia(); }
+    public Integer obtenerEnergia() {
+        return this.estado.obtenerEnergia();
+    }
+
+    public Integer obtenerCreditos() {
+        return this.creditosOtorgados;
+    }
+
+    public Coordenadas obtenerCoordenadas() {
+        return this.coordenadas;
+    }
+
+    public int obtenerDanioCausado (int numeroDeTurno) {
+        return this.dañoCausado;
+    }
 }

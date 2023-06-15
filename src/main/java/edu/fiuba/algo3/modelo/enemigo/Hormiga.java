@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Hormiga extends Enemigo {
+    final String nombre = "hormiga";
+
     public Hormiga(Coordenadas coordenadas) {
         int energia = 1;
         this.velocidad = 1;
@@ -15,7 +17,6 @@ public class Hormiga extends Enemigo {
         this.coordenadas = coordenadas;
         this.estado = new Vivo( energia );
         this.coeficienteDeRalentizacion = 1;
-        logger.info("Se creó una hormiga");
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeHormigasMuertas) {
@@ -23,6 +24,7 @@ public class Hormiga extends Enemigo {
         this.creditosOtorgados = this.estado.creditosOtorgados(creditosOtorgados);
         return this.creditosOtorgados;
     }
+
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
         this.estado.acumularHormigasMuertas(hormigasMuertas, this);
     }
@@ -39,6 +41,10 @@ public class Hormiga extends Enemigo {
         }
         Hormiga e = (Hormiga) e2;
         return e.coordenadas == this.coordenadas && e.estado == this.estado;
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
     }
 }
 

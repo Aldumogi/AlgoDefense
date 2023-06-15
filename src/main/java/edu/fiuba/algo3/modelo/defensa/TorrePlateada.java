@@ -25,13 +25,17 @@ public class TorrePlateada extends Torre {
         mapa.recibir(this);
         this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion);
 
-        logger.info("Se pusó en construcción una Torre Plateada");
+        logger.info("Jugador inicia la construcción de una Torre Plateada en la posición (" +
+                coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
+                + ")");
     }
 
     public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException {
         this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.obtenerCoordenadas());
 
-        logger.info("Torre Plateada atacó a un enemigo");
+        logger.info("Torre Plateada ataca a una " + enemigo.obtenerNombre() + "en la posicion (" +
+                enemigo.obtenerCoordenadas().obtenerFila() + ", " +
+                enemigo.obtenerCoordenadas().obtenerColumna() + ")");
     }
 }

@@ -26,7 +26,6 @@ public class Juego {
         this.turnos = new ArrayList<>();
         this.mapa = new Mapa();
 
-        logger.info("Se ha iniciado el juego");
 
     }
 
@@ -37,8 +36,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-
-        logger.info("Se ha iniciado el juego con un jugador y un mapa");
     }
 
     public Juego(ArrayList<Turno> turnos) throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -47,8 +44,6 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-
-        logger.info("Se ha iniciado el juego con los turnos");
     }
 
     public Juego(ArrayList<Turno> turnos, Mapa mapa) throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -57,13 +52,9 @@ public class Juego {
         this.enemigos = new ArrayList<Enemigo>();
         this.turnos = turnos;
         this.agregarEnemigosDelTurno();
-
-        logger.info("Se ha iniciado el juego con los turnos");
     }
     public void setearJugador(Jugador jugador) {
         this.jugador = jugador;
-
-        logger.info("Seteo del jugador");
     }
 
     public Jugador obtenerJugador() {
@@ -74,7 +65,6 @@ public class Juego {
         // aca deberia devolver el numero de turno real
         return this.indiceActualListaTurnos + 1;
     }
-    public Mapa obtenerMapa() { return this.mapa; }
 
     public void agregarEnemigo(Enemigo enemigo) {
         enemigos.add(enemigo);
@@ -97,7 +87,7 @@ public class Juego {
         this.actualizarEnergiaJugador();
         this.avanzarEnemigos();
         this.agregarEnemigosDelTurno();
-        logger.info("Se avanzó al turno " + this.indiceActualListaTurnos);
+        logger.info("Se avanzó al turno " + this.indiceActualListaTurnos + 1);
     }
 
     public void avanzarEnemigos(){
@@ -154,6 +144,10 @@ public class Juego {
         this.enemigos.forEach( enemigo -> {
             enemigo.setCoordenadas(coordenadasMeta);
         });
+    }
+
+    public Mapa obtenerMapa() {
+        return this.mapa;
     }
 
 }

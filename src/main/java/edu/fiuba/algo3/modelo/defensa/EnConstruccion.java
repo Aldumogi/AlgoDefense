@@ -15,6 +15,7 @@ import java.util.List;
 public class EnConstruccion implements EstadoDefensa {
     private int tiempoDeConstruccion;
     private int tiempoDeRalentizacion;
+
     public EnConstruccion(int tiempoDeConstruccion, int tiempoDeRalentizacion) {
         this.tiempoDeConstruccion = tiempoDeConstruccion;
         this.tiempoDeRalentizacion = tiempoDeRalentizacion;
@@ -34,7 +35,8 @@ public class EnConstruccion implements EstadoDefensa {
                                     double factorDeRalentizacion) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
-            logger.info("La construcción terminó");
+            logger.info("La construcción terminó en la posición (" + coordenadasDefensa.obtenerFila() + ", " +
+                    coordenadasDefensa.obtenerColumna() + ")");
             return new Terminada(this.tiempoDeRalentizacion);
         }
         return this;

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
-public class Topo extends Enemigo{
+public class Topo extends Enemigo {
+    final String nombre = "topo";
+
     public Topo(Coordenadas coordenadas) {
         int energia = 100;
         this.velocidad = 1 ;
@@ -17,7 +19,6 @@ public class Topo extends Enemigo{
         this.coordenadas = coordenadas;
         this.estado = new Vivo( energia );
         this.coeficienteDeRalentizacion = 1;
-        logger.info("Se creó un topo");
     }
 
     public int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo) {
@@ -25,6 +26,7 @@ public class Topo extends Enemigo{
     }
 
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) { }
+
     @Override
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {}
 
@@ -35,11 +37,6 @@ public class Topo extends Enemigo{
     }
 
     @Override
-    public int obtenerDanioCausado (int numeroDeTurno) {
-        int dañoEnTurnoImpar = 5;
-        return ( numeroDeTurno % 2 == 0 ) ? this.dañoCausado : dañoEnTurnoImpar;
-    }
-    @Override
     public boolean equals(Object e2) {
         if ( e2 == this ) {
             return true;
@@ -49,5 +46,15 @@ public class Topo extends Enemigo{
         }
         Topo e = (Topo) e2;
         return e.coordenadas == this.coordenadas && e.estado == this.estado;
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
+    }
+
+    @Override
+    public int obtenerDanioCausado (int numeroDeTurno) {
+        int dañoEnTurnoImpar = 5;
+        return ( numeroDeTurno % 2 == 0 ) ? this.dañoCausado : dañoEnTurnoImpar;
     }
 }

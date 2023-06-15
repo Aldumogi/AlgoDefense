@@ -18,18 +18,24 @@ public class Inicializador {
         Mapa mapa = new Mapa(filepath);
         ArrayList<Turno> turnos = new ArrayList<>();
         this.juego = new Juego(turnos, mapa);
+
+        logger.info("Se inicializó el juego");
     }
 
     public Inicializador(ArrayList<Turno> turnos) throws FormatoMapaInvalidoException, IOException, ParseException, FormatoMapaInvalidoException {
         // inicializador sin enemigos
         Mapa mapa = new Mapa( "src/main/java/edu/fiuba/algo3/resources/mapa.json" );
         this.juego = new Juego(turnos, mapa);
+
+        logger.info("Se inicializó el juego");
     }
 
     public Inicializador(String jsonArchivoEnemigos, String jsonArchivoMapa) throws FormatoMapaInvalidoException, FormatoEnemigosInvalidoException, IOException, ParseException {
         Mapa mapa = new Mapa( jsonArchivoMapa );
         ArrayList<Turno> turnos = LoaderEnemigosJuego.recuperarTurnosYEnemigos(jsonArchivoEnemigos, mapa.getCoordenadasLargada());
         this.juego = new Juego(turnos, mapa);
+
+        logger.info("Se inicializó el juego");
     }
 
     public Juego obtenerJuego() {
@@ -40,7 +46,7 @@ public class Inicializador {
         if(nombre.length() >= 6) {
             Jugador jugador = new Jugador(nombre);
             this.juego.setearJugador(jugador);
-            logger.info(nombre + "se ha unido al juego");
+            logger.info(nombre + " fue agregado al juego");
         }
     }
 
