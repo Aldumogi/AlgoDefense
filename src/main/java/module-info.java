@@ -17,4 +17,5 @@ module edu.fiuba.algo3 {
     exports edu.fiuba.algo3.modelo.utils;
     exports edu.fiuba.algo3.modelo.loaders;
     exports edu.fiuba.algo3.modelo;
+    exports edu.fiuba.algo3.modelo.fabrica;
 }
