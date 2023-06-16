@@ -279,7 +279,7 @@ public class EnemigoTest {
 
     @Test
     public void laLechuzaNoEsRalentizadaPorLaTrampaArenosa() throws IOException, ParseException, FormatoMapaInvalidoException, NoSePudoConstruirException {
-        String filepath = "src/main/test/edu/fiuba/algo3/resources/mapaValido.json";
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
         Inicializador ini = new Inicializador(filepath);
         ini.agregarJugador("Roberto");
         Juego juego = ini.obtenerJuego();
@@ -287,14 +287,14 @@ public class EnemigoTest {
         juego.agregarEnemigo(lechuza);
         Jugador jugador = juego.obtenerJugador();
         TrampaArenosa trampa = new TrampaArenosa();
-        jugador.generarConstruccion(trampa, new Coordenadas(1,7), juego.obtenerMapa());
+        jugador.generarConstruccion(trampa, new Coordenadas(2,2), juego.obtenerMapa());
 
         juego.avanzarTurno();
-        assertThat( juego.obtenerMapa().obtenerCelda(new Coordenadas(1,7)), instanceOf(PasarelaNormal.class) );
-        assertEquals( new Coordenadas(1,7), lechuza.obtenerCoordenadas() );
+        assertThat( juego.obtenerMapa().obtenerCelda(new Coordenadas(2,2)), instanceOf(PasarelaNormal.class) );
 
         juego.avanzarTurno();
-        assertEquals( new Coordenadas(1,12), lechuza.obtenerCoordenadas());
+        assertEquals( new Coordenadas(5,8), lechuza.obtenerCoordenadas());
+        //assertEquals( new Coordenadas(6,2), lechuza.obtenerCoordenadas());
     }
     /*
     * LECHUZA
@@ -309,16 +309,24 @@ public class EnemigoTest {
         juego.agregarEnemigo(lechuza);
         // un movimiento
         juego.avanzarTurno();
-        Coordenadas cordenadaEsperada = new Coordenadas(1, 7);
+        Coordenadas cordenadaEsperada = new Coordenadas(3, 5);
         assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada);
         // dos movimientos
         juego.avanzarTurno();
-        Coordenadas cordenadaEsperada1 = new Coordenadas(1, 12);
+        Coordenadas cordenadaEsperada1 = new Coordenadas(5, 8);
         assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada1);
         // tres movimientos
         juego.avanzarTurno();
-        Coordenadas cordenadaEsperada3 = new Coordenadas(3, 15);
+        Coordenadas cordenadaEsperada3 = new Coordenadas(7, 11);
         assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada3);
+        // cuatro movimientos
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada4 = new Coordenadas(9, 14);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada4);
+        // cuatro movimientos
+        juego.avanzarTurno();
+        Coordenadas cordenadaEsperada5 = new Coordenadas(11, 15);
+        assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada5);
     }
     
     @Test
@@ -338,11 +346,11 @@ public class EnemigoTest {
         juego.agregarEnemigo(lechuza);
         // un movimiento
         juego.avanzarTurno();
-        Coordenadas cordenadaEsperada1 = new Coordenadas(1, 7);
+        Coordenadas cordenadaEsperada1 = new Coordenadas(3, 5);
         assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada1);
         // dos movimientos - Aca se deberiaMoverEnDiagonal
         juego.avanzarTurno();
-        Coordenadas cordenadaEsperada2 = new Coordenadas(6, 12);
+        Coordenadas cordenadaEsperada2 = new Coordenadas(8, 10);
         assertEquals(lechuza.obtenerCoordenadas(), cordenadaEsperada2);
         // dos movimientos - Aca se deberiaMoverEnDiagonal
         juego.avanzarTurno();

@@ -41,7 +41,7 @@ public class Lechuza extends Enemigo {
 
                 // Mover a la siguiente parsela
                 double velocidad = this.velocidad;
-                Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCordenadaEnL(this.coordenadas, velocidad);
+                Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCoordenadaEnL(this.coordenadas, (int)velocidad);
                 if(this.estado.obtenerEnergia() <= 2){
                         coordenadaSiguiente = mapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(this.coordenadas, (int)velocidad);
                 }
