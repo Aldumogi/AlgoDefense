@@ -169,7 +169,7 @@ public class Mapa {
         }
         return cordenadaActual;
     };
-    public Coordenadas devolverSiguienteCordenadaEnL(Coordenadas cordenadaActual, double cantidadDeMovimientos){
+    public Coordenadas devolverSiguienteCordenadaEnLineaRecta(Coordenadas cordenadaActual, double cantidadDeMovimientos){
         Coordenadas meta = this.getCoordenadasMeta();
         int columnaMeta = meta.obtenerColumna();
         int filaMeta = meta.obtenerFila();
@@ -199,7 +199,7 @@ public class Mapa {
         int filaActual = cordenadaActual.obtenerFila();
         int columnaActual = cordenadaActual.obtenerColumna();
         if (columnaMeta == columnaActual || filaMeta == filaActual){
-            return devolverSiguienteCordenadaEnL(cordenadaActual, 1);
+            return devolverSiguienteCordenadaEnLineaRecta(cordenadaActual, 1);
         }
         if(columnaMeta > columnaActual && filaMeta > filaActual ){
             cordenadaActual = new Coordenadas(filaActual + 1, columnaActual + 1);
@@ -213,11 +213,43 @@ public class Mapa {
         }
         return cordenadaActual;
     }
+
     public Coordenadas devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas cordenadaActual, int cantidadDeMovimientos){
         for(int i = 0; i < cantidadDeMovimientos; i++){
             cordenadaActual = devolverSiguienteCordenadaUsandoDiagonalesMasCercanaALaMeta(cordenadaActual);
         }
         return cordenadaActual;
+    }
+
+    public Coordenadas devolverSiguienteCoordenadaEnL(Coordenadas cordenadaActual, int cantidadDeMovimientos){
+        Coordenadas meta = this.getCoordenadasMeta();
+        int columnaMeta = meta.obtenerColumna();
+        int filaMeta = meta.obtenerFila();
+        int filaActual = cordenadaActual.obtenerFila();
+        int columnaActual = cordenadaActual.obtenerColumna();
+        if (columnaMeta == columnaActual || filaMeta == filaActual){
+            return devolverSiguienteCordenadaEnLineaRecta(cordenadaActual, 1);
+        }
+        for(int i = 2; i < 5 ; i ++){
+            if(columnaActual < columnaMeta){
+                columnaActual += 1;
+                cantidadDeMovimientos --;
+            }
+            else if(columnaActual > columnaMeta){
+                columnaActual -= 1;
+                cantidadDeMovimientos --;
+            }
+        }
+        for(int i =0 ; i <= cantidadDeMovimientos ; i = 1){
+            if(filaActual < filaMeta){
+                filaActual += 1;
+                }
+            if(filaActual > filaMeta){
+                filaActual -= 1;
+                }
+            cantidadDeMovimientos --;
+        }  
+        return (new Coordenadas(filaActual, columnaActual));
     }
 
 
