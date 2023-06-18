@@ -141,48 +141,48 @@ public class MapaTest {
         assertThat(parcela, instanceOf(Pasarela.class));
     }
     @Test
-    public void devuelvoLaSiguienteCordenadaEnLDesdeLargada() throws IOException, ParseException, FormatoMapaInvalidoException {
+    public void devuelvoLaSiguienteCordenadaEnLineaRectaDesdeLargada() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Mapa unMapa = new Mapa();
         Coordenadas coordenadaActual = new Coordenadas(1, 2);
         Coordenadas cordenadaEsperada = new Coordenadas(1, 7);
 
-        Coordenadas ATestear = unMapa.devolverSiguienteCordenadaEnL(coordenadaActual, 5);
+        Coordenadas ATestear = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual, 5);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
     @Test
-    public void devuelvoLaSiguienteCordenadaEnLCorrectamenteDesdeLargadaHastaMeta() throws IOException, ParseException, FormatoMapaInvalidoException {
+    public void devuelvoLaSiguienteCordenadaEnRectaCorrectamenteDesdeLargadaHastaMeta() throws IOException, ParseException, FormatoMapaInvalidoException {
 
         Mapa unMapa = new Mapa();
         //PrimerMovimiento
         Coordenadas coordenadaActual1 = new Coordenadas(1, 2);
         Coordenadas cordenadaEsperada1 = new Coordenadas(1, 7);
 
-        Coordenadas ATestear = unMapa.devolverSiguienteCordenadaEnL(coordenadaActual1, 5);
+        Coordenadas ATestear = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual1, 5);
         assertTrue(ATestear.equals(cordenadaEsperada1));
         //SegundoMovimiento
         Coordenadas coordenadaActual2 = new Coordenadas(1, 7);
         Coordenadas cordenadaEsperada2 = new Coordenadas(1, 12);
 
-        Coordenadas ATestear2 = unMapa.devolverSiguienteCordenadaEnL(coordenadaActual2, 5);
+        Coordenadas ATestear2 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual2, 5);
         assertTrue(ATestear2.equals(cordenadaEsperada2));
         //tercerMovimiento
         Coordenadas coordenadaActual3 = new Coordenadas(1, 12);
         Coordenadas cordenadaEsperada3 = new Coordenadas(3, 15);
 
-        Coordenadas ATestear3 = unMapa.devolverSiguienteCordenadaEnL(coordenadaActual3, 5);
+        Coordenadas ATestear3 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual3, 5);
         assertTrue(ATestear3.equals(cordenadaEsperada3));
         //cuartoMovimiento-
         Coordenadas coordenadaActual4 = new Coordenadas(3, 15);
         Coordenadas cordenadaEsperada4 = new Coordenadas(8, 15);
 
-        Coordenadas ATestear4 = unMapa.devolverSiguienteCordenadaEnL(coordenadaActual4, 5);
+        Coordenadas ATestear4 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual4, 5);
         assertTrue(ATestear4.equals(cordenadaEsperada4));
         //quintoMovimiento - Llega A Meta
         Coordenadas coordenadaActual5 = new Coordenadas(8, 15);
         Coordenadas cordenadaEsperada5 = new Coordenadas(11, 15);
 
-        Coordenadas ATestear5 = unMapa.devolverSiguienteCordenadaEnL(coordenadaActual5, 5);
+        Coordenadas ATestear5 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual5, 5);
         assertTrue(ATestear5.equals(cordenadaEsperada5));
     }
     @Test
@@ -215,5 +215,46 @@ public class MapaTest {
         Coordenadas ATestear = unMapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual, 13);
         assertTrue(ATestear.equals(cordenadaEsperada));
        
+    }
+    @Test
+    public void devuelvoLaSiguientesCordenadaEnL() throws IOException, ParseException, FormatoMapaInvalidoException {
+        Mapa unMapa = new Mapa();
+        Coordenadas coordenadaActual = new Coordenadas(1, 2);
+        Coordenadas cordenadaEsperada = new Coordenadas(3, 5);
+
+        Coordenadas ATestear = unMapa.devolverSiguienteCoordenadaEnL(coordenadaActual, 5);
+        assertTrue(ATestear.equals(cordenadaEsperada));
+    }
+    @Test
+    public void devuelvoLaSiguientesCordenadaEnLDEsdeLargadaHastaMeta() throws IOException, ParseException, FormatoMapaInvalidoException {
+        Mapa unMapa = new Mapa();
+
+        //un movimiento
+        Coordenadas coordenadaActual1 = new Coordenadas(1, 2);
+        Coordenadas cordenadaEsperada1 = new Coordenadas(3, 5);
+        Coordenadas ATestear = unMapa.devolverSiguienteCoordenadaEnL(coordenadaActual1, 5);
+        assertTrue(ATestear.equals(cordenadaEsperada1));
+        //dos movimientos
+        Coordenadas coordenadaActual2 = new Coordenadas(3, 5);
+        Coordenadas cordenadaEsperada2 = new Coordenadas(5, 8);
+        Coordenadas ATestear2 = unMapa.devolverSiguienteCoordenadaEnL(coordenadaActual2, 5);
+        assertTrue(ATestear2.equals(cordenadaEsperada2));
+        //tres movimientos
+        Coordenadas coordenadaActual3 = new Coordenadas(5, 8);
+        Coordenadas cordenadaEsperada3 = new Coordenadas(7, 11);
+        Coordenadas ATestear3 = unMapa.devolverSiguienteCoordenadaEnL(coordenadaActual3, 5);
+        assertTrue(ATestear3.equals(cordenadaEsperada3));
+        //cuatro movimientos
+        Coordenadas coordenadaActual4 = new Coordenadas(7, 11);
+        Coordenadas cordenadaEsperada4 = new Coordenadas(9, 14);
+        Coordenadas ATestear4 = unMapa.devolverSiguienteCoordenadaEnL(coordenadaActual4, 5);
+        assertTrue(ATestear4.equals(cordenadaEsperada4));
+        
+        //cinco movimientos- devuelve la cordenada de la meta
+        Coordenadas coordenadaActual5 = new Coordenadas(9, 14);
+        Coordenadas cordenadaEsperada5 = new Coordenadas(11, 15);
+        Coordenadas ATestear5 = unMapa.devolverSiguienteCoordenadaEnL(coordenadaActual5, 5);
+        assertTrue(ATestear5.equals(cordenadaEsperada5));
+
     }
 }
