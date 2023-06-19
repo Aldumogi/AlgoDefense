@@ -39,7 +39,7 @@ public class EnConstruccion implements EstadoDefensa {
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
                                     Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
-                                    double factorDeRalentizacion, String nombre) {
+                                    String nombre) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
             logger.info( this.mensajeAlFinalizarConstruccion );
@@ -48,7 +48,7 @@ public class EnConstruccion implements EstadoDefensa {
         return this;
     }
 
-    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion, String nombre) {
-        return this.pasarTurno(enemigos, 0, 0, coordenadasDefensa, null, factorDeRalentizacion, nombre);
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, String nombre) {
+        return this.pasarTurno(enemigos, 0, 0, coordenadasDefensa, null, nombre);
     }
 }

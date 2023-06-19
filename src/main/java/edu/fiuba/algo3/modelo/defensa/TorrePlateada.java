@@ -16,8 +16,6 @@ public class TorrePlateada extends Torre {
         this.tiempoDeConstruccion = 2;
         this.rangoDeAtaque = 5;
         this.danio = 2;
-        this.tiempoDeRalentizacion = -1;
-        this.factorDeRalentizacion = 1;
     }
 
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {

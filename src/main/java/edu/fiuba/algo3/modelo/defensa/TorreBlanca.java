@@ -14,8 +14,6 @@ public class TorreBlanca extends Torre {
         this.tiempoDeConstruccion = 1;
         this.rangoDeAtaque = 3;
         this.danio = 1;
-        this.tiempoDeRalentizacion = -1;
-        this.factorDeRalentizacion = 1;
     }
 
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {

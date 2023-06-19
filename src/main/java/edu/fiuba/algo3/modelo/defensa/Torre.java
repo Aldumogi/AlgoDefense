@@ -17,8 +17,6 @@ public abstract class Torre implements Defensa {
     protected int danio;
     protected EstadoDefensa estado;
     protected Coordenadas coordenadas;
-    protected int tiempoDeRalentizacion;
-    protected double factorDeRalentizacion;
 
     public int costo() {
         return this.costo;
@@ -42,7 +40,7 @@ public abstract class Torre implements Defensa {
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
         this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
-                this.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion, nombre);
+                this.obtenerCoordenadas(), hormigasAsesinadas, nombre);
     }
     public void atacarEnemigos(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
         for (Enemigo enemigo: enemigos) {

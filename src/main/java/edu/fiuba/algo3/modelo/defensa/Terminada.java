@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.exceptions.FueraDeRangoException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
-import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,14 +47,12 @@ public class Terminada implements EstadoDefensa {
     }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
-                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
-                                    double factorDeRalentizacion, String nombre) {
+                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas, String nombre) {
         this.atacarEnemigos(enemigos, rangoDeAtaque, danio, coordenadasDefensa, hormigasAsesinadas, nombre);
         return this;
     }
 
-    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa,
-                                    double factorDeRalentizacion, String nombre) {
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, String nombre) {
         return this;
     }
 
