@@ -15,9 +15,7 @@ import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public class Terminada implements EstadoDefensa {
     private int tiempoDeConstruccion = 0;
-    private int tiempoDeRalentizacion;
-    public Terminada(int tiempoDeRalentizacion) {
-        this.tiempoDeRalentizacion = tiempoDeRalentizacion;
+    public Terminada() {
     }
     public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
@@ -29,13 +27,7 @@ public class Terminada implements EstadoDefensa {
                 enemigo.obtenerCoordenadas().obtenerColumna() + ")");
     }
 
-    private void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
-        if ( coordenadasDefensa.distanciaEntreCoordenadas( coordenadasEnemigo) > rangoDeAtaque ) throw new FueraDeRangoException();
-    }
-
-    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
-                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
-                                    double factorDeRalentizacion, String nombre) {
+    public void atacarEnemigos(List<Enemigo> enemigos, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas, String nombre) {
         for (Enemigo enemigo: enemigos) {
             try {
                 this.atacarEnemigo(enemigo, rangoDeAtaque, danio, coordenadasDefensa, nombre);
@@ -47,26 +39,40 @@ public class Terminada implements EstadoDefensa {
             catch (DefensaEnConstruccionException e) {}
             catch (FueraDeRangoException e) {}
         }
+    }
+
+    public void atacarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion, String nombre) { }
+
+    private void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
+        if ( coordenadasDefensa.distanciaEntreCoordenadas( coordenadasEnemigo) > rangoDeAtaque ) throw new FueraDeRangoException();
+    }
+
+    public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
+                                    Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
+                                    double factorDeRalentizacion, String nombre) {
+        this.atacarEnemigos(enemigos, rangoDeAtaque, danio, coordenadasDefensa, hormigasAsesinadas, nombre);
         return this;
     }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa,
                                     double factorDeRalentizacion, String nombre) {
-        this.tiempoDeRalentizacion--;
-        for (Enemigo enemigo: enemigos) {
-            this.ralentizarEnemigo(enemigo, coordenadasDefensa, factorDeRalentizacion);
-        }
         return this;
     }
 
     public int tiempoDeConstruccion() {
         return this.tiempoDeConstruccion;
     }
-    public int obtenerTiempoDeRalentizacion() { return this.tiempoDeRalentizacion; }
-    public void ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadasDefensa, double ralentizacion) {
+
+    public void ralentizarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, Integer tiempoDeRalentizacion, double ralentizacion ) {
+        enemigos.forEach( enemigo -> {
+            _ralentizarEnemigo(enemigo, coordenadasDefensa, tiempoDeRalentizacion, ralentizacion);
+        } );
+    }
+    private void _ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadasDefensa, Integer tiempoDeRalentizacion, double ralentizacion) {
         if( coordenadasDefensa.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0
-                && this.tiempoDeRalentizacion >= 0) {
+                && tiempoDeRalentizacion >= 0) {
             enemigo.recibirRalentizacion(ralentizacion);
         }
     }
+
 }

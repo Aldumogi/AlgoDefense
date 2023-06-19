@@ -14,23 +14,28 @@ import java.util.List;
 
 public class EnConstruccion implements EstadoDefensa {
     private int tiempoDeConstruccion;
-    private int tiempoDeRalentizacion;
     private String mensajeAlFinalizarConstruccion;
 
-    public EnConstruccion(int tiempoDeConstruccion, int tiempoDeRalentizacion, String mensajeAlFinalizarConstruccion) {
+    public EnConstruccion(int tiempoDeConstruccion, String mensajeAlFinalizarConstruccion) {
         this.tiempoDeConstruccion = tiempoDeConstruccion;
-        this.tiempoDeRalentizacion = tiempoDeRalentizacion;
         this.mensajeAlFinalizarConstruccion = mensajeAlFinalizarConstruccion;
     }
     public void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
         throw new DefensaEnConstruccionException();
     }
+
+    public void atacarEnemigos(List<Enemigo> enemigos, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas, String nombre) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException {
+        throw new DefensaEnConstruccionException();
+    }
+
+    public void atacarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion, String nombre) throws DefensaEnConstruccionException {
+        throw new DefensaEnConstruccionException();
+    }
+
     public int tiempoDeConstruccion() { return this.tiempoDeConstruccion; }
 
-    public void ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadas, double ralentizacion) { }
-
-    public int obtenerTiempoDeRalentizacion() { return this.tiempoDeRalentizacion; }
+    public void ralentizarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, Integer tiempoDeRalentizacion, double ralentizacion) { }
 
     public EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
                                     Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
@@ -38,7 +43,7 @@ public class EnConstruccion implements EstadoDefensa {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
             logger.info( this.mensajeAlFinalizarConstruccion );
-            return new Terminada(this.tiempoDeRalentizacion);
+            return new Terminada();
         }
         return this;
     }

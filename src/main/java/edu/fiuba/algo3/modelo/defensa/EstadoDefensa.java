@@ -12,8 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface EstadoDefensa {
+    // atacarEnemigo deberia ser interna (implementar adentro de Terminada)
     void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
             ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
+    void atacarEnemigos(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
+                        Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
+            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
+
+    void atacarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
+            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
+
     EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
                              Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
                              double factorDeRalentizacion, String nombre);
@@ -21,7 +29,5 @@ public interface EstadoDefensa {
                              double factorDeRalentizacion, String nombre);
     int tiempoDeConstruccion();
 
-    void ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadas, double ralentizacion);
-
-    int obtenerTiempoDeRalentizacion();
+    void ralentizarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, Integer tiempoDeRalentizacion, double ralentizacion);
 }

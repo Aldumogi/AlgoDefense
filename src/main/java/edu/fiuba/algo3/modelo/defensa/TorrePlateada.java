@@ -25,7 +25,7 @@ public class TorrePlateada extends Torre {
         mapa.recibir(this);
         String mensajeAlFinalizarConstruccion = "La construcción de " + this.nombre + " en la posición ("
                 + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") terminó" ;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion, mensajeAlFinalizarConstruccion);
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion, mensajeAlFinalizarConstruccion);
 
         logger.info("Jugador inicia la construcción de una Torre Plateada en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()

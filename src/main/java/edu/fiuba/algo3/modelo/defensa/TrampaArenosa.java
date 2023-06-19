@@ -48,7 +48,7 @@ public class TrampaArenosa implements Defensa{
         mapa.recibir(this);
         String mensajeAlFinalizarConstruccion = this.nombre + " está operativa en la posición ("
                 + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") " ;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion, mensajeAlFinalizarConstruccion);
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion, mensajeAlFinalizarConstruccion);
 
         logger.info("Jugador agrega una Trampa Arenosa en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
@@ -56,8 +56,11 @@ public class TrampaArenosa implements Defensa{
     }
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
+        // esta linea solo deberia de ocuparse de pasar de EnConstruccion a Terminada()
         this.estado = this.estado.pasarTurno(enemigos, this.obtenerCoordenadas(), this.factorDeRalentizacion, nombre);
-        if ( this.estado.obtenerTiempoDeRalentizacion() == 0 ) {
+        this.tiempoDeRalentizacion--;
+        this.estado.ralentizarEnemigos(enemigos, this.coordenadas, this.tiempoDeRalentizacion, this.factorDeRalentizacion);
+        if ( this.tiempoDeRalentizacion == 0 ) {
             mapa.borrar(this);
             trampasAEliminar.add(this);
         }

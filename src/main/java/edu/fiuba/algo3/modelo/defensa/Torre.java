@@ -44,4 +44,17 @@ public abstract class Torre implements Defensa {
         this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
                 this.obtenerCoordenadas(), hormigasAsesinadas, this.factorDeRalentizacion, nombre);
     }
+    public void atacarEnemigos(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
+        for (Enemigo enemigo: enemigos) {
+            try {
+                this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio, this.coordenadas, this.nombre);
+                enemigo.acumularMuertos( hormigasAsesinadas );
+                enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
+
+            } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
+            catch (ElEnemigoEstaMuertoException e) {}
+            catch (DefensaEnConstruccionException e) {}
+            catch (FueraDeRangoException e) {}
+        }
+    }
 }
