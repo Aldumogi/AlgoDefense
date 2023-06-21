@@ -11,11 +11,9 @@ import java.util.List;
 
 public class EnConstruccion implements EstadoDefensa {
     private int tiempoDeConstruccion;
-    private String mensajeAlFinalizarConstruccion;
 
-    public EnConstruccion(int tiempoDeConstruccion, String mensajeAlFinalizarConstruccion) {
+    public EnConstruccion(int tiempoDeConstruccion) {
         this.tiempoDeConstruccion = tiempoDeConstruccion;
-        this.mensajeAlFinalizarConstruccion = mensajeAlFinalizarConstruccion;
     }
     public int tiempoDeConstruccion() { return this.tiempoDeConstruccion; }
 
@@ -26,10 +24,10 @@ public class EnConstruccion implements EstadoDefensa {
         throw new DefensaEnConstruccionException();
     }
 
-    public EstadoDefensa pasarTurno(String nombre) {
+    public EstadoDefensa pasarTurno(String nombre, String mensajeAlFinalizarConstruccion) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
-            logger.info( this.mensajeAlFinalizarConstruccion );
+            logger.info( mensajeAlFinalizarConstruccion );
             return new Terminada();
         }
         return this;

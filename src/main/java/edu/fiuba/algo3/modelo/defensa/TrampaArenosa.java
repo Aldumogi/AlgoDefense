@@ -26,6 +26,7 @@ public class TrampaArenosa implements Defensa{
         this.tiempoDeConstruccion = 1;
         this.factorDeRalentizacion = 0.5;
         this.tiempoDeRalentizacion = 3;
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion);
     }
 
     public int costo() {
@@ -46,9 +47,6 @@ public class TrampaArenosa implements Defensa{
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
-        String mensajeAlFinalizarConstruccion = this.nombre + " está operativa en la posición ("
-                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") " ;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, mensajeAlFinalizarConstruccion);
 
         logger.info("Jugador agrega una Trampa Arenosa en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
@@ -64,7 +62,9 @@ public class TrampaArenosa implements Defensa{
                 trampasAEliminar.add(this);
             }
         } catch (DefensaEnConstruccionException e) {}
-        this.estado = this.estado.pasarTurno(nombre);
+        String mensajeAlFinalizarConstruccion = this.nombre + " estará operativa en el próximo turno en la posición ("
+                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ")";
+        this.estado = this.estado.pasarTurno(nombre, mensajeAlFinalizarConstruccion);
     }
 
     public void ralentizarEnemigo(Enemigo enemigo) {

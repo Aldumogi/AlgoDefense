@@ -24,9 +24,7 @@ public class TorrePlateada extends Torre {
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
-        String mensajeAlFinalizarConstruccion = "La construcción de " + this.nombre + " en la posición ("
-                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") terminó" ;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, mensajeAlFinalizarConstruccion);
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion);
 
         logger.info("Jugador inicia la construcción de una Torre Plateada en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
@@ -35,12 +33,11 @@ public class TorrePlateada extends Torre {
 
     public void atacarEnemigo(Enemigo enemigo, ArrayList<Hormiga> hormigasAsesinadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException, FueraDeRangoException {
         this.estaEnRango(enemigo.obtenerCoordenadas(), this.coordenadas, this.rangoDeAtaque);
+        logger.info("Torre Plateada ataca a una " + enemigo.obtenerNombre() + " en la posicion (" +
+                enemigo.obtenerCoordenadas().obtenerFila() + ", " +
+                enemigo.obtenerCoordenadas().obtenerColumna() + ")");
         enemigo.recibirDanio(this.danio);
         enemigo.acumularMuertos( hormigasAsesinadas );
         enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
-
-        logger.info("Torre Plateada ataca a una " + enemigo.obtenerNombre() + "en la posicion (" +
-                enemigo.obtenerCoordenadas().obtenerFila() + ", " +
-                enemigo.obtenerCoordenadas().obtenerColumna() + ")");
     }
 }

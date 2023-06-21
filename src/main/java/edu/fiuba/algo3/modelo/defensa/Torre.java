@@ -42,7 +42,9 @@ public abstract class Torre implements Defensa {
         try {
             this.estado.atacarEnemigos(enemigos, this, hormigasAsesinadas);
         } catch( Exception e ) {}
-        this.estado = this.estado.pasarTurno(nombre);
+        String mensajeAlFinalizarConstruccion = "La construcción de " + this.nombre + " en la posición ("
+                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") estará terminada para el próximo turno" ;
+        this.estado = this.estado.pasarTurno(nombre, mensajeAlFinalizarConstruccion);
     }
 
     protected void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
