@@ -17,7 +17,7 @@ public class Pasarela implements Parcela {
     protected EstadoParcela estado;
     protected List<Enemigo> enemigos;
     protected TrampaArenosa trampaArenosa;
-    public final Color color = Color.YELLOW;
+    public final String tipo = "P";
 
     public Pasarela(Coordenadas coordenadas){
         this.estado = new ParcelaDisponible();
@@ -65,8 +65,8 @@ public class Pasarela implements Parcela {
         return this.coordenadas;
     }
 
-    public Color obtenerColor() {
-        return this.color;
+    public String obtenerTipo() {
+        return this.tipo;
     }
 
     public boolean equals(Object obj) {

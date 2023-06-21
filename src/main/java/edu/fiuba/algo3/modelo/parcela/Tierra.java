@@ -17,7 +17,7 @@ public class Tierra implements Parcela {
     private List<Enemigo> enemigos;
     private EstadoParcela estado;
     protected Defensa defensa;
-    public final Color color = Color.BROWN;
+    public final String tipo = "T";
 
     public Tierra(Coordenadas coordenadas){
         this.estado = new ParcelaDisponible();
@@ -67,7 +67,7 @@ public class Tierra implements Parcela {
         return this.coordenadas;
     }
 
-    public Color obtenerColor() {
-        return this.color;
+    public String obtenerTipo() {
+        return this.tipo;
     }
 }

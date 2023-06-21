@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 
 public class PasarelaNormal extends Pasarela {
-
+    public final String tipo = "PNormal";
     public PasarelaNormal(Coordenadas coordenadas) {
         super(coordenadas);
     }
@@ -22,4 +22,7 @@ public class PasarelaNormal extends Pasarela {
         this.estado = new ParcelaDisponible();
     }
 
+    public String obtenerTipo() {
+        return this.tipo;
+    }
 }

@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class App extends Application {
@@ -29,6 +31,13 @@ public class App extends Application {
     static String MAP_RELATIVE_PATH = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
     private double medidaCelda = 30;
     private double height = 640, width = 480;
+    private final HashMap<String, Color> color = new HashMap<>() {{
+        put("PLargada", Color.ORANGE);
+        put("PNormal", Color.YELLOW);
+        put("PMeta", Color.GREEN);
+        put("R", Color.GREY);
+        put("T", Color.BROWN);
+    }};
 
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException {
@@ -104,7 +113,7 @@ public class App extends Application {
             for(int columna = 1; columna <= cantidadDeColumnas; columna++) {
                 Parcela parcela = partida.obtenerJuego().obtenerMapa().obtenerCelda(new Coordenadas(fila, columna));
                 Rectangle celda = new Rectangle(medidaCelda, medidaCelda);
-                celda.setFill(parcela.obtenerColor());
+                celda.setFill( color.get( parcela.obtenerTipo() ) );
                 celda.setStroke(Color.BLACK);
                 celda.setStrokeWidth(1);
 

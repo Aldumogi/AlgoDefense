@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -143,6 +144,7 @@ public class DefensaTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
@@ -152,7 +154,7 @@ public class DefensaTest {
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
 
         //Act, Assert
-        assertDoesNotThrow( () -> torreBlanca.atacarEnemigo(hormiga) );
+        assertDoesNotThrow( () -> torreBlanca.atacarEnemigo(hormiga, hormigasAsesinadas) );
     }
 
     @Test
@@ -172,9 +174,10 @@ public class DefensaTest {
         juego.avanzarTurno();
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         //Act, Assert
-        assertDoesNotThrow( () -> torrePlateada.atacarEnemigo(hormiga) );
+        assertDoesNotThrow( () -> torrePlateada.atacarEnemigo(hormiga, hormigasAsesinadas) );
     }
 
     @Test
@@ -193,9 +196,10 @@ public class DefensaTest {
         jugador.generarConstruccion(torreBlanca, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         //Act, Assert
-        assertThrows( FueraDeRangoException.class, () -> torreBlanca.atacarEnemigo(hormiga) );
+        assertThrows( FueraDeRangoException.class, () -> torreBlanca.atacarEnemigo(hormiga, hormigasAsesinadas) );
     }
 
     @Test
@@ -215,9 +219,10 @@ public class DefensaTest {
         juego.avanzarTurno();
         juego.avanzarTurno();
         Enemigo hormiga = new Hormiga(coordenadasHormiga);  // 1 punto de energia
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         //Act, Assert
-        assertThrows( FueraDeRangoException.class, () -> torrePlateada.atacarEnemigo(hormiga) );
+        assertThrows( FueraDeRangoException.class, () -> torrePlateada.atacarEnemigo(hormiga, hormigasAsesinadas) );
     }
 
 }

@@ -26,6 +26,7 @@ public class TrampaArenosa implements Defensa{
         this.tiempoDeConstruccion = 1;
         this.factorDeRalentizacion = 0.5;
         this.tiempoDeRalentizacion = 3;
+        this.estado = new EnConstruccion(this.tiempoDeConstruccion);
     }
 
     public int costo() {
@@ -46,9 +47,6 @@ public class TrampaArenosa implements Defensa{
     public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException {
         this.coordenadas = coordenadas;
         mapa.recibir(this);
-        String mensajeAlFinalizarConstruccion = this.nombre + " está operativa en la posición ("
-                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") " ;
-        this.estado = new EnConstruccion(this.tiempoDeConstruccion, this.tiempoDeRalentizacion, mensajeAlFinalizarConstruccion);
 
         logger.info("Jugador agrega una Trampa Arenosa en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
@@ -56,10 +54,23 @@ public class TrampaArenosa implements Defensa{
     }
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
-        this.estado = this.estado.pasarTurno(enemigos, this.obtenerCoordenadas(), this.factorDeRalentizacion, nombre);
-        if ( this.estado.obtenerTiempoDeRalentizacion() == 0 ) {
-            mapa.borrar(this);
-            trampasAEliminar.add(this);
+        try {
+            this.estado.atacarEnemigos(enemigos, this);
+            this.tiempoDeRalentizacion--;
+            if ( this.tiempoDeRalentizacion == 0 ) {
+                mapa.borrar(this);
+                trampasAEliminar.add(this);
+            }
+        } catch (DefensaEnConstruccionException e) {}
+        String mensajeAlFinalizarConstruccion = this.nombre + " estará operativa en el próximo turno en la posición ("
+                + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ")";
+        this.estado = this.estado.pasarTurno(nombre, mensajeAlFinalizarConstruccion);
+    }
+
+    public void ralentizarEnemigo(Enemigo enemigo) {
+        if( this.coordenadas.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0
+                && this.tiempoDeRalentizacion >= 0) {
+            enemigo.recibirRalentizacion(this.factorDeRalentizacion);
         }
     }
 }
