@@ -1,10 +1,13 @@
 package edu.fiuba.algo3.modelo.defensa;
 
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.exceptions.*;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
+
+import java.util.ArrayList;
 
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
@@ -30,9 +33,11 @@ public class TorrePlateada extends Torre {
                 + ")");
     }
 
-    public void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
-            DefensaEnConstruccionException, FueraDeRangoException {
-        this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio , this.obtenerCoordenadas(), this.nombre);
+    public void atacarEnemigo(Enemigo enemigo, ArrayList<Hormiga> hormigasAsesinadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException, FueraDeRangoException {
+        this.estaEnRango(enemigo.obtenerCoordenadas(), this.coordenadas, this.rangoDeAtaque);
+        enemigo.recibirDanio(this.danio);
+        enemigo.acumularMuertos( hormigasAsesinadas );
+        enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
 
         logger.info("Torre Plateada ataca a una " + enemigo.obtenerNombre() + "en la posicion (" +
                 enemigo.obtenerCoordenadas().obtenerFila() + ", " +

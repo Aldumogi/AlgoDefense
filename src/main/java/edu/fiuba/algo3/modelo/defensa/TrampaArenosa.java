@@ -25,7 +25,7 @@ public class TrampaArenosa implements Defensa{
         this.costo = 25;
         this.tiempoDeConstruccion = 1;
         this.factorDeRalentizacion = 0.5;
-        this.tiempoDeRalentizacion = 4;
+        this.tiempoDeRalentizacion = 3;
     }
 
     public int costo() {
@@ -56,13 +56,21 @@ public class TrampaArenosa implements Defensa{
     }
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
-        // esta linea solo deberia de ocuparse de pasar de EnConstruccion a Terminada()
-        this.estado = this.estado.pasarTurno(enemigos, this.obtenerCoordenadas(), nombre);
-        this.tiempoDeRalentizacion--;
-        this.estado.ralentizarEnemigos(enemigos, this.coordenadas, this.tiempoDeRalentizacion, this.factorDeRalentizacion);
-        if ( this.tiempoDeRalentizacion == 0 ) {
-            mapa.borrar(this);
-            trampasAEliminar.add(this);
+        try {
+            this.estado.atacarEnemigos(enemigos, this);
+            this.tiempoDeRalentizacion--;
+            if ( this.tiempoDeRalentizacion == 0 ) {
+                mapa.borrar(this);
+                trampasAEliminar.add(this);
+            }
+        } catch (DefensaEnConstruccionException e) {}
+        this.estado = this.estado.pasarTurno(nombre);
+    }
+
+    public void ralentizarEnemigo(Enemigo enemigo) {
+        if( this.coordenadas.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0
+                && this.tiempoDeRalentizacion >= 0) {
+            enemigo.recibirRalentizacion(this.factorDeRalentizacion);
         }
     }
 }

@@ -12,21 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface EstadoDefensa {
-    // atacarEnemigo deberia ser interna (implementar adentro de Terminada)
-    void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
-            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
-    void atacarEnemigos(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
-                        Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
-            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
 
-    void atacarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, double factorDeRalentizacion, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
-            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
-
-    EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
-                             Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
-                             String nombre);
-    EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, String nombre);
+    EstadoDefensa pasarTurno(String nombre);
     int tiempoDeConstruccion();
 
-    void ralentizarEnemigos(List<Enemigo> enemigos, Coordenadas coordenadasDefensa, Integer tiempoDeRalentizacion, double ralentizacion);
+    void atacarEnemigos(List<Enemigo> enemigos, TrampaArenosa trampa) throws DefensaEnConstruccionException;
+    void atacarEnemigos(List<Enemigo> enemigos, Torre torre, ArrayList<Hormiga> hormigasAsesinadas) throws DefensaEnConstruccionException;
 }

@@ -33,26 +33,19 @@ public abstract class Torre implements Defensa {
         return this.coordenadas;
     }
 
-    public abstract void atacarEnemigo(Enemigo enemigo) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
+    public abstract void atacarEnemigo(Enemigo enemigo, ArrayList<Hormiga> hormigasAsesinadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException,
             DefensaEnConstruccionException, FueraDeRangoException;
 
     public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
-        this.estado = this.estado.pasarTurno(enemigos, this.rangoDeAtaque, this.danio,
-                this.obtenerCoordenadas(), hormigasAsesinadas, nombre);
+        try {
+            this.estado.atacarEnemigos(enemigos, this, hormigasAsesinadas);
+        } catch( Exception e ) {}
+        this.estado = this.estado.pasarTurno(nombre);
     }
-    public void atacarEnemigos(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas) {
-        for (Enemigo enemigo: enemigos) {
-            try {
-                this.estado.atacarEnemigo(enemigo, this.rangoDeAtaque, this.danio, this.coordenadas, this.nombre);
-                enemigo.acumularMuertos( hormigasAsesinadas );
-                enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
 
-            } catch (ElEnemigoMurioDuranteElAtaqueException e) {}
-            catch (ElEnemigoEstaMuertoException e) {}
-            catch (DefensaEnConstruccionException e) {}
-            catch (FueraDeRangoException e) {}
-        }
+    protected void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
+        if ( coordenadasDefensa.distanciaEntreCoordenadas( coordenadasEnemigo) > rangoDeAtaque ) throw new FueraDeRangoException();
     }
 }

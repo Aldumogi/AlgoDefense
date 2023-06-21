@@ -30,6 +30,7 @@ public class EnemigoTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
@@ -38,8 +39,8 @@ public class EnemigoTest {
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga, hormigasAsesinadas) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga, hormigasAsesinadas) );
     }
     @Test
     public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -49,6 +50,7 @@ public class EnemigoTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
@@ -57,8 +59,8 @@ public class EnemigoTest {
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga, hormigasAsesinadas) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga, hormigasAsesinadas) );
     }
     @Test
     public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -68,6 +70,7 @@ public class EnemigoTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
@@ -76,9 +79,9 @@ public class EnemigoTest {
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
     }
     @Test
     public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -88,6 +91,7 @@ public class EnemigoTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
@@ -96,9 +100,9 @@ public class EnemigoTest {
         jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
         juego.avanzarTurno();
 
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
     }
     @Test
     public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -108,6 +112,7 @@ public class EnemigoTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
@@ -117,8 +122,8 @@ public class EnemigoTest {
         juego.avanzarTurno();
         juego.avanzarTurno();
 
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga, hormigasAsesinadas) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga, hormigasAsesinadas) );
     }
     @Test
     public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -128,6 +133,7 @@ public class EnemigoTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
@@ -137,8 +143,8 @@ public class EnemigoTest {
         juego.avanzarTurno();
         juego.avanzarTurno();
 
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
     }
     @Test
     public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -148,6 +154,7 @@ public class EnemigoTest {
         ini.agregarJugador("Patricia");
         Juego juego = ini.obtenerJuego();
         Jugador jugador = juego.obtenerJugador();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
@@ -157,8 +164,8 @@ public class EnemigoTest {
         juego.avanzarTurno();
         juego.avanzarTurno();
 
-        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania, hormigasAsesinadas) );
     }
 
     /*
@@ -176,6 +183,7 @@ public class EnemigoTest {
         Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
         Coordenadas coordenadasLargada = mapa.getCoordenadasLargada();
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         Hormiga unaHormiga = new Hormiga(coordenadasLargada);
         juego.agregarEnemigo(unaHormiga);
@@ -188,7 +196,7 @@ public class EnemigoTest {
 
         assertEquals(80, jugador.obtenerCantidadDeCreditos());
         juego.avanzarTurno();
-        assertThrows( ElEnemigoEstaMuertoException.class, () -> torrePlateada.atacarEnemigo(unaHormiga) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> torrePlateada.atacarEnemigo(unaHormiga, hormigasAsesinadas) );
         assertEquals(81, jugador.obtenerCantidadDeCreditos());
 
     }
@@ -205,8 +213,9 @@ public class EnemigoTest {
         Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
         Coordenadas coordenadasLargada = mapa.getCoordenadasLargada();
+       ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
-        Arania unaArania = new Arania(coordenadasLargada);
+       Arania unaArania = new Arania(coordenadasLargada);
         juego.agregarEnemigo(unaArania);
         Coordenadas coordenadas = new Coordenadas(3, 3);
         Torre unatorre = new TorrePlateada();
@@ -215,7 +224,7 @@ public class EnemigoTest {
         juego.avanzarTurno();
 
         assertEquals(80, jugador.obtenerCantidadDeCreditos());
-        unatorre.atacarEnemigo(unaArania);
+        unatorre.atacarEnemigo(unaArania, hormigasAsesinadas);
         juego.avanzarTurno();
         assert( jugador.obtenerCantidadDeCreditos() > 80);
     }
