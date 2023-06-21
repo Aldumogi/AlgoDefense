@@ -12,7 +12,7 @@ public interface EstadoEnemigo {
     EstadoEnemigo recibirDanio(int danio, Coordenadas coordenadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException;
     int creditosOtorgados(int creditos);
 
-    void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo);
+    void acumular(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo);
     void agregarIndiceDeEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual);
 
     int obtenerEnergia();

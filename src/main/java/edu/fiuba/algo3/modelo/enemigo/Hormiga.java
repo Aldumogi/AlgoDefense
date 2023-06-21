@@ -4,8 +4,6 @@ import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 
 import java.util.ArrayList;
 
-import static edu.fiuba.algo3.modelo.LoggerManager.logger;
-
 public class Hormiga extends Enemigo {
     final String nombre = "Hormiga";
 
@@ -26,7 +24,7 @@ public class Hormiga extends Enemigo {
     }
 
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
-        this.estado.acumularHormigasMuertas(hormigasMuertas, this);
+        this.estado.acumular(hormigasMuertas, this);
     }
 
     protected void _actualizarVelocidadSegunCantidadDeMovimientos() {  }
