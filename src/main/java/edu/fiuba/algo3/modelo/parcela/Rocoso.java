@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rocoso implements Parcela {
-    public final Color color = Color.GREY;
+    public final String tipo = "R";
     private List<Enemigo> enemigos;
     private Coordenadas coordenadas;
     private EstadoParcela estado;
@@ -60,7 +60,7 @@ public class Rocoso implements Parcela {
         return this.coordenadas;
     }
 
-    public Color obtenerColor() {
-        return this.color;
+    public String obtenerTipo() {
+        return this.tipo;
     }
 }
