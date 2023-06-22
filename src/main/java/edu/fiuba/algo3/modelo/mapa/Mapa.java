@@ -51,14 +51,10 @@ public class Mapa {
     /* En el futuro puede agregar otra cosas si se desea, no solo enemigo */
     public void recibir(Coordenadas coordenadas, Enemigo enemigo) {
         if ( enemigo != null ) {
-            for (int fila = 1 ; fila <= this.mapaDelJuego.size() ; fila ++ ) {
-                for (int columna = 1 ; columna <= this.mapaDelJuego.get(fila).size() ; columna ++ ) {
-                    try {
-                        this.mapaDelJuego.get(fila).get(columna).recibir(enemigo);
-                    }
-                    catch(NoEsPosibleRecibirEnemigosEnParcelaException e){
-                    }
-                }
+            try {
+                this.mapaDelJuego.get(coordenadas.obtenerFila()).get(coordenadas.obtenerColumna()).recibir(enemigo);
+            }
+            catch(NoEsPosibleRecibirEnemigosEnParcelaException e){
             }
         }
     }
