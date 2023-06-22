@@ -1,20 +1,18 @@
 @startuml
-interface DisponibilidadParcela {
-+ agregar(D: Defensa, P: Parcela)
-+ verSiEstaDisponible()
+interface EstadoParcela {
++ construir(D: Defensa, T: tierra): EstadoParcela
 }
 
 class ParcelaOcupada {
-+ agregar(D: Defensa, P: Parcela)
-+ verSiEstaDisponible()
++ construir(D: Defensa, T: tierra): EstadoParcela
 }
 
 class ParcelaDisponible {
-+ agregar(D: Defensa, P: Parcela)
-+ verSiEstaDisponible()
++ construir(D: Defensa, T: tierra): EstadoParcela
 }
 
-DisponibilidadParcela <|.. ParcelaOcupada
-DisponibilidadParcela <|.. ParcelaDisponible
+EstadoParcela <|.. ParcelaOcupada
+EstadoParcela <|.. ParcelaDisponible
 
 @enduml
+

@@ -1,125 +1,164 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
-import edu.fiuba.algo3.exceptions.NoDisponibleParaConstruirException;
+import edu.fiuba.algo3.modelo.defensa.Torre;
+import edu.fiuba.algo3.modelo.exceptions.*;
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+import edu.fiuba.algo3.modelo.defensa.TorreBlanca;
+import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
+import edu.fiuba.algo3.modelo.enemigo.Arania;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.exceptions.*;
+import edu.fiuba.algo3.modelo.juego.Inicializador;
+import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemigoTest {
     @Test
-    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+    public void unaTorreBlancaAtacaAunaHormigaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
+        juego.avanzarTurno();
 
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
-
-        unaDefensa.atacarEnemigo(unaHormiga);
-
-        assertFalse(unaHormiga.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoDisponibleParaConstruirException {
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+    public void unaTorreBlancaAtacaNoPuedeAtacarAunaHormigaDosVecesPorqueEstaMuerta() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
+        juego.avanzarTurno();
 
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
-
-        unaDefensa.atacarEnemigo(unaHormiga);
-        boolean pudeAtacar = unaDefensa.atacarEnemigo(unaHormiga);
-
-        assertFalse(pudeAtacar);
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaYNoLaMata() throws NoDisponibleParaConstruirException {
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+    public void unaTorreBlancaAtacaAunaAraniaUnaVezYNoLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
+        juego.avanzarTurno();
 
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
-
-        unaDefensa.atacarEnemigo(unaArania);
-
-        assertTrue(unaArania.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoDisponibleParaConstruirException {
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+    public void unaTorreBlancaAtacaAunaAraniaDosVecesYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorreBlanca();
+        Torre unaDefensa = new TorreBlanca();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
+        juego.avanzarTurno();
 
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
-
-        unaDefensa.atacarEnemigo(unaArania);
-        unaDefensa.atacarEnemigo(unaArania);
-
-        assertFalse(unaArania.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+    public void unaTorrePlateadaAtacaAunaHormigaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasHormiga = new Coordenadas(3,1);
         Hormiga unaHormiga = new Hormiga(coordenadasHormiga);
-        Defensa unaDefensa = new TorrePlateada();
+        Torre unaDefensa = new TorrePlateada();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
+        juego.avanzarTurno();
+        juego.avanzarTurno();
 
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
-
-        unaDefensa.atacarEnemigo(unaHormiga);
-
-        assertFalse(unaHormiga.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaHormiga) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaHormiga) );
     }
     @Test
-    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoDisponibleParaConstruirException {
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+    public void unaTorrePlateadaAtacaAunaAraniaUnaVezYLaMata() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorrePlateada();
+        Torre unaDefensa = new TorrePlateada();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
+        juego.avanzarTurno();
+        juego.avanzarTurno();
 
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
-
-        unaDefensa.atacarEnemigo(unaArania);
-
-        assertFalse(unaArania.estaVivo());
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
     @Test
-    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoDisponibleParaConstruirException {
-        Coordenadas coordenadasTorre = new Coordenadas(2,2);
+    public void unaTorrePlateadaNoPuedeAtacarDosVecesUnaArania() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador ini = new Inicializador(fileEnemigos, fileMapa);
+        ini.agregarJugador("Patricia");
+        Juego juego = ini.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
+
+        Coordenadas coordenadasTorre = new Coordenadas(2,1);
         Coordenadas coordenadasArania = new Coordenadas(3,1);
         Arania unaArania = new Arania(coordenadasArania);
-        Defensa unaDefensa = new TorrePlateada();
+        Torre unaDefensa = new TorrePlateada();
+        jugador.generarConstruccion(unaDefensa, coordenadasTorre, juego.obtenerMapa());
+        juego.avanzarTurno();
+        juego.avanzarTurno();
 
-        Tierra tierra = new Tierra(coordenadasTorre);
-        tierra.construir(unaDefensa, 0);
-        unaDefensa.terminarDeConstruir();
-
-        unaDefensa.atacarEnemigo(unaArania);
-        boolean pudeAtacar = unaDefensa.atacarEnemigo(unaArania);
-        assertFalse(pudeAtacar);
-
+        assertDoesNotThrow( () -> unaDefensa.atacarEnemigo(unaArania) );
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> unaDefensa.atacarEnemigo(unaArania) );
     }
 
     /*
@@ -128,43 +167,50 @@ public class EnemigoTest {
     cobra correctamente
     */
     @Test
-    public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoDisponibleParaConstruirException{
-        Inicializador inicio = new Inicializador();
+    public void matoAUnaHormigaYLeSuma1CredAlJugador() throws NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String filepath = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador inicio = new Inicializador(filepath);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
+        Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
+        Coordenadas coordenadasLargada = mapa.getCoordenadasLargada();
 
-        Hormiga unaHormiga = new Hormiga();
+        Hormiga unaHormiga = new Hormiga(coordenadasLargada);
         juego.agregarEnemigo(unaHormiga);
-        Coordenadas coordenadas = new Coordenadas(3, 2);
-        Defensa torrePlateada = new TorrePlateada();
+        Coordenadas coordenadas = new Coordenadas(3, 1);
+        Torre torrePlateada = new TorrePlateada();
 
-        jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerNumeroDeturno());
+        jugador.generarConstruccion(torrePlateada, coordenadas, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
         assertEquals(80, jugador.obtenerCantidadDeCreditos());
-        torrePlateada.atacarEnemigo(unaHormiga);
-        assertEquals(-1, unaHormiga.energia() );
         juego.avanzarTurno();
+        assertThrows( ElEnemigoEstaMuertoException.class, () -> torrePlateada.atacarEnemigo(unaHormiga) );
         assertEquals(81, jugador.obtenerCantidadDeCreditos());
 
     }
 
    @Test
-    public void matoAUnaAraniaYLeSuma1CredAlJugador() {
-        Inicializador inicio = new Inicializador();
+    public void matoAUnaAraniaYLeSuma1CredAlJugador() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
+           ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
+        Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
+        Coordenadas coordenadasLargada = mapa.getCoordenadasLargada();
 
-        Arania unaArania = new Arania();
+        Arania unaArania = new Arania(coordenadasLargada);
         juego.agregarEnemigo(unaArania);
         Coordenadas coordenadas = new Coordenadas(3, 3);
-        Defensa unatorre = new TorrePlateada();
-        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerNumeroDeturno());
+        Torre unatorre = new TorrePlateada();
+        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerMapa());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
@@ -175,70 +221,36 @@ public class EnemigoTest {
     }
 
     @Test
-    public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() {
-        Inicializador inicio = new Inicializador();
+    public void matoAOnceHormigasYElJugadorTieneLosCreditosCorrectos() throws ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException,
+            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador inicio = new Inicializador(fileMapa);
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
+        Mapa mapa = juego.obtenerMapa();
         Jugador jugador = juego.obtenerJugador();
+        Coordenadas coordenadasLargada = mapa.getCoordenadasLargada();
+        ArrayList<Hormiga> hormigas = new ArrayList<>();
+        for ( int i = 0; i < 11 ; i++ ) {
+            hormigas.add(new Hormiga(coordenadasLargada));
+            juego.agregarEnemigo( hormigas.get(i) );
+        }
 
-        Hormiga hormiga1 = new Hormiga();
-        juego.agregarEnemigo(hormiga1);
+        Torre unatorre = new TorrePlateada();
+        Coordenadas coordenadas = new Coordenadas(2,3);
+        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerMapa());
+        Torre otratorre = new TorrePlateada();
+        Coordenadas coordenadasTorre2 = new Coordenadas(11,5);
+        jugador.generarConstruccion(otratorre, coordenadasTorre2, juego.obtenerMapa());
 
-        Hormiga hormiga2 = new Hormiga();
-        juego.agregarEnemigo(hormiga2);
-
-        Hormiga hormiga3 = new Hormiga();
-        juego.agregarEnemigo(hormiga3);
-
-        Hormiga hormiga4 = new Hormiga();
-        juego.agregarEnemigo(hormiga4);
-        Hormiga hormiga5 = new Hormiga();
-        juego.agregarEnemigo(hormiga5);
-        Hormiga hormiga6 = new Hormiga();
-        juego.agregarEnemigo(hormiga6);
-        Hormiga hormiga7 = new Hormiga();
-        juego.agregarEnemigo(hormiga7);
-        Hormiga hormiga8 = new Hormiga();
-        juego.agregarEnemigo(hormiga8);
-
-        Hormiga hormiga9 = new Hormiga();
-        juego.agregarEnemigo(hormiga9);
-        Hormiga hormiga10 = new Hormiga();
-        juego.agregarEnemigo(hormiga10);
-        Hormiga hormiga11 = new Hormiga();
-        juego.agregarEnemigo(hormiga11);
-
-        Defensa unatorre = new TorrePlateada();
-        Coordenadas coordenadas = new Coordenadas(3,3);
-        jugador.generarConstruccion(unatorre, coordenadas, juego.obtenerNumeroDeturno());
         juego.avanzarTurno();
         juego.avanzarTurno();
 
-        assertEquals(80, jugador.obtenerCantidadDeCreditos());
-        unatorre.atacarEnemigo(hormiga1);
+        assertEquals(60, jugador.obtenerCantidadDeCreditos());
         juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga2);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga3);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga4);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga5);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga6);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga7);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga8);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga9);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga10);
-        juego.avanzarTurno();
-        unatorre.atacarEnemigo(hormiga11);
-        juego.avanzarTurno();
-        assertEquals(92, jugador.obtenerCantidadDeCreditos());
+
+        assertEquals(72, jugador.obtenerCantidadDeCreditos());
     }
 
 }

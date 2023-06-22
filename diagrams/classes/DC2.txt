@@ -1,9 +1,15 @@
 @startuml
 
 class Juego {
+- cantidadDeHormigasMuertas: int
 - jugador: Jugador
 - numeroDeTurno: int
 + avanzarTurno()
++ agregarEnemigo()
++ juegoTerminado()
++ obtenerCreditosYEliminarEnemigosAlFinalizarTurno()
++ contarMuertosEnElTurnoActual()
++ actualizarEnergiaJugador()
 }
 
 class Inicializador {
@@ -23,14 +29,16 @@ class Coordenadas {
 }
 
 interface Parcela {
-+ construir(D: Defensa, numeroDeTurno: int)
++ construir(D: Defensa)
 + recibirEnemigo(Enemigo enemigo)
 }
 
 class Pasarela {
 # coordenadas: Coordenadas
+- estado: EstadoParcela
 # enemigos: Enemigo
-+ construir(D: Defensa, numeroDeTurno: int)
++ construir(D: Defensa)
++ recibirEnemigo(E: Enemigo)
 }
 
 class PasarelaLargada {}
@@ -39,14 +47,16 @@ class PasarelaMeta{}
 
 class Rocoso {
 - coordenadas: Coordenadas
-- disponibilidad: DisponibilidadParcela
-+ construir(D: Defensa, numeroDeTurno: int)
+- estado: EstadoParcela
++ construir(D: Defensa)
++ recibirEnemigo(E: Enemigo)
 }
 
 class Tierra {
 - coordenadas: Coordenadas
-- disponibilidad: DisponibilidadParcela
-+ construir(D: Defensa, numeroDeTurno: int)
+- estado: EstadoParcela
++ construir(D: Defensa)
++ recibirEnemigo(E: Enemigo)
 }
 
 Parcela <|.. Pasarela

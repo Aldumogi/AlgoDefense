@@ -1,107 +1,142 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.*;
+import edu.fiuba.algo3.modelo.defensa.Torre;
+import edu.fiuba.algo3.modelo.exceptions.*;
+import edu.fiuba.algo3.modelo.defensa.Defensa;
+import edu.fiuba.algo3.modelo.defensa.TorrePlateada;
+import edu.fiuba.algo3.modelo.enemigo.Arania;
+import edu.fiuba.algo3.modelo.enemigo.Enemigo;
+import edu.fiuba.algo3.modelo.enemigo.Hormiga;
+import edu.fiuba.algo3.modelo.exceptions.*;
+import edu.fiuba.algo3.modelo.juego.Inicializador;
+import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JuegoTest {
     @Test
-    public void juegoConDosEnemigosNoDeberiaEstarTerminado() {
-      // Arrange
-      Inicializador inicio = new Inicializador();
+    public void juegoConDosEnemigosNoDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        // Arrange
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
-      inicio.agregarJugador("NombreDelJugador");
-      Juego juego = inicio.obtenerJuego();
-      
-      juego.agregarEnemigo(new Arania());
-      juego.agregarEnemigo(new Hormiga());
 
-      // Act
-      boolean terminado =  juego.juegoTerminado();
+        inicio.agregarJugador("NombreDelJugador");
+        Juego juego = inicio.obtenerJuego();
+        Mapa mapa = juego.obtenerMapa();
 
-      // Assert
-      assertFalse(terminado);
-  }
+        juego.agregarEnemigo(new Arania(mapa.getCoordenadasLargada()));
+        juego.agregarEnemigo(new Hormiga(mapa.getCoordenadasLargada()));
 
-  @Test
-    public void juegoSinEnemigosDeberiaEstarTerminado() {
-      // Arrange
-      Inicializador inicio = new Inicializador();
+        // Act
+        boolean terminado =  juego.juegoTerminado();
 
-      inicio.agregarJugador("NombreDelJugador");
-      Juego juego = inicio.obtenerJuego();
+        // Assert
+        assertFalse(terminado);
+    }
+    @Test
+    public void juegoSinEnemigosDeberiaEstarTerminado() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        // Arrange
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador inicio = new Inicializador(fileMapa);
 
-      // Act
-      boolean terminado =  juego.juegoTerminado();
+        inicio.agregarJugador("NombreDelJugador");
+        Juego juego = inicio.obtenerJuego();
 
-      // Assert
-      assertTrue(terminado);
-  }
+        // Act
+        boolean terminado =  juego.juegoTerminado();
 
-  @Test
-  public void caso11() {
-    Inicializador inicio = new Inicializador();
+        // Assert
+        assertTrue(terminado);
+    }
 
-    inicio.agregarJugador("Alberto");
-    Juego juego = inicio.obtenerJuego();
-    Jugador jugador = juego.obtenerJugador();
+    @Test
+    public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        Inicializador inicio = new Inicializador(fileMapa);
 
-    Defensa defensa = new TorrePlateada();
-    Coordenadas coordDefensa = new Coordenadas(4,2);
-    jugador.generarConstruccion(defensa, coordDefensa, juego.obtenerNumeroDeturno());
+        inicio.agregarJugador("Alberto");
+        Juego juego = inicio.obtenerJuego();
+        Jugador jugador = juego.obtenerJugador();
 
-    juego.avanzarTurno();
-    juego.avanzarTurno();
+        Torre torrePlateada = new TorrePlateada();
+        Coordenadas coordDefensa = new Coordenadas(4, 3);
+        jugador.generarConstruccion(torrePlateada, coordDefensa, juego.obtenerMapa());
 
-    Enemigo enemigo = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo1 = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo2 = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo3 = new Arania(new Coordenadas(5,2));
-    Enemigo enemigo4 = new Arania(new Coordenadas(5,2));
-    juego.agregarEnemigo(enemigo);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
 
-    defensa.atacarEnemigo(enemigo);
-    defensa.atacarEnemigo(enemigo1);
-    defensa.atacarEnemigo(enemigo2);
-    defensa.atacarEnemigo(enemigo3);
-    defensa.atacarEnemigo(enemigo4);
+        Enemigo enemigo = new Arania(new Coordenadas(5,2));
+        Enemigo enemigo1 = new Arania(new Coordenadas(5,2));
+        Enemigo enemigo2 = new Arania(new Coordenadas(5,2));
+        Enemigo enemigo3 = new Arania(new Coordenadas(5,2));
+        Enemigo enemigo4 = new Arania(new Coordenadas(5,2));
+        juego.agregarEnemigo(enemigo);
 
-    Enemigo enemigo5 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo6 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo7 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo8 = new Arania(new Coordenadas(5, 2));
-    Enemigo enemigo9 = new Arania(new Coordenadas(5, 2));
+        try {
+            torrePlateada.atacarEnemigo(enemigo);
+            torrePlateada.atacarEnemigo(enemigo1);
+            torrePlateada.atacarEnemigo(enemigo2);
+            torrePlateada.atacarEnemigo(enemigo3);
+            torrePlateada.atacarEnemigo(enemigo4);
+        }
+        catch(ElEnemigoMurioDuranteElAtaqueException e) {}
 
-    juego.avanzarTurno();
+        Enemigo enemigo5 = new Arania(new Coordenadas(5, 2));
+        Enemigo enemigo6 = new Arania(new Coordenadas(5, 2));
+        Enemigo enemigo7 = new Arania(new Coordenadas(5, 2));
+        Enemigo enemigo8 = new Arania(new Coordenadas(5, 2));
+        Enemigo enemigo9 = new Arania(new Coordenadas(5, 2));
 
-    boolean terminado =  juego.juegoTerminado();
+        juego.avanzarTurno();
 
-    assertTrue(jugador.estaVivo());
-    assertTrue(terminado);
-  }
+        boolean terminado =  juego.juegoTerminado();
 
-  @Test
-  public void caso12() {
-    Inicializador inicio = new Inicializador();
+        assertTrue(jugador.estaVivo());
+        assertTrue(terminado);
+    }
 
-    inicio.agregarJugador("Alberto");
-    Juego juego = inicio.obtenerJuego();
-    Jugador jugador = juego.obtenerJugador();
-    Enemigo enemigo = new Arania(new Coordenadas(5,2));
+    @Test
+    public void caso12() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
-    juego.agregarEnemigo(enemigo);
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
-    juego.avanzarTurno();
+        inicio.agregarJugador("Alberto");
+        Juego juego = inicio.obtenerJuego();
+        Mapa mapa = juego.obtenerMapa();
+        Jugador jugador = juego.obtenerJugador();
+        for( int i = 0; i < 7 ; i++ ){
+            juego.agregarEnemigo( new Arania( mapa.getCoordenadasLargada() ) );
+            juego.agregarEnemigo( new Hormiga( mapa.getCoordenadasLargada() ) );
+        }
 
-    assertFalse(jugador.estaVivo());
-  }
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+
+        assertFalse(jugador.estaVivo());
+    }
 }
