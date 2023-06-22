@@ -8,10 +8,11 @@ import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
-public class TrampaArenosa implements Defensa{
+public class TrampaArenosa extends Observable implements Defensa{
     protected String nombre;
     protected int costo;
     protected int tiempoDeConstruccion;
@@ -51,6 +52,7 @@ public class TrampaArenosa implements Defensa{
         logger.info("Jugador agrega una Trampa Arenosa en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
                 + ")");
+        setChanged();
     }
 
     public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {

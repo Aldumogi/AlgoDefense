@@ -8,8 +8,9 @@ import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public abstract class Torre implements Defensa {
+public abstract class Torre extends Observable implements Defensa{
     protected String nombre;
     protected int costo;
     protected int tiempoDeConstruccion;

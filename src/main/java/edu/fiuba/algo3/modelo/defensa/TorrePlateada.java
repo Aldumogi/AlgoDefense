@@ -29,6 +29,7 @@ public class TorrePlateada extends Torre {
         logger.info("Jugador inicia la construcción de una Torre Plateada en la posición (" +
                 coordenadas.obtenerFila() + ", " + coordenadas.obtenerColumna()
                 + ")");
+        setChanged();
     }
 
     public void atacarEnemigo(Enemigo enemigo, ArrayList<Hormiga> hormigasAsesinadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException, FueraDeRangoException {

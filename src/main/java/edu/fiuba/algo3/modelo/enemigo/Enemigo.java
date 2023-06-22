@@ -9,10 +9,11 @@ import edu.fiuba.algo3.modelo.parcela.Parcela;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
-public abstract class Enemigo {
+public abstract class Enemigo extends Observable {
     protected int velocidad;
     protected int dañoCausado;
     protected int creditosOtorgados;
@@ -33,6 +34,7 @@ public abstract class Enemigo {
 
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio, this.coordenadas);
+        setChanged();
     }
 
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
@@ -54,6 +56,8 @@ public abstract class Enemigo {
         this.coordenadas = coordenadaSiguiente;
         this._actualizarVelocidadSegunCantidadDeMovimientos();
         this._restaurarVelocidadNormal();
+
+        setChanged();
     }
 
     private void _restaurarVelocidadNormal() {
