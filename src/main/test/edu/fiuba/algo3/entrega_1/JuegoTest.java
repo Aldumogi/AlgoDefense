@@ -108,8 +108,8 @@ public class JuegoTest {
 
     @Test
     public void caso12() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        String fileMapa = "src/main/test/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
         Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");
