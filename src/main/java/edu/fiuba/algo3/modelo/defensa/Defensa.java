@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
+import java.util.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
