@@ -1,9 +1,13 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.controller.juegoController;
+import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
+import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.parcela.*;
+import edu.fiuba.algo3.view.VistaParcela;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,34 +18,25 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class App extends Application {
 
     private Stage primaryStage;
     static String MAP_RELATIVE_PATH = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+    static String ENEMIGOS_RELATIVE_PATH = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
     private double medidaCelda = 30;
-    private double height = 640, width = 480;
-    private final HashMap<String, Color> color = new HashMap<>() {{
-        put("PLargada", Color.ORANGE);
-        put("PNormal", Color.YELLOW);
-        put("PMeta", Color.GREEN);
-        put("R", Color.GREY);
-        put("T", Color.BROWN);
-    }};
+    private double height = 680, width = 520;
 
     @Override
-    public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException {
-        Inicializador partida = new Inicializador(MAP_RELATIVE_PATH);
+    public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
+        Inicializador partida = new Inicializador(ENEMIGOS_RELATIVE_PATH, MAP_RELATIVE_PATH);
         this.primaryStage = primaryStage;
         primaryStage.setTitle("AlgoDefense");
 
@@ -112,15 +107,7 @@ public class App extends Application {
         for(int fila = 1; fila <= cantidadDeFilas; fila++) {
             for(int columna = 1; columna <= cantidadDeColumnas; columna++) {
                 Parcela parcela = partida.obtenerJuego().obtenerMapa().obtenerCelda(new Coordenadas(fila, columna));
-                Rectangle celda = new Rectangle(medidaCelda, medidaCelda);
-                celda.setFill( color.get( parcela.obtenerTipo() ) );
-                celda.setStroke(Color.BLACK);
-                celda.setStrokeWidth(1);
-
-                celda.setWidth(medidaCelda);
-                celda.setHeight(medidaCelda);
-
-                root.add(celda, columna - 1, fila - 1);
+                root.add(new VistaParcela(parcela, medidaCelda), columna - 1, fila - 1);
             }
         }
 
@@ -129,6 +116,12 @@ public class App extends Application {
 
         root.setTranslateX(offsetX);
         root.setTranslateY(offsetY);
+
+        Juego juego = partida.obtenerJuego();
+        Button avanzarTurno = new Button("Avanzar Turno");
+        avanzarTurno.setOnAction(e -> new juegoController(juego).avanzarTurno());
+
+        root.add(avanzarTurno, cantidadDeColumnas, cantidadDeFilas - 1);
 
         primaryStage.setScene(scene);
         primaryStage.show();
