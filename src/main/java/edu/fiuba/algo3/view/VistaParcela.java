@@ -45,7 +45,7 @@ public class VistaParcela extends StackPane implements Observer {
 
     this.getChildren().addAll(rect, numeroEnemigos);
 
-    ControladorMouse eventHandler = new ControladorMouse(parcela, this);
+    ControladorMouse eventHandler = new ControladorMouse(parcela);
     this.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
   }
 

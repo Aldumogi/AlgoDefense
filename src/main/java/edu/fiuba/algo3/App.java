@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.controller.juegoController;
+import edu.fiuba.algo3.controller.JuegoController;
 import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
@@ -104,10 +104,15 @@ public class App extends Application {
         int cantidadDeFilas = partida.obtenerJuego().obtenerMapa().obtenerCantidadDeFilas();
         int cantidadDeColumnas = partida.obtenerJuego().obtenerMapa().obtenerCantidadDeColumnas();
 
+        Juego juego = partida.obtenerJuego();
+        JuegoController juegoController = new JuegoController(juego);
+
         for(int fila = 1; fila <= cantidadDeFilas; fila++) {
             for(int columna = 1; columna <= cantidadDeColumnas; columna++) {
                 Parcela parcela = partida.obtenerJuego().obtenerMapa().obtenerCelda(new Coordenadas(fila, columna));
-                root.add(new VistaParcela(parcela, medidaCelda), columna - 1, fila - 1);
+                VistaParcela vista = new VistaParcela(parcela, medidaCelda);
+                juegoController.agregarObservable(parcela, vista);
+                root.add(vista, columna - 1, fila - 1);
             }
         }
 
@@ -117,9 +122,8 @@ public class App extends Application {
         root.setTranslateX(offsetX);
         root.setTranslateY(offsetY);
 
-        Juego juego = partida.obtenerJuego();
         Button avanzarTurno = new Button("Avanzar Turno");
-        avanzarTurno.setOnAction(e -> new juegoController(juego).avanzarTurno());
+        avanzarTurno.setOnAction(e -> juegoController.avanzarTurno());
 
         root.add(avanzarTurno, cantidadDeColumnas, cantidadDeFilas - 1);
 
