@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tierra implements Parcela {
+public class Tierra extends Parcela {
     private Coordenadas coordenadas;
     private List<Enemigo> enemigos;
     private EstadoParcela estado;

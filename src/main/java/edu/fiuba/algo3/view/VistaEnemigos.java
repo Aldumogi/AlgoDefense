@@ -34,10 +34,13 @@ public class VistaEnemigos {
         Rectangle rect = new Rectangle(medidaImagen, medidaImagen);
         rect.setStroke(Color.BLACK);
         rect.setStrokeWidth(1);
+
         Image img = new Image(getClass().getResourceAsStream(imgEnemigos.get(enemigo.obtenerNombre())));
         ImagePattern imagePattern = new ImagePattern(img);
+
         rect.setFill(imagePattern);
         root.add(rect, columna, fila);
+
         columna = (columna == 4) ? 0 : columna + 1;
         fila = (columna == 0) ? fila + 1 : fila;
       }

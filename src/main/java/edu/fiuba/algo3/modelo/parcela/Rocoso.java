@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rocoso implements Parcela {
+public class Rocoso extends Parcela {
     public final String tipo = "R";
     private List<Enemigo> enemigos;
     private Coordenadas coordenadas;
