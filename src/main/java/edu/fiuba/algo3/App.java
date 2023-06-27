@@ -16,6 +16,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -23,7 +26,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 public class App extends Application {
@@ -41,14 +46,37 @@ public class App extends Application {
         primaryStage.setTitle("AlgoDefense");
 
         StackPane root = new StackPane();
-        root.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+
+        InputStream imageStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/background_main1.png");
+        Image backgroundImage = new Image(imageStream);
+        BackgroundImage background = new BackgroundImage(
+                backgroundImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+        );
+        root.setBackground(new Background(background));
+
         root.setPadding(new Insets(20));
+
         Scene scene = new Scene(root, height, width);
 
-        Button agregarJugadorButton = new Button("Agregar Jugador");
-        agregarJugadorButton.setOnAction(e -> mostrarDialogoIngresarNombre(partida));
+        InputStream imgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/button_add_player.png");
+        Image imgButton = new Image(imgBtnStream);
 
-        root.getChildren().add(agregarJugadorButton);
+        InputStream hoverImgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/button_add_player_2.png");
+        Image hoverImgButton = new Image(hoverImgBtnStream);
+
+        ImageView imageView = new ImageView(imgButton);
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(75);
+        imageView.setTranslateY(75);
+        imageView.setOnMouseClicked(e -> mostrarDialogoIngresarNombre(partida));
+        imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
+        imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
+
+        root.getChildren().add(imageView);
 
         primaryStage.setScene(scene);
         primaryStage.show();

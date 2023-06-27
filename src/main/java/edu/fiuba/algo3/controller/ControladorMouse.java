@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controller;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
@@ -19,8 +20,13 @@ public class ControladorMouse implements EventHandler<MouseEvent> {
 
   @Override 
   public void handle(MouseEvent e) { 
-    List<Enemigo> enemigos = this.parcela.obtener(); 
-    VistaEnemigos vistaEnemigos = new VistaEnemigos(enemigos);
+    List<Enemigo> enemigos = this.parcela.obtener();
+    VistaEnemigos vistaEnemigos = null;
+    try {
+      vistaEnemigos = new VistaEnemigos(enemigos);
+    } catch (FileNotFoundException ex) {
+      throw new RuntimeException(ex);
+    }
     vistaEnemigos.show();
   }
 

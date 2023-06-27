@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,15 +15,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+
 public class VistaEnemigos {
   private int medidaImagen = 30;
   private Stage stage;
   private final HashMap<String, String> imgEnemigos = new HashMap<>() {{
-        put("Hormiga", "hormiga.png");
-        put("Araña", "arania.png");
+        put("Hormiga", "src/main/java/edu/fiuba/algo3/view/images/enemigos/hormiga.png");
+        put("Araña", "src/main/java/edu/fiuba/algo3/view/images/enemigos/arania.png");
+        put("Topo", "src/main/java/edu/fiuba/algo3/view/images/enemigos/topo.png");
+        put("Lechuza", "src/main/java/edu/fiuba/algo3/view/images/enemigos/lechuza.png");
     }};
   
-  public VistaEnemigos(List<Enemigo> enemigos) {
+  public VistaEnemigos(List<Enemigo> enemigos) throws FileNotFoundException {
     this.stage = new Stage();
     stage.setTitle("Enemigos en Parcela");
 
@@ -34,8 +41,8 @@ public class VistaEnemigos {
         Rectangle rect = new Rectangle(medidaImagen, medidaImagen);
         rect.setStroke(Color.BLACK);
         rect.setStrokeWidth(1);
-
-        Image img = new Image(getClass().getResourceAsStream(imgEnemigos.get(enemigo.obtenerNombre())));
+        InputStream imageStream = new FileInputStream(imgEnemigos.get(enemigo.obtenerNombre()));
+        Image img = new Image(imageStream);
         ImagePattern imagePattern = new ImagePattern(img);
 
         rect.setFill(imagePattern);
