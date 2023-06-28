@@ -92,20 +92,13 @@ public class App extends Application {
     private void mostrarDialogoIngresarNombre(Inicializador partida) throws MalformedURLException, FileNotFoundException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Ingresar Nombre");
-        //dialog.setHeaderText("Ingresar nombre del jugador");
-        // Apply CSS styles to the text input field
-
-        //dialog.setWidth(600);
         dialog.setContentText("...........");
 
-
-        // Access the dialog pane
         DialogPane dialogPane = dialog.getDialogPane();
-        // Hide the header
         dialogPane.setHeaderText(null);
         dialogPane.setGraphic(null);
         dialogPane.setPrefWidth(400);
-        // Add background
+
         InputStream imageStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/background_input_name.png");
         Image backgroundImage = new Image(imageStream);
         BackgroundImage background = new BackgroundImage(
@@ -117,15 +110,9 @@ public class App extends Application {
         );
         dialogPane.setBackground(new Background(background));
         dialogPane.setPadding(new Insets(5));
-
-        // Add CSS class to the dialog pane
         dialogPane.getStyleClass().add("my-dialog-pane");
-
-        // Apply inline styles to the dialog pane
-        //dialogPane.setStyle("-fx-background-color: #8A33FF; -fx-font-size: 20px;");
         dialogPane.setStyle("-fx-font-size: 20px;");
 
-        // Apply CSS styles to the buttons
         Button cancelButton = (Button) dialogPane.lookupButton(ButtonType.CANCEL);
         cancelButton.getStyleClass().add("my-cancel-button");
 
@@ -149,10 +136,21 @@ public class App extends Application {
         }
     }
 
-    private void mostrarPantallaIniciarPartida(Inicializador partida) {
+    private void mostrarPantallaIniciarPartida(Inicializador partida) throws FileNotFoundException {
         StackPane root = new StackPane();
+
+        InputStream imageStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/background_start_game.png");
+        Image backgroundImage = new Image(imageStream);
+        BackgroundImage background = new BackgroundImage(
+                backgroundImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+        );
+        root.setBackground(new Background(background));
         root.setPadding(new Insets(20));
-        root.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, null, null)));
+
         Scene scene = new Scene(root, height, width);
 
         VBox vbox = new VBox();
@@ -160,11 +158,24 @@ public class App extends Application {
         vbox.setAlignment(Pos.CENTER);
 
         Label messageLabel = new Label("¡Bienvenido, " + partida.obtenerJuego().obtenerJugador().obtenerNombre() + "!");
-        messageLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        messageLabel.setFont(Font.font("Cambria", FontWeight.BOLD, 26));
+        messageLabel.setTextFill(Color.ORANGE);
 
-        Button iniciarPartidaButton = new Button("Iniciar Partida");
-        iniciarPartidaButton.setOnAction(e -> mostrarPantallaConMapa(partida));
-        vbox.getChildren().addAll(iniciarPartidaButton, messageLabel);
+        InputStream imgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/start_game_btn.png");
+        Image imgButton = new Image(imgBtnStream);
+
+        InputStream hoverImgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/start_game_btn_hover.png");
+        Image hoverImgButton = new Image(hoverImgBtnStream);
+
+        ImageView imageView = new ImageView(imgButton);
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(75);
+        imageView.setTranslateY(60);
+        imageView.setOnMouseClicked(e -> mostrarPantallaConMapa(partida));
+        imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
+        imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
+
+        vbox.getChildren().addAll(messageLabel, imageView);
         root.getChildren().add(vbox);
 
         primaryStage.setScene(scene);
