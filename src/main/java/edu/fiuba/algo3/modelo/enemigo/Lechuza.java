@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
@@ -19,10 +20,6 @@ public class Lechuza extends Enemigo {
                 this.estado = new Vivo( energia , this.nombre );
                 this.coeficienteDeRalentizacion = 1;
                 logger.info("Se creó una Lechuza");
-        }
-
-        public boolean atacaTorres(){
-                return true;
         }
 
         @Override
@@ -53,7 +50,10 @@ public class Lechuza extends Enemigo {
                 
         }
 
-                
+        public void realizarAtaque(Jugador jugador, int numeroDeTurno, Mapa mapa) {
+                jugador.destruirPrimeraTorre(mapa);
+                logger.info( this.nombre + " llega a la meta y destruye la primera torre construida si es que existía");
+        }
         public boolean equals(Object e2) {
                 if ( e2 == this ) {
                 return true;
