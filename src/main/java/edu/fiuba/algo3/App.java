@@ -16,12 +16,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
+import javax.sound.sampled.*;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -35,7 +37,12 @@ public class App extends Application {
     static String ENEMIGOS_RELATIVE_PATH = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
     private double medidaCelda = 30;
     private double height = 680, width = 520;
+    private static final String HOME_MUSIC_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/8-Bit_Algo_defense_home_music.wav";
+    private static final String BUTTON_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/swords_clashing.wav";
+    private static final String BUTTON_NEXT_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/Castle-Wood-Door-Sound.wav";
+    private static final String START_GAME_MUSIC_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/8-Bit-Algo-defense-music_start_game.wav";
 
+    private Clip backgroundClip;
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador partida = new Inicializador(ENEMIGOS_RELATIVE_PATH, MAP_RELATIVE_PATH);
@@ -73,6 +80,7 @@ public class App extends Application {
         imageView.setTranslateY(75);
         imageView.setOnMouseClicked(e -> {
             try {
+                playSound(BUTTON_SOUND_FILE_PATH, 1.1f,null);
                 mostrarDialogoIngresarNombre(partida);
             } catch (MalformedURLException ex) {
                 throw new RuntimeException(ex);
@@ -85,6 +93,7 @@ public class App extends Application {
 
         root.getChildren().add(imageView);
 
+        playBackground(HOME_MUSIC_FILE_PATH, 0.7f);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -123,6 +132,7 @@ public class App extends Application {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
+            playSound(BUTTON_SOUND_FILE_PATH, 1.1f,null);
             String nombre = result.get();
             if (nombre.length() >= 6) {
                 partida.agregarJugador(nombre);
@@ -171,7 +181,10 @@ public class App extends Application {
         imageView.setFitWidth(200);
         imageView.setFitHeight(75);
         imageView.setTranslateY(60);
-        imageView.setOnMouseClicked(e -> mostrarPantallaConMapa(partida));
+        imageView.setOnMouseClicked(e -> {
+            playSound(BUTTON_SOUND_FILE_PATH, 1.1f, null);
+            mostrarPantallaConMapa(partida);
+        });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
 
@@ -208,14 +221,55 @@ public class App extends Application {
         root.setTranslateY(offsetY);
 
         Button avanzarTurno = new Button("Avanzar Turno");
-        avanzarTurno.setOnAction(e -> juegoController.avanzarTurno());
+        avanzarTurno.setOnAction(e -> {
+            playSound(BUTTON_NEXT_SOUND_FILE_PATH, 0.5f, null);
+            juegoController.avanzarTurno();
+        });
 
         root.add(avanzarTurno, cantidadDeColumnas, cantidadDeFilas - 1);
-
+        playBackground(START_GAME_MUSIC_FILE_PATH, 0.4f);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    private void playBackground(String url, float volume) {
+        try {
+            stopSound(backgroundClip);
+            backgroundClip = AudioSystem.getClip();
+            playSound(url, volume, backgroundClip );
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+   private void playSound(String url, float volume, Clip clipBase) {
+       try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(url)))) {
+           Clip clip = AudioSystem.getClip();
+           if (clipBase != null) {
+               clip = clipBase;
+           }
+
+           clip.open(audioInputStream);
+           adjustVolume(clip, volume);
+           clip.start();
+       } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+           e.printStackTrace();
+       }
+    }
+
+    private void adjustVolume(Clip clip, float volume) {
+        if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
+            gainControl.setValue(dB);
+        }
+    }
+
+    private void stopSound(Clip clip) {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+        }
+    }
     public static void main(String[] args) {
         launch(args);
     }
