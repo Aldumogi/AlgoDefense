@@ -11,14 +11,11 @@ import edu.fiuba.algo3.view.VistaParcela;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -26,9 +23,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Optional;
 
 public class App extends Application {
@@ -57,11 +54,13 @@ public class App extends Application {
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
         );
         root.setBackground(new Background(background));
-
         root.setPadding(new Insets(20));
 
         Scene scene = new Scene(root, height, width);
 
+        File cssFile = new File("src/main/java/edu/fiuba/algo3/view/css/styles.css");
+        URL cssUrl = cssFile.toURI().toURL();
+        scene.getStylesheets().add(cssUrl.toExternalForm());
         InputStream imgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/button_add_player.png");
         Image imgButton = new Image(imgBtnStream);
 
@@ -72,7 +71,15 @@ public class App extends Application {
         imageView.setFitWidth(200);
         imageView.setFitHeight(75);
         imageView.setTranslateY(75);
-        imageView.setOnMouseClicked(e -> mostrarDialogoIngresarNombre(partida));
+        imageView.setOnMouseClicked(e -> {
+            try {
+                mostrarDialogoIngresarNombre(partida);
+            } catch (MalformedURLException ex) {
+                throw new RuntimeException(ex);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
 
@@ -82,11 +89,50 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    private void mostrarDialogoIngresarNombre(Inicializador partida) {
+    private void mostrarDialogoIngresarNombre(Inicializador partida) throws MalformedURLException, FileNotFoundException {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Ingresar Nombre");
-        dialog.setHeaderText("Por favor ingrese su nombre de usuario");
-        dialog.setContentText("Nombre:");
+        //dialog.setHeaderText("Ingresar nombre del jugador");
+        // Apply CSS styles to the text input field
+
+        //dialog.setWidth(600);
+        dialog.setContentText("...........");
+
+
+        // Access the dialog pane
+        DialogPane dialogPane = dialog.getDialogPane();
+        // Hide the header
+        dialogPane.setHeaderText(null);
+        dialogPane.setGraphic(null);
+        dialogPane.setPrefWidth(400);
+        // Add background
+        InputStream imageStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/background_input_name.png");
+        Image backgroundImage = new Image(imageStream);
+        BackgroundImage background = new BackgroundImage(
+                backgroundImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+        );
+        dialogPane.setBackground(new Background(background));
+        dialogPane.setPadding(new Insets(5));
+
+        // Add CSS class to the dialog pane
+        dialogPane.getStyleClass().add("my-dialog-pane");
+
+        // Apply inline styles to the dialog pane
+        //dialogPane.setStyle("-fx-background-color: #8A33FF; -fx-font-size: 20px;");
+        dialogPane.setStyle("-fx-font-size: 20px;");
+
+        // Apply CSS styles to the buttons
+        Button cancelButton = (Button) dialogPane.lookupButton(ButtonType.CANCEL);
+        cancelButton.getStyleClass().add("my-cancel-button");
+
+        Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+        okButton.getStyleClass().add("my-ok-button");
+        TextField textField = dialog.getEditor();
+        textField.getStyleClass().add("my-text-field; -fx-text-fill: white; ");
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
