@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.enemigo;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
@@ -10,8 +11,6 @@ import edu.fiuba.algo3.modelo.parcela.Parcela;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
 public abstract class Enemigo extends Observable {
     protected int velocidad;
@@ -26,11 +25,6 @@ public abstract class Enemigo extends Observable {
     public abstract int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo);
     public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
     public abstract String obtenerNombre();
-
-
-    public boolean atacaTorres() {
-        return false;
-    }
 
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio, this.coordenadas);
@@ -68,6 +62,8 @@ public abstract class Enemigo extends Observable {
         this.coeficienteDeRalentizacion = coeficienteDeRalentizacion;
     }
 
+    public abstract void realizarAtaque(Jugador jugador, int numeroDeTurno, Mapa mapa);
+
     public void setCoordenadas(Coordenadas coordenadas) {
         this.coordenadas = coordenadas;
     }
@@ -95,4 +91,5 @@ public abstract class Enemigo extends Observable {
     public int obtenerDanioCausado (int numeroDeTurno) {
         return this.dañoCausado;
     }
+
 }

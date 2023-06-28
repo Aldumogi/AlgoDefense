@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import javafx.scene.paint.Color;
 
-public class Pasarela extends Parcela {
+public abstract class Pasarela extends Parcela {
     protected Coordenadas coordenadas;
     protected EstadoParcela estado;
     protected List<Enemigo> enemigos;
@@ -31,7 +31,7 @@ public class Pasarela extends Parcela {
         throw new NoSePudoConstruirException();
     }
 
-    public void construir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {  }
+    public abstract void construir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException;
 
     public Coordenadas recibir(Enemigo enemigo){
         enemigos.add(enemigo);
@@ -55,14 +55,6 @@ public class Pasarela extends Parcela {
     }
 
     public void borrarObjeto(Defensa defensa) {
-    }
-
-    public Coordenadas devolverCoordenadasMeta() {
-        return null;
-    }
-
-    public Coordenadas devolverCoordenadasLargada() {
-        return null;
     }
 
     public Coordenadas obtenerCoordenadas() {

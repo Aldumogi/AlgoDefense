@@ -84,7 +84,7 @@ public class Juego {
         this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size() - 1 )? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12);
         this.jugador.finalizarTurno(this.enemigos, this.mapa);
         this.eliminarEnemigosMuertos();
-        this.actualizarEnergiaJugador();
+        this.realizarAtaquesDeLosEnemigosEnLaMeta();
         this.avanzarEnemigos();
         this.agregarEnemigosDelTurno();
         logger.info("Se avanzó al turno " + (this.indiceActualListaTurnos + 1));
@@ -115,28 +115,16 @@ public class Juego {
         }
     }
 
-    public void actualizarEnergiaJugador() {
+    public void realizarAtaquesDeLosEnemigosEnLaMeta() {
         Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
         ArrayList<Enemigo> enemigosEnLaMeta = new ArrayList<>();
         this.enemigos.forEach( enemigo -> {
             if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
-                int danio = enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() );
-                logger.info( enemigo.obtenerNombre() + " llega a la meta, produce " + danio + " de daño al jugador" );
-                jugador.restarEnergia( danio );
+                enemigo.realizarAtaque(jugador, this.obtenerNumeroDeturno(), this.mapa);
                 enemigosEnLaMeta.add(enemigo);
             }
         });
         this.enemigos.removeAll(enemigosEnLaMeta);
-    }
-
-    public void actualizarTorresJugador() {
-        Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
-        this.enemigos.forEach( enemigo -> {
-            if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0 && enemigo.atacaTorres()) {
-                jugador.destruirPrimeraTorre();
-                logger.info("Se destruyo una Torre si es que habia");
-            }
-        });
     }
     
     public boolean juegoTerminado(){

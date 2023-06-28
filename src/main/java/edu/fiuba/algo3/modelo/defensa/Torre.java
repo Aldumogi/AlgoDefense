@@ -39,13 +39,13 @@ public abstract class Torre extends Observable implements Defensa{
 
     public abstract void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
         try {
             this.estado.atacarEnemigos(enemigos, this, hormigasAsesinadas);
         } catch( Exception e ) {}
         String mensajeAlFinalizarConstruccion = "La construcción de " + this.nombre + " en la posición ("
                 + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") estará terminada para el próximo turno" ;
-        this.estado = this.estado.pasarTurno(nombre, mensajeAlFinalizarConstruccion);
+        this.estado = this.estado.pasarTurno(mensajeAlFinalizarConstruccion);
     }
 
     protected void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {

@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface EstadoDefensa {
 
-    EstadoDefensa pasarTurno(String nombre, String mensajeAlFinalizarConstruccion);
+    EstadoDefensa pasarTurno(String mensajeAlFinalizarConstruccion);
     int tiempoDeConstruccion();
 
     void atacarEnemigos(List<Enemigo> enemigos, TrampaArenosa trampa) throws DefensaEnConstruccionException;

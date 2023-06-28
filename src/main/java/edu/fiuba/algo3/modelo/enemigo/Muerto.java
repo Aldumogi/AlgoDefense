@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Muerto implements EstadoEnemigo {
-    public void mover(Enemigo enemigo) {
-
-    }
     public EstadoEnemigo recibirDanio(int danio, Coordenadas coordenadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException {
         throw new ElEnemigoEstaMuertoException();
     }

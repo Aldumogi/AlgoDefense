@@ -18,7 +18,7 @@ public class Terminada implements EstadoDefensa {
     public Terminada() {
     }
 
-    public EstadoDefensa pasarTurno(String nombre, String mensajeAlFinalizarConstruccion) {
+    public EstadoDefensa pasarTurno(String mensajeAlFinalizarConstruccion) {
         return this;
     }
 
