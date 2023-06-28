@@ -101,7 +101,7 @@ public class DefensaTest {
         // Arrange
         Torre torreBlanca = new TorreBlanca();
         Coordenadas coordenadas = new Coordenadas(55,62);
-        Parcela pasarela = new Pasarela(coordenadas);
+        Parcela pasarela = new PasarelaNormal(coordenadas);
         //Act, Assert
         assertThrows(NoSePudoConstruirException.class, () -> {
             pasarela.construir(torreBlanca);

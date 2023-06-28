@@ -48,14 +48,6 @@ public class Rocoso extends Parcela {
 
     public void borrarObjeto(Defensa defensa) { }
 
-    public Coordenadas devolverCoordenadasMeta() {
-        return null;
-    }
-
-    public Coordenadas devolverCoordenadasLargada() {
-        return null;
-    }
-
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;
     }

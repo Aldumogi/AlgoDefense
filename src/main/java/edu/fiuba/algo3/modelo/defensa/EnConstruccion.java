@@ -24,7 +24,7 @@ public class EnConstruccion implements EstadoDefensa {
         throw new DefensaEnConstruccionException();
     }
 
-    public EstadoDefensa pasarTurno(String nombre, String mensajeAlFinalizarConstruccion) {
+    public EstadoDefensa pasarTurno(String mensajeAlFinalizarConstruccion) {
         this.tiempoDeConstruccion--;
         if ( this.tiempoDeConstruccion <= 0 ) {
             logger.info( mensajeAlFinalizarConstruccion );

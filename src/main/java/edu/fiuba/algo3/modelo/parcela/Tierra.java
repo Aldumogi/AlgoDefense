@@ -26,7 +26,7 @@ public class Tierra extends Parcela {
     }
 
     public void construir(Torre torre) throws NoSePudoConstruirException {
-        this.estado = this.estado.construir(torre);
+        this.estado = this.estado.construir();
         this.defensa = torre;
     }
 
@@ -53,14 +53,6 @@ public class Tierra extends Parcela {
 
     public void borrarObjeto(Defensa defensa) {
         this.defensa = null;
-    }
-
-    public Coordenadas devolverCoordenadasMeta() {
-        return null;
-    }
-
-    public Coordenadas devolverCoordenadasLargada() {
-        return null;
     }
 
     public Coordenadas obtenerCoordenadas(){

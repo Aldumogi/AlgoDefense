@@ -14,10 +14,6 @@ public class PasarelaLargada extends Pasarela {
     public void construir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {
         throw new NoSePudoConstruirException();
     }
-    @Override
-    public Coordenadas devolverCoordenadasLargada() {
-        return this.coordenadas;
-    }
 
     public String obtenerTipo() {
         return this.tipo;

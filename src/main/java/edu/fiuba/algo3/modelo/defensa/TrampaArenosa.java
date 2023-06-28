@@ -55,7 +55,7 @@ public class TrampaArenosa extends Observable implements Defensa{
         setChanged();
     }
 
-    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, List<Defensa> defensas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
+    public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre) {
         try {
             this.estado.atacarEnemigos(enemigos, this);
             this.tiempoDeRalentizacion--;
@@ -66,7 +66,7 @@ public class TrampaArenosa extends Observable implements Defensa{
         } catch (DefensaEnConstruccionException e) {}
         String mensajeAlFinalizarConstruccion = this.nombre + " estará operativa en el próximo turno en la posición ("
                 + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ")";
-        this.estado = this.estado.pasarTurno(nombre, mensajeAlFinalizarConstruccion);
+        this.estado = this.estado.pasarTurno(mensajeAlFinalizarConstruccion);
     }
 
     public void ralentizarEnemigo(Enemigo enemigo) {

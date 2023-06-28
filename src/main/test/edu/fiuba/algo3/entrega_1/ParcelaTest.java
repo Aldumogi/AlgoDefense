@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.enemigo.Hormiga;
 import edu.fiuba.algo3.modelo.parcela.Pasarela;
+import edu.fiuba.algo3.modelo.parcela.PasarelaNormal;
 import edu.fiuba.algo3.modelo.parcela.Rocoso;
 import edu.fiuba.algo3.modelo.parcela.Tierra;
 import edu.fiuba.algo3.modelo.exceptions.NoEsPosibleRecibirEnemigosEnParcelaException;
@@ -18,7 +19,7 @@ public class ParcelaTest {
 
         Coordenadas coordenadaPasarela = new Coordenadas(1, 1);
         Hormiga hormiga = new Hormiga( coordenadaPasarela );
-        Pasarela pasarela = new Pasarela(coordenadaPasarela);
+        Pasarela pasarela = new PasarelaNormal(coordenadaPasarela);
 
 
         assertDoesNotThrow(() -> pasarela.recibir(hormiga));

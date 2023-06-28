@@ -20,9 +20,6 @@ public abstract class Parcela extends Observable{
     abstract public void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException;
     abstract public void borrarObjeto(Defensa defensa) ;
 
-    abstract public Coordenadas devolverCoordenadasMeta();
-
-    abstract public Coordenadas devolverCoordenadasLargada();
     abstract public Coordenadas obtenerCoordenadas();
     abstract public String obtenerTipo();
 }

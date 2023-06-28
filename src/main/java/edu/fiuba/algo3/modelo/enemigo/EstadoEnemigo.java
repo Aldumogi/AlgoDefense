@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface EstadoEnemigo {
-    void mover(Enemigo enemigo);
     EstadoEnemigo recibirDanio(int danio, Coordenadas coordenadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException;
     int creditosOtorgados(int creditos);
 
