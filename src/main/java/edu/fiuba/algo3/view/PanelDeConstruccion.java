@@ -16,9 +16,9 @@ import javafx.scene.paint.Color;
 import static edu.fiuba.algo3.view.SoundUtils.*;
 
 public class PanelDeConstruccion {
-  private static final String TORRE_BLANCA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlanca.png";
-  private static final String TORRE_PLATEADA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreNegra.png";
-  private static final String TRAMPA_ARENOSA = "src/main/java/edu/fiuba/algo3/view/images/defensas/trampaArenosa.png";
+  private static final String TORRE_BLANCA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlancaCosto.png";
+  private static final String TORRE_PLATEADA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreNegraCosto.png";
+  private static final String TRAMPA_ARENOSA = "src/main/java/edu/fiuba/algo3/view/images/defensas/trampaArenosaCosto.png";
 
   public PanelDeConstruccion() {
   }
@@ -47,11 +47,10 @@ public class PanelDeConstruccion {
         event.setDragDetect(true);
     });
   
-    // gridPane.add(torreBlancaRect, cantidadDeColumnas, cantidadDeFilas - 2);
     panelDeConstruccion.add(torreBlancaRect, 0, 1);
-    //
-  
-    //
+
+
+
     Rectangle torrePlateadaRect = new Rectangle(medidaCelda, medidaCelda);
     torrePlateadaRect.setStroke(Color.BLACK);
     torrePlateadaRect.setStrokeWidth(1);
@@ -73,11 +72,9 @@ public class PanelDeConstruccion {
         event.setDragDetect(true);
     });
     
-    // gridPane.add(torrePlateadaRect, cantidadDeColumnas + 1, cantidadDeFilas - 2);
     panelDeConstruccion.add(torrePlateadaRect, 1, 1);
-    //
+
   
-    //
     Rectangle trampaArenosaRect = new Rectangle(medidaCelda, medidaCelda);
     trampaArenosaRect.setStroke(Color.BLACK);
     trampaArenosaRect.setStrokeWidth(1);
@@ -100,7 +97,6 @@ public class PanelDeConstruccion {
     });
     
     panelDeConstruccion.add(trampaArenosaRect, 2, 1);
-    // gridPane.add(trampaArenosaRect, cantidadDeColumnas + 2, cantidadDeFilas - 2);
     return panelDeConstruccion;
   }
 
