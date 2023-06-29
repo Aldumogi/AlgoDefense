@@ -5,9 +5,9 @@ import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
 import edu.fiuba.algo3.modelo.juego.Juego;
-import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.parcela.*;
+import edu.fiuba.algo3.view.PanelDeConstruccion;
 import edu.fiuba.algo3.view.VistaParcela;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -16,14 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -44,8 +38,8 @@ public class App extends Application {
     static String ENEMIGOS_RELATIVE_PATH = "src/main/java/edu/fiuba/algo3/resources/enemigos.json"; //"src/main/test/edu/fiuba/algo3/resources/enemigos.json";
     private double medidaCelda = 30;
     private double height = 680, width = 520;
-    private static final String TORRE_BLANCA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlanca.png";
     private Clip backgroundClip;
+    private int creditos = 0;
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         Inicializador partida = new Inicializador(ENEMIGOS_RELATIVE_PATH, MAP_RELATIVE_PATH);
@@ -206,7 +200,7 @@ public class App extends Application {
     }
 
     private void mostrarPantallaConMapa(Inicializador partida) throws FileNotFoundException {
-
+        creditos = partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos();
         StackPane root = new StackPane();
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -268,6 +262,7 @@ public class App extends Application {
         imageView.setTranslateX(5);
         imageView.setOnMouseClicked(e -> {
             playSound(BUTTON_NEXT_SOUND_FILE_PATH, 0.5f, null);
+            creditos = partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos();
             if(!juegoController.avanzarTurno()){
                 mostrarDialogFinDeJuego(partida);
                 ImageView imageViewEndGame = new ImageView(imgEndGame);
@@ -279,42 +274,23 @@ public class App extends Application {
             turnoLabel.setText("TURNO:" +  partida.obtenerJuego().obtenerNumeroDeturno());
             scoreValueLabel.setText("Vida: "+ partida.obtenerJuego().obtenerJugador().obtenerPuntosDeVida());
             creditosLabel.setText("Creditos: " +  partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos());
+            PanelDeConstruccion panelDeConstruccion = new PanelDeConstruccion();
+            GridPane panel = null;
+            try {
+                panel = panelDeConstruccion.generarPanel(medidaCelda, partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos(), creditosLabel);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            gridPane.add(panel, cantidadDeColumnas, cantidadDeFilas/2);
+
         });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
         gridPane.add(imageView, cantidadDeColumnas, cantidadDeFilas - 1);
 
-        Rectangle torreBlancaRect = new Rectangle(medidaCelda, medidaCelda);
-        torreBlancaRect.setStroke(Color.BLACK);
-        torreBlancaRect.setStrokeWidth(1);
-        InputStream torreBlanca = new FileInputStream(TORRE_BLANCA);
-        Image torreBlancaImg = new Image(torreBlanca);
-        ImagePattern torreBlancaIP = new ImagePattern(torreBlancaImg);
-
-        torreBlancaRect.setFill(torreBlancaIP);
-        gridPane.add(torreBlancaRect, cantidadDeColumnas, cantidadDeFilas - 2);
-
-        torreBlancaRect.setOnMouseClicked(e -> {
-            playSound(CLICK_DEFENSE_SOUND_FILE_PATH, 1.1f, null);
-        } );
-        torreBlancaRect.setOnDragDetected((MouseEvent event) -> {
-
-            if((partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos() - 10) < 0 ) {
-                playSound(CLICK_DEFENSE_DENIED_SOUND_FILE_PATH, 1.1f, null);
-            }else{
-                Dragboard db = torreBlancaRect.startDragAndDrop(TransferMode.ANY);
-                ClipboardContent content = new ClipboardContent();
-                content.putString("torre blanca");
-                db.setContent(content);
-                playSound(CLICK_DEFENSE_BUILDING_SOUND_FILE_PATH, 1.1f, null);
-            }
-            creditosLabel.setText("Creditos: " + ((partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos() - 10) <= 0 ? 0: (partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos() - 10)));
-        });
-
-        torreBlancaRect.setOnMouseDragged((MouseEvent event) -> {
-            event.setDragDetect(true);
-        });
-
+        PanelDeConstruccion panelDeConstruccion = new PanelDeConstruccion();
+        GridPane panel =  panelDeConstruccion.generarPanel(medidaCelda, partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos(), creditosLabel);
+        gridPane.add(panel, cantidadDeColumnas, cantidadDeFilas/2);
         playBackground(START_GAME_MUSIC_FILE_PATH, 0.4f);
         primaryStage.setScene(scene);
         primaryStage.show();

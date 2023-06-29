@@ -6,44 +6,48 @@ abstract Defensa {
 + pasarTurno(enemigos, hormigasAsesinadas, mapa, trampasAEliminar, nombre)
 }
 
-class TrampaArenosa {
-- nombre
-- costo
-- tiempoDeConstruccion
-- estado: EstadoDefensa
-- coordenadas
-- tiempoDeRalentizacion
-- factorDeRalentizacion
-+ construir(m: Mapa, c: Coordenadas)
-+ pasarTurno(enemigos, hormigasAsesinadas, mapa, trampasAEliminar)
-+ ralentizarEnemigo(e: Enemigo)
+together{
+    class TrampaArenosa {
+    - nombre
+    - costo
+    - tiempoDeConstruccion
+    - estado: EstadoDefensa
+    - coordenadas
+    - tiempoDeRalentizacion
+    - factorDeRalentizacion
+    + construir(m: Mapa, c: Coordenadas)
+    + pasarTurno(enemigos, hormigasAsesinadas, mapa, trampasAEliminar)
+    + ralentizarEnemigo(e: Enemigo)
+    }
+
+    abstract Torre {
+    - nombre
+    - costo
+    - tiempoDeConstruccion
+    - rangoDeAtaque
+    - danio
+    - estado: EstadoDefensa
+    - coordenadas: Coordenadas
+    + atacarEnemigo(e: Enemigo, hormigasAsesinadas)
+    + construir(m: Mapa, c: Coordenadas)
+    + pasarTurno(enemigos, hormigasAsesinadas, mapa, trampasAEliminar)
+    + estaEnRango(coordenadasEnemigo, coordenadasDefensa, rangoDeAtaque)
+    }
+
+    together{
+        class TorreBlanca {
+        + atacarEnemigo(enemigo: Enemigo, hormigasAsesinadas)
+        + construir(m: Mapa, c: Coordenadas)
+        }
+
+        class TorrePlateada {
+        + atacarEnemigo(enemigo: Enemigo, hormigasAsesinadas)
+        + construir(m: Mapa, c: Coordenadas)
+        }
+    }
 }
 
-abstract Torre {
-- nombre
-- costo
-- tiempoDeConstruccion
-- rangoDeAtaque
-- danio
-- estado: EstadoDefensa
-- coordenadas: Coordenadas
-+ atacarEnemigo(e: Enemigo, hormigasAsesinadas)
-+ construir(m: Mapa, c: Coordenadas)
-+ pasarTurno(enemigos, hormigasAsesinadas, mapa, trampasAEliminar)
-+ estaEnRango(coordenadasEnemigo, coordenadasDefensa, rangoDeAtaque)
-}
-
-class TorreBlanca {
-+ atacarEnemigo(enemigo: Enemigo, hormigasAsesinadas)
-+ construir(m: Mapa, c: Coordenadas)
-}
-
-class TorrePlateada {
-+ atacarEnemigo(enemigo: Enemigo, hormigasAsesinadas)
-+ construir(m: Mapa, c: Coordenadas)
-}
-
-Defensa <|-- TrampaArenosa
+TrampaArenosa -|> Defensa
 Defensa <|-- Torre
 Torre <|-- TorreBlanca
 Torre <|-- TorrePlateada

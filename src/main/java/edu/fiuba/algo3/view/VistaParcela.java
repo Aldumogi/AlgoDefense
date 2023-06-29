@@ -39,7 +39,6 @@ public class VistaParcela extends StackPane implements Observer {
     this.parcela = parcela;
     this.parcela.addObserver(this);
 
-
     Rectangle rect = new Rectangle(medidaCelda, medidaCelda);
     rect.setFill( color.get( parcela.obtenerTipo() ) );
     rect.setStroke(Color.BLACK);
@@ -74,15 +73,17 @@ public class VistaParcela extends StackPane implements Observer {
 
   @Override
   public void update(Observable o, Object arg) {
-    this.actualizarNumeroEnemigos();
 
-    if( this.defensa != null){
+    if( this.parcela.tengoDefensaConstruida()){
       VistaDefensa vd;
       try {
         vd = new VistaDefensa(this.defensa);
         indicador.setGraphic(vd.obtenerVistaDeImagen());
       } catch (FileNotFoundException e) {
       }
+    } else{
+      indicador.setGraphic(null);
+      this.actualizarNumeroEnemigos();
     }
   }
 

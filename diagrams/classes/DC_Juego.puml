@@ -44,7 +44,7 @@ class Jugador {
 - agregarCreditosAlMatarEnemigos(enemigos: Enemigo)
 }
 
-Juego <- Inicializador
+Inicializador -> Juego
 Juego "1" --> "0..*" Turno
-Jugador <- Juego
+Juego -> Jugador
 @enduml

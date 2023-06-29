@@ -70,12 +70,12 @@ class Tierra {
 + recibir(l: Lechuza): Coordenadas
 }
 
-Parcela <|-- Pasarela
-Parcela <|-- Rocoso
-Parcela <|-- Tierra
-
 Pasarela <|-- PasarelaLargada
 Pasarela <|-- PasarelaMeta
 Pasarela <|-- PasarelaNormal
+
+Parcela <|-left- Rocoso
+Parcela <|-- Pasarela
+Parcela <|-right- Tierra
 
 @enduml
