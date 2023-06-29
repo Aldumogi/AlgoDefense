@@ -53,6 +53,7 @@ public class Tierra extends Parcela {
 
     public void borrarObjeto(Defensa defensa) {
         this.defensa = null;
+        setChanged();
     }
 
     public Coordenadas obtenerCoordenadas(){
@@ -61,5 +62,9 @@ public class Tierra extends Parcela {
 
     public String obtenerTipo() {
         return this.tipo;
+    }
+
+    public boolean tengoDefensaConstruida(){
+        return this.defensa != null;
     }
 }

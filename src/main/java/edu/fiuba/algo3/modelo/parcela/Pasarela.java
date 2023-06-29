@@ -55,6 +55,7 @@ public abstract class Pasarela extends Parcela {
     }
 
     public void borrarObjeto(Defensa defensa) {
+        setChanged();
     }
 
     public Coordenadas obtenerCoordenadas() {
@@ -75,5 +76,9 @@ public abstract class Pasarela extends Parcela {
         Pasarela other = (Pasarela) obj;
         return (Objects.equals(coordenadas, other.coordenadas));
         }
+    
+    public boolean tengoDefensaConstruida(){
+        return this.trampaArenosa != null;
+    }
     }
 

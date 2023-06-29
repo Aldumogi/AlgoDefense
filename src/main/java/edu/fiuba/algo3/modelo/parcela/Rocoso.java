@@ -55,4 +55,8 @@ public class Rocoso extends Parcela {
     public String obtenerTipo() {
         return this.tipo;
     }
+
+    public boolean tengoDefensaConstruida(){
+        return false;
+    }
 }

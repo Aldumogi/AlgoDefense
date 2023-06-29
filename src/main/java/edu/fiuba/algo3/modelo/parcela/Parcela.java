@@ -22,4 +22,5 @@ public abstract class Parcela extends Observable{
 
     abstract public Coordenadas obtenerCoordenadas();
     abstract public String obtenerTipo();
+    abstract public boolean tengoDefensaConstruida();
 }
