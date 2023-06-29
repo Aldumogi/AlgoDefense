@@ -38,8 +38,8 @@ public class JuegoTest {
    */
     @Test
     public void elJuegoSeCreaAcordeAAmbosJSON() throws FormatoEnemigosInvalidoException, IOException, ParseException, FormatoMapaInvalidoException, NoSePudoBorrarElEnemigoException {
-        String fileMapa = "src/main/test/edu/fiuba/algo3/resources/mapa.json";
-        String fileEnemigos = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
+        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
         List<Enemigo> enemigosEnLaPasarela;
         Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
         inicio.agregarJugador("NombreDelJugador");

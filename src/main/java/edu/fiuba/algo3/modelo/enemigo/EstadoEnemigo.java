@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface EstadoEnemigo {
+    void mover(Enemigo enemigo);
     EstadoEnemigo recibirDanio(int danio, Coordenadas coordenadas) throws ElEnemigoMurioDuranteElAtaqueException, ElEnemigoEstaMuertoException;
     int creditosOtorgados(int creditos);
 
-    void acumular(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo);
+    void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo);
     void agregarIndiceDeEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual);
 
     int obtenerEnergia();

@@ -53,16 +53,12 @@ public class Jugador {
 
 
     public void finalizarTurno(List<Enemigo> enemigos, Mapa mapa){
-        this._actualizarDefensasAlFinalizarTurno(enemigos, mapa);
-        this._agregarCreditosAlMatarEnemigos(enemigos);
-    }
-
-    private void _actualizarDefensasAlFinalizarTurno(List<Enemigo> enemigos, Mapa mapa) {
         List<Defensa> trampasAEliminar = new ArrayList<>();
-        this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas, mapa, trampasAEliminar, defensa.getNombre()) );
+        this.defensas.forEach( defensa -> defensa.pasarTurno(enemigos, this.hormigasAsesinadas, this.defensas, mapa, trampasAEliminar, defensa.getNombre()) );
         for (Defensa trampa: trampasAEliminar) {
             this.defensas.remove(trampa);
         }
+        this._agregarCreditosAlMatarEnemigos(enemigos);
     }
 
     private void _agregarCreditosAlMatarEnemigos(List<Enemigo> enemigos) {
@@ -79,10 +75,9 @@ public class Jugador {
         this.puntosDeVida -= energia;
     }
 
-    public void destruirPrimeraTorre(Mapa mapa) {
-        if( ! this.defensas.isEmpty()){
-            mapa.borrar(this.defensas.get(0));
-            this.defensas.remove(0);
+    public void destruirPrimeraTorre() {
+        if(this.defensas.isEmpty()){
+            defensas.remove(0);
         }
     }
 }

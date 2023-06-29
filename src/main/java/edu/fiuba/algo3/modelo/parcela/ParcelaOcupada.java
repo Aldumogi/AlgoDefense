@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 
 public class ParcelaOcupada implements EstadoParcela {
-    public EstadoParcela construir() throws NoSePudoConstruirException {
+    public EstadoParcela construir(Defensa defensa) throws NoSePudoConstruirException {
         throw new NoSePudoConstruirException();
     }
 }

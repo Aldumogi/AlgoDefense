@@ -2,9 +2,7 @@ package edu.fiuba.algo3.modelo.enemigo;
 
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
-import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
-import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import java.util.ArrayList;
 
@@ -54,16 +52,8 @@ public class Topo extends Enemigo {
         return this.nombre;
     }
 
-    public void realizarAtaque(Jugador jugador, int numeroDeTurno, Mapa mapa) {
-        int danio = _calcularDanioSegunTurno(numeroDeTurno);
-        logger.info( this.nombre + " llega a la meta, produce " + danio + " de daño al jugador" );
-        jugador.restarEnergia( danio );
-    }
     @Override
     public int obtenerDanioCausado (int numeroDeTurno) {
-        return _calcularDanioSegunTurno(numeroDeTurno);
-    }
-    private int _calcularDanioSegunTurno(int numeroDeTurno) {
         int dañoEnTurnoImpar = 5;
         return ( numeroDeTurno % 2 == 0 ) ? this.dañoCausado : dañoEnTurnoImpar;
     }

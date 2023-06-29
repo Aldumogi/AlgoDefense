@@ -5,6 +5,6 @@ import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.defensa.Defensa;
 
 public interface EstadoParcela {
-    EstadoParcela construir() throws NoSePudoConstruirException;
+    EstadoParcela construir(Defensa defensa) throws NoSePudoConstruirException;
 }
 

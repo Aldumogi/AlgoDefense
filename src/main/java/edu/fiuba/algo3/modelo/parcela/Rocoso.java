@@ -11,8 +11,8 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rocoso extends Parcela {
-    public final String tipo = "R";
+public class Rocoso implements Parcela {
+    public final Color color = Color.GREY;
     private List<Enemigo> enemigos;
     private Coordenadas coordenadas;
     private EstadoParcela estado;
@@ -48,11 +48,19 @@ public class Rocoso extends Parcela {
 
     public void borrarObjeto(Defensa defensa) { }
 
+    public Coordenadas devolverCoordenadasMeta() {
+        return null;
+    }
+
+    public Coordenadas devolverCoordenadasLargada() {
+        return null;
+    }
+
     public Coordenadas obtenerCoordenadas() {
         return this.coordenadas;
     }
 
-    public String obtenerTipo() {
-        return this.tipo;
+    public Color obtenerColor() {
+        return this.color;
     }
 }

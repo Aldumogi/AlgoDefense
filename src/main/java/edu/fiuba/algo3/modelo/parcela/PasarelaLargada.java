@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import javafx.scene.paint.Color;
 
 public class PasarelaLargada extends Pasarela {
-    public final String tipo = "PLargada";
+    public final Color color = Color.YELLOW;
     public PasarelaLargada(Coordenadas coordenadas){
         super(coordenadas);
     }
@@ -14,8 +14,12 @@ public class PasarelaLargada extends Pasarela {
     public void construir(TrampaArenosa trampaArenosa) throws NoSePudoConstruirException {
         throw new NoSePudoConstruirException();
     }
+    @Override
+    public Coordenadas devolverCoordenadasLargada() {
+        return this.coordenadas;
+    }
 
-    public String obtenerTipo() {
-        return this.tipo;
+    public Color obtenerColor() {
+        return this.color;
     }
 }
