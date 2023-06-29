@@ -15,6 +15,10 @@ public class VistaDefensa {
   private final HashMap<String, String> imgDefensa = new HashMap<>() {{
         put("Torre Blanca", "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlanca.png");
         put("Torre Blanca const", "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlancaConst.png");
+        put("Torre Plateada", "src/main/java/edu/fiuba/algo3/view/images/defensas/torreNegra.png");
+        put("Torre Plateada const", "src/main/java/edu/fiuba/algo3/view/images/defensas/torreNegraConst.png");
+        put("Trampa arenosa", "src/main/java/edu/fiuba/algo3/view/images/defensas/trampaArenosa.png");
+        put("Trampa arenosa const", "src/main/java/edu/fiuba/algo3/view/images/defensas/trampaArenosaConst.png");
     }};
   
   public VistaDefensa(Defensa defensa) throws FileNotFoundException {

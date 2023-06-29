@@ -5,9 +5,9 @@ import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
 import edu.fiuba.algo3.modelo.juego.Juego;
-import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.parcela.*;
+import edu.fiuba.algo3.view.PanelDeConstruccion;
 import edu.fiuba.algo3.view.VistaParcela;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -16,14 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -44,7 +38,6 @@ public class App extends Application {
     static String ENEMIGOS_RELATIVE_PATH = "src/main/java/edu/fiuba/algo3/resources/enemigos.json"; //"src/main/test/edu/fiuba/algo3/resources/enemigos.json";
     private double medidaCelda = 30;
     private double height = 680, width = 520;
-    private static final String TORRE_BLANCA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlanca.png";
     private Clip backgroundClip;
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -260,27 +253,10 @@ public class App extends Application {
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
 
-        Rectangle torreBlancaRect = new Rectangle(medidaCelda, medidaCelda);
-        torreBlancaRect.setStroke(Color.BLACK);
-        torreBlancaRect.setStrokeWidth(1);
-        InputStream torreBlanca = new FileInputStream(TORRE_BLANCA);
-        Image torreBlancaImg = new Image(torreBlanca);
-        ImagePattern torreBlancaIP = new ImagePattern(torreBlancaImg);
+        PanelDeConstruccion panelDeConstruccion = new PanelDeConstruccion();
+        GridPane panel =  panelDeConstruccion.generarPanel(medidaCelda);
+        gridPane.add(panel, cantidadDeColumnas, cantidadDeFilas/2);
 
-        torreBlancaRect.setFill(torreBlancaIP);
-        gridPane.add(torreBlancaRect, cantidadDeColumnas, cantidadDeFilas - 2);
-
-        torreBlancaRect.setOnMouseClicked(e -> playSound(CLICK_DEFENSE_SOUND_FILE_PATH, 1.1f, null) );
-        torreBlancaRect.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = torreBlancaRect.startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent();
-            content.putString("torre blanca");
-            db.setContent(content);
-            playSound(CLICK_DEFENSE_BUILDING_SOUND_FILE_PATH, 1.1f, null);
-        });
-        torreBlancaRect.setOnMouseDragged((MouseEvent event) -> {
-            event.setDragDetect(true);
-        });
 
         gridPane.add(imageView, cantidadDeColumnas, cantidadDeFilas - 1);
         playBackground(START_GAME_MUSIC_FILE_PATH, 0.4f);
