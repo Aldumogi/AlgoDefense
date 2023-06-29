@@ -11,12 +11,10 @@ import edu.fiuba.algo3.view.VistaParcela;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -30,6 +28,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
 
+import static edu.fiuba.algo3.view.SoundUtils.*;
+
 public class App extends Application {
 
     private Stage primaryStage;
@@ -37,10 +37,6 @@ public class App extends Application {
     static String ENEMIGOS_RELATIVE_PATH = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
     private double medidaCelda = 30;
     private double height = 680, width = 520;
-    private static final String HOME_MUSIC_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/8-Bit_Algo_defense_home_music.wav";
-    private static final String BUTTON_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/swords_clashing.wav";
-    private static final String BUTTON_NEXT_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/Castle-Wood-Door-Sound.wav";
-    private static final String START_GAME_MUSIC_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/8-Bit-Algo-defense-music_start_game.wav";
 
     private Clip backgroundClip;
     @Override
@@ -50,6 +46,9 @@ public class App extends Application {
         primaryStage.setTitle("AlgoDefense");
 
         StackPane root = new StackPane();
+        InputStream iconStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/icon.png");
+        Image icon = new Image(iconStream);
+        primaryStage.getIcons().add(icon);
 
         InputStream imageStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/background_main1.png");
         Image backgroundImage = new Image(imageStream);
@@ -240,36 +239,8 @@ public class App extends Application {
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }
-
-    }
-   private void playSound(String url, float volume, Clip clipBase) {
-       try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(url)))) {
-           Clip clip = AudioSystem.getClip();
-           if (clipBase != null) {
-               clip = clipBase;
-           }
-
-           clip.open(audioInputStream);
-           adjustVolume(clip, volume);
-           clip.start();
-       } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-           e.printStackTrace();
-       }
     }
 
-    private void adjustVolume(Clip clip, float volume) {
-        if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-            gainControl.setValue(dB);
-        }
-    }
-
-    private void stopSound(Clip clip) {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-        }
-    }
     public static void main(String[] args) {
         launch(args);
     }

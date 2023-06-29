@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 
+import static edu.fiuba.algo3.view.SoundUtils.*;
+
 public class VistaEnemigos {
   private int medidaImagen = 30;
   private Stage stage;
@@ -52,6 +54,8 @@ public class VistaEnemigos {
         fila = (columna == 0) ? fila + 1 : fila;
       }
     }
+
+    playSound(BUTTON_OPEN_SOUND_FILE_PATH, 0.7f,null);
     stage.setScene(scene);
   }
 
