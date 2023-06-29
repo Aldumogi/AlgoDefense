@@ -1,0 +1,33 @@
+@startuml
+
+class Mapa {
+- coordenadasLargada: Coordenadas
+- coordenadasMeta: Coordenadas
+- mapaDelJuego: Parcela
++ borrar(d: Defensa)
++ borrar(e: Enemigo)
++ buscarSiguienteCoordenada(nueva: Coordenadas, visitadas: Coordenadas): boolean
++ devolverSiguientePasarela_(actual: Coordenadas): Coordenadas
++ devolverSiguientePasarela(actual: Coordenadas, cantDeMovimientos: double): Coordenadas
++ devolverSiguienteCoordenadaEnLineaRecta(actual: Coordenadas, cantDeMovimientos: double): Coordenadas
++ devolverSiguienteCoordenadaUsandoDiagonalesMasCercanaALaMeta(c: Coordenadas): Coordenadas
++ devolverSiguientesNCoordenadaUsandoDiagonalesMasCercanaALaMeta(actual: Coordenadas, cantDeMovimientos: int): Coordenadas
++ devolverSiguienteCoordenadaEnL(actual: Coordenadas, cantDeMovimientos: int): Coordenadas
++ esPorAca(coordAVerificar: Coordenadas, coordVisitadas: Coordenadas): boolean
++ obtenerCelda(c: Coordenadas): Parcela
++ recibir(c: Coordenadas, e: Enemigo)
++ recibir(t: Torre)
++ recibir(trampa: TrampaArenosa)
+- _buscarCoordenadasLargadaYMeta()
+}
+
+class Coordenadas {
+- fila: int
+- columna: int
++ distanciaEntreCoordenadas(c1: Coordenadas, c2: Coordenadas): int
++ equals(o: Object): boolean
+}
+
+Coordenadas "1..*" <-- "1" Mapa
+
+@enduml

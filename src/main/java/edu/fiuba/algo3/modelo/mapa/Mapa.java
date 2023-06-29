@@ -48,7 +48,6 @@ public class Mapa {
         return this.mapaDelJuego.get(coordenada.obtenerFila()).get(coordenada.obtenerColumna());
     }
 
-    /* En el futuro puede agregar otra cosas si se desea, no solo enemigo */
     public void recibir(Coordenadas coordenadas, Enemigo enemigo) {
         if ( enemigo != null ) {
             try {
@@ -78,7 +77,7 @@ public class Mapa {
         Coordenadas coordenadas = defensa.obtenerCoordenadas();
         this.mapaDelJuego.get(coordenadas.obtenerFila()).get(coordenadas.obtenerColumna()).borrarObjeto(defensa);
     }
-    //recibe una cordenada y chequea, que para ese lado este la meta. 
+    //recibe una coordenada y chequea, que para ese lado este la meta. 
     //Tambien recibe una lista, que contenga la posicion actual del enemigo
 
     public boolean esPorAca(Coordenadas coordenadaAVerificar, List<Coordenadas> coordenadasVisitadas) {
@@ -121,110 +120,110 @@ public class Mapa {
         return false;
     }
 
-    public Coordenadas devolverSiguientePasarela_(Coordenadas cordenadaActual){
+    public Coordenadas devolverSiguientePasarela_(Coordenadas coordenadaActual){
 
-        int fila = cordenadaActual.obtenerFila();
-        int columna = cordenadaActual.obtenerColumna();
-        //Parcela celdaActual = this.obtenerCelda(cordenadaActual);
+        int fila = coordenadaActual.obtenerFila();
+        int columna = coordenadaActual.obtenerColumna();
+        //Parcela celdaActual = this.obtenerCelda(coordenadaActual);
 
         List<Coordenadas> visitados = new ArrayList<>();
-        visitados.add(cordenadaActual);
+        visitados.add(coordenadaActual);
 
         if((columna + 1) <= this.obtenerCantidadDeColumnas() ){
-            Coordenadas posibleCordenada = new Coordenadas(fila, columna +1 );
-            if(this.esPorAca(posibleCordenada, visitados)){
-                return posibleCordenada;
+            Coordenadas posiblecoordenada = new Coordenadas(fila, columna +1 );
+            if(this.esPorAca(posiblecoordenada, visitados)){
+                return posiblecoordenada;
             }
         }
     
 
         if((columna - 1) > 0){
-            Coordenadas posibleCordenada = new Coordenadas(fila, columna - 1);
-            if(this.esPorAca(posibleCordenada, visitados)){
-                return posibleCordenada;
+            Coordenadas posiblecoordenada = new Coordenadas(fila, columna - 1);
+            if(this.esPorAca(posiblecoordenada, visitados)){
+                return posiblecoordenada;
             }
         }
         if((fila - 1) > 0 ){
-            Coordenadas posibleCordenada = new Coordenadas(fila  - 1, columna);
-            if(this.esPorAca(posibleCordenada, visitados)){
-                return posibleCordenada;
+            Coordenadas posiblecoordenada = new Coordenadas(fila  - 1, columna);
+            if(this.esPorAca(posiblecoordenada, visitados)){
+                return posiblecoordenada;
             }
         }
         if((fila +1) <= this.obtenerCantidadDeFilas()){
-            Coordenadas posibleCordenada = new Coordenadas(fila + 1, columna);
-            if(this.esPorAca(posibleCordenada, visitados)){
-                return posibleCordenada;
+            Coordenadas posiblecoordenada = new Coordenadas(fila + 1, columna);
+            if(this.esPorAca(posiblecoordenada, visitados)){
+                return posiblecoordenada;
             }
         }
-        return cordenadaActual;
+        return coordenadaActual;
     }
-    public Coordenadas devolverSiguientePasarela(Coordenadas cordenadaActual, double cantidadDeMovimientos){
+    public Coordenadas devolverSiguientePasarela(Coordenadas coordenadaActual, double cantidadDeMovimientos){
         int cantidadDeMovs = (int) cantidadDeMovimientos;
         for(int i = 0; i < cantidadDeMovs; i ++ ){
-            cordenadaActual = devolverSiguientePasarela_(cordenadaActual);
+            coordenadaActual = devolverSiguientePasarela_(coordenadaActual);
         }
-        return cordenadaActual;
+        return coordenadaActual;
     };
-    public Coordenadas devolverSiguienteCordenadaEnLineaRecta(Coordenadas cordenadaActual, double cantidadDeMovimientos){
+    public Coordenadas devolverSiguienteCoordenadaEnLineaRecta(Coordenadas coordenadaActual, double cantidadDeMovimientos){
         Coordenadas meta = this.getCoordenadasMeta();
         int columnaMeta = meta.obtenerColumna();
         int filaMeta = meta.obtenerFila();
 
         while(cantidadDeMovimientos != 0){
-            if(columnaMeta > cordenadaActual.obtenerColumna()){
-                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila(), cordenadaActual.obtenerColumna() + 1);
-            }else if(columnaMeta < cordenadaActual.obtenerColumna()){
-                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila(), cordenadaActual.obtenerColumna() - 1);   
-            }else if(filaMeta > cordenadaActual.obtenerFila()){
-                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila() + 1, cordenadaActual.obtenerColumna());   
-            }else if(filaMeta < cordenadaActual.obtenerFila()){
-                cordenadaActual = new Coordenadas(cordenadaActual.obtenerFila() - 1, cordenadaActual.obtenerColumna());   
+            if(columnaMeta > coordenadaActual.obtenerColumna()){
+                coordenadaActual = new Coordenadas(coordenadaActual.obtenerFila(), coordenadaActual.obtenerColumna() + 1);
+            }else if(columnaMeta < coordenadaActual.obtenerColumna()){
+                coordenadaActual = new Coordenadas(coordenadaActual.obtenerFila(), coordenadaActual.obtenerColumna() - 1);   
+            }else if(filaMeta > coordenadaActual.obtenerFila()){
+                coordenadaActual = new Coordenadas(coordenadaActual.obtenerFila() + 1, coordenadaActual.obtenerColumna());   
+            }else if(filaMeta < coordenadaActual.obtenerFila()){
+                coordenadaActual = new Coordenadas(coordenadaActual.obtenerFila() - 1, coordenadaActual.obtenerColumna());   
             }
             cantidadDeMovimientos -= 1;
-            if (meta.equals(cordenadaActual)){
-                return cordenadaActual;
+            if (meta.equals(coordenadaActual)){
+                return coordenadaActual;
             }
         }
-        return cordenadaActual;
+        return coordenadaActual;
         
     }
-    public Coordenadas devolverSiguienteCordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas cordenadaActual){
+    public Coordenadas devolverSiguienteCoordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas coordenadaActual){
         Coordenadas meta = this.getCoordenadasMeta();
         int columnaMeta = meta.obtenerColumna();
         int filaMeta = meta.obtenerFila();
-        int filaActual = cordenadaActual.obtenerFila();
-        int columnaActual = cordenadaActual.obtenerColumna();
+        int filaActual = coordenadaActual.obtenerFila();
+        int columnaActual = coordenadaActual.obtenerColumna();
         if (columnaMeta == columnaActual || filaMeta == filaActual){
-            return devolverSiguienteCordenadaEnLineaRecta(cordenadaActual, 1);
+            return devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual, 1);
         }
         if(columnaMeta > columnaActual && filaMeta > filaActual ){
-            cordenadaActual = new Coordenadas(filaActual + 1, columnaActual + 1);
+            coordenadaActual = new Coordenadas(filaActual + 1, columnaActual + 1);
         }else if(columnaMeta < columnaActual && filaMeta < filaActual ){
-            cordenadaActual = new Coordenadas(filaActual - 1, columnaActual - 1); 
+            coordenadaActual = new Coordenadas(filaActual - 1, columnaActual - 1); 
 
         }else if(columnaMeta > columnaActual && filaMeta < filaActual ){
-            cordenadaActual = new Coordenadas(filaActual - 1, columnaActual + 1); 
+            coordenadaActual = new Coordenadas(filaActual - 1, columnaActual + 1); 
         }else if(columnaMeta < columnaActual && filaMeta > filaActual ){
-            cordenadaActual = new Coordenadas(filaActual + 1, columnaActual - 1); 
+            coordenadaActual = new Coordenadas(filaActual + 1, columnaActual - 1); 
         }
-        return cordenadaActual;
+        return coordenadaActual;
     }
 
-    public Coordenadas devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas cordenadaActual, int cantidadDeMovimientos){
+    public Coordenadas devolverSiguientesNCoordenadaUsandoDiagonalesMasCercanaALaMeta(Coordenadas coordenadaActual, int cantidadDeMovimientos){
         for(int i = 0; i < cantidadDeMovimientos; i++){
-            cordenadaActual = devolverSiguienteCordenadaUsandoDiagonalesMasCercanaALaMeta(cordenadaActual);
+            coordenadaActual = devolverSiguienteCoordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual);
         }
-        return cordenadaActual;
+        return coordenadaActual;
     }
 
-    public Coordenadas devolverSiguienteCoordenadaEnL(Coordenadas cordenadaActual, int cantidadDeMovimientos){
+    public Coordenadas devolverSiguienteCoordenadaEnL(Coordenadas coordenadaActual, int cantidadDeMovimientos){
         Coordenadas meta = this.getCoordenadasMeta();
         int columnaMeta = meta.obtenerColumna();
         int filaMeta = meta.obtenerFila();
-        int filaActual = cordenadaActual.obtenerFila();
-        int columnaActual = cordenadaActual.obtenerColumna();
+        int filaActual = coordenadaActual.obtenerFila();
+        int columnaActual = coordenadaActual.obtenerColumna();
         if (columnaMeta == columnaActual || filaMeta == filaActual){
-            return devolverSiguienteCordenadaEnLineaRecta(cordenadaActual, 1);
+            return devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual, 1);
         }
         for(int i = 2; i < 5 ; i ++){
             if(columnaActual < columnaMeta){

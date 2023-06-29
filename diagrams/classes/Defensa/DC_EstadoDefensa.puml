@@ -1,0 +1,25 @@
+@startuml
+interface EstadoDefensa {
++ atacarEnemigos(enemigos, trampa: TrampaArenosa)
++ atacarEnemigos(enemigos, torre: Torre, hormigasAsesinadas)
++ pasarTurno(mensajeAlFinalizarConstruccion): EstadoDefensa
+}
+
+class EnConstruccion {
+- tiempoDeConstruccion: int
++ atacarEnemigos(enemigos, trampa: TrampaArenosa)
++ atacarEnemigos(enemigos, torre: Torre, hormigasAsesinadas)
++ pasarTurno(mensajeAlFinalizarConstruccion): EstadoDefensa
+}
+
+class Terminada {
+- tiempoDeConstruccion: int
++ atacarEnemigos(enemigos, trampa: TrampaArenosa)
++ atacarEnemigos(enemigos, torre: Torre, hormigasAsesinadas)
++ pasarTurno(mensajeAlFinalizarConstruccion): EstadoDefensa
+}
+
+
+EstadoDefensa <|.. EnConstruccion
+EstadoDefensa <|.. Terminada
+@enduml

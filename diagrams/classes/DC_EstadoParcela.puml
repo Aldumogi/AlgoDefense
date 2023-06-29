@@ -1,14 +1,14 @@
 @startuml
 interface EstadoParcela {
-+ construir(D: Defensa, T: tierra): EstadoParcela
++ construir(): EstadoParcela
 }
 
 class ParcelaOcupada {
-+ construir(D: Defensa, T: tierra): EstadoParcela
++ construir(): EstadoParcela
 }
 
 class ParcelaDisponible {
-+ construir(D: Defensa, T: tierra): EstadoParcela
++ construir(): EstadoParcela
 }
 
 EstadoParcela <|.. ParcelaOcupada
