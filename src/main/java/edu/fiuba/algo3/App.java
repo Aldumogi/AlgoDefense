@@ -240,13 +240,15 @@ public class App extends Application {
                 gridPane.add(vista, columna - 1, fila - 1);
             }
         }
-
+        Label turnoLabel = new Label("TURNO:" +  partida.obtenerJuego().obtenerNumeroDeturno());
         Label nameLabel = new Label("Nombre:" +  partida.obtenerJuego().obtenerJugador().obtenerNombre());
         Label scoreValueLabel = new Label("Vida: "+ partida.obtenerJuego().obtenerJugador().obtenerPuntosDeVida());
         Label creditosLabel = new Label("Creditos:" +  partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos());
+        turnoLabel.setTranslateX(5);
         nameLabel.setTranslateX(5);
         scoreValueLabel.setTranslateX(5);
         creditosLabel.setTranslateX(5);
+        gridPane.add(turnoLabel, cantidadDeColumnas, 0);
         gridPane.add(nameLabel, cantidadDeColumnas, 2);
         gridPane.add(scoreValueLabel, cantidadDeColumnas, 3);
         gridPane.add(creditosLabel, cantidadDeColumnas, 4);
@@ -274,9 +276,9 @@ public class App extends Application {
                 root.getChildren().add(imageViewEndGame);
                 root.setDisable(true);
             }
+            turnoLabel.setText("TURNO:" +  partida.obtenerJuego().obtenerNumeroDeturno());
             scoreValueLabel.setText("Vida: "+ partida.obtenerJuego().obtenerJugador().obtenerPuntosDeVida());
             creditosLabel.setText("Creditos: " +  partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos());
-
         });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
@@ -292,14 +294,23 @@ public class App extends Application {
         torreBlancaRect.setFill(torreBlancaIP);
         gridPane.add(torreBlancaRect, cantidadDeColumnas, cantidadDeFilas - 2);
 
-        torreBlancaRect.setOnMouseClicked(e -> playSound(CLICK_DEFENSE_SOUND_FILE_PATH, 1.1f, null) );
+        torreBlancaRect.setOnMouseClicked(e -> {
+            playSound(CLICK_DEFENSE_SOUND_FILE_PATH, 1.1f, null);
+        } );
         torreBlancaRect.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = torreBlancaRect.startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent();
-            content.putString("torre blanca");
-            db.setContent(content);
-            playSound(CLICK_DEFENSE_BUILDING_SOUND_FILE_PATH, 1.1f, null);
+
+            if((partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos() - 10) < 0 ) {
+                playSound(CLICK_DEFENSE_DENIED_SOUND_FILE_PATH, 1.1f, null);
+            }else{
+                Dragboard db = torreBlancaRect.startDragAndDrop(TransferMode.ANY);
+                ClipboardContent content = new ClipboardContent();
+                content.putString("torre blanca");
+                db.setContent(content);
+                playSound(CLICK_DEFENSE_BUILDING_SOUND_FILE_PATH, 1.1f, null);
+            }
+            creditosLabel.setText("Creditos: " + ((partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos() - 10) <= 0 ? 0: (partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos() - 10)));
         });
+
         torreBlancaRect.setOnMouseDragged((MouseEvent event) -> {
             event.setDragDetect(true);
         });
