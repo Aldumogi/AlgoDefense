@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
 import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.parcela.*;
 import edu.fiuba.algo3.view.VistaParcela;
@@ -15,8 +16,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -37,7 +44,7 @@ public class App extends Application {
     static String ENEMIGOS_RELATIVE_PATH = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
     private double medidaCelda = 30;
     private double height = 680, width = 520;
-
+    private static final String TORRE_BLANCA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlanca.png";
     private Clip backgroundClip;
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
@@ -182,7 +189,11 @@ public class App extends Application {
         imageView.setTranslateY(60);
         imageView.setOnMouseClicked(e -> {
             playSound(BUTTON_SOUND_FILE_PATH, 1.1f, null);
-            mostrarPantallaConMapa(partida);
+            try {
+                mostrarPantallaConMapa(partida);
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
         });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
@@ -194,8 +205,25 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    private void mostrarPantallaConMapa(Inicializador partida) {
-        GridPane root = new GridPane();
+    private void mostrarPantallaConMapa(Inicializador partida) throws FileNotFoundException {
+
+        StackPane root = new StackPane();
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        root.getChildren().add(gridPane);
+
+        InputStream imageStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/background_playing.png");
+        Image backgroundImage = new Image(imageStream);
+        BackgroundImage background = new BackgroundImage(
+                backgroundImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+        );
+        root.setBackground(new Background(background));
+        root.setPadding(new Insets(20));
+
         Scene scene = new Scene(root, height, width);
 
         int cantidadDeFilas = partida.obtenerJuego().obtenerMapa().obtenerCantidadDeFilas();
@@ -207,25 +235,52 @@ public class App extends Application {
         for(int fila = 1; fila <= cantidadDeFilas; fila++) {
             for(int columna = 1; columna <= cantidadDeColumnas; columna++) {
                 Parcela parcela = partida.obtenerJuego().obtenerMapa().obtenerCelda(new Coordenadas(fila, columna));
-                VistaParcela vista = new VistaParcela(parcela, medidaCelda);
+                VistaParcela vista = new VistaParcela(parcela, medidaCelda, juego, juegoController);
                 juegoController.agregarObservable(parcela, vista);
-                root.add(vista, columna - 1, fila - 1);
+                gridPane.add(vista, columna - 1, fila - 1);
             }
         }
 
-        double offsetX = (scene.getWidth() - (cantidadDeColumnas * medidaCelda)) / 2;
-        double offsetY = (scene.getHeight() - (cantidadDeFilas * medidaCelda)) / 2;
+        InputStream imgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/next_round.png");
+        Image imgButton = new Image(imgBtnStream);
 
-        root.setTranslateX(offsetX);
-        root.setTranslateY(offsetY);
+        InputStream hoverImgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/next_round_hover.png");
+        Image hoverImgButton = new Image(hoverImgBtnStream);
 
-        Button avanzarTurno = new Button("Avanzar Turno");
-        avanzarTurno.setOnAction(e -> {
+        ImageView imageView = new ImageView(imgButton);
+        imageView.setFitWidth(110);
+        imageView.setFitHeight(30);
+        imageView.setTranslateX(5);
+        imageView.setOnMouseClicked(e -> {
             playSound(BUTTON_NEXT_SOUND_FILE_PATH, 0.5f, null);
             juegoController.avanzarTurno();
         });
+        imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
+        imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
 
-        root.add(avanzarTurno, cantidadDeColumnas, cantidadDeFilas - 1);
+        Rectangle torreBlancaRect = new Rectangle(medidaCelda, medidaCelda);
+        torreBlancaRect.setStroke(Color.BLACK);
+        torreBlancaRect.setStrokeWidth(1);
+        InputStream torreBlanca = new FileInputStream(TORRE_BLANCA);
+        Image torreBlancaImg = new Image(torreBlanca);
+        ImagePattern torreBlancaIP = new ImagePattern(torreBlancaImg);
+
+        torreBlancaRect.setFill(torreBlancaIP);
+        gridPane.add(torreBlancaRect, cantidadDeColumnas, cantidadDeFilas - 2);
+
+        torreBlancaRect.setOnMouseClicked(e -> playSound(CLICK_DEFENSE_SOUND_FILE_PATH, 1.1f, null) );
+        torreBlancaRect.setOnDragDetected((MouseEvent event) -> {
+            Dragboard db = torreBlancaRect.startDragAndDrop(TransferMode.ANY);
+            ClipboardContent content = new ClipboardContent();
+            content.putString("torre blanca");
+            db.setContent(content);
+            playSound(CLICK_DEFENSE_BUILDING_SOUND_FILE_PATH, 1.1f, null);
+        });
+        torreBlancaRect.setOnMouseDragged((MouseEvent event) -> {
+            event.setDragDetect(true);
+        });
+
+        gridPane.add(imageView, cantidadDeColumnas, cantidadDeFilas - 1);
         playBackground(START_GAME_MUSIC_FILE_PATH, 0.4f);
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -10,16 +10,18 @@ import java.util.Observable;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface Defensa {
-    void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
+abstract public class Defensa extends Observable {
+    abstract public void construir(Mapa mapa, Coordenadas coordenadas) throws NoSePudoConstruirException;
 
-    int costo();
+    abstract public int costo();
 
-    EstadoDefensa estadoDefensa();
+    abstract public EstadoDefensa estadoDefensa();
 
-    void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre);
+    abstract public void pasarTurno(List<Enemigo> enemigos, ArrayList<Hormiga> hormigasAsesinadas, Mapa mapa, List<Defensa> trampasAEliminar, String nombre);
 
-    String getNombre();
+    abstract public String getNombre();
 
-    Coordenadas obtenerCoordenadas();
+    abstract public Coordenadas obtenerCoordenadas();
+
+    abstract public boolean enConstruccion();
 }

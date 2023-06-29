@@ -11,6 +11,8 @@ public class SoundUtils {
     public static final String BUTTON_NEXT_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/Castle-Wood-Door-Sound.wav";
     public static final String BUTTON_OPEN_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/opening.wav";
     public static final String BUTTON_CLOSE_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/close.wav";
+    public static final String CLICK_DEFENSE_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/hammer.wav";
+    public static final String CLICK_DEFENSE_BUILDING_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/building.wav";
     public static final String START_GAME_MUSIC_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/8-Bit-Algo-defense-music_start_game.wav";
 
     public static void playSound(String url, float volume, Clip clipBase) {
