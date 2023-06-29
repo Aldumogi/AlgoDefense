@@ -233,9 +233,28 @@ public class App extends Application {
             playSound(BUTTON_SOUND_FILE_PATH, 1.1f, null);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.getDialogPane().setMinWidth(500);
-            alert.setTitle("Como Juagar");
+            alert.setTitle("Como Jugar");
             alert.setHeaderText("Instrucciones de AlgoDefense");
-            alert.setContentText("- Para construir defensas arrastrar la defensa deseada desde el panel de la derecha hacia la parcela donde la queremos construir. La construccion de defensas consume creditos del jugador.\n\n- Para pasar de turno presionar el bóton \"Avanzar Turno\".\n\n- Los enemigos se desplegarán desde la parcela de largada y se dirigirán hacia la parcela de llegada. Cada vez que un enemigo llegue a la parcela de llegada, la energia del jugador disminuirá una cantidad que dependerá del enemigo.\n\n- Los numeros en las parcelas representa la cantidad de enemigos que estan actualmente en ella. Al hacer click en ella, podemos ver el detalle de los enemigos.\n\n- Los enemigos se desplazan por las parcelas excepto la lechuza.\n\n- Los topos no se pueden matar porque se desplazan por debajo de la tierra.\n\n- La lechuza al llegar a la parcela meta destruye una torre.");
+            alert.setContentText("- Colores de las parcelas:\n" +
+                    "\tAmarillo: Pasarela\n" +
+                    "\tMarrón: Tierra\n" +
+                    "\tGris: Rocoso\n" +
+                    "\tNaranja: Largada\n" +
+                    "\tVerde: Meta\n" +
+                    "\n" +
+                    "- Los enemigos aparecen en la parcela de Largada, y se movilizan hasta la meta. Al llegar a la misma generán un daño al jugador, menos la lechuza quien elimina la primer Torre construida por el jugador. \n" +
+                    "\n" +
+                    "- Los enemigos se desplazan por las pasarelas. La lechuza se puede desplazar por cualquier parcela, y se mueve en forma de 'L'. \n" +
+                    "\n" +
+                    "- Para ver cuantos enemigos se encuentran en una parcela hacer click sobre ella y se desplegará una lista con los mismos. \n" +
+                    "\n" +
+                    "- Para colocar defensas en el mapa, seleccionelas y desplacelas a la parcela donde quiera construirlas. \n" +
+                    "\n" +
+                    "- Para pasar de turno presionar el bóton \"Avanzar Turno\".\n" +
+                    "\n" +
+                    "- Todos los enemigos son atacados al avanzar el turno, menos el topo debido a que se desplaza bajo tierra.\n" +
+                    "\n" +
+                    "- Las defensas poseen un costo de construcción, el cual se encuentra presente bajo el símbolo de la misma. \n");
             alert.showAndWait();
         });
         imageViewHowToPlay.setOnMouseEntered(e -> imageViewHowToPlay.setImage(hoverimageHowToPlay));
