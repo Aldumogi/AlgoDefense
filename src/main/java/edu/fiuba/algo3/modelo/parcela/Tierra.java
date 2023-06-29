@@ -12,12 +12,12 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tierra implements Parcela {
+public class Tierra extends Parcela {
     private Coordenadas coordenadas;
     private List<Enemigo> enemigos;
     private EstadoParcela estado;
     protected Defensa defensa;
-    public final Color color = Color.BROWN;
+    public final String tipo = "T";
 
     public Tierra(Coordenadas coordenadas){
         this.estado = new ParcelaDisponible();
@@ -26,7 +26,7 @@ public class Tierra implements Parcela {
     }
 
     public void construir(Torre torre) throws NoSePudoConstruirException {
-        this.estado = this.estado.construir(torre);
+        this.estado = this.estado.construir();
         this.defensa = torre;
     }
 
@@ -55,19 +55,11 @@ public class Tierra implements Parcela {
         this.defensa = null;
     }
 
-    public Coordenadas devolverCoordenadasMeta() {
-        return null;
-    }
-
-    public Coordenadas devolverCoordenadasLargada() {
-        return null;
-    }
-
     public Coordenadas obtenerCoordenadas(){
         return this.coordenadas;
     }
 
-    public Color obtenerColor() {
-        return this.color;
+    public String obtenerTipo() {
+        return this.tipo;
     }
 }

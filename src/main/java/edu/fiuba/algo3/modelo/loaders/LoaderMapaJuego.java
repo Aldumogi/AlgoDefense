@@ -1,13 +1,14 @@
 package edu.fiuba.algo3.modelo.loaders;
 
-import edu.fiuba.algo3.modelo.Fabrica;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
+import edu.fiuba.algo3.modelo.fabrica.FabricaDeParcelas;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.utils.JsonValidator;
 import edu.fiuba.algo3.modelo.parcela.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.testng.annotations.Factory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,13 +33,14 @@ public class LoaderMapaJuego {
         for (String fila : mapaDelArchivo.keySet()) {
             ArrayList<String> columnas = mapaDelArchivo.get(fila);
             HashMap<Integer, Parcela> parcelaHashMap = new HashMap<>();
+            FabricaDeParcelas fabrica = new FabricaDeParcelas();
 
             for (int indice = 0; indice < columnas.size(); indice++) {
                 // Sumo 1 por la diferencia entre el indice del Array y la primer coordenada de columna
                 int columna = indice + 1;
                 String nombreParcela = columnas.get(indice);
                 Coordenadas coordenada = new Coordenadas(Integer.parseInt(fila), columna);
-                Parcela parcela = Fabrica.crearParcela(nombreParcela, coordenada);
+                Parcela parcela = fabrica.crearParcela(nombreParcela, coordenada);
                 parcelaHashMap.put(columna, parcela);
             }
             mapa.put(Integer.parseInt(fila), parcelaHashMap);

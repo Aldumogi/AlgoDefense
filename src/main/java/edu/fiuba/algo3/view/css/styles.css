@@ -1,0 +1,20 @@
+/* styles.css */
+.my-dialog-pane {
+    -fx-background-color: #8A33FF;
+    -fx-font-size: 20px;
+}
+
+.my-text-field {
+    -fx-font-size: 40px;
+    -fx-text-fill: white;
+}
+
+.my-cancel-button {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.my-ok-button {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}

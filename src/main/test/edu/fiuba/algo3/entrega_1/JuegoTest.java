@@ -63,6 +63,7 @@ public class JuegoTest {
     public void caso11() throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException, FueraDeRangoException, DefensaEnConstruccionException, NoSePudoConstruirException, IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
         String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
         Inicializador inicio = new Inicializador(fileMapa);
+        ArrayList<Hormiga> hormigasAsesinadas = new ArrayList<>();
 
         inicio.agregarJugador("Alberto");
         Juego juego = inicio.obtenerJuego();
@@ -83,11 +84,11 @@ public class JuegoTest {
         juego.agregarEnemigo(enemigo);
 
         try {
-            torrePlateada.atacarEnemigo(enemigo);
-            torrePlateada.atacarEnemigo(enemigo1);
-            torrePlateada.atacarEnemigo(enemigo2);
-            torrePlateada.atacarEnemigo(enemigo3);
-            torrePlateada.atacarEnemigo(enemigo4);
+            torrePlateada.atacarEnemigo(enemigo, hormigasAsesinadas);
+            torrePlateada.atacarEnemigo(enemigo1, hormigasAsesinadas);
+            torrePlateada.atacarEnemigo(enemigo2, hormigasAsesinadas);
+            torrePlateada.atacarEnemigo(enemigo3, hormigasAsesinadas);
+            torrePlateada.atacarEnemigo(enemigo4, hormigasAsesinadas);
         }
         catch(ElEnemigoMurioDuranteElAtaqueException e) {}
 
@@ -107,8 +108,8 @@ public class JuegoTest {
 
     @Test
     public void caso12() throws IOException, ParseException, FormatoMapaInvalidoException, FormatoEnemigosInvalidoException {
-        String fileMapa = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-        String fileEnemigos = "src/main/java/edu/fiuba/algo3/resources/enemigos.json";
+        String fileMapa = "src/main/test/edu/fiuba/algo3/resources/mapa.json";
+        String fileEnemigos = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
         Inicializador inicio = new Inicializador(fileEnemigos, fileMapa);
 
         inicio.agregarJugador("Alberto");

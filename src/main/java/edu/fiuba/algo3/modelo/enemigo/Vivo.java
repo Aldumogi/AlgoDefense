@@ -31,8 +31,7 @@ public class Vivo implements EstadoEnemigo {
         return 0;
     }
     public int obtenerEnergia() { return this.energia; }
-    public void mover(Enemigo enemigo) {}
-    public void acumularHormigasMuertas(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo) {}
+    public void acumular(ArrayList<Hormiga> hormigasMuertas, Hormiga enemigo) {}
     public void agregarIndiceDeEnemigoMuerto(List<Integer> enemigosMuertos, int enemigo) {}
 
     @Override

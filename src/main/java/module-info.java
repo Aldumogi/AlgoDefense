@@ -8,6 +8,7 @@ module edu.fiuba.algo3 {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.dataformat.yaml;
     requires org.apache.logging.log4j.core;
+    requires java.desktop;
     exports edu.fiuba.algo3;
     exports edu.fiuba.algo3.modelo.defensa;
     exports edu.fiuba.algo3.modelo.enemigo;
@@ -17,4 +18,5 @@ module edu.fiuba.algo3 {
     exports edu.fiuba.algo3.modelo.utils;
     exports edu.fiuba.algo3.modelo.loaders;
     exports edu.fiuba.algo3.modelo;
+    exports edu.fiuba.algo3.modelo.fabrica;
 }

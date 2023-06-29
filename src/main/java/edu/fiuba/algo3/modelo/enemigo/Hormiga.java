@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
+import edu.fiuba.algo3.modelo.mapa.Mapa;
 
 import java.util.ArrayList;
 
@@ -26,10 +28,15 @@ public class Hormiga extends Enemigo {
     }
 
     public void acumularMuertos(ArrayList<Hormiga> hormigasMuertas) {
-        this.estado.acumularHormigasMuertas(hormigasMuertas, this);
+        this.estado.acumular(hormigasMuertas, this);
     }
 
     protected void _actualizarVelocidadSegunCantidadDeMovimientos() {  }
+
+    public void realizarAtaque(Jugador jugador, int numeroDeTurno, Mapa mapa) {
+        logger.info( this.nombre + " llega a la meta, produce " + this.dañoCausado + " de daño al jugador" );
+        jugador.restarEnergia( this.dañoCausado );
+    }
 
     @Override
     public boolean equals(Object e2) {
