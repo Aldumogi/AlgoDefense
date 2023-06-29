@@ -247,6 +247,9 @@ public class App extends Application {
         InputStream hoverImgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/next_round_hover.png");
         Image hoverImgButton = new Image(hoverImgBtnStream);
 
+        InputStream imgEndGameStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/game_over.png");
+        Image imgEndGame = new Image(imgEndGameStream);
+
         ImageView imageView = new ImageView(imgButton);
         imageView.setFitWidth(110);
         imageView.setFitHeight(30);
@@ -255,10 +258,15 @@ public class App extends Application {
             playSound(BUTTON_NEXT_SOUND_FILE_PATH, 0.5f, null);
             if(!juegoController.avanzarTurno()){
                 mostrarDialogFinDeJuego(partida);
+
+                ImageView imageViewEndGame = new ImageView(imgEndGame);
+                root.getChildren().add(imageViewEndGame);
+                root.setDisable(true);
             }
         });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
+        gridPane.add(imageView, cantidadDeColumnas, cantidadDeFilas - 1);
 
         Rectangle torreBlancaRect = new Rectangle(medidaCelda, medidaCelda);
         torreBlancaRect.setStroke(Color.BLACK);
@@ -282,7 +290,6 @@ public class App extends Application {
             event.setDragDetect(true);
         });
 
-        gridPane.add(imageView, cantidadDeColumnas, cantidadDeFilas - 1);
         playBackground(START_GAME_MUSIC_FILE_PATH, 0.4f);
         primaryStage.setScene(scene);
         primaryStage.show();
