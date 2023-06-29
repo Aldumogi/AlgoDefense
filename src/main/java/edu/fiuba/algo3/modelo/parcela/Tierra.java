@@ -50,6 +50,7 @@ public class Tierra extends Parcela {
 
     public void borrarObjeto(Enemigo enemigo) throws NoSePudoBorrarElEnemigoException {
         this.enemigos.remove(enemigo);
+        setChanged();
     }
 
     public void borrarObjeto(Defensa defensa) {
