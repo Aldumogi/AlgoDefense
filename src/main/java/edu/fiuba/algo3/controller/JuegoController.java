@@ -24,10 +24,11 @@ public class JuegoController {
     observables.add(observable);
   }
 
-  public void avanzarTurno(){
+  public boolean avanzarTurno(){
     juego.avanzarTurno();
     for(Pair<Observable, Observer> obs : observables){
       obs.getKey().notifyObservers(obs.getValue());
     }
+    return (juego.juegoTerminado())? false: true;
   }
 }

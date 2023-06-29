@@ -32,9 +32,10 @@ public class LoaderEnemigosJuego {
             JSONObject enemigos = (JSONObject) jsonObject.get("enemigos");
             Integer cantidadHormigas = Integer.parseInt(enemigos.get("hormiga").toString());
             Integer cantidadAranas = Integer.parseInt(enemigos.get("arana").toString());
-
+            Integer cantidadTopo = Integer.parseInt(enemigos.get("topo").toString());
+            Integer cantidadLechuza = Integer.parseInt(enemigos.get("lechuza").toString());
             Turno turno = new Turno (turnoId);
-            turno.agregarEnemigos(cantidadHormigas, cantidadAranas, coordenadasLargada);
+            turno.agregarEnemigos(cantidadHormigas, cantidadAranas, cantidadTopo, cantidadLechuza, coordenadasLargada);
             turnos.add(turno);
         }
 

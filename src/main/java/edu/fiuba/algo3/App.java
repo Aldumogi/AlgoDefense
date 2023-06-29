@@ -41,7 +41,7 @@ public class App extends Application {
 
     private Stage primaryStage;
     static String MAP_RELATIVE_PATH = "src/main/java/edu/fiuba/algo3/resources/mapa.json";
-    static String ENEMIGOS_RELATIVE_PATH = "src/main/test/edu/fiuba/algo3/resources/enemigos.json";
+    static String ENEMIGOS_RELATIVE_PATH = "src/main/java/edu/fiuba/algo3/resources/enemigos.json"; //"src/main/test/edu/fiuba/algo3/resources/enemigos.json";
     private double medidaCelda = 30;
     private double height = 680, width = 520;
     private static final String TORRE_BLANCA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlanca.png";
@@ -253,7 +253,9 @@ public class App extends Application {
         imageView.setTranslateX(5);
         imageView.setOnMouseClicked(e -> {
             playSound(BUTTON_NEXT_SOUND_FILE_PATH, 0.5f, null);
-            juegoController.avanzarTurno();
+            if(!juegoController.avanzarTurno()){
+                mostrarDialogFinDeJuego(partida);
+            }
         });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
@@ -285,7 +287,19 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
+    private void mostrarDialogFinDeJuego(Inicializador partida){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(partida.obtenerJuego().juegoTerminado() && partida.obtenerJuego().obtenerJugador().estaVivo()) {
+            alert.setTitle("GANASTE LA PARTIDA!");
+            alert.setHeaderText(null);
+            alert.setContentText("GANASTE!");
+        } else if(partida.obtenerJuego().juegoTerminado() && !partida.obtenerJuego().obtenerJugador().estaVivo() ){
+            alert.setTitle("PERDISTE LA PARTIDA!");
+            alert.setHeaderText(null);
+            alert.setContentText("Game over");
+        }
+        alert.showAndWait();
+    }
     private void playBackground(String url, float volume) {
         try {
             stopSound(backgroundClip);
