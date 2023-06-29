@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract Enemigo {
+# cantidadDeMovimientosRealizados: int
+# coeficienteDeRalentizacion: double
+# coordenadas: Coordenadas
+# creditosOtorgados: int
+# dañoCausado: int
+# estado: EstadoEnemigo
+# velocidad: int
++ acumularMuertos(hormigasMuertas: Hormiga)
++ agregarIndiceDelEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
++ cantidadCreditosOtorgados(): int
++ mover(m: Mapa)
++ realizarAtaque(j: Jugador, numeroDeTurno: int, m: Mapa)
++ recibirDaño(daño: int)
++ recibirRalentizacion(coeficienteDeRalentizacion: double)
+- actualizarVelocidadSegunCantidadDeMovimientos()
+- restaurarVelocidadNormal()
+}
+
+class Hormiga {
++ {static} nombre
++ acumularMuertos(hormigasMuertas: Hormiga)
++ cantidadCreditosOtorgados(): int
++ equals(o: Object)
++ realizarAtaque(j: Jugador, numeroDeTurno: int, m: Mapa)
+- actualizarVelocidadSegunCantidadDeMovimientos()
+}
+
+class Araña {
++ {static} nombre
++ acumularMuertos(hormigasMuertas: Hormiga)
++ cantidadCreditosOtorgados(): int
++ equals(o: Object)
++ realizarAtaque(j: Jugador, numeroDeTurno: int, m: Mapa)
+- actualizarVelocidadSegunCantidadDeMovimientos()
+}
+
+class Lechuza{
++ {static} nombre
++ acumularMuertos(hormigasMuertas: Hormiga)
++ cantidadCreditosOtorgados(): int
++ equals(o: Object)
++ mover(m: Mapa)
++ realizarAtaque(j: Jugador, numeroDeTurno: int, m: Mapa)
+- actualizarVelocidadSegunCantidadDeMovimientos()
+}
+
+class Topo {
++ {static} nombre
++ acumularMuertos(hormigasMuertas: Hormiga)
++ cantidadCreditosOtorgados(): int
++ equals(o: Object)
++ realizarAtaque(j: Jugador, numeroDeTurno: int, m: Mapa)
+- actualizarVelocidadSegunCantidadDeMovimientos()
+- calcularDanioSegunTurno(numeroDeTurno: int): int
+}
+
+Enemigo <|-- Hormiga
+
+Enemigo <|- Araña
+
+Enemigo <|-- Lechuza
+Enemigo <|-- Topo
+
+@enduml

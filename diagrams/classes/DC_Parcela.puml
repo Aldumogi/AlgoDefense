@@ -1,0 +1,81 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract Parcela {
++ borrarObjeto(d: Defensa)
++ borrarObjeto(e: Enemigo)
++ construir(t: Torre)
++ construir(t: TrampaArenosa)
++ recibir(e: Enemigo): Coordenadas
++ recibir(l: Lechuza): Coordenadas
+}
+
+abstract Pasarela {
+# coordenadas: Coordenadas
+# estado: EstadoParcela
+# enemigos: Enemigo
+# trampaArenosa: TrampaArenosa
++ {static} tipo: String
++ borrarObjeto(d: Defensa)
++ borrarObjeto(e: Enemigo)
++ construir(t: Torre)
++ construir(t: TrampaArenosa)
++ equals(o: Object): boolean
++ recibir(e: Enemigo): Coordenadas
++ recibir(l: Lechuza): Coordenadas
+}
+
+class PasarelaLargada {
++ {static} tipo: String
++ construir(TrampaArenosa trampaArenosa)
+}
+
+class PasarelaMeta{
++ {static} tipo: String
++ construir(TrampaArenosa trampaArenosa)
+}
+
+class PasarelaNormal{
++ {static} tipo: String
++ borrarObjeto(d: Defensa)
++ construir(TrampaArenosa trampaArenosa)
+}
+
+class Rocoso {
+- coordenadas: Coordenadas
+- enemigos: Enemigo
+- estado: EstadoParcela
++ {static} tipo
++ borrarObjeto(d: Defensa)
++ borrarObjeto(e: Enemigo)
++ construir(t: Torre)
++ construir(t: TrampaArenosa)
++ equals(o: Object): boolean
++ recibir(e: Enemigo): Coordenadas
++ recibir(l: Lechuza): Coordenadas
+}
+
+class Tierra {
+- coordenadas: Coordenadas
+- defensa: Defensa
+- enemigos: Enemigo
+- estado: EstadoParcela
++ {static} tipo
++ borrarObjeto(d: Defensa)
++ borrarObjeto(e: Enemigo)
++ construir(t: Torre)
++ construir(t: TrampaArenosa)
++ equals(o: Object): boolean
++ recibir(e: Enemigo): Coordenadas
++ recibir(l: Lechuza): Coordenadas
+}
+
+Parcela <|-- Pasarela
+Parcela <|-- Rocoso
+Parcela <|-- Tierra
+
+Pasarela <|-- PasarelaLargada
+Pasarela <|-- PasarelaMeta
+Pasarela <|-- PasarelaNormal
+
+@enduml
