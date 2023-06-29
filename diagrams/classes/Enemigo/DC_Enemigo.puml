@@ -60,9 +60,9 @@ class Topo {
 
 Enemigo <|-- Hormiga
 
-Enemigo <|- Araña
+Enemigo <|--- Araña
 
-Enemigo <|-- Lechuza
+Enemigo <|--- Lechuza
 Enemigo <|-- Topo
 
 @enduml
