@@ -258,8 +258,9 @@ public class App extends Application {
             playSound(BUTTON_NEXT_SOUND_FILE_PATH, 0.5f, null);
             if(!juegoController.avanzarTurno()){
                 mostrarDialogFinDeJuego(partida);
-
                 ImageView imageViewEndGame = new ImageView(imgEndGame);
+                imageViewEndGame.setFitWidth(200);
+                imageViewEndGame.setFitHeight(75);
                 root.getChildren().add(imageViewEndGame);
                 root.setDisable(true);
             }
