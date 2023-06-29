@@ -147,7 +147,7 @@ public class MapaTest {
         Coordenadas coordenadaActual = new Coordenadas(1, 2);
         Coordenadas cordenadaEsperada = new Coordenadas(1, 7);
 
-        Coordenadas ATestear = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual, 5);
+        Coordenadas ATestear = unMapa.devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual, 5);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
     @Test
@@ -158,31 +158,31 @@ public class MapaTest {
         Coordenadas coordenadaActual1 = new Coordenadas(1, 2);
         Coordenadas cordenadaEsperada1 = new Coordenadas(1, 7);
 
-        Coordenadas ATestear = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual1, 5);
+        Coordenadas ATestear = unMapa.devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual1, 5);
         assertTrue(ATestear.equals(cordenadaEsperada1));
         //SegundoMovimiento
         Coordenadas coordenadaActual2 = new Coordenadas(1, 7);
         Coordenadas cordenadaEsperada2 = new Coordenadas(1, 12);
 
-        Coordenadas ATestear2 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual2, 5);
+        Coordenadas ATestear2 = unMapa.devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual2, 5);
         assertTrue(ATestear2.equals(cordenadaEsperada2));
         //tercerMovimiento
         Coordenadas coordenadaActual3 = new Coordenadas(1, 12);
         Coordenadas cordenadaEsperada3 = new Coordenadas(3, 15);
 
-        Coordenadas ATestear3 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual3, 5);
+        Coordenadas ATestear3 = unMapa.devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual3, 5);
         assertTrue(ATestear3.equals(cordenadaEsperada3));
         //cuartoMovimiento-
         Coordenadas coordenadaActual4 = new Coordenadas(3, 15);
         Coordenadas cordenadaEsperada4 = new Coordenadas(8, 15);
 
-        Coordenadas ATestear4 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual4, 5);
+        Coordenadas ATestear4 = unMapa.devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual4, 5);
         assertTrue(ATestear4.equals(cordenadaEsperada4));
         //quintoMovimiento - Llega A Meta
         Coordenadas coordenadaActual5 = new Coordenadas(8, 15);
         Coordenadas cordenadaEsperada5 = new Coordenadas(11, 15);
 
-        Coordenadas ATestear5 = unMapa.devolverSiguienteCordenadaEnLineaRecta(coordenadaActual5, 5);
+        Coordenadas ATestear5 = unMapa.devolverSiguienteCoordenadaEnLineaRecta(coordenadaActual5, 5);
         assertTrue(ATestear5.equals(cordenadaEsperada5));
     }
     @Test
@@ -192,7 +192,7 @@ public class MapaTest {
         Coordenadas coordenadaActual = new Coordenadas(1, 2);
         Coordenadas cordenadaEsperada = new Coordenadas(2, 3);
 
-        Coordenadas ATestear = unMapa.devolverSiguienteCordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual);
+        Coordenadas ATestear = unMapa.devolverSiguienteCoordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }   
     @Test
@@ -202,7 +202,7 @@ public class MapaTest {
         Coordenadas coordenadaActual = new Coordenadas(1, 2);
         Coordenadas cordenadaEsperada = new Coordenadas(5, 6);
 
-        Coordenadas ATestear = unMapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual, 4);
+        Coordenadas ATestear = unMapa.devolverSiguientesNCoordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual, 4);
         assertTrue(ATestear.equals(cordenadaEsperada));
     }
     @Test
@@ -212,7 +212,7 @@ public class MapaTest {
         Coordenadas coordenadaActual = new Coordenadas(1, 2);
         Coordenadas cordenadaEsperada = new Coordenadas(11, 15);
 
-        Coordenadas ATestear = unMapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual, 13);
+        Coordenadas ATestear = unMapa.devolverSiguientesNCoordenadaUsandoDiagonalesMasCercanaALaMeta(coordenadaActual, 13);
         assertTrue(ATestear.equals(cordenadaEsperada));
        
     }
