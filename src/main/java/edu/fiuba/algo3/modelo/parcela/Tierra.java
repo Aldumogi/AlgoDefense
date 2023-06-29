@@ -40,6 +40,7 @@ public class Tierra extends Parcela {
 
     public Coordenadas recibir(Lechuza lechuza) throws NoEsPosibleRecibirEnemigosEnParcelaException {
         this.enemigos.add(lechuza);
+        setChanged();
         return this.coordenadas;
     }
 

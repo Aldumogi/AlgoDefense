@@ -36,6 +36,7 @@ public class Rocoso extends Parcela {
     }
     public Coordenadas recibir(Lechuza lechuza) throws NoEsPosibleRecibirEnemigosEnParcelaException {
         this.enemigos.add(lechuza);
+        setChanged();
         return this.coordenadas;
     }
     public List<Enemigo> obtener() {
