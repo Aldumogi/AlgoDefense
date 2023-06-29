@@ -16,7 +16,7 @@ public class Tierra extends Parcela {
     private Coordenadas coordenadas;
     private List<Enemigo> enemigos;
     private EstadoParcela estado;
-    protected Defensa defensa;
+    private Defensa defensa;
     public final String tipo = "T";
 
     public Tierra(Coordenadas coordenadas){
