@@ -241,6 +241,16 @@ public class App extends Application {
             }
         }
 
+        Label nameLabel = new Label("Nombre:" +  partida.obtenerJuego().obtenerJugador().obtenerNombre());
+        Label scoreValueLabel = new Label("Vida: "+ partida.obtenerJuego().obtenerJugador().obtenerPuntosDeVida());
+        Label creditosLabel = new Label("Creditos:" +  partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos());
+        nameLabel.setTranslateX(5);
+        scoreValueLabel.setTranslateX(5);
+        creditosLabel.setTranslateX(5);
+        gridPane.add(nameLabel, cantidadDeColumnas, 2);
+        gridPane.add(scoreValueLabel, cantidadDeColumnas, 3);
+        gridPane.add(creditosLabel, cantidadDeColumnas, 4);
+
         InputStream imgBtnStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/next_round.png");
         Image imgButton = new Image(imgBtnStream);
 
@@ -264,6 +274,9 @@ public class App extends Application {
                 root.getChildren().add(imageViewEndGame);
                 root.setDisable(true);
             }
+            scoreValueLabel.setText("Vida: "+ partida.obtenerJuego().obtenerJugador().obtenerPuntosDeVida());
+            creditosLabel.setText("Creditos: " +  partida.obtenerJuego().obtenerJugador().obtenerCantidadDeCreditos());
+
         });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
