@@ -32,4 +32,8 @@ public class EnConstruccion implements EstadoDefensa {
         }
         return this;
     }
+
+    public boolean enConstruccion() {
+        return true;
+    }
 }

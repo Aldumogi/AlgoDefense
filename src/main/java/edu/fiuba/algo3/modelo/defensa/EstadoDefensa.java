@@ -18,4 +18,6 @@ public interface EstadoDefensa {
 
     void atacarEnemigos(List<Enemigo> enemigos, TrampaArenosa trampa) throws DefensaEnConstruccionException;
     void atacarEnemigos(List<Enemigo> enemigos, Torre torre, ArrayList<Hormiga> hormigasAsesinadas) throws DefensaEnConstruccionException;
+
+    boolean enConstruccion();
 }

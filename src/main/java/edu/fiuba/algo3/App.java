@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.exceptions.FormatoEnemigosInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.juego.Inicializador;
 import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.parcela.*;
 import edu.fiuba.algo3.view.VistaParcela;
@@ -16,9 +17,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -41,6 +48,9 @@ public class App extends Application {
     private static final String BUTTON_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/swords_clashing.wav";
     private static final String BUTTON_NEXT_SOUND_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/Castle-Wood-Door-Sound.wav";
     private static final String START_GAME_MUSIC_FILE_PATH = "src/main/java/edu/fiuba/algo3/view/sounds/8-Bit-Algo-defense-music_start_game.wav";
+
+    private static final String TORRE_BLANCA = "src/main/java/edu/fiuba/algo3/view/images/defensas/torreBlanca.png";
+
 
     private Clip backgroundClip;
     @Override
@@ -183,7 +193,11 @@ public class App extends Application {
         imageView.setTranslateY(60);
         imageView.setOnMouseClicked(e -> {
             playSound(BUTTON_SOUND_FILE_PATH, 1.1f, null);
-            mostrarPantallaConMapa(partida);
+            try {
+                mostrarPantallaConMapa(partida);
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
         });
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
@@ -195,7 +209,7 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    private void mostrarPantallaConMapa(Inicializador partida) {
+    private void mostrarPantallaConMapa(Inicializador partida) throws FileNotFoundException {
         GridPane root = new GridPane();
         Scene scene = new Scene(root, height, width);
 
@@ -208,7 +222,7 @@ public class App extends Application {
         for(int fila = 1; fila <= cantidadDeFilas; fila++) {
             for(int columna = 1; columna <= cantidadDeColumnas; columna++) {
                 Parcela parcela = partida.obtenerJuego().obtenerMapa().obtenerCelda(new Coordenadas(fila, columna));
-                VistaParcela vista = new VistaParcela(parcela, medidaCelda);
+                VistaParcela vista = new VistaParcela(parcela, medidaCelda, juego, juegoController);
                 juegoController.agregarObservable(parcela, vista);
                 root.add(vista, columna - 1, fila - 1);
             }
@@ -224,6 +238,27 @@ public class App extends Application {
         avanzarTurno.setOnAction(e -> {
             playSound(BUTTON_NEXT_SOUND_FILE_PATH, 0.5f, null);
             juegoController.avanzarTurno();
+        });
+
+        Rectangle torreBlancaRect = new Rectangle(medidaCelda, medidaCelda);
+        torreBlancaRect.setStroke(Color.BLACK);
+        torreBlancaRect.setStrokeWidth(1);
+        InputStream torreBlanca = new FileInputStream(TORRE_BLANCA);
+        Image torreBlancaImg = new Image(torreBlanca);
+        ImagePattern torreBlancaIP = new ImagePattern(torreBlancaImg);
+
+        torreBlancaRect.setFill(torreBlancaIP);
+        root.add(torreBlancaRect, cantidadDeColumnas, cantidadDeFilas - 2);
+
+        torreBlancaRect.setOnDragDetected((MouseEvent event) -> {
+            Dragboard db = torreBlancaRect.startDragAndDrop(TransferMode.ANY);
+
+            ClipboardContent content = new ClipboardContent();
+            content.putString("torre blanca");
+            db.setContent(content);
+        });
+        torreBlancaRect.setOnMouseDragged((MouseEvent event) -> {
+            event.setDragDetect(true);
         });
 
         root.add(avanzarTurno, cantidadDeColumnas, cantidadDeFilas - 1);

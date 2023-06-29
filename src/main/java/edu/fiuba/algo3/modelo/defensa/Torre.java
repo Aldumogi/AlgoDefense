@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public abstract class Torre extends Observable implements Defensa{
+public abstract class Torre extends Defensa{
     protected String nombre;
     protected int costo;
     protected int tiempoDeConstruccion;
@@ -46,9 +46,16 @@ public abstract class Torre extends Observable implements Defensa{
         String mensajeAlFinalizarConstruccion = "La construcción de " + this.nombre + " en la posición ("
                 + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ") estará terminada para el próximo turno" ;
         this.estado = this.estado.pasarTurno(mensajeAlFinalizarConstruccion);
+        if(!this.enConstruccion()){
+            setChanged();
+        }
     }
 
     protected void estaEnRango(Coordenadas coordenadasEnemigo,Coordenadas coordenadasDefensa, int rangoDeAtaque) throws FueraDeRangoException {
         if ( coordenadasDefensa.distanciaEntreCoordenadas( coordenadasEnemigo) > rangoDeAtaque ) throw new FueraDeRangoException();
+    }
+
+    public boolean enConstruccion(){
+        return this.estado.enConstruccion();
     }
 }

@@ -12,7 +12,7 @@ import java.util.Observable;
 
 import static edu.fiuba.algo3.modelo.LoggerManager.logger;
 
-public class TrampaArenosa extends Observable implements Defensa{
+public class TrampaArenosa extends Defensa{
     protected String nombre;
     protected int costo;
     protected int tiempoDeConstruccion;
@@ -67,6 +67,7 @@ public class TrampaArenosa extends Observable implements Defensa{
         String mensajeAlFinalizarConstruccion = this.nombre + " estará operativa en el próximo turno en la posición ("
                 + this.coordenadas.obtenerFila() + ", " + this.coordenadas.obtenerColumna() + ")";
         this.estado = this.estado.pasarTurno(mensajeAlFinalizarConstruccion);
+        setChanged();
     }
 
     public void ralentizarEnemigo(Enemigo enemigo) {
@@ -74,5 +75,9 @@ public class TrampaArenosa extends Observable implements Defensa{
                 && this.tiempoDeRalentizacion >= 0) {
             enemigo.recibirRalentizacion(this.factorDeRalentizacion);
         }
+    }
+
+    public boolean enConstruccion(){
+        return this.estado.enConstruccion();
     }
 }
