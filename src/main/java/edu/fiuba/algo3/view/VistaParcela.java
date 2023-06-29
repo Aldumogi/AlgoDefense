@@ -74,15 +74,16 @@ public class VistaParcela extends StackPane implements Observer {
   @Override
   public void update(Observable o, Object arg) {
 
-    if( this.defensa == null){
-      this.actualizarNumeroEnemigos();
-    } else{
+    if( this.parcela.tengoDefensaConstruida()){
       VistaDefensa vd;
       try {
         vd = new VistaDefensa(this.defensa);
         indicador.setGraphic(vd.obtenerVistaDeImagen());
       } catch (FileNotFoundException e) {
       }
+    } else{
+      indicador.setGraphic(null);
+      this.actualizarNumeroEnemigos();
     }
   }
 
