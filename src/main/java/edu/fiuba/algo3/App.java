@@ -164,8 +164,8 @@ public class App extends Application {
         Scene scene = new Scene(root, height, width);
 
         VBox vbox = new VBox();
-        vbox.setSpacing(10);
         vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(165,0,0,0));
 
         Label messageLabel = new Label("¡Bienvenido, " + partida.obtenerJuego().obtenerJugador().obtenerNombre() + "!");
         messageLabel.setFont(Font.font("Cambria", FontWeight.BOLD, 26));
@@ -180,7 +180,7 @@ public class App extends Application {
         ImageView imageView = new ImageView(imgButton);
         imageView.setFitWidth(200);
         imageView.setFitHeight(75);
-        imageView.setTranslateY(60);
+        imageView.setTranslateY(30);
         imageView.setOnMouseClicked(e -> {
             playSound(BUTTON_SOUND_FILE_PATH, 1.1f, null);
             try {
@@ -192,7 +192,56 @@ public class App extends Application {
         imageView.setOnMouseEntered(e -> imageView.setImage(hoverImgButton));
         imageView.setOnMouseExited(e -> imageView.setImage(imgButton));
 
-        vbox.getChildren().addAll(messageLabel, imageView);
+
+        InputStream imgBtnAboutStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/acerca_de_btn.png");
+        Image imgButtonAbout = new Image(imgBtnAboutStream);
+
+        InputStream hoverimgBtnAboutStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/acerca_de_btn_hover.png");
+        Image hoverimgButtonAbout = new Image(hoverimgBtnAboutStream);
+
+        ImageView imageViewAbout = new ImageView(imgButtonAbout);
+        imageViewAbout.setFitWidth(200);
+        imageViewAbout.setFitHeight(75);
+        imageViewAbout.setTranslateY(30);
+        imageViewAbout.setOnMouseClicked(e -> {
+            playSound(BUTTON_SOUND_FILE_PATH, 1.1f, null);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Acerca de");
+            alert.setHeaderText("AlgoDefense es un juego desarrollado en Java (11.0.19) y Javafx (15.0.1) por:");
+            alert.setContentText("- Diego Di Grazia\n" + //
+                    "- Nazarian Juan Martin\n" + //
+                    "- Avalo Alejandro Valentin\n" + //
+                    "- Joaquin Miranda Iglesias\n" + //
+                    "- Aldana Mogilewski");
+            alert.showAndWait();
+        });
+        imageViewAbout.setOnMouseEntered(e -> imageViewAbout.setImage(hoverimgButtonAbout));
+        imageViewAbout.setOnMouseExited(e -> imageViewAbout.setImage(imgButtonAbout));
+
+
+        InputStream imgBtnHowToPlayStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/como_jugar_btn.png");
+        Image imageHowToPlay = new Image(imgBtnHowToPlayStream);
+
+        InputStream hoverimgBtnHowToPlayStream = new FileInputStream("src/main/java/edu/fiuba/algo3/view/images/como_jugar_btn_hover.png");
+        Image hoverimageHowToPlay = new Image(hoverimgBtnHowToPlayStream);
+
+        ImageView imageViewHowToPlay = new ImageView(imageHowToPlay);
+        imageViewHowToPlay.setFitWidth(200);
+        imageViewHowToPlay.setFitHeight(75);
+        imageViewHowToPlay.setTranslateY(30);
+        imageViewHowToPlay.setOnMouseClicked(e -> {
+            playSound(BUTTON_SOUND_FILE_PATH, 1.1f, null);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getDialogPane().setMinWidth(500);
+            alert.setTitle("Como Juagar");
+            alert.setHeaderText("Instrucciones de AlgoDefense");
+            alert.setContentText("- Para construir defensas arrastrar la defensa deseada desde el panel de la derecha hacia la parcela donde la queremos construir. La construccion de defensas consume creditos del jugador.\n\n- Para pasar de turno presionar el bóton \"Avanzar Turno\".\n\n- Los enemigos se desplegarán desde la parcela de largada y se dirigirán hacia la parcela de llegada. Cada vez que un enemigo llegue a la parcela de llegada, la energia del jugador disminuirá una cantidad que dependerá del enemigo.\n\n- Los numeros en las parcelas representa la cantidad de enemigos que estan actualmente en ella. Al hacer click en ella, podemos ver el detalle de los enemigos.\n\n- Los enemigos se desplazan por las parcelas excepto la lechuza.\n\n- Los topos no se pueden matar porque se desplazan por debajo de la tierra.\n\n- La lechuza al llegar a la parcela meta destruye una torre.");
+            alert.showAndWait();
+        });
+        imageViewHowToPlay.setOnMouseEntered(e -> imageViewHowToPlay.setImage(hoverimageHowToPlay));
+        imageViewHowToPlay.setOnMouseExited(e -> imageViewHowToPlay.setImage(imageHowToPlay));
+
+        vbox.getChildren().addAll(messageLabel, imageView, imageViewAbout, imageViewHowToPlay);
         root.getChildren().add(vbox);
 
         primaryStage.setScene(scene);
