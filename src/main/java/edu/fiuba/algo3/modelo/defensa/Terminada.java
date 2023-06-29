@@ -40,4 +40,8 @@ public class Terminada implements EstadoDefensa {
             catch (FueraDeRangoException e) {}
         });
     }
+
+    public boolean enConstruccion() {
+        return false;
+    }
 }

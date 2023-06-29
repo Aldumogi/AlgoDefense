@@ -40,5 +40,6 @@ public class TorrePlateada extends Torre {
         enemigo.recibirDanio(this.danio);
         enemigo.acumularMuertos( hormigasAsesinadas );
         enemigo.cantidadCreditosOtorgados( hormigasAsesinadas.size() );
+        setChanged();
     }
 }
