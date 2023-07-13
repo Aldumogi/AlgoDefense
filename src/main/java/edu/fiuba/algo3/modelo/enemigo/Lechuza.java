@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.enemigo;
 
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
@@ -21,10 +22,6 @@ public class Lechuza extends Enemigo {
                 logger.info("Se creó una Lechuza");
         }
 
-        public boolean atacaTorres(){
-                return true;
-        }
-
         @Override
         public int cantidadCreditosOtorgados(int cantidadDeMuertosDeUnTipoDeEnemigo) {
                 return 0;
@@ -41,9 +38,9 @@ public class Lechuza extends Enemigo {
 
                 // Mover a la siguiente parsela
                 double velocidad = this.velocidad;
-                Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCordenadaEnL(this.coordenadas, velocidad);
+                Coordenadas coordenadaSiguiente = mapa.devolverSiguienteCoordenadaEnL(this.coordenadas, (int)velocidad);
                 if(this.estado.obtenerEnergia() <= 2){
-                        coordenadaSiguiente = mapa.devolverSiguientesNCordenadaUsandoDiagonalesMasCercanaALaMeta(this.coordenadas, (int)velocidad);
+                        coordenadaSiguiente = mapa.devolverSiguientesNCoordenadaUsandoDiagonalesMasCercanaALaMeta(this.coordenadas, (int)velocidad);
                 }
                 Parcela pasarelaSiguiente  = mapa.obtenerCelda(coordenadaSiguiente);
                 pasarelaSiguiente.recibir(this);
@@ -53,7 +50,10 @@ public class Lechuza extends Enemigo {
                 
         }
 
-                
+        public void realizarAtaque(Jugador jugador, int numeroDeTurno, Mapa mapa) {
+                jugador.destruirPrimeraTorre(mapa);
+                logger.info( this.nombre + " llega a la meta y destruye la primera torre construida si es que existía");
+        }
         public boolean equals(Object e2) {
                 if ( e2 == this ) {
                 return true;

@@ -12,16 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface EstadoDefensa {
-    void atacarEnemigo(Enemigo enemigo, int rangoDeAtaque, int danio, Coordenadas coordenadasDefensa, String nombre) throws ElEnemigoMurioDuranteElAtaqueException,
-            ElEnemigoEstaMuertoException, DefensaEnConstruccionException, FueraDeRangoException;
-    EstadoDefensa pasarTurno(List<Enemigo> enemigos, int rangoDeAtaque, int danio,
-                             Coordenadas coordenadasDefensa, ArrayList<Hormiga> hormigasAsesinadas,
-                             double factorDeRalentizacion, String nombre);
-    EstadoDefensa pasarTurno(List<Enemigo> enemigos, Coordenadas coordenadasDefensa,
-                             double factorDeRalentizacion, String nombre);
+
+    EstadoDefensa pasarTurno(String mensajeAlFinalizarConstruccion);
     int tiempoDeConstruccion();
 
-    void ralentizarEnemigo(Enemigo enemigo, Coordenadas coordenadas, double ralentizacion);
+    void atacarEnemigos(List<Enemigo> enemigos, TrampaArenosa trampa) throws DefensaEnConstruccionException;
+    void atacarEnemigos(List<Enemigo> enemigos, Torre torre, ArrayList<Hormiga> hormigasAsesinadas) throws DefensaEnConstruccionException;
 
-    int obtenerTiempoDeRalentizacion();
+    boolean enConstruccion();
 }

@@ -1,0 +1,30 @@
+@startuml
+interface EstadoEnemigo {
++ acumular(hormigasMuertas: Hormiga, enemigo: Hormiga)
++ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
++ creditosOtorgados(creditos: int): int
++ recibirDanio(danio: int, c: Coordenadas): EstadoEnemigo
+}
+
+class Vivo {
+- energia: int
+- nombre: String
++ acumular(hormigasMuertas: Hormiga, enemigo: Hormiga)
++ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
++ creditosOtorgados(creditos: int): int
++ equals(o: Object)
++ recibirDanio(danio: int, c: Coordenadas): EstadoEnemigo
+}
+
+class Muerto {
+- energia: int
++ acumularHormigasMuertas(hormigasMuertas: ArrayList<Enemigo>, enemigo: Hormiga)
++ agregarIndiceDeEnemigoMuerto(indicesEnemigosMuertos: List<Integer>, posicionActual: int)
++ creditosOtorgados(creditos: int)
++ mover(velocidad:int)
++ recibirDanio(danio: int): EstadoEnemigo
+}
+
+EstadoEnemigo <|.. Vivo
+EstadoEnemigo <|.. Muerto
+@enduml

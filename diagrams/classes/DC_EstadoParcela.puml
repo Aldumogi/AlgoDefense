@@ -1,0 +1,18 @@
+@startuml
+interface EstadoParcela {
++ construir(): EstadoParcela
+}
+
+class ParcelaOcupada {
++ construir(): EstadoParcela
+}
+
+class ParcelaDisponible {
++ construir(): EstadoParcela
+}
+
+EstadoParcela <|.. ParcelaOcupada
+EstadoParcela <|.. ParcelaDisponible
+
+@enduml
+

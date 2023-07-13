@@ -3,16 +3,16 @@ package edu.fiuba.algo3.modelo.enemigo;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoEstaMuertoException;
 import edu.fiuba.algo3.modelo.exceptions.ElEnemigoMurioDuranteElAtaqueException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import edu.fiuba.algo3.modelo.parcela.Parcela;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-import static edu.fiuba.algo3.modelo.LoggerManager.logger;
-
-public abstract class Enemigo {
+public abstract class Enemigo extends Observable {
     protected int velocidad;
     protected int dañoCausado;
     protected int creditosOtorgados;
@@ -26,13 +26,9 @@ public abstract class Enemigo {
     public abstract void acumularMuertos(ArrayList<Hormiga> hormigasMuertas);
     public abstract String obtenerNombre();
 
-
-    public boolean atacaTorres() {
-        return false;
-    }
-
     public void recibirDanio(int unDanio) throws ElEnemigoEstaMuertoException, ElEnemigoMurioDuranteElAtaqueException {
         this.estado = this.estado.recibirDanio(unDanio, this.coordenadas);
+        setChanged();
     }
 
     public void agregarIndiceDelEnemigoMuerto(List<Integer> indicesEnemigosMuertos, int posicionActual) {
@@ -54,6 +50,8 @@ public abstract class Enemigo {
         this.coordenadas = coordenadaSiguiente;
         this._actualizarVelocidadSegunCantidadDeMovimientos();
         this._restaurarVelocidadNormal();
+
+        setChanged();
     }
 
     private void _restaurarVelocidadNormal() {
@@ -63,6 +61,8 @@ public abstract class Enemigo {
     public void recibirRalentizacion(double coeficienteDeRalentizacion) {
         this.coeficienteDeRalentizacion = coeficienteDeRalentizacion;
     }
+
+    public abstract void realizarAtaque(Jugador jugador, int numeroDeTurno, Mapa mapa);
 
     public void setCoordenadas(Coordenadas coordenadas) {
         this.coordenadas = coordenadas;
@@ -91,4 +91,5 @@ public abstract class Enemigo {
     public int obtenerDanioCausado (int numeroDeTurno) {
         return this.dañoCausado;
     }
+
 }

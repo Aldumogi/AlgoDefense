@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface FabricaDeElementos {
++ crearDefensa(tipoDefensa: String): Defensa
++ crearEnemigo(tipoEnemigo: String, c: Coordenadas): Enemigo
++ crearParcela(tipoParcela: String, c: Coordenadas): Parcela
+}
+
+class FabricaDeDefensas{
++ crearDefensa(tipoDefensa: String): Defensa
++ crearEnemigo(tipoEnemigo: String, c: Coordenadas)
++ crearParcela(tipoParcela: String, c: Coordenadas)
+}
+
+class FabricaDeEnemigos{
++ crearDefensa(tipoDefensa: String)
++ crearEnemigo(tipoEnemigo: String, c: Coordenadas): Enemigo
++ crearParcela(tipoParcela: String, c: Coordenadas)
+}
+
+class FabricaDeParcelas{
++ crearDefensa(tipoDefensa: String)
++ crearEnemigo(tipoEnemigo: String, c: Coordenadas)
++ crearParcela(tipoParcela: String, c: Coordenadas): Parcela
+}
+
+FabricaDeElementos <|.. FabricaDeDefensas
+FabricaDeElementos <|.. FabricaDeEnemigos
+FabricaDeElementos <|.. FabricaDeParcelas
+
+@enduml

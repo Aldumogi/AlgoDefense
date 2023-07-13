@@ -1,0 +1,50 @@
+@startuml
+
+class Juego {
+- enemigos: Enemigo
+- mapa: Mapa
+- indiceActualListaTurnos: int
++ agregarEnemigo(e: Enemigo)
++ agregarEnemigosDelTurno()
++ avanzarEnemigos()
++ avanzarTurno()
++ construirDefensa(d: Defensa, c: Coordenadas, m: Mapa)
++ eliminarEnemigosMuertos()
++ juegoTerminado()
++ moverEnemigosAMeta()
++ realizarAtaquesDeLosEnemigosEnLaMeta()
+}
+
+class Turno {
+- listaEnemigosAgregados
+- turnoId
++ agregarEnemigos(int cantidadHormigas, int cantidadAranas, Coordenadas coordenadasLargada)
++ agregarEnemigos(cantidadHormigas, cantidadAranas, cantidadTopo, cantidadLechuza, coordenadasLargada)
+}
+
+class Inicializador {
++ Inicializador(filepath: String)
++ Inicializador(turnos: Turno)
++ Inicializador(jsonEnemigos: String, jsonMapa: String)
++ agregarJugador(nombre: String)
+}
+
+class Jugador {
+- nombre
+- cantidadDeCreditos: int
+- defensas: Defensa
+- puntosDeVida: int
+- hormigasAsesinadas: Hormiga
++ destruirPrimeraTorre(Mapa mapa)
++ finalizarTurno(enemigos: Enemigo, m: Mapa)
++ generarConstruccion(d: Defensa, c: Coordenadas, m: Mapa)
++ estaVivo()
++ restarEnergia(energia: int)
+- actualizarDefensasAlFinalizarTurno(enemigos: Enemigo, mapa: Mapa)
+- agregarCreditosAlMatarEnemigos(enemigos: Enemigo)
+}
+
+Inicializador -> Juego
+Juego "1" --> "0..*" Turno
+Juego -> Jugador
+@enduml

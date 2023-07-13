@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import edu.fiuba.algo3.modelo.defensa.Defensa;
 import edu.fiuba.algo3.modelo.enemigo.Enemigo;
 import edu.fiuba.algo3.modelo.exceptions.FormatoMapaInvalidoException;
 import edu.fiuba.algo3.modelo.exceptions.NoSePudoBorrarElEnemigoException;
+import edu.fiuba.algo3.modelo.exceptions.NoSePudoConstruirException;
 import edu.fiuba.algo3.modelo.mapa.Coordenadas;
 import edu.fiuba.algo3.modelo.mapa.Mapa;
 import org.json.simple.parser.ParseException;
@@ -84,7 +86,7 @@ public class Juego {
         this.indiceActualListaTurnos = (this.indiceActualListaTurnos < turnos.size() - 1 )? this.indiceActualListaTurnos + 1 : (this.indiceActualListaTurnos % 12);
         this.jugador.finalizarTurno(this.enemigos, this.mapa);
         this.eliminarEnemigosMuertos();
-        this.actualizarEnergiaJugador();
+        this.realizarAtaquesDeLosEnemigosEnLaMeta();
         this.avanzarEnemigos();
         this.agregarEnemigosDelTurno();
         logger.info("Se avanzó al turno " + (this.indiceActualListaTurnos + 1));
@@ -115,28 +117,16 @@ public class Juego {
         }
     }
 
-    public void actualizarEnergiaJugador() {
+    public void realizarAtaquesDeLosEnemigosEnLaMeta() {
         Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
         ArrayList<Enemigo> enemigosEnLaMeta = new ArrayList<>();
         this.enemigos.forEach( enemigo -> {
             if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0) {
-                int danio = enemigo.obtenerDanioCausado( this.obtenerNumeroDeturno() );
-                logger.info( enemigo.obtenerNombre() + " llega a la meta, produce " + danio + " de daño al jugador" );
-                jugador.restarEnergia( danio );
+                enemigo.realizarAtaque(jugador, this.obtenerNumeroDeturno(), this.mapa);
                 enemigosEnLaMeta.add(enemigo);
             }
         });
         this.enemigos.removeAll(enemigosEnLaMeta);
-    }
-
-    public void actualizarTorresJugador() {
-        Coordenadas coordenadasMeta = this.mapa.getCoordenadasMeta();
-        this.enemigos.forEach( enemigo -> {
-            if(coordenadasMeta.distanciaEntreCoordenadas(enemigo.obtenerCoordenadas()) == 0 && enemigo.atacaTorres()) {
-                jugador.destruirPrimeraTorre();
-                logger.info("Se destruyo una Torre si es que habia");
-            }
-        });
     }
     
     public boolean juegoTerminado(){
@@ -160,6 +150,10 @@ public class Juego {
 
     public Mapa obtenerMapa() {
         return this.mapa;
+    }
+
+    public void construirDefensa(Defensa unaDefensa, Coordenadas coordenadas, Mapa mapa) throws NoSePudoConstruirException {
+        this.jugador.generarConstruccion(unaDefensa, coordenadas, mapa);
     }
 
 }
